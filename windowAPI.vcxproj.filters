@@ -237,6 +237,9 @@
     <ClInclude Include="attack.h">
       <Filter>playGround\player</Filter>
     </ClInclude>
+    <ClInclude Include="bomb.h">
+      <Filter>playGround\item\subclass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -412,6 +415,9 @@
     </ClCompile>
     <ClCompile Include="attack.cpp">
       <Filter>playGround\player</Filter>
+    </ClCompile>
+    <ClCompile Include="bomb.cpp">
+      <Filter>playGround\item\subclass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

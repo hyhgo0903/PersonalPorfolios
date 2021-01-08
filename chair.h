@@ -4,7 +4,7 @@ class chair :public object
 {
 private:
 
-	image* _ChairImg;
+	image* _img;
 
 public:
 	chair();
@@ -14,5 +14,9 @@ public:
 	virtual void release();
 	virtual void update();
 	virtual void render();
+
+
+	image* getChairImg() { return _img; }
+
 };
 

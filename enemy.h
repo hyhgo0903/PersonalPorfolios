@@ -1,13 +1,8 @@
 #pragma once
 #include "gameNode.h"
 
-enum enemyState
-{
-	E_IDLE_L, E_IDLE_R,
-	E_WALK_L, E_WALK_R,
-	E_ATK_L, E_ATK_R,
-	E_DEAD_L, E_DEAD_R
-};
+enum enemyState { E_IDLE, E_WALK, E_ATK, E_DEAD, E_HIT, E_GRAB, E_FLYING };
+enum bossState { B_IDLE, B_WALK };
 
 class enemy : public gameNode
 {
@@ -17,9 +12,16 @@ protected:
 	float _currentHP; float _maxHP;
 
 	int _count; int _index;
-	enemyState _state;
 	float _pX; float _pY; // 플레이어 중점
+	bool _left; // 왼쪽을 보고 있으면 1, 오른쪽이면 0. 왜 인트냐면 _frameIndexY처럼 쓸것이기 때문)
+	int _attackCount;		// 공격쿨타임
+	int _hitCount;			// 피격모션 유지시간
+	int _grabCount;			// 그랩모션 유지시간
+	int _flyingCount;		// 플라잉모션 유지시간
+	bool _flying; // 날고있으면 1, 지상이면 0
 
+	enemyState _state;
+	bossState _bState;
 public:
 	enemy();
 	~enemy();

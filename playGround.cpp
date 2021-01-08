@@ -51,6 +51,7 @@ void playGround::update()
 	}
 
 	SCENEMANAGER->update();	
+	EFFECTMANAGER->update();
 }
 
 
@@ -60,6 +61,7 @@ void playGround::render()
 	//================ 위에 건들지 마라 ==============================
 	
 	SCENEMANAGER->render();
+	EFFECTMANAGER->render();
 	
 	//================= 아래도 건들지 마라 ==============================
 	if (!_videoPlaying) _backBuffer->render(getHDC(), 0, 0, CAMX, CAMY, WINSIZEX, WINSIZEY);

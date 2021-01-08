@@ -38,7 +38,6 @@ public:
 
 	void createMinion(float x, float y);
 	void createBoss(float x, float y);
-	void enemyAi();
 
 	vector<enemy*> getVEnemy() { return _vEnemy; }
 	vector<enemy*>::iterator getViEnemy() { return _viEnemy; }

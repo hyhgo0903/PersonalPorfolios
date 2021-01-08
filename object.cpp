@@ -9,8 +9,9 @@ object::~object()
 {
 }
 
-HRESULT object::init(float x, float y)
+HRESULT object::init(float x, float y) // ÁÂÇ¥
 {
+
 	return S_OK;
 }
 

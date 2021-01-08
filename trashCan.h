@@ -5,7 +5,7 @@ class trashCan :public object
 {
 private:
 
-	image* _TrashCanImg;
+	image* _img;
 
 public:
 	trashCan();
@@ -15,5 +15,7 @@ public:
 	virtual void release();
 	virtual void update();
 	virtual void render();
+
+	image* getTrashCanImg() { return _img; }
 };
 

@@ -33,11 +33,13 @@ void attack::update(int count)
 
 void attack::render()
 {
-	
+	if(KEYMANAGER->isToggleKey(VK_TAB))
+	{ 
 		for (_viAttack = _vAttack.begin(); _viAttack != _vAttack.end(); ++_viAttack)
 		{
 			Rectangle(getMemDC(), _viAttack->rc);
 		} 
+	}
 	
 }
 

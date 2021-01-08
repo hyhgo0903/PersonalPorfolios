@@ -12,19 +12,22 @@ baseball::~baseball()
 HRESULT baseball::init(float x, float y)
 {
 	//상위 클래스(item) 변수.
-	_image = IMAGEMANAGER->findImage("공");
-	_gravity = -3;
-	_x = x;	_y = y;
+	_image = IMAGEMANAGER->findImage("공");//이미지 삽입
+	_gravity = -3;//중력
+	_x = x;	_y = y;//공중렉트 중심
 	_rc = RectMakeCenter(_x, _y, _image->getWidth(), _image->getHeight());//공중렉트
-	_pickup = false;
-	_moving = false;
 
-	//하위 클래스(ball) 변수.
-	_xg = _x;
+	_pickup = false;//들려있지 않음.
+	_moving = false;//던져지지 않음.
+	
+	_xg = _x;//땅렉트
 	_yg = _y + 70;
 	_rcg = RectMakeCenter(_xg, _yg, _image->getWidth(), _image->getHeight());//땅렉트
-	_distance = _yg - _y;
-	_shadow = RectMakeCenter(_xg, _rcg.bottom, _image->getWidth() -(_distance /2), _image->getHeight()/3);
+	
+	_distance = _yg - _y;//렉트간 거리.
+	int shadowWidth = _image->getWidth() - (_distance / 2);
+	int shadowHeight = (_image->getHeight() / 3) - (_distance / 6);
+	_shadow = RectMakeCenter(_xg, _rcg.bottom, shadowWidth, shadowHeight);//그림자 출력용.
 	_time = 0;
 	_angle = 0;
 	_strach = false;
@@ -59,12 +62,23 @@ void baseball::update()
 	
 	if (_strach)_time -= TIMEMANAGER->getElapsedTime();
 	if (_time < 0)_strach = false;
+	if (_pickup)
+	{
+		_xg = _x;//땅렉트
+		_yg = _y + 30;
+		_rcg = RectMakeCenter(_xg, _yg, _image->getWidth(), _image->getHeight());//땅렉트
+	}
+	if (_moving)
+	{
+		_xg = _x;//땅렉트
+		_rcg = RectMakeCenter(_xg, _yg, _image->getWidth(), _image->getHeight());//땅렉트
+	}
 }
 
 void baseball::render()
 {
 	fillColorEllipse(80, 80, 80, _shadow);
-	Rectangle(getMemDC(), _rcg);
+	//Rectangle(getMemDC(), _rcg);
 	_image->render(getMemDC(), _x-(_image->getWidth()/2), _rc.top);
 	//TextOut(getMemDC(), _rc.left, _rc.top, "난 야구공", strlen("난 야구공"));
 }
@@ -88,10 +102,9 @@ void baseball::drop()
 	}
 }
 
-
-void baseball::setHold(bool holding, float x, float y)
-{//매니저에서 사용할 함수.
-	_pickup = holding;
+void baseball::setHold(float x, float y)
+{
+	_pickup = true;
 	_x = x;
 	_y = y;
 }
@@ -102,11 +115,11 @@ void baseball::attackMove(bool direction)
 	_moving = true;
 	if (direction==true)
 	{
-		_x += 7.2f;
+		_x += 12.2f;
 	}
 	else
 	{
-		_x -= 7.2f;
+		_x -= 12.2f;
 	}
 	_y -= sinf(_angle);//충돌시 튕겨나가는 느낌을 주기위해.
 }

@@ -5,6 +5,7 @@ class player;
 
 class combo1 : public STATE
 {
+private:
 public:
 
 	void EnterState();

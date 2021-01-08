@@ -23,7 +23,7 @@
     <ProjectGuid>{19D559FB-F5D0-4C3C-9B48-720C72E962E0}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>windowAPI</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -151,6 +151,7 @@
     <ClInclude Include="attack.h" />
     <ClInclude Include="baseball.h" />
     <ClInclude Include="bat.h" />
+    <ClInclude Include="bomb.h" />
     <ClInclude Include="boss.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="cameraManager.h" />
@@ -204,6 +205,7 @@
     <ClCompile Include="attack.cpp" />
     <ClCompile Include="baseball.cpp" />
     <ClCompile Include="bat.cpp" />
+    <ClCompile Include="bomb.cpp" />
     <ClCompile Include="boss.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="cameraManager.cpp" />

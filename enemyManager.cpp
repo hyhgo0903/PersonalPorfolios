@@ -57,9 +57,11 @@ void enemyManager::update()
 	if (_wave == 1 && _create == WAIT)
 	{
 		//첫 몬스터 웨이브(볼 몬스터 3마리)
-		createMinion(CAMX + 1300, CAMY + 400);
+		createMinion(900, 600);
 		//createMinion(CAMX + 1300, CAMY + 500);
 		//createMinion(CAMX + 1300, CAMY + 600);
+		//createBoss(1600, 400);
+		//보스 테스트
 		_create = END;
 	}
 }

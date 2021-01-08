@@ -3,16 +3,7 @@
 class baseball :	public item
 {
 private:
-	RECT _rcg;
-	float _xg, _yg;
-	float _gravity;
-
-	RECT _shadow;
-	int _distance;
-	float _time;
 	BOOL _strach;
-
-	float _angle;
 
 public:
 	baseball();
@@ -26,7 +17,7 @@ public:
 	virtual void render();
 	//상속받아 오버라이드하는 함수.
 
-	virtual void setHold(bool holding, float x, float y);
+	virtual void setHold(float x, float y);
 	virtual void attackMove(bool direction);
 
 	//클래스 고유 함수

@@ -9,13 +9,14 @@ private:
 public:
 	minion();
 	~minion();
+	int _plAtkNum;				//테스트용 플레이어 공격상태
 
 	virtual HRESULT init(float x, float y);
 	virtual void release();
 	virtual void update();
 	virtual void render();
 
-	//void imageRect();				//이미지상태에 따라 렉트크기를 변환함
-	void move();					//적의 움직임을 관리함
 	void enemyState();				//적과 플레이어의 위치를 비교하여 상태값을 관리함
+	void enemyStateRender();		//가독성을 위해 렌더함수로 따로 관리함
+	void keyManager();				//그냥 나 편하려고만든 테스트용
 };

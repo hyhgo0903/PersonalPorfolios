@@ -10,16 +10,10 @@
 // 왜 헤더가 아니냐면 상호참조(상속받고) 날수 있기 때문이라고 함
 // 추가할떈 잊지말고 여기에다 추가
 
-player::player()
-{
-}
-
-player::~player()
-{
-}
-
 HRESULT player::init()
 {
+	playerImage = IMAGEMANAGER->findImage("플레이어대기");
+	_count = _index = 0;
 	_flyX = _groundX = 100.f;
 	_flyY = _groundY = CAMY + 300.f;
 	_directionChanged = _directionChangeCount = _dirMemory = _dirMemoryCount = 0;
@@ -42,6 +36,7 @@ void player::release()
 void player::update()
 {
 	_statePattern->updateState();
+	stateUpdate();
 	_flyRc = RectMakeCenter(_flyX, _flyY, 50, 50);
 	_groundRc = RectMakeCenter(_groundX, _groundY, 50, 50);	
 	minusDirectionChanged();
@@ -50,9 +45,10 @@ void player::update()
 
 void player::render()
 {
+	/*
 	switch (_enumState)
 	{
-	case IDLE: sprintf_s(_str, "IDLE");		break;
+	case IDLE: IMAGEMANAGER->findImage("플레이어대기")->frameRender(getMemDC(), _flyRc.left, _flyRc.top);	break;
 	case JUMP: sprintf_s(_str, "JUMP");		break;
 	case WALK: sprintf_s(_str, "WALK");		break;
 	case RUN: sprintf_s(_str, "RUN");		break;
@@ -66,6 +62,7 @@ void player::render()
 		sprintf_s(_str, "이때 버튼을 누르면 특수기로 나가도록 설정");
 		TextOut(getMemDC(), 0, 80, _str, strlen(_str));
 	}
+	*/ // 참고용
 	_attack->render();
 }
 
@@ -94,9 +91,13 @@ void player::minusDirectionChanged()
 }
 
 void player::playerRender()
-{
-	Rectangle(getMemDC(), _groundRc);
-	Rectangle(getMemDC(), _flyRc);
+{	
+	stateRender();
+	if(KEYMANAGER->isToggleKey(VK_TAB))
+	{ 
+		Rectangle(getMemDC(), _groundRc);
+		Rectangle(getMemDC(), _flyRc);
+	}
 }
 
 //상태설정
@@ -121,4 +122,115 @@ void player::setState(State state)
 	// _pl을 이 클래스(this)로 연결하도록 하는거야
 	// (아니면 그냥 빈껍데기)
 	_statePattern->EnterState();
+
+}
+
+//상태에 따라 이미지를 찾고 재생해주는 함수
+void player::stateUpdate()
+{
+	_count++;
+	if (_count % 5 == 0)
+	{
+		switch (_enumState)
+		{
+		case IDLE:
+			_index = 0;
+			playerImage = IMAGEMANAGER->findImage("플레이어대기");
+			if (!_left) { playerImage->setFrameY(0); }
+			else { playerImage->setFrameY(1); }
+			playerImage->setFrameX(0);
+			break;
+		case JUMP:
+			playerImage = IMAGEMANAGER->findImage("플레이어점프");
+			if (!_left) { playerImage->setFrameY(0); }
+			else { playerImage->setFrameY(1); }
+			playerImage->setFrameX(0);
+			break;
+		case WALK:
+			playerImage = IMAGEMANAGER->findImage("플레이어이동");
+			if (!_left)
+			{
+				if (_index >= 5) _index = 0;
+				playerImage->setFrameY(0);
+				playerImage->setFrameX(_index);
+				_index++;
+			}
+			else
+			{
+				if (_index <= 0) _index = 5;
+				playerImage->setFrameY(1);
+				playerImage->setFrameX(_index);
+				_index--;
+			}
+			break;
+		case RUN:
+			playerImage = IMAGEMANAGER->findImage("플레이어대시");
+			if (!_left)
+			{
+				if (_index >= 3) _index = 0;
+				playerImage->setFrameY(0);
+				playerImage->setFrameX(_index);
+				_index++;
+			}
+			else
+			{
+				if (_index <= 0) _index = 3;
+				playerImage->setFrameY(1);
+				playerImage->setFrameX(_index);
+				_index--;
+			}
+			break;
+		case COMBO1:
+			playerImage = IMAGEMANAGER->findImage("플레이어공격");
+			if (!_left)
+			{
+				if (_index >= 3) setState(IDLE);
+				playerImage->setFrameY(0);
+				playerImage->setFrameX(_index);
+				_index++;
+			}
+			else
+			{
+				if (_index >= 3) setState(IDLE);
+				playerImage->setFrameY(1);
+				playerImage->setFrameX(_index);
+				_index++;
+			}
+			break;
+		}
+		_count = 0;
+	}
+	
+}
+
+
+
+// 상태에 따라 이미지 위치를 보정해주고 렌더해주는 함수 
+void player::stateRender() 
+{
+
+	switch (_enumState)
+	{
+	case IDLE:
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 125, _flyRc.top - 180);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 75, _flyRc.top - 180);
+		break;
+	case JUMP:
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 75, _flyRc.top - 200);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 100, _flyRc.top - 200);
+		break;
+	case WALK:
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 75, _flyRc.top - 200);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 100, _flyRc.top - 200);
+		break;
+	case RUN:
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 75, _flyRc.top - 200);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 100, _flyRc.top - 200);
+		break;
+	case COMBO1:
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 75, _flyRc.top - 200);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 100, _flyRc.top - 200);
+		break;
+	
+	}
 }

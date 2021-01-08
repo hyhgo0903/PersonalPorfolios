@@ -11,6 +11,6 @@ public:
 	virtual void release();
 	virtual void update();
 	virtual void render();
-	void move();
+	void bossState();			//보스의 상태값 관리
 };
 
