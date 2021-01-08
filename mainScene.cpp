@@ -12,7 +12,7 @@ mainScene::~mainScene()
 HRESULT mainScene::init()
 {
 	CAMERAMANAGER->setCameraX(0);
-	_loopX = 0;	_loopY = 300; _loopCount = _timeCount = 0;
+	_loopX = 0;	_loopY = 300; _loopCount = _timeCount = _score = 0;
 	_timeLimit = 99; _life = 3;
 	_mapChanging = false;
 	CAMERAMANAGER->setCameraY(MAPSIZEY-WINSIZEY);

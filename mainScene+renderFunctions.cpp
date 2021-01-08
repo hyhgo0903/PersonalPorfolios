@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "mainScene.h"
 
-
 void mainScene::zOrderRender()
 { // ###################### z오더 구현 여기부터 ##################
 	RECT temp;
@@ -69,16 +68,21 @@ void mainScene::zOrderRender()
 		}
 	}
 	bottomY.clear();
-
-	//너무 비효율적이지 않을까..
 }
-
 
 
 void mainScene::uiRender()
 {
 	FINDIMG("플레이어ui")->render(getMemDC(), CAMX + 170, CAMY);
+	//+174 +31
 	FINDIMG("초록숫자")->frameRender(getMemDC(), CAMX + 466, CAMY + 30, _timeLimit / 10, 0);
 	FINDIMG("초록숫자")->frameRender(getMemDC(), CAMX + 513, CAMY + 30, _timeLimit % 10, 0);
 	FINDIMG("노란숫자")->frameRender(getMemDC(), CAMX + 359, CAMY + 53, _life, 0);
+	// _score = _cl->getScore();
+	FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 359, CAMY + 29, _score%10, 0);
+	if(_score>9) FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 335, CAMY + 29, _score / 10 % 10, 0);
+	if (_score > 99) FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 311, CAMY + 29, _score / 100 % 10, 0);
+	if (_score > 999) FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 287, CAMY + 29, _score / 1000 % 10, 0);
+	if (_score > 9999) FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 263, CAMY + 29, _score / 10000 % 10, 0);
+	
 }

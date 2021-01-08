@@ -35,5 +35,7 @@ void mainScene::cameraControl()
 			--_loopY;
 		}
 	}
+
+	if (CAMX >= MAPSIZEX-WINSIZEX) SCENEMANAGER->changeScene("¿£µù¾À");
 }
 
