@@ -36,6 +36,10 @@ void mainScene::cameraControl()
 		}
 	}
 
+	if (_redCount < 29) ++_redCount;
+	else _redCount = 0;
+	
+
 	if (CAMX >= MAPSIZEX-WINSIZEX) SCENEMANAGER->changeScene("¿£µù¾À");
 }
 

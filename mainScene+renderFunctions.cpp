@@ -74,15 +74,36 @@ void mainScene::zOrderRender()
 void mainScene::uiRender()
 {
 	FINDIMG("플레이어ui")->render(getMemDC(), CAMX + 170, CAMY);
-	//+174 +31
+	FINDIMG("그냥텍스트")->frameRender(getMemDC(), CAMX + 670, CAMY, _timeLimit % 2, 0);
 	FINDIMG("초록숫자")->frameRender(getMemDC(), CAMX + 466, CAMY + 30, _timeLimit / 10, 0);
 	FINDIMG("초록숫자")->frameRender(getMemDC(), CAMX + 513, CAMY + 30, _timeLimit % 10, 0);
 	FINDIMG("노란숫자")->frameRender(getMemDC(), CAMX + 359, CAMY + 53, _life, 0);
 	// _score = _cl->getScore();
+	_score = 1500;
 	FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 359, CAMY + 29, _score%10, 0);
-	if(_score>9) FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 335, CAMY + 29, _score / 10 % 10, 0);
-	if (_score > 99) FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 311, CAMY + 29, _score / 100 % 10, 0);
-	if (_score > 999) FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 287, CAMY + 29, _score / 1000 % 10, 0);
-	if (_score > 9999) FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 263, CAMY + 29, _score / 10000 % 10, 0);
+	if (_score > 9)		FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 335, CAMY + 29, _score / 10 % 10, 0);
+	if (_score > 99)	FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 311, CAMY + 29, _score / 100 % 10, 0);
+	if (_score > 999)	FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 287, CAMY + 29, _score / 1000 % 10, 0);
+	if (_score > 9999)	FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 263, CAMY + 29, _score / 10000 % 10, 0);
+
+	// _playerHpRatio = _pl->getCurrentHp()/100.f;
+	// _bossHpRatio = _em->;
+
+	if (_playerHpRatio > 0) _playerHpRatio -= 0.01f;
+	else _playerHpRatio = 1.f; // 확인용
+
+	if (_playerHpRatio < 0.3f)
+	{
+		FINDIMG("빨피일때")->frameRender(getMemDC(), CAMX + 173, CAMY + 31, _redCount/15, 0);
+	}
+	FINDIMG("플레이어체력바")->render(getMemDC(), CAMX + 245, CAMY + 81, 132 - 132 * _playerHpRatio, 0, 132 * _playerHpRatio, 18);
+	
+	if (_bossHpRatio > 0) _bossHpRatio -= 0.01f;
+	else _bossHpRatio = 1.f; // 확인용 576 96 6~570
+	FINDIMG("보스텍스트")->render(getMemDC(), CAMX + 428, CAMY + 176);
+	if (_bossHpRatio > 0.5f) FINDIMG("보스체력바")->render(getMemDC(), CAMX + 224, CAMY + 200, 0, 24, 576, 24);
+	else  FINDIMG("보스체력바")->render(getMemDC(), CAMX + 224, CAMY + 200, 0, 72, 576, 24);
+	if (_bossHpRatio > 0.5f) FINDIMG("보스체력바")->render(getMemDC(), CAMX + 230, CAMY + 200, 576 - 570 * (_bossHpRatio -0.5f) * 2, 0, 570 * (_bossHpRatio - 0.5f) * 2, 24);
+	else  FINDIMG("보스체력바")->render(getMemDC(), CAMX + 230, CAMY + 200, 576 - 570 * (_bossHpRatio) * 2, 48, 570 * (_bossHpRatio) * 2, 24);
 	
 }

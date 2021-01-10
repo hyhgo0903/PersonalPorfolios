@@ -467,6 +467,92 @@ void image::alphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int
 {
 	//여기는 여러분이 한 번 채워보세요~ *^^*
 	//한 번 공부해보라고~
+
+	_blendFunc.SourceConstantAlpha = alpha;
+
+	if (_trans)
+	{
+		BitBlt(_blendImage->hMemDC, 0, 0,
+			sourWidth, sourHeight,
+			hdc,
+			destX, destY, SRCCOPY);
+
+		GdiTransparentBlt(_blendImage->hMemDC, 0, 0,
+			sourWidth, sourHeight,
+			_imageInfo->hMemDC,
+			sourX, sourY,
+			sourWidth, sourHeight, _transColor); // 위 둘에서 sour할 만큼만 그려줌
+
+		AlphaBlend(hdc, destX, destY, sourWidth,
+			sourHeight, _blendImage->hMemDC,
+			0, 0, // 이미 hMemDC의 0,0에 그렸으므로 여기는 그냥 0,0 으로 갖고오면 되는 거였음
+			sourWidth, sourHeight, _blendFunc);
+	}
+	else
+	{
+		AlphaBlend(hdc, destX, destY, sourWidth,
+			sourHeight, _blendImage->hMemDC,
+			0, 0,
+			sourWidth, sourHeight, _blendFunc);
+	}
+}
+
+
+// 활용예: enemy.cpp랑 bullets.cpp의 렉트 미사일 렌더
+void image::alphaFrameRender(HDC hdc, int destX, int destY, BYTE alpha)
+{
+	_blendFunc.SourceConstantAlpha = alpha;
+
+	if (_trans)
+	{
+		BitBlt(_blendImage->hMemDC, 0, 0, _imageInfo->frameWidth, _imageInfo->frameHeight,
+			hdc, destX, destY, SRCCOPY);
+
+		GdiTransparentBlt(_blendImage->hMemDC, 0, 0, _imageInfo->frameWidth,
+			_imageInfo->frameHeight, _imageInfo->hMemDC, _imageInfo->currentFrameX * _imageInfo->frameWidth,
+			_imageInfo->currentFrameY * _imageInfo->frameHeight,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight, _transColor);
+
+		AlphaBlend(hdc, destX, destY, _imageInfo->frameWidth,
+			_imageInfo->frameHeight, _blendImage->hMemDC, 0, 0,
+			_imageInfo->frameWidth, _imageInfo->frameHeight, _blendFunc);
+	}
+	else
+	{
+		AlphaBlend(hdc, destX, destY, _imageInfo->frameWidth,
+			_imageInfo->frameHeight, _blendImage->hMemDC, 0, 0,
+			_imageInfo->frameWidth, _imageInfo->frameHeight, _blendFunc);
+	}
+}
+
+void image::alphaFrameRender(HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY, BYTE alpha)
+{
+	_imageInfo->currentFrameX = currentFrameX;
+	_imageInfo->currentFrameY = currentFrameY;
+	_blendFunc.SourceConstantAlpha = alpha;
+
+	if (_trans)
+	{
+		BitBlt(_blendImage->hMemDC, 0, 0, _imageInfo->frameWidth, _imageInfo->frameHeight,
+			hdc, destX, destY, SRCCOPY);
+
+		GdiTransparentBlt(_blendImage->hMemDC, 0, 0, _imageInfo->frameWidth,
+			_imageInfo->frameHeight, _imageInfo->hMemDC, _imageInfo->currentFrameX * _imageInfo->frameWidth,
+			_imageInfo->currentFrameY * _imageInfo->frameHeight,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight, _transColor);
+
+		AlphaBlend(hdc, destX, destY, _imageInfo->frameWidth,
+			_imageInfo->frameHeight, _blendImage->hMemDC, 0, 0,
+			_imageInfo->frameWidth, _imageInfo->frameHeight, _blendFunc);
+	}
+	else
+	{
+		AlphaBlend(hdc, destX, destY, _imageInfo->frameWidth,
+			_imageInfo->frameHeight, _blendImage->hMemDC, 0, 0,
+			_imageInfo->frameWidth, _imageInfo->frameHeight, _blendFunc);
+	}
 }
 
 //애니메이션 렌더용 함수

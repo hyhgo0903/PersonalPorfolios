@@ -22,7 +22,8 @@ private:
 	bool _mapChanging; // 맵이 바뀌는 중인지(위로 올라가는 효과)
 	int _timeLimit; int _timeCount; // 제한시간
 	int _life;
-	int _score;
+	int _score; float _playerHpRatio; float _bossHpRatio;
+	int _redCount;
 
 public:
 	mainScene();

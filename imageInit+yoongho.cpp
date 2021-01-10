@@ -27,7 +27,9 @@ void playGround::imageInitYoongho()
 	IMAGEMANAGER->addImage("컷씬대사3", "image/ui/cutscenedialog3.bmp", 459, 27, false, RGB(0, 0, 0));
 	IMAGEMANAGER->addImage("컷씬레드", "image/ui/cutscenered.bmp", 75, 83, false, RGB(0, 0, 0));
 
-	IMAGEMANAGER->addFrameImage("빨피일때", "image/ui/playericon.bmp", 240, 24, 10, 1, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("빨피일때", "image/ui/playericon.bmp", 126, 72, 2, 1, false, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("보스체력바", "image/ui/bossbar.bmp", 576, 96, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("그냥텍스트", "image/ui/text.bmp", 864, 96, 4, 1, true, RGB(255, 0, 255));
 
-	
+	IMAGEMANAGER->addImage("보스텍스트", "image/ui/bosstext.bmp", 168, 24, true, RGB(255, 0, 255));
 }
