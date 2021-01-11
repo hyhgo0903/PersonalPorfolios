@@ -15,7 +15,29 @@ void playGround::imageInitYounghan()
 	IMAGEMANAGER->addFrameImage("enemy1_grab", "image/enemy1(ball)/enemy1_grab1.bmp", 180, 390, 1, 2, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("enemy1_flying", "image/enemy1(ball)/enemy1_flying.bmp", 1080, 360, 4, 2, true, RGB(255, 0, 255));
 
+	//적2
+	IMAGEMANAGER->addFrameImage("enemy2_idle", "image/enemy2(bat)/idle.bmp", 330, 768, 2, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy2_move", "image/enemy2(bat)/move.bmp", 990, 768, 5, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy2_atk", "image/enemy2(bat)/attack.bmp", 7296, 768, 16, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy2_hit", "image/enemy2(bat)/enemy2_hit.bmp", 291, 588, 1, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy2_dead", "image/enemy2(bat)/dead.bmp", 219, 768, 1, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy2_grab", "image/enemy2(bat)/enemy2_grab.bmp", 291, 588, 1, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy2_flying", "image/enemy2(bat)/enemy2_flying.bmp", 285, 588, 1, 2, true, RGB(255, 0, 255));
+
+	//적3
+	IMAGEMANAGER->addFrameImage("enemy3_idle", "image/enemy3(card)/enemy3_idle.bmp", 390, 390, 2, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy3_walk", "image/enemy3(card)/enemy3_walk.bmp", 975, 420, 5, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy3_atk", "image/enemy3(card)/enemy3_atk.bmp", 990, 390, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy3_hit", "image/enemy3(card)/enemy3_hit.bmp", 195, 390, 1, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy3_dead", "image/enemy3(card)/enemy3_dead.bmp", 840, 420, 4, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy3_grab", "image/enemy3(card)/enemy3_grab.bmp", 195, 480, 1, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("enemy3_flying", "image/enemy3(card)/enemy3_flying.bmp", 210, 420, 1, 2, true, RGB(255, 0, 255));
+
+
 	//보스 관련 이미지 추가
 	IMAGEMANAGER->addFrameImage("boss_idle", "image/boss/boss_idle.bmp", 424, 800, 1, 2, true, RGB(255, 0, 255));
 	IMAGEMANAGER->addFrameImage("boss_walk", "image/boss/boss_walk.bmp", 1456, 800, 4, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("boss_atk", "image/boss/boss_kick.bmp", 1866, 800, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("boss_hit", "image/boss/boss_AttackByPlayer_Side.bmp", 315, 800, 1, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("boss_dead", "image/boss/boss_flatted.bmp", 1091, 800, 1, 2, true, RGB(255, 0, 255));
 }

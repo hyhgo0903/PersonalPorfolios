@@ -3,6 +3,8 @@
 #include <vector>
 #include "boss.h"
 #include "minion.h"
+#include "minion2.h"
+#include "minion3.h"
 
 class player;
 
@@ -37,6 +39,8 @@ public:
 	virtual void render();
 
 	void createMinion(float x, float y);
+	void createMinion2(float x, float y);
+	void createMinion3(float x, float y);
 	void createBoss(float x, float y);
 
 	vector<enemy*> getVEnemy() { return _vEnemy; }

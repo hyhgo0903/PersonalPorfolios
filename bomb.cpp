@@ -23,8 +23,36 @@ HRESULT bomb::init(float x, float y)
 	_index = 0;
 	_indexTime = 0;
 
+	_ID = 2;
+	_food = false;
 	
-	
+	return S_OK;
+}
+
+HRESULT bomb::init(float x, float y, float bottom)
+{
+	_image = IMAGEMANAGER->findImage("ÆøÅº");
+	_image->setFrameX(0);
+	_image->setFrameY(0);
+	_gravity = 3;
+	_x = x;	_y = y;
+	_rc = RectMakeCenter(_x, _y, _image->getFrameWidth(), _image->getFrameHeight());//°øÁß·ºÆ®
+	_pickup = false;
+	_moving = false;
+
+	_xg = _x;
+	_yg = bottom;
+	_rcg = RectMakeCenter(_xg, _yg, _image->getFrameWidth(), _image->getFrameHeight());//¶¥·ºÆ®
+	_distance = _yg - _y;
+	_shadow = RectMakeCenter(_xg, _rcg.bottom, _image->getFrameWidth() - (_distance / 2), (_image->getFrameHeight() - (_distance / 2) / 3));
+	_time = 0;
+	_delete = false;
+
+	_index = 0;
+	_indexTime = 0;
+
+	_ID = 2;
+	_food = false;
 	return S_OK;
 }
 
@@ -34,6 +62,7 @@ void bomb::release()
 
 void bomb::update()
 {
+	_ID = 2;
 	if (!_moving && !_pickup)
 	{
 		drop();
@@ -52,7 +81,6 @@ void bomb::update()
 	if (_pickup)
 	{
 		_xg = _x;//¶¥·ºÆ®
-		_yg = _y + 30;
 		_rcg = RectMakeCenter(_xg, _yg, _image->getWidth(), _image->getHeight());//¶¥·ºÆ®
 	}
 	if (_moving)
@@ -101,6 +129,18 @@ void bomb::setHold(float x, float y)
 	_x = x;
 	_y = y;
 	framing(0, 1);
+}
+
+void bomb::setHold(float x, float y, float bottom)
+{
+	_pickup = true;
+	_x = x;
+	_y = y;
+	_yg = bottom-(_image->getHeight()/2);
+	_xg = _x;
+	framing(0, 1);
+
+	_tall = _yg - _y;
 }
 
 void bomb::drop()

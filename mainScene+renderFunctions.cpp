@@ -21,24 +21,20 @@ void mainScene::zOrderRender()
 	}
 	temp = _pl->getGroundRc(); // 이건 플레이어
 	bottomY.push_back(temp.bottom);
-	// y값을 하나하나 넣었음
-	
-	for (int i = 0; i < bottomY.size() - 1; ++i)
+	// y값을 하나하나 넣었음	
+
+	if (bottomY.size() > 1 ) QuickSort(0, bottomY.size() - 1); // 이게 퀵정렬
+
+	if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
-		for (int j = i + 1; j > 0 && bottomY[j] < bottomY[j - 1]; --j)
+
+		for (int i = 0; i < bottomY.size(); ++i)
 		{
-			swap(bottomY[j], bottomY[j - 1]);
+			sprintf_s(_str, "%d", bottomY[i]);
+			TextOut(getMemDC(), CAMX + 80 * i, CAMY + 100, _str, strlen(_str));
 		}
-	}	// 삽입 알고리즘을 통한 정렬이야
-	// 반복문을 잘 분석한다면 알 수 있겠지만, 순차적으로 반복문이 도는데
-	// 뒤의것이 앞의것보다 작다면 swap(위치바꿈)을 반복하는 반복문이라 보면 돼
 
-	for (int i = 0; i < bottomY.size(); ++i)
-	{
-		sprintf_s(_str, "%d", bottomY[i]);
-		TextOut(getMemDC(), CAMX+80 * i, CAMY+100, _str, strlen(_str));
 	}
-
 	for (int i = 0; i < bottomY.size(); ++i)
 	{ // 정렬했으니 벡터에 담긴 순서대로 그리기로 함
 		if (_pl->getGroundRc().bottom == bottomY[i])
@@ -78,6 +74,7 @@ void mainScene::uiRender()
 	FINDIMG("초록숫자")->frameRender(getMemDC(), CAMX + 466, CAMY + 30, _timeLimit / 10, 0);
 	FINDIMG("초록숫자")->frameRender(getMemDC(), CAMX + 513, CAMY + 30, _timeLimit % 10, 0);
 	FINDIMG("노란숫자")->frameRender(getMemDC(), CAMX + 359, CAMY + 53, _life, 0);
+
 	// _score = _cl->getScore();
 	_score = 1500;
 	FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 359, CAMY + 29, _score%10, 0);
@@ -106,4 +103,48 @@ void mainScene::uiRender()
 	if (_bossHpRatio > 0.5f) FINDIMG("보스체력바")->render(getMemDC(), CAMX + 230, CAMY + 200, 576 - 570 * (_bossHpRatio -0.5f) * 2, 0, 570 * (_bossHpRatio - 0.5f) * 2, 24);
 	else  FINDIMG("보스체력바")->render(getMemDC(), CAMX + 230, CAMY + 200, 576 - 570 * (_bossHpRatio) * 2, 48, 570 * (_bossHpRatio) * 2, 24);
 	
+}
+
+int mainScene::paritition(int left, int right)
+{
+	int pivot = bottomY[left];//피벗의 위치는 가장 왼쪽에서 시작
+	int low = left + 1;
+	int high = right;
+
+	while (low <= high) // 교차되기 전까지 반복한다 
+	{
+		while (low <= right && pivot >= bottomY[low]) // 피벗보다 큰 값을 찾는 과정 
+		{
+			low++; // low를 오른쪽으로 이동 
+		}
+		while (high >= (left + 1) && pivot <= bottomY[high])// 피벗보다 작은 값을 찾는 과정
+		{
+			high--; // high를 왼쪽으로 이동
+		}
+		if (low <= high) // 교차되지 않은 상태이면 스왑 과정 실행 
+		{
+			int temp = bottomY[low];
+			bottomY[low] = bottomY[high];
+			bottomY[high] = temp;
+		}
+
+
+	}
+	// 피벗과 high가 가리키는 대상을 교환 
+	int temp = bottomY[left];
+	bottomY[left] = bottomY[high];
+	bottomY[high] = temp;
+
+	// 옮겨진 피벗의 위치정보를 반환 
+	return high;
+}
+
+void mainScene::QuickSort(int left, int right)
+{
+	if (left < right)
+	{
+		int q = paritition(left, right);  // 둘로 나누어서
+		QuickSort(left, q - 1); // 왼쪽 영역을 정렬한다.
+		QuickSort(q + 1, right); // 오른쪽 영역을 정렬한다.
+	}
 }

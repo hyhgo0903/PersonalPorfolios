@@ -34,7 +34,13 @@ void walk::updateState()
 	{
 		_pl->getFlyY() += 3;	_pl->getGroundY() += 3;
 	}
-	if (KEYMANAGER->isStayKeyDown('X'))
+
+    if (KEYMANAGER->isOnceKeyDown('Z'))
+    {
+        _pl->setState(COMBO1);
+    }
+
+	if (KEYMANAGER->isOnceKeyDown('X'))
 	{
 		_pl->setState(JUMP);
 	}

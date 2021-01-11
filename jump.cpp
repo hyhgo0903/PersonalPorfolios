@@ -2,12 +2,11 @@
 #include "Jump.h"
 #include "player.h"
 
-#define GRAVITY 0.2f
+#define GRAVITY 0.6f
 
 void Jump::EnterState()
 {
 	_pl->getFlyRc() = _pl->getGroundRc();
-	_jumpPower = 5;
 	// 여기서 방향에따라 이미지넣고 인덱스 대충 초기화해줌
 }
 
@@ -40,13 +39,18 @@ void Jump::updateState()
 		_pl->getFlyY() += 3;	_pl->getGroundY() += 3;
 	}
 
-	_jumpPower -= GRAVITY;
-	_pl->getFlyY() -= _jumpPower; // 늘상 보던 중력과 점프파워
+    _pl->getJumpPower() -= GRAVITY;
+    _pl->getFlyY() -= _pl->getJumpPower(); // 늘상 보던 중력과 점프파워
 	if (_pl->getFlyY() > _pl->getGroundY())
 	{ // 
 		_pl->getFlyY() = _pl->getGroundY();
 		_pl->setState(IDLE);
 	}
+
+    if (KEYMANAGER->isOnceKeyDown('Z'))
+    {
+        _pl->setState(JUMPATTACK);
+    }
 }
 
 void Jump::ExitState()

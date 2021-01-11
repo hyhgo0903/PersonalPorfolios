@@ -51,7 +51,8 @@ void attack::Attack(float x, float y)
 	attack.x = attack.attackX = x;
 	attack.y = attack.attackY = y;
 
-	attack.rc = RectMakeCenter(attack.x, attack.y, 100, 20);
+	attack.rc = RectMake(attack.x, attack.y, 150, 20); 
+	 
 
 	_vAttack.push_back(attack);
 }

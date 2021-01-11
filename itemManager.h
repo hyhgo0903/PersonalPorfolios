@@ -3,6 +3,13 @@
 #include "baseball.h"
 #include "bat.h"
 #include "bomb.h"
+
+#include "juice.h"
+#include "fries.h"
+#include "pizza.h"
+#include "cereal.h"
+#include "pudding.h"
+#include "hamberger.h"
 #include <vector>
 
 class itemManager :	public gameNode
@@ -30,7 +37,15 @@ public:
 	
 
 	void createBaseball(float x, float y);
+	void createBaseball(float x, float y, float bottom);
 	void createBomb(float x, float y);
+	void createBomb(float x, float y, float bottom);
+	void createPizza(float x, float y);
+	void createPizza(float x, float y, float bottom);
+	void createFood(float x, float y);
+	void createFood(float x, float y, float bottom);
+	void createBat(float x, float y);
+	void createBat(float x, float y, float bottom);
 	void throwing();
 	void throwing(bool direction);
 	vector<item*> getVItem() { return _vItem; }

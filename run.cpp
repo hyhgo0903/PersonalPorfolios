@@ -35,9 +35,13 @@ void run::updateState()
 	{
 		_pl->getFlyY() += 8;	_pl->getGroundY() += 8;
 	}
-	if (KEYMANAGER->isStayKeyDown('X'))
+    if (KEYMANAGER->isOnceKeyDown('Z'))
+    {
+        _pl->setState(SLIDE);
+    }
+	if (KEYMANAGER->isOnceKeyDown('X'))
 	{
-		_pl->setState(JUMP);
+		_pl->setState(TACKLE);
 	}
 	if (!KEYMANAGER->isStayKeyDown(VK_LEFT) &&
 		!KEYMANAGER->isStayKeyDown(VK_RIGHT) &&

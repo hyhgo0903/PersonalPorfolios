@@ -9,7 +9,6 @@ private:
 public:
 	minion();
 	~minion();
-	int _plAtkNum;				//테스트용 플레이어 공격상태
 
 	virtual HRESULT init(float x, float y);
 	virtual void release();

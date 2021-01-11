@@ -2,6 +2,10 @@
 #include "gameNode.h"
 #include <vector>
 
+
+
+class player;
+
 // 콤보공격에 쓸 공격 벡터입니다.
 struct tagAttack
 {
@@ -20,6 +24,8 @@ private:
 
 	int _count;
 	int _attackMax; // 공격 렉트 한계치. (없어도 될 거 같은데 넣었습니다)
+	player* _pl;
+
 public:
 	attack() {};
 	~attack() {};

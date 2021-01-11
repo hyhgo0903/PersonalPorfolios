@@ -82,6 +82,9 @@
     <Filter Include="playGround\scene\mainScene">
       <UniqueIdentifier>{0380463a-eeff-47c4-aa80-20daee59a0f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\player\STATE\combo">
+      <UniqueIdentifier>{870678d6-c5f1-47d0-98b4-d83f892a3b34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -231,14 +234,65 @@
     <ClInclude Include="videoScene.h">
       <Filter>playGround\scene</Filter>
     </ClInclude>
-    <ClInclude Include="combo1.h">
-      <Filter>playGround\player\STATE</Filter>
-    </ClInclude>
     <ClInclude Include="attack.h">
       <Filter>playGround\player</Filter>
     </ClInclude>
     <ClInclude Include="bomb.h">
       <Filter>playGround\item\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="pizza.h">
+      <Filter>playGround\item\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="juice.h">
+      <Filter>playGround\item\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="minion2.h">
+      <Filter>playGround\enemy\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="minion3.h">
+      <Filter>playGround\enemy\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="combo11.h">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClInclude>
+    <ClInclude Include="combo1.h">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClInclude>
+    <ClInclude Include="combo12.h">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClInclude>
+    <ClInclude Include="combo13.h">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClInclude>
+    <ClInclude Include="cereal.h">
+      <Filter>playGround\item\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="fries.h">
+      <Filter>playGround\item\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="hamberger.h">
+      <Filter>playGround\item\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="pudding.h">
+      <Filter>playGround\item\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="combo21.h">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClInclude>
+    <ClInclude Include="combo22.h">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClInclude>
+    <ClInclude Include="combo23.h">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClInclude>
+    <ClInclude Include="jumpAttack.h">
+      <Filter>playGround\player\STATE</Filter>
+    </ClInclude>
+    <ClInclude Include="slide.h">
+      <Filter>playGround\player\STATE</Filter>
+    </ClInclude>
+    <ClInclude Include="tackle.h">
+      <Filter>playGround\player\STATE</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -410,14 +464,65 @@
     <ClCompile Include="mainScene+renderFunctions.cpp">
       <Filter>playGround\scene\mainScene</Filter>
     </ClCompile>
-    <ClCompile Include="combo1.cpp">
-      <Filter>playGround\player\STATE</Filter>
-    </ClCompile>
     <ClCompile Include="attack.cpp">
       <Filter>playGround\player</Filter>
     </ClCompile>
     <ClCompile Include="bomb.cpp">
       <Filter>playGround\item\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="pizza.cpp">
+      <Filter>playGround\item\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="juice.cpp">
+      <Filter>playGround\item\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="minion2.cpp">
+      <Filter>playGround\enemy\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="minion3.cpp">
+      <Filter>playGround\enemy\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="combo1.cpp">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClCompile>
+    <ClCompile Include="combo11.cpp">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClCompile>
+    <ClCompile Include="combo12.cpp">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClCompile>
+    <ClCompile Include="combo13.cpp">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClCompile>
+    <ClCompile Include="cereal.cpp">
+      <Filter>playGround\item\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="fries.cpp">
+      <Filter>playGround\item\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="hamberger.cpp">
+      <Filter>playGround\item\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="pudding.cpp">
+      <Filter>playGround\item\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="combo21.cpp">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClCompile>
+    <ClCompile Include="combo22.cpp">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClCompile>
+    <ClCompile Include="combo23.cpp">
+      <Filter>playGround\player\STATE\combo</Filter>
+    </ClCompile>
+    <ClCompile Include="jumpAttack.cpp">
+      <Filter>playGround\player\STATE</Filter>
+    </ClCompile>
+    <ClCompile Include="slide.cpp">
+      <Filter>playGround\player\STATE</Filter>
+    </ClCompile>
+    <ClCompile Include="tackle.cpp">
+      <Filter>playGround\player\STATE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

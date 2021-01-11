@@ -12,7 +12,7 @@ videoScene::~videoScene()
 HRESULT videoScene::init()
 {
 	LogoVideo = MCIWndCreate(_hWnd, NULL, MCIWNDF_NOPLAYBAR |
-		WS_VISIBLE | WS_CHILD, "sample_1280x720.wmv");
+		WS_VISIBLE | WS_CHILD, "opening.wmv");
 	MoveWindow(LogoVideo, 0, 0, WINSIZEX, WINSIZEY, NULL);
 	MCIWndPlay(LogoVideo);
 	return S_OK;

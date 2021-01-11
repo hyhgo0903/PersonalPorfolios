@@ -24,6 +24,8 @@ private:
 	int _life;
 	int _score; float _playerHpRatio; float _bossHpRatio;
 	int _redCount;
+	int _tempX;
+	int _playerHeight; int _playerWidth;
 
 public:
 	mainScene();
@@ -38,5 +40,7 @@ public:
 	void cameraControl();
 	void uiRender();
 	void plusScore(int x) { _score += x; }
+	int paritition(int left, int right);
+	void QuickSort(int left, int right);
 };
 

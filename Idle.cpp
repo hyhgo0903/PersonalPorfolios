@@ -5,6 +5,7 @@ void Idle::EnterState()
 {
 	// 방향에따라 이미지넣고 인덱스 대충 초기화해줌
 	//_player->setMainImg("전령일반상태");
+    _pl->getJumpPower() = 15;
 	
 }
 

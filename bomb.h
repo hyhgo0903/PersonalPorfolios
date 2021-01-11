@@ -9,11 +9,13 @@ private:
 
 public:
 	virtual HRESULT init(float x, float y);
+	virtual HRESULT init(float x, float y, float bottom);
 	virtual void release();
 	virtual void update();
 	virtual void render();
 	virtual void attackMove(bool direction);
 	virtual void setHold(float x, float y);
+	virtual void setHold(float x, float y, float bottom);
 
 	void drop();
 	void drop(float g);
@@ -21,6 +23,5 @@ public:
 	void framing(int start, int end);
 	void reverseFraming();
 	void reverseFraming(int start, int end);
-
 };
 
