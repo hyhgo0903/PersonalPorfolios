@@ -5,6 +5,8 @@
 void tackle::EnterState()
 {
     _pl->getJumpPower() = 20;
+	if (!_pl->getLeft()) { _pl->getAttack()->Attack(_pl->getGroundRc().right + 50, _pl->getGroundRc().top); }
+	if (_pl->getLeft()) { _pl->getAttack()->Attack(_pl->getGroundRc().left - 200, _pl->getGroundRc().top); }
 }
 
 void tackle::updateState()

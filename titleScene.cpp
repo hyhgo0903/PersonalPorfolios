@@ -18,9 +18,9 @@ HRESULT titleScene::init()
 
 	_loopX = _loopY = _cursorCount = 0;
 	_cursorFrame = 1;
-	
-	_selected = false;
 
+	_selected = false;
+	SOUNDMANAGER->play("¼¿·ºÆ®¾À");
 	return S_OK;
 }
 
@@ -49,7 +49,11 @@ void titleScene::update()
 	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
 	{
 		if (!_selected && _cursor == 0) _selected = true;
-		else if (_selected) SCENEMANAGER->changeScene("¸ÞÀÎ¾À");
+		else if (_selected)
+		{
+			SOUNDMANAGER->stop("¼¿·ºÆ®¾À");
+			SCENEMANAGER->changeScene("¸ÞÀÎ¾À");
+		}
 	}
 }
 
@@ -57,7 +61,7 @@ void titleScene::render()
 {
 	FINDIMG("¼¿·º¹è°æ")->loopRender(getMemDC(), &_rc, _loopX, _loopY);
 	if (_cursorFrame == 1 && !_selected) FINDIMG("¼¿·ºÄ¿¼­")->frameRender(getMemDC(), 134 + 240 * _cursor, 165, 0, 0);
-	else if (_cursorFrame  == -1 && !_selected) FINDIMG("¼¿·ºÄ¿¼­")->frameRender(getMemDC(), 134 + 240 * _cursor, 165, 1, 0);
+	else if (_cursorFrame == -1 && !_selected) FINDIMG("¼¿·ºÄ¿¼­")->frameRender(getMemDC(), 134 + 240 * _cursor, 165, 1, 0);
 	FINDIMG("¼¿·ºÄ³¸¯")->render(getMemDC());
 	if (!_selected) FINDIMG("¼¿·º·¹µå")->frameRender(getMemDC(), 34, 178, 0, 0);
 	else FINDIMG("¼¿·º·¹µå")->frameRender(getMemDC(), 34, 178, 1, 0);

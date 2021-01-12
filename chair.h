@@ -5,6 +5,7 @@ class chair :public object
 private:
 
 	image* _img;
+	RECT _chairRect;
 
 public:
 	chair();
@@ -17,6 +18,7 @@ public:
 
 
 	image* getChairImg() { return _img; }
+	RECT getChairRect() { return _chairRect; }
 
 };
 

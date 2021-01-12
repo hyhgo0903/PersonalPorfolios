@@ -24,6 +24,8 @@ private:
 	stageManager*	_sm;
 	itemManager*	_im;
 
+	int _itemOrder; //이걸로 아이템 순서 정해보려고 만듬;
+
 public:
 	collision();
 	~collision();

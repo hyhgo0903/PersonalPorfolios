@@ -173,6 +173,8 @@
     <ClInclude Include="enemyManager.h" />
     <ClInclude Include="fries.h" />
     <ClInclude Include="gameNode.h" />
+    <ClInclude Include="grab.h" />
+    <ClInclude Include="grabswing.h" />
     <ClInclude Include="hamberger.h" />
     <ClInclude Include="Idle.h" />
     <ClInclude Include="image.h" />
@@ -248,6 +250,8 @@
     <ClCompile Include="enemyManager.cpp" />
     <ClCompile Include="fries.cpp" />
     <ClCompile Include="gameNode.cpp" />
+    <ClCompile Include="grab.cpp" />
+    <ClCompile Include="grabswing.cpp" />
     <ClCompile Include="hamberger.cpp" />
     <ClCompile Include="Idle.cpp" />
     <ClCompile Include="image.cpp" />
@@ -280,6 +284,7 @@
     <ClCompile Include="run.cpp" />
     <ClCompile Include="sceneManager.cpp" />
     <ClCompile Include="slide.cpp" />
+    <ClCompile Include="soundInit.cpp" />
     <ClCompile Include="soundManager.cpp" />
     <ClCompile Include="stageManager.cpp" />
     <ClCompile Include="STATE.cpp" />

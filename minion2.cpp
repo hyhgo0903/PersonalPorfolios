@@ -230,13 +230,19 @@ void minion2::update()
 {
 	_rc = RectMakeCenter(_x, _y, 50, 200);
 	enemyState();
-
 	//테스트용, 파일 합치기전엔 항상 주석처리할것
-	keyManager();
+	//keyManager();
+
+	//상태에 따라 그림자의 크기를 다르게하여 그려줍니다
+	if (_state2 == E_IDLE || _state2 == E_WALK || _state2 == E_WALK2 || _state2 == E_ATK || _state2 == E_DEAD || _state2 == E_HIT)
+		_shadow = RectMakeCenter(_rc.left + 25, _rc.bottom + 10, 200, 50);
+
+	if (_state2 == E_GRAB || _state2 == E_FLYING) _shadow = RectMakeCenter(_rc.left + 25, _rc.bottom + 10, 150, 50);
 }
 
 void minion2::render()
 {
+	fillColorEllipse(40, 40, 40, _shadow);
 	enemyStateRender();
 	if (KEYMANAGER->isToggleKey(VK_F1)) Rectangle(getMemDC(), _rc);
 }

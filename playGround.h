@@ -23,5 +23,6 @@ public:
 	void imageInitHyunjeong();
 	void imageInitYoongho();
 	void imageInitYounghan();
+	void soundInit();
 };
 

@@ -17,8 +17,9 @@ protected:
 	int _distance;//공중렉트, 지상렉트 위치차이.
 	int _tall;
 	float _time;//이미지, 상황 변환용 변수.
-	
+
 	int _ID; //아이템 구별 위해서.
+	bool _direction;
 	float _angle; //이동시 각 이용해서 변하게.
 
 	bool _pickup; //들고있나요?->손에 쥐고 있을 때 쓸 거임.
@@ -41,12 +42,15 @@ public:
 	void fillColorEllipse(int R, int G, int B, RECT rc);
 
 	RECT getRect() { return _rc; }
+	RECT getShadow() { return _shadow; }
 
 	inline int getID() { return _ID; }
 	inline bool getDelete() { return _delete; }
 	inline bool getPickup() { return _pickup; }
 	inline bool getMoving() { return _moving; }
 	inline bool isFood() { return _food; }
+	inline bool getDirection() { return _direction; }
+
 
 	//아래는 둘 다 매니저에서 사용할 함수임.
 	//던지면 발생하도록함. 방향을 지정해주면(true : 오른쪽, false : 왼쪽) x, y로 움직이도록 함.
@@ -56,6 +60,10 @@ public:
 	virtual void setHold(float x, float y);
 	virtual void setHold(float x, float y, float bottom);
 
-	
+	//적이랑 공격시에 이용할 것.
+	inline void makeBoom() { _delete = true; }//얘는 폭탄
+	inline void makeInflect(float angle) { _angle += angle; }//얘는 야구공
+
+
 };
 

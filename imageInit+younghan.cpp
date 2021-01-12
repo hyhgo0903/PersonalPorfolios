@@ -35,9 +35,16 @@ void playGround::imageInitYounghan()
 
 
 	//보스 관련 이미지 추가
-	IMAGEMANAGER->addFrameImage("boss_idle", "image/boss/boss_idle.bmp", 424, 800, 1, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("boss_walk", "image/boss/boss_walk.bmp", 1456, 800, 4, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("boss_atk", "image/boss/boss_kick.bmp", 1866, 800, 3, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("boss_hit", "image/boss/boss_AttackByPlayer_Side.bmp", 315, 800, 1, 2, true, RGB(255, 0, 255));
-	IMAGEMANAGER->addFrameImage("boss_dead", "image/boss/boss_flatted.bmp", 1091, 800, 1, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("boss_idle", "image/boss/boss_idle.bmp", 212, 400, 1, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("boss_walk", "image/boss/boss_walk.bmp", 728, 400, 4, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("boss_atk", "image/boss/boss_kick.bmp", 933, 400, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("boss_hit", "image/boss/boss_AttackByPlayer_Side.bmp", 158, 400, 4, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("boss_dead", "image/boss/boss_AttackedByPlayer_fallSpin.bmp", 832, 400, 1, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("boss_shakes", "image/boss/boss_shakes.bmp", 1230, 400, 4, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("boss_crawl", "image/boss/boss_Crawl.bmp", 969, 400, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("boss_car", "image/boss/boss_withCar.bmp", 1200, 594, 3, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("boss_hit2", "image/boss/boss_AttackedByPlayer_downToUpAndJump.bmp", 222, 400, 1, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("boss_hit3", "image/boss/boss_AttackedByPlayer_downToUp.bmp", 142, 400, 1, 2, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("boss_hit4", "image/boss/boss_AttackedByPlayer_rightToLeft.bmp", 192, 400, 1, 2, true, RGB(255, 0, 255));
+	
 }

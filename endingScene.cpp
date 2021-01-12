@@ -11,6 +11,7 @@ endingScene::~endingScene()
 
 HRESULT endingScene::init()
 {
+	SOUNDMANAGER->play("¿£µù");
 	_loopX = _characterY = 0.f;
 	_dialCount = 0;
 	_dialog1index=0;	_dialog2index=0;	_dialog3index=0;

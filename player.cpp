@@ -33,7 +33,7 @@ HRESULT player::init()
 	_left = false;
 	setState(IDLE);
 	_attack = new attack;
-	_attack->init(3, 50);
+	_attack->init(8, 50);
 	//setState(IDLE);
 	_em = new enemyManager;
 	return S_OK;
@@ -153,7 +153,6 @@ void player::stateUpdate()
 		switch (_enumState)
 		{
 		case IDLE:
-			_index = 0;
 			playerImage = IMAGEMANAGER->findImage("플레이어대기");
 			if (!_left) { playerImage->setFrameY(0); }
 			else { playerImage->setFrameY(1); }
@@ -365,6 +364,22 @@ void player::stateUpdate()
                 _index++;
             }
             break;
+		case GRAB:
+			playerImage = IMAGEMANAGER->findImage("플레이어잡기");
+			if (!_left)
+			{
+				if (_index >= 1) _index = 0;
+				playerImage->setFrameY(0);
+				playerImage->setFrameX(_index);
+				_index++;
+			}
+			else
+			{
+				if (_index >= 1) _index = 0;
+				playerImage->setFrameY(0);
+				playerImage->setFrameX(_index);
+				_index++;
+			}
 		}
 		_count = 0;
 	}
@@ -380,48 +395,48 @@ void player::stateRender()
 	switch (_enumState)
 	{
 	case IDLE:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 120, _flyRc.top);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top);
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 123, _flyRc.top);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 67, _flyRc.top);
 		break;
 	case JUMP:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 86, _flyRc.top);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 86, _flyRc.top);
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 75, _flyRc.top - 12);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 100, _flyRc.top - 12);
 		break;
 	case WALK:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 100, _flyRc.top);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 75, _flyRc.top);
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 115, _flyRc.top - 12);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 77, _flyRc.top - 12);
 		break;
 	case RUN:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 100, _flyRc.top);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 40, _flyRc.top);
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 100, _flyRc.top - 3);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 40, _flyRc.top - 3);
 		break;
 	case COMBO1:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 150, _flyRc.top);
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 62, _flyRc.top + 18);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 164, _flyRc.top + 18);
 		break;
 	case COMBO11:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 120, _flyRc.top);
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top + 9);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 120, _flyRc.top + 9);
 		break;
 	case COMBO12:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 120, _flyRc.top - 40);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 150, _flyRc.top - 40);
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 120, _flyRc.top - 39);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 150, _flyRc.top - 39);
 		break;
 	case COMBO13:
-		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top);
-		else playerImage->frameRender(getMemDC(), _flyRc.left - 180, _flyRc.top);
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top - 10);
+		else playerImage->frameRender(getMemDC(), _flyRc.left - 180, _flyRc.top - 10);
 		break;
     case COMBO21:
-        if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top);
-        else playerImage->frameRender(getMemDC(), _flyRc.left - 120, _flyRc.top);
+        if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 90, _flyRc.top - 18);
+        else playerImage->frameRender(getMemDC(), _flyRc.left - 150, _flyRc.top - 18);
         break;
     case COMBO22:
-        if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 120, _flyRc.top - 40);
-        else playerImage->frameRender(getMemDC(), _flyRc.left - 150, _flyRc.top - 40);
+        if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 120, _flyRc.top);
+        else playerImage->frameRender(getMemDC(), _flyRc.left - 150, _flyRc.top);
         break;
     case COMBO23:
-        if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top);
-        else playerImage->frameRender(getMemDC(), _flyRc.left - 180, _flyRc.top);
+        if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top + 12);
+        else playerImage->frameRender(getMemDC(), _flyRc.left - 180, _flyRc.top + 12);
         break;
     case SLIDE:
         if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top);
@@ -432,9 +447,16 @@ void player::stateRender()
         else playerImage->frameRender(getMemDC(), _flyRc.left - 30, _flyRc.top);
         break;
     case JUMPATTACK:
-        if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top);
-        else playerImage->frameRender(getMemDC(), _flyRc.left - 180, _flyRc.top);
+        if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left - 60, _flyRc.top - 12);
+        else playerImage->frameRender(getMemDC(), _flyRc.left - 180, _flyRc.top - 12);
         break;
-	
+	case GRAB:
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left, _flyRc.top);
+		else playerImage->frameRender(getMemDC(), _flyRc.left, _flyRc.top);
+		break;
+	case GRABSWING:
+		if (!_left) playerImage->frameRender(getMemDC(), _flyRc.left, _flyRc.top);
+		else playerImage->frameRender(getMemDC(), _flyRc.left, _flyRc.top);
+		break;
 	}
 }

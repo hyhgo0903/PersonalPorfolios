@@ -11,6 +11,7 @@ protected:
 	int _id;
 	float _x; float _y;
 	bool _isFire;
+	bool _isBossOn;
 
 public:
 	object();
@@ -24,6 +25,7 @@ public:
 	RECT getRect() { return _rc; }
 	int getId() { return _id; }
 	bool getIsFire() { return _isFire; }
+	bool getIsBossOn() { return _isBossOn; }
 //	void setId(int x) { _id = x; } // 외부에서 x를 집어넣으면 _id의 값이 x로 바뀌게 된다.
 
 

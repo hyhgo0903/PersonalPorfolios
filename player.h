@@ -22,7 +22,9 @@ enum State {
 	COMBO13,
     COMBO21,
     COMBO22,
-    COMBO23
+    COMBO23,
+	GRAB,
+	GRABSWING
 };
 
 class player :

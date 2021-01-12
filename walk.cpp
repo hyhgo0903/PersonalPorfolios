@@ -53,4 +53,5 @@ void walk::updateState()
 
 void walk::ExitState()
 {
+	_pl->getIndex() = 0;
 }

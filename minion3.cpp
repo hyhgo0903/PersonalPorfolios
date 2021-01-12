@@ -235,10 +235,16 @@ void minion3::update()
 
 	//테스트용, 파일 합치기전엔 항상 주석처리할것
 	//keyManager(); 
+	//상태에 따라 그림자의 크기를 다르게하여 그려줍니다
+	if (_state3 == E_IDLE || _state3 == E_WALK || _state3 == E_WALK2 || _state3 == E_ATK || _state3 == E_DEAD || _state3 == E_HIT)
+		_shadow = RectMakeCenter(_rc.left + 60, _rc.bottom + 30, 230, 50);
+
+	if (_state3 == E_GRAB || _state3 == E_FLYING) _shadow = RectMakeCenter(_rc.left + 60, _rc.bottom + 30, 180, 50);
 }
 
 void minion3::render()
 {
+	fillColorEllipse(40, 40, 40, _shadow);
 	enemyStateRender();
 	if (KEYMANAGER->isToggleKey(VK_F1)) Rectangle(getMemDC(), _rc);
 }

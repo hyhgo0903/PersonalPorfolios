@@ -22,33 +22,33 @@ void itemManager::release()
 
 void itemManager::update()
 {
-	
+
 	{
-		if (KEYMANAGER->isOnceKeyDown('1'))
+		if (KEYMANAGER->isOnceKeyDown('Q'))
 		{//»ç¿ë¹ý ´À³¦¾²
 			_vItem.clear();
 			createBaseball(300, CAMY + 500);
 		}
 
-		if (KEYMANAGER->isOnceKeyDown('2'))
+		if (KEYMANAGER->isOnceKeyDown('W'))
 		{
 			_vItem.clear();
 			createBomb(500, CAMY + 500);
 		}
-		if (KEYMANAGER->isOnceKeyDown('3'))
+		if (KEYMANAGER->isOnceKeyDown('E'))
 		{
 			_vItem.clear();
 			createPizza(500, CAMY + 600);
-			for(int i =0; i<4;i++) createFood(600, CAMY + 600);
+			for (int i = 0; i < 4; i++) createFood(600, CAMY + 600);
 		}
-		if (KEYMANAGER->isOnceKeyDown('4'))
+		if (KEYMANAGER->isOnceKeyDown('R'))
 		{
 			_vItem.clear();
 			createBat(500, CAMY + 600);
 		}
 	}
-	
-	
+
+
 	{
 		for (int i = 0; i < _vItem.size(); i++)
 		{
@@ -67,12 +67,13 @@ void itemManager::update()
 				{
 					if (_vItem[i]->getID() == 2)
 					{
+						SOUNDMANAGER->play("ÆøÅº");
 						EFFECTMANAGER->play("Æø¹ß", ((_vItem[i]->getRect().right + _vItem[i]->getRect().left) / 2), _vItem[i]->getRect().top);
-						EFFECTMANAGER->play("Æø¹ß", _vItem[i]->getRect().right, _vItem[i]->getRect().top - 50);
-						EFFECTMANAGER->play("Æø¹ß", _vItem[i]->getRect().left, _vItem[i]->getRect().top - 50);
+						EFFECTMANAGER->play("Æø¹ß", _vItem[i]->getRect().right + 50, _vItem[i]->getRect().top - 150);
+						EFFECTMANAGER->play("Æø¹ß", _vItem[i]->getRect().left - 50, _vItem[i]->getRect().top - 150);
 						_vItem.erase(_vItem.begin() + i);
 					}
-					
+
 				}
 			}
 		}
@@ -90,13 +91,13 @@ void itemManager::update()
 			_vItem.erase(_vItem.begin() + i);
 			break;
 		}
-		
+
 	}
 }
 
 void itemManager::render()
 { // ¾ÆÀÌÅÛµéÀº Á¦Æ®¿À´õ¿¡¼­ ÇÑ¹ø¿¡ ±×¸±°ÅÀÓ
-	
+
 }
 
 
@@ -192,13 +193,13 @@ void itemManager::createFood(float x, float y)
 	}
 
 
-	
 
-	
 
-	
 
-	
+
+
+
+
 }
 
 void itemManager::createFood(float x, float y, float bottom)

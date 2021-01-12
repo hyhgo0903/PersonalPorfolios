@@ -5,6 +5,9 @@
 
 void jumpAttack::EnterState()
 {
+	_pl->getIndex() = 0;
+	if (!_pl->getLeft()) { _pl->getAttack()->Attack(_pl->getGroundRc().right, _pl->getGroundRc().top); }
+	if (_pl->getLeft()) { _pl->getAttack()->Attack(_pl->getGroundRc().left - 150, _pl->getGroundRc().top); }
 }
 
 void jumpAttack::updateState()
@@ -13,8 +16,7 @@ void jumpAttack::updateState()
     _pl->getJumpPower() -= GRAVITY;
     _pl->getFlyY() -= _pl->getJumpPower();
 
-    if (!_pl->getLeft()) { _pl->getAttack()->Attack(_pl->getFlyRc().right, (_pl->getFlyRc().bottom + _pl->getFlyRc().top) / 2); }
-    if (_pl->getLeft()) { _pl->getAttack()->Attack(_pl->getFlyRc().left - 150, (_pl->getFlyRc().bottom + _pl->getFlyRc().top) / 2); }
+    
 
     if (_pl->getFlyY() > _pl->getGroundY())
     {

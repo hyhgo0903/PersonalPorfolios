@@ -14,6 +14,7 @@ HRESULT trashCan::init(float x, float y)
 	_x = x; _y = y;
 	_id = 1; // 부여받은 id ()
 	_rc = RectMakeCenter(_x, _y, 110, 150);
+	_trashRect = RectMakeCenter(_x, _y, 110, 150);
 	_img = IMAGEMANAGER->findImage("쓰레기통");
 	_isFire = true;
 	return S_OK;

@@ -25,17 +25,21 @@ HRESULT stageManager::init()
 	// 보스 등장 전 의자 위치지정. (등장조건 불필요)
 	for (int i = 0; i < 3; i++)
 	{
-		createChair(3200 + (i * 350), 420);
+		//if (!_VObject[i]->getIsBossOn()) // 보스 등장 전이라면. 
+		//{
+			createChair(3100 + (i * 360), 380);
+		//}
 	}
 
 	//// 보스 등장 후 의자 위치지정.  (등장조건 필요함 - 보스가 등장하게되면 나타나게 된다.) 보스 등장하고 만들기. 
-	//for (int i = 0; i < 9; i++)
-	//{
-	//  for (int j = 0; j < 3; j++)
-	//	{
-	//		createChair(3200 + (i * 370), 420 + ( j * 120));
-	//  }
-	//}
+	for (int i = 0; i < 3; i++)
+	{
+		createChair(3140 + (i * 355), 430);
+		for (int j = 0; j < 3; j++)
+		{
+			createChair(3300 + (j * 355), 680);
+		}
+	}
 
 
 	return S_OK;

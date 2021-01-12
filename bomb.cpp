@@ -103,10 +103,11 @@ void bomb::attackMove(bool direction)
 	drop(0.5f);
 	_pickup = false;
 	_moving = true;
+	_direction = direction;
 	if (_y < _yg)
 	{
 		reverseFraming();
-		if (direction == true)
+		if (_direction == true)
 		{
 			_x += 9.7f;
 			_xg += 9.7f;

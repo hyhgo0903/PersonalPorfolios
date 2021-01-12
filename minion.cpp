@@ -257,13 +257,13 @@ void minion::keyManager()
 	if (KEYMANAGER->isOnceKeyDown(VK_F2)) _left = true;
 	if (KEYMANAGER->isOnceKeyDown(VK_F3)) _left = false;
 	if (KEYMANAGER->isOnceKeyDown(VK_F4)) { _plAtkNum += 1; if (_plAtkNum > 2) _plAtkNum = 1; }
-	if (KEYMANAGER->isOnceKeyDown('1')) { _index = 0; _state = E_IDLE; }
-	if (KEYMANAGER->isOnceKeyDown('2')) { _index = 0; _state = E_WALK; }
-	if (KEYMANAGER->isOnceKeyDown('3')) { _index = 0; _state = E_ATK; }
-	if (KEYMANAGER->isOnceKeyDown('4')) { _index = 0; _state = E_DEAD; }
-	if (KEYMANAGER->isOnceKeyDown('5')) { _index = 0; _state = E_HIT; }
-	if (KEYMANAGER->isOnceKeyDown('6')) { _index = 0; _state = E_GRAB; }
-	if (KEYMANAGER->isOnceKeyDown('7')) { _index = 0; _state = E_FLYING; }
+	if (KEYMANAGER->isOnceKeyDown('1')) { _state = E_IDLE; _index = 0; }
+	if (KEYMANAGER->isOnceKeyDown('2')) { _state = E_WALK; _index = 0; }
+	if (KEYMANAGER->isOnceKeyDown('3')) { _state = E_ATK; _index = 0; }
+	if (KEYMANAGER->isOnceKeyDown('4')) { _state = E_DEAD; _index = 0; }
+	if (KEYMANAGER->isOnceKeyDown('5')) { _state = E_HIT; _index = 0; }
+	if (KEYMANAGER->isOnceKeyDown('6')) { _state = E_GRAB; _index = 0; }
+	if (KEYMANAGER->isOnceKeyDown('7')) { _state = E_FLYING; _index = 0; }
 	//////////////////////////////////////////////////////////////////////
 }
 
@@ -291,10 +291,20 @@ void minion::update()
 	enemyState();
 	//테스트용, 파일 합치기전엔 항상 주석처리할것
 	//keyManager();
+	
+	
+	//상태에 따라 그림자의 크기를 다르게하여 그려줍니다
+	if(_state == E_IDLE || _state == E_WALK || _state == E_WALK2 || _state == E_ATK || _state == E_DEAD || _state == E_HIT) 
+		_shadow = RectMakeCenter(_rc.left + 75, _rc.bottom + 10, 250, 50);
+
+	if(_state == E_GRAB || _state == E_FLYING) _shadow = RectMakeCenter(_rc.left + 75, _rc.bottom + 10, 200, 50);
 }
 
 void minion::render()
 {
+	fillColorEllipse(40, 40, 40, _shadow);
+	//Ellipse(getMemDC(), _shadow);
+
 	enemyStateRender();
 	if (KEYMANAGER->isToggleKey(VK_F1)) Rectangle(getMemDC(), _rc);
 }

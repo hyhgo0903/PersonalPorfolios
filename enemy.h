@@ -1,7 +1,7 @@
 #pragma once
 #include "gameNode.h"
 
-enum enemyState { E_IDLE, E_WALK, E_ATK, E_DEAD, E_HIT, E_GRAB, E_FLYING, E_WALK2 };
+enum enemyState { E_IDLE, E_WALK, E_ATK, E_DEAD, E_HIT, E_GRAB, E_FLYING, E_WALK2, E_SHAKE };
 enum bossState { B_IDLE, B_WALK, B_ATK, B_DEAD, B_HIT, B_GRAB, B_FLYING};
 
 class enemy : public gameNode
@@ -23,6 +23,8 @@ protected:
 	bool _atkArea;					//몬스터 1 공격범위 안에서 움직일수 있게 체크해줌
 	int _randomNum;					//몬스터 y좌표 랜덤값 지정 (겹치지않게하기위함)
 
+	RECT _shadow;
+
 	enemyState _state;
 	enemyState _state2;
 	enemyState _state3;
@@ -36,8 +38,10 @@ public:
 	virtual void release();
 	virtual void update();
 	virtual void render();
+	void fillColorEllipse(int R, int G, int B, RECT rc);
 
 	// 공통적으로 쓰이는 함수는 다 여기다 하면 돼
 	RECT& getRect() { return _rc; }
+	RECT& getShadow() { return _shadow; }
 	void setPlayerPt(float x, float y) { _pX = x; _pY = y; }
 };
