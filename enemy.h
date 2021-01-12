@@ -2,7 +2,6 @@
 #include "gameNode.h"
 
 enum enemyState { E_IDLE, E_WALK, E_ATK, E_DEAD, E_HIT, E_GRAB, E_FLYING, E_WALK2, E_SHAKE };
-enum bossState { B_IDLE, B_WALK, B_ATK, B_DEAD, B_HIT, B_GRAB, B_FLYING};
 
 class enemy : public gameNode
 {
@@ -26,9 +25,7 @@ protected:
 	RECT _shadow;
 
 	enemyState _state;
-	enemyState _state2;
-	enemyState _state3;
-	bossState _bState;
+	enemyState _bState;
 public:
 	enemy();
 	~enemy();
@@ -43,5 +40,7 @@ public:
 	// 공통적으로 쓰이는 함수는 다 여기다 하면 돼
 	RECT& getRect() { return _rc; }
 	RECT& getShadow() { return _shadow; }
+	float& getHp() { return _currentHP; }
+	enemyState& getState() { return _state; }
 	void setPlayerPt(float x, float y) { _pX = x; _pY = y; }
 };

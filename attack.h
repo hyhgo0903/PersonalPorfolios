@@ -26,10 +26,11 @@ private:
 	int _attackMax; // 공격 렉트 한계치. (없어도 될 거 같은데 넣었습니다)
 	player* _pl;
 
+	RECT _attackRect; // 현정_콜리전위해 추가한것 2
+
 public:
 
-	RECT _attackRect;
-
+	
 	attack() {};
 	~attack() {};
 
@@ -39,9 +40,9 @@ public:
 	void render();
 
 	void Attack(float x, float y);
-	RECT getAttackRect() { return _attackRect; }
+	RECT getAttackRect() { return _attackRect; } // 현정_콜리전위해 추가한것 3. 끝.
 	void removeAttack(int arrNum);
 
-	vector<tagAttack> &getVAttack()				{ return _vAttack; }
+	vector<tagAttack> getVAttack()				{ return _vAttack; }
 	vector<tagAttack>::iterator getViAttack() { return _viAttack; }
 };

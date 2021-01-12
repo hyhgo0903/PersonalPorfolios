@@ -13,9 +13,9 @@ void minion2::enemyState()
 {
 	_count++;
 	//HIT상태에서만 hit카운트가 더해진다
-	if (_state2 == E_HIT) _hitCount++;
+	if (_state == E_HIT) _hitCount++;
 	//GRAB상태에서만 grab카운트가 더해진다
-	if (_state2 == E_GRAB) _grabCount++;
+	if (_state == E_GRAB) _grabCount++;
 
 	//공격범위 안에 플레이어가 있는지 체크함, 플레이어와 에너미의 간격이 100미만이면 true
 	if (getDistance(_x, _y, _pX, _pY) < 100) _atkArea = true;
@@ -28,7 +28,7 @@ void minion2::enemyState()
 		_count = 0;
 	}
 
-	switch (_state2)
+	switch (_state)
 	{
 	case E_IDLE:
 		//프레임 이미지의 최대 렌더값을 초과하지 않도록 설정해줌
@@ -40,13 +40,13 @@ void minion2::enemyState()
 			//에너미는 왼쪽을 보고있다고 설정해주고 WALK상태로 변경 후 
 			//애니메이션을 처음부터 처리하기위해 인덱스를 0으로 초기화
 			_left = true;
-			if ((getDistance(_x, _y, _pX, _pY) > 200)) _state2 = E_WALK;
+			if ((getDistance(_x, _y, _pX, _pY) > 200)) _state = E_WALK;
 			else
 			{
 				_attackCount++;
 				if (_attackCount > 45)
 				{
-					_state2 = E_ATK;
+					_state = E_ATK;
 					_index = 0;
 					_attackCount = 0;
 				}
@@ -57,13 +57,13 @@ void minion2::enemyState()
 		{
 			//엘스로 오른쪽도 설정
 			_left = false;
-			if ((getDistance(_x, _y, _pX, _pY) > 200)) _state2 = E_WALK;
+			if ((getDistance(_x, _y, _pX, _pY) > 200)) _state = E_WALK;
 			else
 			{
 				_attackCount++;
 				if (_attackCount > 45)
 				{
-					_state2 = E_ATK;
+					_state = E_ATK;
 					_index = 0;
 					_attackCount = 0;
 				}
@@ -82,7 +82,7 @@ void minion2::enemyState()
 			_attackCount++;
 			if (_attackCount > 45)
 			{
-				_state2 = E_ATK;
+				_state = E_ATK;
 				_index = 0;
 				_attackCount = 0;
 			}
@@ -111,7 +111,7 @@ void minion2::enemyState()
 	case E_ATK:
 		if (_index > 15)
 		{
-			_state2 = E_IDLE;
+			_state = E_IDLE;
 			_index = 0;
 		}
 		break;
@@ -125,7 +125,7 @@ void minion2::enemyState()
 		//피격모션 유지시간 (30 = 0.5초)
 		if (_hitCount > 30)
 		{
-			_state2 = E_IDLE;
+			_state = E_IDLE;
 			_hitCount = 0;
 		}
 		break;
@@ -135,7 +135,7 @@ void minion2::enemyState()
 		//그랩모션 유지시간 (90 = 1.5초)
 		if (_grabCount > 90)
 		{
-			_state2 = E_IDLE;
+			_state = E_IDLE;
 			_grabCount = 0;
 		}
 		break;
@@ -146,7 +146,7 @@ void minion2::enemyState()
 		if (_rc.right > CAMX + WINSIZEX && _flying && _left)
 		{
 			_flying = false;
-			_state2 = E_IDLE;
+			_state = E_IDLE;
 			//x좌표 위치를 보정해주는 이유는 안해주면 애가 가끔 낑김
 			_x -= 5;
 		}
@@ -154,7 +154,7 @@ void minion2::enemyState()
 		if (_rc.left < CAMX && _flying && !_left)
 		{
 			_flying = false;
-			_state2 = E_IDLE;
+			_state = E_IDLE;
 			//x좌표 위치를 보정해주는 이유는 안해주면 애가 가끔 낑김
 			_x += 5;
 		}
@@ -170,7 +170,7 @@ void minion2::enemyState()
 
 void minion2::enemyStateRender()
 {
-	switch (_state2)
+	switch (_state)
 	{
 	case E_IDLE:
 		if (_left) FINDIMG("enemy2_idle")->frameRender(getMemDC(), _rc.left - 70, _rc.top - 160, _index, 1);
@@ -201,13 +201,13 @@ void minion2::keyManager()
 	//////////////////////////////////////////////////////////////////////
 	if (KEYMANAGER->isOnceKeyDown(VK_F2)) _left = true;
 	if (KEYMANAGER->isOnceKeyDown(VK_F3)) _left = false;
-	if (KEYMANAGER->isOnceKeyDown('1')) { _index = 0; _state2 = E_IDLE; }
-	if (KEYMANAGER->isOnceKeyDown('2')) { _index = 0; _state2 = E_WALK; }
-	if (KEYMANAGER->isOnceKeyDown('3')) { _index = 0; _state2 = E_ATK; }
-	if (KEYMANAGER->isOnceKeyDown('4')) { _index = 0; _state2 = E_DEAD; }
-	if (KEYMANAGER->isOnceKeyDown('5')) { _index = 0; _state2 = E_HIT; }
-	if (KEYMANAGER->isOnceKeyDown('6')) { _index = 0; _state2 = E_GRAB; }
-	if (KEYMANAGER->isOnceKeyDown('7')) { _index = 0; _state2 = E_FLYING; }
+	if (KEYMANAGER->isOnceKeyDown('1')) { _index = 0; _state = E_IDLE; }
+	if (KEYMANAGER->isOnceKeyDown('2')) { _index = 0; _state = E_WALK; }
+	if (KEYMANAGER->isOnceKeyDown('3')) { _index = 0; _state = E_ATK; }
+	if (KEYMANAGER->isOnceKeyDown('4')) { _index = 0; _state = E_DEAD; }
+	if (KEYMANAGER->isOnceKeyDown('5')) { _index = 0; _state = E_HIT; }
+	if (KEYMANAGER->isOnceKeyDown('6')) { _index = 0; _state = E_GRAB; }
+	if (KEYMANAGER->isOnceKeyDown('7')) { _index = 0; _state = E_FLYING; }
 	//////////////////////////////////////////////////////////////////////
 }
 
@@ -216,7 +216,7 @@ HRESULT minion2::init(float x, float y)
 	_x = CAMX + x;	_y = CAMY + y;
 	_currentHP = _maxHP = 100;
 	_count = _index = _attackCount = _hitCount = _grabCount = 0;
-	_state2 = E_IDLE;
+	_state = E_IDLE;
 	_left = true;
 	_flying = false;
 	return S_OK;
@@ -234,10 +234,10 @@ void minion2::update()
 	//keyManager();
 
 	//상태에 따라 그림자의 크기를 다르게하여 그려줍니다
-	if (_state2 == E_IDLE || _state2 == E_WALK || _state2 == E_WALK2 || _state2 == E_ATK || _state2 == E_DEAD || _state2 == E_HIT)
+	if (_state == E_IDLE || _state == E_WALK || _state == E_WALK2 || _state == E_ATK || _state == E_DEAD || _state == E_HIT)
 		_shadow = RectMakeCenter(_rc.left + 25, _rc.bottom + 10, 200, 50);
 
-	if (_state2 == E_GRAB || _state2 == E_FLYING) _shadow = RectMakeCenter(_rc.left + 25, _rc.bottom + 10, 150, 50);
+	if (_state == E_GRAB || _state == E_FLYING) _shadow = RectMakeCenter(_rc.left + 25, _rc.bottom + 10, 150, 50);
 }
 
 void minion2::render()
