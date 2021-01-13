@@ -4,19 +4,26 @@
 
 void grab::EnterState()
 {
-
+    _pl->getIndex() = 0;
+    count = 90;
 }
 
 void grab::updateState()
 {
+    count--;
+    if (KEYMANAGER->isOnceKeyDown('Z'))
+    {
+        _pl->setState(GRABSWING);
+    }
 
-	if (!_pl->getLeft()) { _pl->getAttack()->Attack(_pl->getFlyRc().right, (_pl->getFlyRc().bottom + _pl->getFlyRc().top) / 2); }
-	if (_pl->getLeft()) { _pl->getAttack()->Attack(_pl->getFlyRc().left - 150, (_pl->getFlyRc().bottom + _pl->getFlyRc().top) / 2); }
-
+    if (count <= 0)
+    {
+        _pl->setState(IDLE);
+    }
 
 }
 
 void grab::ExitState()
 {
-	_pl->getIndex() = 0;
+    _pl->getIsGrab() = false;
 }

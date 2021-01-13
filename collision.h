@@ -23,6 +23,7 @@ private:
 	enemyManager*	_em;
 	stageManager*	_sm;
 	itemManager*	_im;
+    int _score;
 
 	int _itemOrder; //이걸로 아이템 순서 정해보려고 만듬;
 
@@ -34,6 +35,8 @@ public:
 	virtual void release();
 	virtual void update();
 	virtual void render();
+
+    int& getScore() { return _score; }
 
 	void chanhoInit();		void chanhoUpdate();	void chanhoRender();
 	void deokhoInit();		void deokhoUpdate();	void deokhoRender();

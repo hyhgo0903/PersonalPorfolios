@@ -12,6 +12,7 @@ protected:
 	float _x; float _y;
 	bool _isFire;
 	bool _isBossOn;
+	RECT _shadow;
 
 public:
 	object();
@@ -28,6 +29,7 @@ public:
 	bool getIsBossOn() { return _isBossOn; }
 //	void setId(int x) { _id = x; } // 외부에서 x를 집어넣으면 _id의 값이 x로 바뀌게 된다.
 
+	RECT getShadow() { return _shadow; }
 
 };
 

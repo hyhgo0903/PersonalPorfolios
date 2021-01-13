@@ -9,7 +9,9 @@ void playGround::soundInit()
 
 	//효과음류
 	SOUNDMANAGER->addSound("엔딩", "sound/게임끝.wav", false, false);
-	SOUNDMANAGER->addSound("선택", "sound/코인넣음.mp3", false, false);
+	SOUNDMANAGER->addSound("시작", "sound/코인넣음.mp3", false, false);
+	SOUNDMANAGER->addSound("선택 이동", "sound/셀렉트 이동.wav", false, false);
+	SOUNDMANAGER->addSound("선택 엔터", "sound/선택2.wav", false, false);
 	
 	SOUNDMANAGER->addSound("적등장1", "sound/적 등장01.wav", false, false);
 	SOUNDMANAGER->addSound("적등장2", "sound/적 등장02.wav", false, false);

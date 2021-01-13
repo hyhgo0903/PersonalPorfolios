@@ -22,33 +22,6 @@ void itemManager::release()
 
 void itemManager::update()
 {
-
-	{
-		if (KEYMANAGER->isOnceKeyDown('Q'))
-		{//사용법 느낌쓰
-			_vItem.clear();
-			createBaseball(300, CAMY + 500);
-		}
-
-		if (KEYMANAGER->isOnceKeyDown('W'))
-		{
-			_vItem.clear();
-			createBomb(500, CAMY + 500);
-		}
-		if (KEYMANAGER->isOnceKeyDown('E'))
-		{
-			_vItem.clear();
-			createPizza(500, CAMY + 600);
-			for (int i = 0; i < 4; i++) createFood(600, CAMY + 600);
-		}
-		if (KEYMANAGER->isOnceKeyDown('R'))
-		{
-			_vItem.clear();
-			createBat(500, CAMY + 600);
-		}
-	}
-
-
 	{
 		for (int i = 0; i < _vItem.size(); i++)
 		{

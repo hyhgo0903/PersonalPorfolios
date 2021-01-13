@@ -6,7 +6,6 @@ class trashCan :public object
 private:
 
 	image* _img;
-	RECT _trashRect;
 
 public:
 	trashCan();
@@ -18,6 +17,6 @@ public:
 	virtual void render();
 
 	image* getTrashCanImg() { return _img; }
-	RECT getTrashCanRect() { return _trashRect; }
+	void shadowRender(RECT rc);
 };
 

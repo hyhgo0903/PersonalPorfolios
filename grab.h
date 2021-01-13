@@ -8,6 +8,7 @@ class player;
 class grab : public STATE
 {
 private:
+    int count;
 public:
 
 	void EnterState();

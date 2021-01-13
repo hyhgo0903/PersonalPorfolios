@@ -4,6 +4,7 @@
 
 void walk::EnterState()
 {
+	_pl->getIndex() = 0;
 }
 
 void walk::updateState()
@@ -34,6 +35,16 @@ void walk::updateState()
 	{
 		_pl->getFlyY() += 3;	_pl->getGroundY() += 3;
 	}
+
+    if (_pl->getDirectionChanged() >= 2 && KEYMANAGER->isOnceKeyDown('Z'))
+    {
+        _pl->setState(WINDMILL);
+    }
+
+    if (_pl->getIsGrab())
+    {
+        _pl->setState(GRAB);
+    }
 
     if (KEYMANAGER->isOnceKeyDown('Z'))
     {

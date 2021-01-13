@@ -27,6 +27,7 @@ void enemyManager::createMinion(float x, float y)
 	vminion = new minion;
 	vminion->init(x, y);
 	_vEnemy.push_back(vminion);
+	if(!SOUNDMANAGER->isPlaySound("적등장1")) SOUNDMANAGER->play("적등장1");
 }
 
 void enemyManager::createMinion2(float x, float y)
@@ -35,6 +36,7 @@ void enemyManager::createMinion2(float x, float y)
 	vminion2 = new minion2;
 	vminion2->init(x, y);
 	_vEnemy.push_back(vminion2);
+	if (!SOUNDMANAGER->isPlaySound("적등장2")) SOUNDMANAGER->play("적등장2");
 }
 
 void enemyManager::createMinion3(float x, float y)
@@ -43,6 +45,7 @@ void enemyManager::createMinion3(float x, float y)
 	vminion3 = new minion3;
 	vminion3->init(x, y);
 	_vEnemy.push_back(vminion3);
+	if (!SOUNDMANAGER->isPlaySound("적등장1")) SOUNDMANAGER->play("적등장1");
 }
 
 void enemyManager::createBoss(float x, float y)
@@ -55,12 +58,12 @@ void enemyManager::createBoss(float x, float y)
 
 void enemyManager::release()
 {
-	_vEnemy.clear();
+		_vEnemy.clear();
 }
 
 void enemyManager::update()
 {
-	
+
 	//만들어진 모든 에너미들의 업데이트 연산
 	for (int i = 0; i < _vEnemy.size(); ++i)
 	{
@@ -75,9 +78,21 @@ void enemyManager::update()
 		createMinion(900, 600);
 		createMinion2(700, 500);
 		createMinion3(700, 600);
-		createBoss(1600, 400);
+		//createBoss(1600, 400);
 		_create = END;
 	}
+
+	//몬스터를 삭제시켜주는 것
+	//E_DEAD상태가 되면 프레임이미지가 모두 순환하고 or 0.5초가 경과한 뒤 삭제됨
+	for (int i = 0; i < _vEnemy.size(); ++i)
+	{
+		if (_vEnemy[i]->getState() == E_DEAD && _vEnemy[i]->getIsDead())
+		{
+			_vEnemy.erase(_vEnemy.begin() + i);
+			break;
+		}
+	}
+
 }
 
 void enemyManager::render()

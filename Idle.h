@@ -5,6 +5,7 @@ class Idle :
     public STATE
 {
 private:
+	int count;
 public:
     void EnterState();
     void updateState();

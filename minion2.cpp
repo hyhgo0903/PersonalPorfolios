@@ -16,6 +16,8 @@ void minion2::enemyState()
 	if (_state == E_HIT) _hitCount++;
 	//GRAB상태에서만 grab카운트가 더해진다
 	if (_state == E_GRAB) _grabCount++;
+	//DEAD상태에서만 dead카운트가 더해진다
+	if (_state == E_DEAD) _deadCount++;
 
 	//공격범위 안에 플레이어가 있는지 체크함, 플레이어와 에너미의 간격이 100미만이면 true
 	if (getDistance(_x, _y, _pX, _pY) < 100) _atkArea = true;
@@ -40,14 +42,13 @@ void minion2::enemyState()
 			//에너미는 왼쪽을 보고있다고 설정해주고 WALK상태로 변경 후 
 			//애니메이션을 처음부터 처리하기위해 인덱스를 0으로 초기화
 			_left = true;
-			if ((getDistance(_x, _y, _pX, _pY) > 200)) _state = E_WALK;
+			if ((getDistance(_x, _y, _pX, _pY) > 200)) setState(E_WALK);
 			else
 			{
 				_attackCount++;
 				if (_attackCount > 45)
 				{
-					_state = E_ATK;
-					_index = 0;
+					setState(E_ATK);
 					_attackCount = 0;
 				}
 			}
@@ -57,14 +58,13 @@ void minion2::enemyState()
 		{
 			//엘스로 오른쪽도 설정
 			_left = false;
-			if ((getDistance(_x, _y, _pX, _pY) > 200)) _state = E_WALK;
+			if ((getDistance(_x, _y, _pX, _pY) > 200)) setState(E_WALK);
 			else
 			{
 				_attackCount++;
 				if (_attackCount > 45)
 				{
-					_state = E_ATK;
-					_index = 0;
+					setState(E_ATK);
 					_attackCount = 0;
 				}
 			}
@@ -82,8 +82,7 @@ void minion2::enemyState()
 			_attackCount++;
 			if (_attackCount > 45)
 			{
-				_state = E_ATK;
-				_index = 0;
+				setState(E_ATK);
 				_attackCount = 0;
 			}
 		}
@@ -109,62 +108,163 @@ void minion2::enemyState()
 		break;
 
 	case E_ATK:
+		
+		if (_left)
+		{
+			_attackRc = RectMakeCenter(_x - 90, _y - 40, 140, 60);
+		}
+		else
+		{
+			_attackRc = RectMakeCenter(_x + 90, _y - 40, 140, 60);
+		}
+
 		if (_index > 15)
 		{
-			_state = E_IDLE;
-			_index = 0;
+			_attackRc = RectMakeCenter(0, 0, 0, 0);
+			setState(E_IDLE);
 		}
+
 		break;
 
 	case E_DEAD:
+		_alpha -= 7;
 		_index = 0;
+		if (_deadCount > 30)
+		{
+			_isDead = true;
+			_deadCount = 0;
+		}
 		break;
 
 	case E_HIT:
 		_index = 0;
+		if (_left) _x += 0.8f;
+		else _x -= 0.8f;
 		//피격모션 유지시간 (30 = 0.5초)
 		if (_hitCount > 30)
 		{
-			_state = E_IDLE;
+			setState(E_IDLE);
 			_hitCount = 0;
+		}
+
+		if (_currentHP <= 0)
+		{
+			setState(E_DEAD);
 		}
 		break;
 
 	case E_GRAB:
 		_index = 0;
+
+		if (_left)
+		{
+			_x = _pX + 150;
+			_y = _pY + 10;
+		}
+		else
+		{
+			_x = _pX - 150;
+			_y = _pY + 10;
+		}
+
 		//그랩모션 유지시간 (90 = 1.5초)
 		if (_grabCount > 90)
 		{
-			_state = E_IDLE;
+			setState(E_IDLE);
 			_grabCount = 0;
 		}
 		break;
 
 	case E_FLYING:
-		_index = 0;
-		//몬스터 렉트의 라이트가 카메라 화면 오른쪽 밖으로 나가려고한다면 체공상태를 풀고 IDLE 상태로 변경
+		//날고있는상태에서 인덱스를 고정시켜줌
+		if (_flying) _index = 0;
+
+		//몬스터 렉트의 라이트가 카메라 화면 오른쪽 밖으로 나가려고한다면 체공상태를 풀고 인덱스를 1로 바꾼다
 		if (_rc.right > CAMX + WINSIZEX && _flying && _left)
 		{
-			_flying = false;
-			_state = E_IDLE;
+			//if (_currentHP <= 0) setState(E_DEAD);
+			//else _currentHP -= 20;
+
+			//_flying = false;
+			//_index = 1;
+			setState(E_FLYING2);
 			//x좌표 위치를 보정해주는 이유는 안해주면 애가 가끔 낑김
 			_x -= 5;
 		}
 		//몬스터 렉트의 레프트가 카메라 화면 왼쪽 밖으로 나가려고한다면 체공상태를 풀고 인덱스를 1로 바꾼다
-		if (_rc.left < CAMX && _flying && !_left)
+		if (_rc.left < CAMX && _flying && !_left && _index == 0)
 		{
-			_flying = false;
-			_state = E_IDLE;
+			//if (_currentHP <= 0) setState(E_DEAD);
+			//else _currentHP -= 20;
+
+			//_flying = false;
+			//_index = 1;
+			setState(E_FLYING2);
 			//x좌표 위치를 보정해주는 이유는 안해주면 애가 가끔 낑김
 			_x += 5;
 		}
-		//인덱스가 정상적으로 초기화되었고 지상에있는 상태라면 플라잉 상태로 변경시켜줌
-		if (!_flying) _flying = true;
+		//인덱스가 정상적으로 초기화되었고 지상에있는 상태라면 플라잉상태로 변경시켜줌
+		if (!_flying && _index == 0) _flying = true;
 		//플라잉 상태에서만 좌표를 이동시킨다
 		if (_flying && _left) _x += 15.5f;
 		if (_flying && !_left) _x -= 15.5f;
-
+		//이미지가 정상적으로 마지막까지 렌더된다면 IDLE상태로 변경시키고 인덱스를 초기화
 		break;
+
+	case E_FLYING2:
+		if (_flying) _index = 0;
+
+		if (!_flyDown)
+		{
+			if (_shadow.left != _shadow.right)
+			{
+				_shadow.left += 1;
+				_shadow.right -= 1;
+			}
+		}
+		if (_flyDown && _left && _shadow.left != _shadow.right)
+		{
+			_shadow.left -= 6;
+			_shadow.right -= 6;
+		}
+		if (_flyDown && !_left && _shadow.left != _shadow.right)
+		{
+			_shadow.left += 6;
+			_shadow.right += 6;
+		}
+		if (_left && !_flyDown)
+		{
+			_y -= 25.0f;
+			_x -= 5.5f;
+		}
+		else if (_left && _flyDown)
+		{
+			_y += 25.0f;
+			_x -= 5.5f;
+		}
+		else if (!_left && !_flyDown)
+		{
+			_y -= 25.0f;
+			_x += 5.5f;
+		}
+		else
+		{
+			_y += 25.0f;
+			_x += 5.5f;
+		}
+		if (_flyDown && _rc.bottom >= _shadow.top - 10)
+		{
+			setState(E_IDLE);
+			//_index = 1;
+			_flyDown = false;
+			_flying = false;
+			getDamage(20);
+			if (_currentHP <= 0) setState(E_DEAD);
+		}
+		if (_shadow.top - _rc.bottom > 400)
+		{
+			_flyDown = true;
+		}
 	}
 }
 
@@ -182,8 +282,8 @@ void minion2::enemyStateRender()
 		if (_left) FINDIMG("enemy2_atk")->frameRender(getMemDC(), _rc.left - 253, _rc.top - 172, _index, 1);
 		else FINDIMG("enemy2_atk")->frameRender(getMemDC(), _rc.left - 158, _rc.top - 172, _index, 0);		break;
 	case E_DEAD:
-		if (_left) FINDIMG("enemy2_dead")->frameRender(getMemDC(), _rc.left - 110, _rc.top - 175, _index, 1);
-		else FINDIMG("enemy2_dead")->frameRender(getMemDC(), _rc.left - 60, _rc.top - 175, _index, 0);		break;
+		if (_left) FINDIMG("enemy2_dead")->alphaFrameRender(getMemDC(), _rc.left - 110, _rc.top - 175, _index, 1, _alpha);
+		else FINDIMG("enemy2_dead")->alphaFrameRender(getMemDC(), _rc.left - 60, _rc.top - 175, _index, 0, _alpha);		break;
 	case E_HIT:
 		if (_left) FINDIMG("enemy2_hit")->frameRender(getMemDC(), _rc.left - 50, _rc.top - 77, _index, 0);
 		else FINDIMG("enemy2_hit")->frameRender(getMemDC(), _rc.left - 175, _rc.top - 87, _index, 1);		break;
@@ -193,6 +293,9 @@ void minion2::enemyStateRender()
 	case E_FLYING:
 		if (_left) FINDIMG("enemy2_flying")->frameRender(getMemDC(), _rc.left - 30, _rc.top - 77, _index, 0);
 		else FINDIMG("enemy2_flying")->frameRender(getMemDC(), _rc.left - 220, _rc.top - 77, _index, 1);	break;
+	case E_FLYING2:
+		if (_left) FINDIMG("enemy2_flying")->frameRender(getMemDC(), _rc.left - 30, _rc.top - 10, _index, 0);
+		else FINDIMG("enemy2_flying")->frameRender(getMemDC(), _rc.left - 60, _rc.top - 10, _index, 1); break;
 	}
 }
 
@@ -215,10 +318,15 @@ HRESULT minion2::init(float x, float y)
 {
 	_x = CAMX + x;	_y = CAMY + y;
 	_currentHP = _maxHP = 100;
-	_count = _index = _attackCount = _hitCount = _grabCount = 0;
-	_state = E_IDLE;
+	_count = _index = _attackCount = _hitCount = _grabCount = _deadCount = 0;
+	setState(E_IDLE);
 	_left = true;
 	_flying = false;
+	_atkArea = false;
+	_randomNum = RND->getFromIntTo(20, 50);
+	_isDead = false;
+	_flyDown = false;
+	_alpha = 255;
 	return S_OK;
 }
 
@@ -234,7 +342,7 @@ void minion2::update()
 	//keyManager();
 
 	//상태에 따라 그림자의 크기를 다르게하여 그려줍니다
-	if (_state == E_IDLE || _state == E_WALK || _state == E_WALK2 || _state == E_ATK || _state == E_DEAD || _state == E_HIT)
+	if (_state == E_IDLE || _state == E_WALK || _state == E_WALK2 || _state == E_ATK || _state == E_HIT)
 		_shadow = RectMakeCenter(_rc.left + 25, _rc.bottom + 10, 200, 50);
 
 	if (_state == E_GRAB || _state == E_FLYING) _shadow = RectMakeCenter(_rc.left + 25, _rc.bottom + 10, 150, 50);
@@ -242,8 +350,12 @@ void minion2::update()
 
 void minion2::render()
 {
-	fillColorEllipse(40, 40, 40, _shadow);
+	if(_state != E_DEAD) fillColorEllipse(40, 40, 40, _shadow);
 	enemyStateRender();
-	if (KEYMANAGER->isToggleKey(VK_F1)) Rectangle(getMemDC(), _rc);
+	if (KEYMANAGER->isToggleKey(VK_F1))
+	{
+		Rectangle(getMemDC(), _rc);
+		Rectangle(getMemDC(), _attackRc);
+	}
 }
 

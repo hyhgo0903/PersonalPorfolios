@@ -16,8 +16,11 @@ void mainScene::zOrderRender()
 	}
 	for (int i = 0; i < _im->getVItem().size(); ++i)
 	{ // 벡터에 객체들의 렉트.바텀값을 추가(푸시백)해줌
-		temp = _im->getVItem()[i]->getRect(); // 이건 아이템들
-		if (temp.bottom > CAMY && temp.top <CAMY + WINSIZEY && temp.right >CAMX && temp.left < CAMX + WINSIZEX) bottomY.push_back(temp.bottom);		
+		if (!_im->getVItem()[i]->getPickup())
+		{
+			temp = _im->getVItem()[i]->getRect(); // 이건 아이템들
+			if (temp.bottom > CAMY && temp.top <CAMY + WINSIZEY && temp.right >CAMX && temp.left < CAMX + WINSIZEX) bottomY.push_back(temp.bottom);
+		}
 	}
 	temp = _pl->getGroundRc(); // 이건 플레이어
 	bottomY.push_back(temp.bottom);
@@ -40,12 +43,22 @@ void mainScene::zOrderRender()
 		if (_pl->getGroundRc().bottom == bottomY[i])
 		{ // 내가 찾는 바텀값과 동일한지?
 			_pl->playerRender(); // 그렇다면 렌더
+			for (int j = 0; j < _im->getVItem().size(); j++)
+			{
+				if (!_im->getVItem()[j]->getPickup())continue;
+				if (_im->getVItem()[j]->getPickup())_im->getVItem()[j]->render();
+			}
 		}
 		for (int j = 0; j < _em->getVEnemy().size(); ++j)
 		{
 			if (_em->getVEnemy()[j]->getRect().bottom == bottomY[i])
 			{
 				_em->getVEnemy()[j]->render();
+				for (int j = 0; j < _im->getVItem().size(); j++)
+				{
+					if (!_im->getVItem()[j]->getMoving())continue;
+					if (_im->getVItem()[j]->getMoving())_im->getVItem()[j]->render();
+				}
 			}
 		}
 		for (int j = 0; j < _im->getVItem().size(); ++j)
@@ -75,19 +88,18 @@ void mainScene::uiRender()
 	FINDIMG("초록숫자")->frameRender(getMemDC(), CAMX + 513, CAMY + 30, _timeLimit % 10, 0);
 	FINDIMG("노란숫자")->frameRender(getMemDC(), CAMX + 359, CAMY + 53, _life, 0);
 
-	// _score = _cl->getScore();
-	_score = 1500;
+	_score = _cl->getScore();
 	FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 359, CAMY + 29, _score%10, 0);
 	if (_score > 9)		FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 335, CAMY + 29, _score / 10 % 10, 0);
 	if (_score > 99)	FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 311, CAMY + 29, _score / 100 % 10, 0);
 	if (_score > 999)	FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 287, CAMY + 29, _score / 1000 % 10, 0);
 	if (_score > 9999)	FINDIMG("하얀숫자")->frameRender(getMemDC(), CAMX + 263, CAMY + 29, _score / 10000 % 10, 0);
 
-	// _playerHpRatio = _pl->getCurrentHp()/100.f;
-	// _bossHpRatio = _em->;
+	_playerHpRatio = _pl->getPlHP()/100.f;
+	//_bossHpRatio = _em->;
 
-	if (_playerHpRatio > 0) _playerHpRatio -= 0.01f;
-	else _playerHpRatio = 1.f; // 확인용
+	//if (_playerHpRatio > 0) _playerHpRatio -= 0.01f;
+	//else _playerHpRatio = 1.f; // 확인용
 
 	if (_playerHpRatio < 0.3f)
 	{

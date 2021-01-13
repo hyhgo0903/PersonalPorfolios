@@ -1,11 +1,12 @@
 #pragma once
 #include "object.h"
+
 class chair :public object
 {
 private:
 
 	image* _img;
-	RECT _chairRect;
+	
 
 public:
 	chair();
@@ -16,9 +17,10 @@ public:
 	virtual void update();
 	virtual void render();
 
+	void shadowRender(RECT rc);
 
 	image* getChairImg() { return _img; }
-	RECT getChairRect() { return _chairRect; }
+
 
 };
 

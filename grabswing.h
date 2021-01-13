@@ -8,6 +8,7 @@ class player;
 class grabswing : public STATE
 {
 private:
+   int count;
 public:
 
 	void EnterState();

@@ -41,14 +41,20 @@ void titleScene::update()
 	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT) && _cursor < 3 && !_selected)
 	{
 		++_cursor;
+		SOUNDMANAGER->play("선택 이동");
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_LEFT) && _cursor > 0 && !_selected)
 	{
 		--_cursor;
+		SOUNDMANAGER->play("선택 이동");
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
 	{
-		if (!_selected && _cursor == 0) _selected = true;
+		if (!_selected && _cursor == 0)
+		{
+			_selected = true;
+			SOUNDMANAGER->play("선택 엔터");
+		}
 		else if (_selected)
 		{
 			SOUNDMANAGER->stop("셀렉트씬");

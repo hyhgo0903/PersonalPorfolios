@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "attack.h"
 
-HRESULT attack::init(int attackMax, int count)
+HRESULT attack::init(int attackMax)
 {
 	_attackMax = attackMax;
-	_count = count;
+	_count = 20;
 	return S_OK;
 }
 
@@ -22,7 +22,7 @@ void attack::update(int count)
 		if (_count <= 0)
 		{
 			_viAttack = _vAttack.erase(_viAttack);
-			_count = count;
+            _count = 20;
 		}
 		else ++_viAttack;
 	}
@@ -51,8 +51,8 @@ void attack::Attack(float x, float y)
 	attack.x = attack.attackX = x;
 	attack.y = attack.attackY = y;
 
-	attack.rc = RectMake(attack.x, attack.y, 150, 200); 
-	_attackRect = RectMake(attack.x, attack.y, 150, 200); // 현정_콜리전위해 추가한것1
+	attack.rc = RectMake(attack.x, attack.y, 150, 100); 
+	_attackRect = RectMake(attack.x, attack.y, 150, 100); // 현정_콜리전위해 추가한것1
 
 	_vAttack.push_back(attack);
 }

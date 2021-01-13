@@ -21,4 +21,5 @@ void playGround::imageInitDeokho()
 	ADDFRAME("베이스", "image/item_bmp/base_angle.bmp", 488, 61, 8, 1, true, MAGENTA);
 	IMAGEMANAGER->addFrameImage("폭탄", "image/item_bmp/bomb_angle.bmp", 560, 70, 8, 1, true, RGB(255, 0, 255));
 	EFFECTMANAGER->addEffect("폭발", "image/item_bmp/bombEffect.bmp", 1035, 171, 115, 171, 3, 0.1f, 20);
+	EFFECTMANAGER->addEffect("라이프업", "image/ui/LIFE_UP.bmp", 1372, 102, (1372 / 4), 102, 2, 0.1f, 10);
 }

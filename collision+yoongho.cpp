@@ -9,12 +9,15 @@ void collision::yoonghoInit()
 void collision::yoonghoUpdate()
 {
 	// ############ 쓰레기통 제외한 오브젝트라면 진로방해하는 기능 ######################
-	RECT temp1;
-	RECT temp2 = RectMakeCenter(_pl->getGroundX(), _pl->getGroundRc().bottom -10,  50, 20);// 50은 나중에 플레이어 너비수정하면 변경할것
-	for (int i = 0; i<_sm->getVObject().size(); ++i)
+	RECT temp1;	
+	RECT temp2 = _pl->getShadow();// 50은 나중에 플레이어 너비수정하면 변경할것
+	for (int i = 0; i < _sm->getVObject().size(); ++i)
 	{
-		if (_sm->getVObject()[i]->getId() == 1) continue; // 의자랑 임의의 렉트만(장애물) 감지
+		if (_sm->getVObject()[i]->getId() != 0) continue; // 의자랑 임의의 렉트만(장애물) 감지
 		RECT temp3 = _sm->getVObject()[i]->getRect();
+		int x = (temp3.left + temp3.right) / 2;
+		int y = (temp3.bottom+ temp3.top)/2;
+		temp3 = RectMakeCenter(x + 30, y + 90, 130, 100);
 		if (IntersectRect(&temp1, &temp2, &temp3))
 		{
 			if (temp1.right - temp1.left > temp1.bottom - temp1.top)

@@ -34,7 +34,7 @@ public:
 	attack() {};
 	~attack() {};
 
-	HRESULT init(int attackMax, int count);
+	HRESULT init(int attackMax);
 	void release();
 	void update(int count);
 	void render();

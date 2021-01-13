@@ -176,6 +176,7 @@
     <ClInclude Include="grab.h" />
     <ClInclude Include="grabswing.h" />
     <ClInclude Include="hamberger.h" />
+    <ClInclude Include="hit.h" />
     <ClInclude Include="Idle.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imageManager.h" />
@@ -201,6 +202,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="run.h" />
     <ClInclude Include="sceneManager.h" />
+    <ClInclude Include="cidleAnimation.h" />
     <ClInclude Include="singletonBase.h" />
     <ClInclude Include="slide.h" />
     <ClInclude Include="soundManager.h" />
@@ -217,6 +219,7 @@
     <ClInclude Include="utils.h" />
     <ClInclude Include="videoScene.h" />
     <ClInclude Include="walk.h" />
+    <ClInclude Include="windmill.h" />
     <ClInclude Include="windowAPI.h" />
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +256,7 @@
     <ClCompile Include="grab.cpp" />
     <ClCompile Include="grabswing.cpp" />
     <ClCompile Include="hamberger.cpp" />
+    <ClCompile Include="hit.cpp" />
     <ClCompile Include="Idle.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imageInit+chanho.cpp" />
@@ -283,6 +287,7 @@
     <ClCompile Include="pudding.cpp" />
     <ClCompile Include="run.cpp" />
     <ClCompile Include="sceneManager.cpp" />
+    <ClCompile Include="cidleAnimation.cpp" />
     <ClCompile Include="slide.cpp" />
     <ClCompile Include="soundInit.cpp" />
     <ClCompile Include="soundManager.cpp" />
@@ -303,6 +308,7 @@
     <ClCompile Include="utils.cpp" />
     <ClCompile Include="videoScene.cpp" />
     <ClCompile Include="walk.cpp" />
+    <ClCompile Include="windmill.cpp" />
     <ClCompile Include="winMain.cpp" />
   </ItemGroup>
   <ItemGroup>

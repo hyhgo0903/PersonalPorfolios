@@ -42,5 +42,6 @@ public:
 	void plusScore(int x) { _score += x; }
 	int paritition(int left, int right);
 	void QuickSort(int left, int right);
+    int& getScore() { _score; }
 };
 

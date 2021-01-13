@@ -29,6 +29,7 @@ private:
 	int _wave;
 	createEnemy _create;
 	player* _pl;
+	minion* _minion;
 public:
 	enemyManager();
 	~enemyManager();
@@ -42,6 +43,7 @@ public:
 	void createMinion2(float x, float y);
 	void createMinion3(float x, float y);
 	void createBoss(float x, float y);
+
 
 	vector<enemy*> getVEnemy() { return _vEnemy; }
 	vector<enemy*>::iterator getViEnemy() { return _viEnemy; }

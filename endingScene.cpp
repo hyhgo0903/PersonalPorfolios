@@ -11,6 +11,7 @@ endingScene::~endingScene()
 
 HRESULT endingScene::init()
 {
+	SOUNDMANAGER->stop("º¸½ººê±Ý");
 	SOUNDMANAGER->play("¿£µù");
 	_loopX = _characterY = 0.f;
 	_dialCount = 0;
@@ -27,6 +28,9 @@ void endingScene::release()
 
 void endingScene::update()
 {
+	{
+		if(!SOUNDMANAGER->isPlaySound("¿£µù")&&!SOUNDMANAGER->isPlaySound("¼¿·ºÆ®¾À")) SOUNDMANAGER->play("¼¿·ºÆ®¾À", 0.6f);
+	}
 	if (_loopX < 514) _loopX += 0.5;
 	if (!_yUp) _characterY += 0.1f;
 	if (_characterY > 20) _yUp = true;

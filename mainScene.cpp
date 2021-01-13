@@ -72,7 +72,7 @@ void mainScene::render()
 	_cl->render(); // 다른 벡터들은 z오더 함수에서 그리게 되어 있음.
 
 	zOrderRender();
-
+	
 	if (CAMX > 2060 - WINSIZEX && CAMX < 2133)FINDIMG("기둥")->render(getMemDC(), 2060, 1536);
 	uiRender(); // 길어질거같아서 따로 뺴다씀
 }

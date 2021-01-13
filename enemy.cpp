@@ -41,3 +41,10 @@ void enemy::fillColorEllipse(int R, int G, int B, RECT rc)
 	DeleteObject(pen);
 }
 
+void enemy::setState(enemyState state)
+{
+	_state = state;
+	_index = 0;
+	_count = 0;
+}
+

@@ -93,7 +93,6 @@ void bomb::update()
 void bomb::render()
 {
 	fillColorEllipse(80, 80, 80, _shadow);
-	Rectangle(getMemDC(), _rc);
 	_image->frameRender(getMemDC(), _rc.left, _rc.top);
 }
 

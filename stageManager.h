@@ -9,6 +9,7 @@ private:
 	vector<object*> _VObject;
 	vector<object*>::iterator _ViObject;
 
+	
 
 	// (중요함) 벡터에는 에너미로써(부모클래스) 넣는거야
 	// 따라서 subclass만의 고유한 함수를 만들어 이용하고 싶다면
