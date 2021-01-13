@@ -24,7 +24,7 @@ void boss::bossState()
 	if (getDistance(_x, _y, _pX, _pY) >= 100) _atkArea = false;
 
 
-	if (_phaseCount > 300 && _state != E_GRAB) // ∆‰¿Ã¡Ó πŸ≤ﬁ
+	if (_phaseCount > 300 && _state != E_GRAB && _state != E_DEAD) // ∆‰¿Ã¡Ó πŸ≤ﬁ
 	{
 		_attackRc = { 0,0,0,0 };
 		_phase = 1 + rand() % 2;
@@ -348,11 +348,12 @@ HRESULT boss::init(float x, float y)
 	_currentHP = _maxHP = 500.f;
 	_count = _index = _attackCount = _hitCount = _grabCount = _phaseCount = _rideCount = 0;
 	_state = E_IDLE;
-	_phase = 0;
+	_phase = 1;
 	_plAtkNum = 1;
-	_flying = _atkArea = _left = false;
-	   
-	_destX = _destY = 0;
+	_flying = _atkArea = false;
+	_left = true;
+	_destX = CAMX + WINSIZEY / 2;
+	_destY = CAMY + WINSIZEY / 2;
 
 	return S_OK;
 }
@@ -384,7 +385,7 @@ void boss::update()
 			break;
 		case E_DEAD: case E_FLYING:
 			_rc = RectMakeCenter(_x, _y, 208, 200);
-			_shadow = RectMakeCenter(_rc.left + 104, _rc.bottom + 10, 208, 50);
+			_shadow = RectMakeCenter(_rc.left + 104, _rc.bottom - 20, 208, 50);
 			break;
 		case E_SHAKE:		case E_WALK2:
 			_rc = RectMakeCenter(_x, _y+40, 180, 120);

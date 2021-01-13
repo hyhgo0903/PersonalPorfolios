@@ -75,10 +75,6 @@ void enemyManager::update()
 	if (_wave == 1 && _create == WAIT)
 	{
 		//첫 몬스터 웨이브(볼 몬스터 3마리)
-		createMinion(900, 600);
-		createMinion2(700, 500);
-		createMinion3(700, 600);
-		//createBoss(1600, 400);
 		_create = END;
 	}
 

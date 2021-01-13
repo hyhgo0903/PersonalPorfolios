@@ -11,6 +11,7 @@ mainScene::~mainScene()
 
 HRESULT mainScene::init()
 {
+	_phase = NO_PHASE;
 	CAMERAMANAGER->setCameraX(0);
 	CAMERAMANAGER->setCameraY(MAPSIZEY - WINSIZEY);
 	_loopX = 0;	_loopY = 300; _loopCount = _timeCount = _score = _redCount = 0;

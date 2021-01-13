@@ -6,23 +6,23 @@ void mainScene::zOrderRender()
 	RECT temp;
 	for (int i = 0; i < _em->getVEnemy().size(); ++i)
 	{ // 벡터에 객체들의 렉트.바텀값을 추가(푸시백)해줌
-		temp = _em->getVEnemy()[i]->getRect(); // 이건 적들
+		temp = _em->getVEnemy()[i]->getShadow(); // 이건 적들
 		if (temp.bottom > CAMY && temp.top <CAMY + WINSIZEY && temp.right >CAMX && temp.left < CAMX + WINSIZEX) bottomY.push_back(temp.bottom);
 	}
 	for (int i = 0; i < _sm->getVObject().size(); ++i)
 	{ // 벡터에 객체들의 렉트.바텀값을 추가(푸시백)해줌
-		temp = _sm->getVObject()[i]->getRect(); // 이건 오브젝트들
+		temp = _sm->getVObject()[i]->getShadow(); // 이건 오브젝트들
 		if (temp.bottom > CAMY && temp.top <CAMY + WINSIZEY && temp.right >CAMX && temp.left < CAMX + WINSIZEX) bottomY.push_back(temp.bottom);
 	}
 	for (int i = 0; i < _im->getVItem().size(); ++i)
 	{ // 벡터에 객체들의 렉트.바텀값을 추가(푸시백)해줌
 		if (!_im->getVItem()[i]->getPickup())
 		{
-			temp = _im->getVItem()[i]->getRect(); // 이건 아이템들
+			temp = _im->getVItem()[i]->getShadow(); // 이건 아이템들
 			if (temp.bottom > CAMY && temp.top <CAMY + WINSIZEY && temp.right >CAMX && temp.left < CAMX + WINSIZEX) bottomY.push_back(temp.bottom);
 		}
 	}
-	temp = _pl->getGroundRc(); // 이건 플레이어
+	temp = _pl->getShadow(); // 이건 플레이어
 	bottomY.push_back(temp.bottom);
 	// y값을 하나하나 넣었음	
 
@@ -40,7 +40,7 @@ void mainScene::zOrderRender()
 	}
 	for (int i = 0; i < bottomY.size(); ++i)
 	{ // 정렬했으니 벡터에 담긴 순서대로 그리기로 함
-		if (_pl->getGroundRc().bottom == bottomY[i])
+		if (_pl->getShadow().bottom == bottomY[i])
 		{ // 내가 찾는 바텀값과 동일한지?
 			_pl->playerRender(); // 그렇다면 렌더
 			for (int j = 0; j < _im->getVItem().size(); j++)
@@ -51,7 +51,7 @@ void mainScene::zOrderRender()
 		}
 		for (int j = 0; j < _em->getVEnemy().size(); ++j)
 		{
-			if (_em->getVEnemy()[j]->getRect().bottom == bottomY[i])
+			if (_em->getVEnemy()[j]->getShadow().bottom == bottomY[i])
 			{
 				_em->getVEnemy()[j]->render();
 				for (int j = 0; j < _im->getVItem().size(); j++)
@@ -63,14 +63,14 @@ void mainScene::zOrderRender()
 		}
 		for (int j = 0; j < _im->getVItem().size(); ++j)
 		{
-			if (_im->getVItem()[j]->getRect().bottom == bottomY[i])
+			if (_im->getVItem()[j]->getShadow().bottom == bottomY[i])
 			{
 				_im->getVItem()[j]->render();
 			}
 		}
 		for (int j = 0; j < _sm->getVObject().size(); ++j)
 		{
-			if (_sm->getVObject()[j]->getRect().bottom == bottomY[i])
+			if (_sm->getVObject()[j]->getShadow().bottom == bottomY[i])
 			{
 				_sm->getVObject()[j]->render();
 			}
@@ -107,13 +107,15 @@ void mainScene::uiRender()
 	}
 	FINDIMG("플레이어체력바")->render(getMemDC(), CAMX + 245, CAMY + 81, 132 - 132 * _playerHpRatio, 0, 132 * _playerHpRatio, 18);
 	
-	if (_bossHpRatio > 0) _bossHpRatio -= 0.01f;
-	else _bossHpRatio = 1.f; // 확인용 576 96 6~570
-	FINDIMG("보스텍스트")->render(getMemDC(), CAMX + 428, CAMY + 176);
-	if (_bossHpRatio > 0.5f) FINDIMG("보스체력바")->render(getMemDC(), CAMX + 224, CAMY + 200, 0, 24, 576, 24);
-	else  FINDIMG("보스체력바")->render(getMemDC(), CAMX + 224, CAMY + 200, 0, 72, 576, 24);
-	if (_bossHpRatio > 0.5f) FINDIMG("보스체력바")->render(getMemDC(), CAMX + 230, CAMY + 200, 576 - 570 * (_bossHpRatio -0.5f) * 2, 0, 570 * (_bossHpRatio - 0.5f) * 2, 24);
-	else  FINDIMG("보스체력바")->render(getMemDC(), CAMX + 230, CAMY + 200, 576 - 570 * (_bossHpRatio) * 2, 48, 570 * (_bossHpRatio) * 2, 24);
+	if (_phase == BOSS_PHASE)
+	{
+		_bossHpRatio = _em->getVEnemy()[0]->getHp()/500.f;
+		FINDIMG("보스텍스트")->render(getMemDC(), CAMX + 428, CAMY + 176);
+		if (_bossHpRatio > 0.5f) FINDIMG("보스체력바")->render(getMemDC(), CAMX + 224, CAMY + 200, 0, 24, 576, 24);
+		else  FINDIMG("보스체력바")->render(getMemDC(), CAMX + 224, CAMY + 200, 0, 72, 576, 24);
+		if (_bossHpRatio > 0.5f) FINDIMG("보스체력바")->render(getMemDC(), CAMX + 230, CAMY + 200, 576 - 570 * (_bossHpRatio - 0.5f) * 2, 0, 570 * (_bossHpRatio - 0.5f) * 2, 24);
+		else  FINDIMG("보스체력바")->render(getMemDC(), CAMX + 230, CAMY + 200, 576 - 570 * (_bossHpRatio) * 2, 48, 570 * (_bossHpRatio) * 2, 24);
+	}
 	
 }
 

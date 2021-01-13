@@ -7,6 +7,16 @@
 #include "collision.h"
 #include <vector>
 
+enum gamePhase
+{
+	NO_PHASE,
+	FIRST_PHASE, // 공3개
+	SECOND_PHASE, // 배트3개
+	THIRD_PHASE, // 카드3개
+	BOSS_PHASE, // 보스
+	END_PHASE
+};
+
 class mainScene : public gameNode
 {
 private:
@@ -26,6 +36,7 @@ private:
 	int _redCount;
 	int _tempX;
 	int _playerHeight; int _playerWidth;
+	gamePhase _phase;
 
 public:
 	mainScene();

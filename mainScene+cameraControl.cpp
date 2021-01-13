@@ -4,8 +4,8 @@
 void mainScene::cameraControl()
 {
 	RECT temp = _pl->getGroundRc();
-	//if (_em->getVEnemy().size() == 0) CAMERAMANAGER->cameraLockOff();
-	//else CAMERAMANAGER->cameraLock(); // ÀûÀÌ ÀÖÀ¸¸é Ä·°íÁ¤, ÀûÀÌ ¾øÀ¸¸é Ä·°íÁ¤ Ç¯
+	if (_em->getVEnemy().size() == 0) CAMERAMANAGER->cameraLockOff();
+	else CAMERAMANAGER->cameraLock(); // ÀûÀÌ ÀÖÀ¸¸é Ä·°íÁ¤, ÀûÀÌ ¾øÀ¸¸é Ä·°íÁ¤ Ç¯
 	CAMERAMANAGER->focusOnRect(temp, 3);
 	if (CAMY <= 55 && CAMX < 1849) CAMERAMANAGER->setCameraX(1849);
 	if (CAMY > 55 && CAMX > 2816) CAMERAMANAGER->setCameraX(2816);
@@ -72,6 +72,40 @@ void mainScene::cameraControl()
 	if (_redCount < 29) ++_redCount;
 	else _redCount = 0;
 
+	// ¸÷Á¨
+	if (_phase == NO_PHASE && CAMX > 400)
+	{
+		_phase = FIRST_PHASE;
+		_em->createMinion(- 100, 500);
+		_em->createMinion(WINSIZEX + 100, 500);
+		_em->createMinion(WINSIZEX + 100, 700);
+	}
+	else if (_phase == FIRST_PHASE && CAMX > 2100)
+	{
+		_phase = SECOND_PHASE;
+		_em->createMinion2(- 200, 500);
+		_em->createMinion2(WINSIZEX + 100, 500);
+		_em->createMinion2(WINSIZEX + 100, 700);
+	}
+	else if (_phase == SECOND_PHASE && CAMY <= 55)
+	{
+		_phase = THIRD_PHASE;
+		_em->createMinion3(- 100, 500);
+		_em->createMinion3(WINSIZEX + 100, 500);
+		_em->createMinion3(WINSIZEX + 100, 700);
+	}
+	else if (_phase == THIRD_PHASE && _em->getVEnemy().size() == 0)
+	{
+		_phase = BOSS_PHASE;
+		_em->createBoss(WINSIZEX + 200, 500);
+	}
+	else if (_phase == BOSS_PHASE && _bossHpRatio <= 0)
+	{
+		_phase = END_PHASE;
+		_im->createBat((_em->getVEnemy()[0]->getRect().left + _em->getVEnemy()[0]->getRect().right) / 2, _em->getVEnemy()[0]->getY());
+		_im->createFood((_em->getVEnemy()[0]->getRect().left + _em->getVEnemy()[0]->getRect().right) / 2 + 20, _em->getVEnemy()[0]->getY());
+		_im->createFood((_em->getVEnemy()[0]->getRect().left + _em->getVEnemy()[0]->getRect().right) / 2 - 20, _em->getVEnemy()[0]->getY());
+	}
 
 	if (CAMX >= MAPSIZEX - WINSIZEX) SCENEMANAGER->changeScene("¿£µù¾À");
 }
