@@ -126,7 +126,6 @@ void minion3::enemyState()
 			_attackRc = RectMakeCenter(0, 0, 0, 0);
 			setState(E_IDLE);
 		}
-		}
 		break;
 
 	case E_DEAD:

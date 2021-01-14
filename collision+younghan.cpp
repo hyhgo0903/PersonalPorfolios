@@ -117,18 +117,17 @@ void collision::younghanUpdate()
 	}
 	for (int i = 0; i < _em->getVEnemy().size(); ++i)
 	{
-		if (_pl->getIsHit()) break;
+		if (_pl->getEnumState() == HIT) break;
 		RECT temp;
 		if (IntersectRect(&temp, &_em->getVEnemy()[i]->getShadow(), &_pl->getShadow()))
 		{
 			if (IntersectRect(&temp, &_pl->getFlyRc(), &_em->getVEnemy()[i]->getAtkRc()))
 			{
-				_pl->getIsHit() = true;
+				_pl->setState(HIT);
 				_em->getVEnemy()[i]->getAtkRc() = RectMake(0, 0, 0, 0);
 				break;
 			}
 		}
-
 	}
 }
 
