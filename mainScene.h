@@ -37,7 +37,8 @@ private:
 	int _tempX;
 	int _playerHeight; int _playerWidth;
 	gamePhase _phase;
-
+	bool _ending;
+	
 public:
 	mainScene();
 	~mainScene();

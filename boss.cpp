@@ -11,6 +11,7 @@ boss::~boss()
 
 void boss::bossState()
 {
+
 	//HIT상태에서만 hit카운트가 더해진다
 	if (_state == E_HIT) _hitCount++;
 	//GRAB상태에서만 grab카운트가 더해진다
@@ -26,7 +27,6 @@ void boss::bossState()
 
 	if (_phaseCount > 300 && _state != E_GRAB && _state != E_DEAD) // 페이즈 바꿈
 	{
-		_attackRc = { 0,0,0,0 };
 		_phase = 1 + rand() % 2;
 		_destX = _pX;	_destY = _pY; // 목적지설정
 		_jumping = true;
@@ -188,13 +188,15 @@ void boss::bossState()
 		}
 		else
 		{
-			if (_left) _x += 1;
-			else _x -= 1;
+			if (_left) _x += 2;
+			else _x -= 2;
 		}
 		break;
 
 	case E_HIT:
 		_index = 0;
+		if (_left) _x += 0.8f;
+		else _x -= 0.8f;
 
 		if (_currentHP <= 0)
 		{
@@ -364,6 +366,7 @@ void boss::release()
 
 void boss::update()
 {	//프레임 렌더가 되는 속도를 조절해줌
+	_attackRc = { 0,0,0,0 };
 	_count++;
 	if (_count % 10 == 0)
 	{

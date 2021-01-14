@@ -11,7 +11,7 @@ mainScene::~mainScene()
 
 HRESULT mainScene::init()
 {
-	_phase = NO_PHASE;
+	_phase = NO_PHASE; _ending = false;
 	CAMERAMANAGER->setCameraX(0);
 	CAMERAMANAGER->setCameraY(MAPSIZEY - WINSIZEY);
 	_loopX = 0;	_loopY = 300; _loopCount = _timeCount = _score = _redCount = 0;
@@ -30,6 +30,7 @@ HRESULT mainScene::init()
 	_cl->setImMemoryAddressLink(_im);
 	_pl->setLinkEnemy(_em);
 	_em->setLinkPlayer(_pl);
+
 	SOUNDMANAGER->play("메인브금");
 	return S_OK;
 }

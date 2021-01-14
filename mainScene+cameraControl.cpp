@@ -80,14 +80,14 @@ void mainScene::cameraControl()
 		_em->createMinion(WINSIZEX + 100, 500);
 		_em->createMinion(WINSIZEX + 100, 700);
 	}
-	else if (_phase == FIRST_PHASE && CAMX > 2100)
+	else if (_phase == FIRST_PHASE && CAMX > 2200)
 	{
 		_phase = SECOND_PHASE;
 		_em->createMinion2(- 200, 500);
 		_em->createMinion2(WINSIZEX + 100, 500);
 		_em->createMinion2(WINSIZEX + 100, 700);
 	}
-	else if (_phase == SECOND_PHASE && CAMY <= 55)
+	else if (_phase == SECOND_PHASE && CAMX > 3000)
 	{
 		_phase = THIRD_PHASE;
 		_em->createMinion3(- 100, 500);
@@ -103,10 +103,33 @@ void mainScene::cameraControl()
 	{
 		_phase = END_PHASE;
 		_im->createBat((_em->getVEnemy()[0]->getRect().left + _em->getVEnemy()[0]->getRect().right) / 2, _em->getVEnemy()[0]->getY());
-		_im->createFood((_em->getVEnemy()[0]->getRect().left + _em->getVEnemy()[0]->getRect().right) / 2 + 20, _em->getVEnemy()[0]->getY());
-		_im->createFood((_em->getVEnemy()[0]->getRect().left + _em->getVEnemy()[0]->getRect().right) / 2 - 20, _em->getVEnemy()[0]->getY());
+		_im->createFood(_em->getVEnemy()[0]->getRect().left  + 70, _em->getVEnemy()[0]->getY());
+		_im->createFood(_em->getVEnemy()[0]->getRect().right - 70, _em->getVEnemy()[0]->getY());
+		_im->createFood((_em->getVEnemy()[0]->getRect().left + _em->getVEnemy()[0]->getRect().right) / 2, _em->getVEnemy()[0]->getY()+120);
+		_im->createFood((_em->getVEnemy()[0]->getRect().left + _em->getVEnemy()[0]->getRect().right) / 2, _em->getVEnemy()[0]->getY()-120);
+	}
+	
+	for (int i = 0; i < _im->getVItem().size(); i++)
+	{// ¾ÆÀÌÅÛ Àâ°í ´øÁö±â. ¸Ô±â
+		if (IntersectRect(&temp, &_pl->getShadow(), &_im->getVItem()[i]->getShadow()))
+		{
+			if (KEYMANAGER->isStayKeyDown('C'))
+			{
+				if (_im->getVItem()[i]->getID() == 0 && !_im->getVItem()[i]->isFood())
+				{
+					_ending = true;
+					break;
+				}
+			}
+		}
+	}
+	if (_ending)
+	{
+		CAMERAMANAGER->cameraLockOff();
+		CAMERAMANAGER->setCameraX(0);
+		CAMERAMANAGER->setCameraY(0);
+		SCENEMANAGER->changeScene("¿£µù¾À");
 	}
 
-	if (CAMX >= MAPSIZEX - WINSIZEX) SCENEMANAGER->changeScene("¿£µù¾À");
 }
 
