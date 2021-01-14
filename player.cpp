@@ -55,8 +55,8 @@ void player::update()
 {
 	_statePattern->updateState();
 	stateUpdate();
-	_flyRc = RectMakeCenter(_flyX, _flyY, 100, 100);
-	_groundRc = RectMakeCenter(_groundX, _groundY, 100, 100);
+	_flyRc = RectMakeCenter(_flyX, _flyY, 100, 200);
+	_groundRc = RectMakeCenter(_groundX, _groundY, 100, 200);
 	minusDirectionChanged();
 	_attack->update(50);
 }
@@ -475,98 +475,98 @@ void player::stateRender()
 	{
 	case IDLE:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 28, imageCenterY - 66);
-		else playerImage->frameRender(getMemDC(), imageCenterX + 28, imageCenterY - 66);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 28, imageCenterY - 16);
+		else playerImage->frameRender(getMemDC(), imageCenterX + 28, imageCenterY - 16);
 		break;
 	case CIDLEANIMATION:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 66);
-		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 66);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 16);
+		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 16);
 		break;
 	case JUMP:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200 - ((_groundRc.bottom - _flyRc.bottom)/2), 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 23, imageCenterY - 75);
-		else playerImage->frameRender(getMemDC(), imageCenterX - 23, imageCenterY - 75);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 23, imageCenterY - 18);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 23, imageCenterY - 18);
 		break;
 	case WALK:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 125, 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 21, imageCenterY - 75);
-		else playerImage->frameRender(getMemDC(), imageCenterX + 21, imageCenterY - 75);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 21, imageCenterY - 18);
+		else playerImage->frameRender(getMemDC(), imageCenterX + 21, imageCenterY - 18);
 		break;
 	case RUN:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 66);
-		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 66);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 16);
+		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 16);
 		break;
     case HIT:
         _shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
-        if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 15, imageCenterY - 60);
-        else playerImage->frameRender(getMemDC(), imageCenterX + 15, imageCenterY - 60);
+        if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 15, imageCenterY - 15);
+        else playerImage->frameRender(getMemDC(), imageCenterX + 15, imageCenterY - 15);
         break;
 	case COMBO1:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 65, imageCenterY - 50);
-		else playerImage->frameRender(getMemDC(), imageCenterX - 65, imageCenterY - 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 65, imageCenterY);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 65, imageCenterY);
 		break;
 	case COMBO11:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 15, imageCenterY - 60);
-		else playerImage->frameRender(getMemDC(), imageCenterX - 15, imageCenterY - 60);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 15, imageCenterY - 10);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 15, imageCenterY - 10);
 		break;
 	case COMBO12:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 55, imageCenterY - 105);
-		else playerImage->frameRender(getMemDC(), imageCenterX - 55, imageCenterY - 105);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 55, imageCenterY - 52);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 55, imageCenterY - 52);
 		break;
 	case COMBO13:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 70, imageCenterY - 80);
-		else playerImage->frameRender(getMemDC(), imageCenterX - 70, imageCenterY - 80);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 70, imageCenterY - 30);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 70, imageCenterY - 30);
 		break;
     case COMBO21:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 35, imageCenterY - 80);
-		else playerImage->frameRender(getMemDC(), imageCenterX - 35, imageCenterY - 80);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 35, imageCenterY - 30);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 35, imageCenterY - 30);
         break;
     case COMBO22:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 20, imageCenterY - 65);
-		else playerImage->frameRender(getMemDC(), imageCenterX + 20, imageCenterY - 65);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 20, imageCenterY - 10);
+		else playerImage->frameRender(getMemDC(), imageCenterX + 20, imageCenterY - 10);
         break;
     case COMBO23:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 75, imageCenterY - 60);
-		else playerImage->frameRender(getMemDC(), imageCenterX - 75, imageCenterY - 60);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 75, imageCenterY - 5);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 75, imageCenterY - 5);
         break;
     case SLIDE:
 		_shadow = RectMakeCenter(_flyX, _flyRc.bottom, 200, 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 40, imageCenterY - 40);
-		else playerImage->frameRender(getMemDC(), imageCenterX + 40, imageCenterY - 40);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 40, imageCenterY + 15);
+		else playerImage->frameRender(getMemDC(), imageCenterX + 40, imageCenterY + 15);
         break;
     case TACKLE:
 		_shadow = RectMakeCenter(_flyX, _flyRc.bottom, 150, 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 60);
-		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 60);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 10);
+		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 10);
         break;
     case JUMPATTACK:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200 - ((_groundRc.bottom - _flyRc.bottom) / 2), 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 60, imageCenterY - 40);
-		else playerImage->frameRender(getMemDC(), imageCenterX - 60, imageCenterY - 40);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 60, imageCenterY - 10);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 60, imageCenterY - 10);
         break;
 	case GRAB:
         _shadow = RectMakeCenter(_groundX, _groundRc.bottom, 150, 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 23, imageCenterY - 60);
-		else playerImage->frameRender(getMemDC(), imageCenterX - 23, imageCenterY - 60);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 23, imageCenterY - 15);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 23, imageCenterY - 15);
 		break;
 	case GRABSWING:
         _shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
-		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 60, imageCenterY - 80);
-		else playerImage->frameRender(getMemDC(), imageCenterX - 60, imageCenterY - 80);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 60, imageCenterY - 25);
+		else playerImage->frameRender(getMemDC(), imageCenterX - 60, imageCenterY - 25);
 		break;
     case WINDMILL:
         _shadow = RectMakeCenter(_groundX, _groundRc.bottom, 125, 50);
-        if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 90);
-        else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 90);
+        if (!_left) playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 35);
+        else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 35);
         break;
 
 	}
