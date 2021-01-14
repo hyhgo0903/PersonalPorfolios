@@ -166,6 +166,7 @@
     <ClInclude Include="combo22.h" />
     <ClInclude Include="combo23.h" />
     <ClInclude Include="commonMacroFunction.h" />
+    <ClInclude Include="dead.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
     <ClInclude Include="endingScene.h" />
@@ -246,6 +247,7 @@
     <ClCompile Include="combo21.cpp" />
     <ClCompile Include="combo22.cpp" />
     <ClCompile Include="combo23.cpp" />
+    <ClCompile Include="dead.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="endingScene.cpp" />

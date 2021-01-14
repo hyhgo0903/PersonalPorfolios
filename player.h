@@ -27,7 +27,8 @@ enum State {
     COMBO23,
 	GRAB,
 	GRABSWING,
-    WINDMILL
+    WINDMILL,
+	DEAD
 };
 
 class player :

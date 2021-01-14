@@ -312,6 +312,9 @@
     <ClInclude Include="hit.h">
       <Filter>playGround\player\STATE</Filter>
     </ClInclude>
+    <ClInclude Include="dead.h">
+      <Filter>playGround\player\STATE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -558,6 +561,9 @@
       <Filter>playGround\player\STATE</Filter>
     </ClCompile>
     <ClCompile Include="hit.cpp">
+      <Filter>playGround\player\STATE</Filter>
+    </ClCompile>
+    <ClCompile Include="dead.cpp">
       <Filter>playGround\player\STATE</Filter>
     </ClCompile>
   </ItemGroup>

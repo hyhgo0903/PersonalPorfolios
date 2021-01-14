@@ -32,6 +32,7 @@ HRESULT mainScene::init()
 	_em->setLinkPlayer(_pl);
 
 	SOUNDMANAGER->play("메인브금");
+	_time = 0.0f;
 	return S_OK;
 }
 

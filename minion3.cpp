@@ -110,20 +110,22 @@ void minion3::enemyState()
 		break;
 
 	case E_ATK:
-
-		if (_left)
+		if (_index == 2)
 		{
-			_attackRc = RectMakeCenter(_x - 130, _y, 150, 60);
+			if (_left)
+			{
+				_attackRc = RectMakeCenter(_x - 130, _y, 150, 60);
+			}
+			else
+			{
+				_attackRc = RectMakeCenter(_x + 130, _y, 150, 60);
+			}
 		}
-		else
-		{
-			_attackRc = RectMakeCenter(_x + 130, _y, 150, 60);
-		}
-
 		if (_index > 2)
 		{
 			_attackRc = RectMakeCenter(0, 0, 0, 0);
 			setState(E_IDLE);
+		}
 		}
 		break;
 

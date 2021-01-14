@@ -32,4 +32,7 @@ void playGround::imageInitYoongho()
 	IMAGEMANAGER->addFrameImage("그냥텍스트", "image/ui/text.bmp", 864, 96, 4, 1, true, RGB(255, 0, 255));
 
 	IMAGEMANAGER->addImage("보스텍스트", "image/ui/bosstext.bmp", 168, 24, true, RGB(255, 0, 255));
+
+	IMAGEMANAGER->addFrameImage("플레이어죽음", "image/player/dead.bmp", 1665, 588, 5, 2, true, RGB(255, 0, 255));
+
 }

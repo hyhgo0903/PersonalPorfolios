@@ -38,6 +38,7 @@ private:
 	int _playerHeight; int _playerWidth;
 	gamePhase _phase;
 	bool _ending;
+	float _time;
 	
 public:
 	mainScene();

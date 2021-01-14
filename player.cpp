@@ -16,6 +16,7 @@
 #include "jumpAttack.h"
 #include "tackle.h"
 #include "slide.h"
+#include "dead.h"
 #include "cidleAnimation.h"
 #include "windmill.h"
 #include "grab.h"
@@ -29,7 +30,7 @@ HRESULT player::init()
 	playerImage = IMAGEMANAGER->findImage("플레이어대기");
 	_count = _index = 0;
 	_flyX = _groundX = 100.f;
-	_flyY = _groundY = CAMY + 300.f;
+	_flyY = _groundY = CAMY + 500.f;
 	_directionChanged = _directionChangeCount = _dirMemory = _dirMemoryCount = 0;
 	_flyRc = RectMakeCenter(_flyX, _flyY, 100, 100);
 	_groundRc = RectMakeCenter(_groundX, _groundY, 100, 100);
@@ -155,6 +156,7 @@ void player::setState(State state)
     case WINDMILL:      _statePattern = new windmill; break;
     case GRAB:          _statePattern = new grab; break;
     case GRABSWING:     _statePattern = new grabswing; break;
+	case DEAD:     _statePattern = new dead; break;
 	}
 	_statePattern->LinkMemberAdress(this);
 	// 참조할때마다 플레이그라운드에서 링크시켰던거 있잖아?
@@ -453,6 +455,19 @@ void player::stateUpdate()
                 _index++;
             }
             break;
+		case DEAD:
+			playerImage = FINDIMG("플레이어죽음");
+			if (!_left)
+			{
+				_index++;
+				if (_index > 4) _index = 4;
+			}
+			else
+			{
+				_index--;
+				if (_index < 0) _index=0;
+			}
+			break;
 		}
 		_count = 0;
 	}
@@ -473,6 +488,11 @@ void player::stateRender()
 
 	switch (_enumState)
 	{
+	case DEAD:
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
+		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 28, imageCenterY - 16, _index, 0);
+		else playerImage->frameRender(getMemDC(), imageCenterX + 28, imageCenterY - 16, _index, 1);
+		break;
 	case IDLE:
 		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200, 50);
 		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX - 28, imageCenterY - 16);

@@ -50,7 +50,7 @@ void collision::deokhoUpdate()
 		{//적 벡터
 			if (_im->getVItem()[i]->getMoving())
 			{//아이템이 움직이라고 명령받은 상태임?? -> 던졌단 얘기임.
-				if (IntersectRect(&temp, &_im->getVItem()[i]->getShadow(), &_em->getVEnemy()[i]->getShadow()))
+				if (IntersectRect(&temp, &_im->getVItem()[i]->getShadow(), &_em->getVEnemy()[j]->getShadow()))
 				{//충돌했니?
 					if (_im->getVItem()[i]->getID() == 1)
 					{//야구공이니?
@@ -65,12 +65,10 @@ void collision::deokhoUpdate()
 						_em->getVEnemy()[j]->setState(E_DEAD);
 						_im->getVItem()[i]->makeBoom();
 					}
-					
 				}
 			}
 		}
 	}
-
 }
 
 void collision::deokhoRender()
