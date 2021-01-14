@@ -13,6 +13,7 @@ minion3::~minion3()
 
 void minion3::enemyState()
 {
+	_attackRc = { 0, 0, 0, 0 };
 	_count++;
 	//HIT상태에서만 hit카운트가 더해진다
 	if (_state == E_HIT) _hitCount++;

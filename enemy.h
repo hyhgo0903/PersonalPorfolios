@@ -55,4 +55,5 @@ public:
 	void setState(enemyState state);
 	float getY() { return _y; }
 	void setAtkNum() { _plAtkNum = RND->getFromIntTo(1, 3); }
+	bool& getLeft() { return _left; }
 };

@@ -11,6 +11,7 @@ minion::~minion()
 
 void minion::enemyState()
 {	
+	_attackRc = { 0, 0, 0, 0 };
 	_count++;
 	//HIT상태에서만 hit카운트가 더해진다
 	if (_state == E_HIT) _hitCount++;
@@ -374,7 +375,7 @@ HRESULT minion::init(float x, float y)
 	_plAtkNum = 1;
 	_flying = false;
 	_atkArea = false;
-	_randomNum = RND->getFromIntTo(20, 50);
+	_randomNum = RND->getFromIntTo(-3, 3);
 	_isDead = false;
 	_flyDown = false;
 	_alpha = 255;
