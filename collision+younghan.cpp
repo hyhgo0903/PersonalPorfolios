@@ -117,7 +117,7 @@ void collision::younghanUpdate()
 	}
 	for (int i = 0; i < _em->getVEnemy().size(); ++i)
 	{
-		if (_pl->getEnumState() == HIT) break;
+		if (_pl->getEnumState() == HIT || _pl->getEnumState() == GRAB || _pl->getEnumState() == DEAD) break;
 		RECT temp;
 		if (IntersectRect(&temp, &_em->getVEnemy()[i]->getShadow(), &_pl->getShadow()))
 		{

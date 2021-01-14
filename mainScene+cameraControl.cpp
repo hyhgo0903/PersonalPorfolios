@@ -130,6 +130,7 @@ void mainScene::cameraControl()
 	{
 		_pl->setState(DEAD);
 		--_life;
+		if (_life < 0) _life = 0;
 	}
 	if (_pl->getEnumState() == DEAD && KEYMANAGER->isStayKeyDown(VK_RETURN))
 	{
