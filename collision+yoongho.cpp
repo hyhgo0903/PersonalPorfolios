@@ -8,6 +8,18 @@ void collision::yoonghoInit()
 
 void collision::yoonghoUpdate()
 {
+	bool check = false;
+	for (int i = 0; i < _em->getVEnemy().size(); ++i)
+	{
+		if (_pl->getEnumState() != GRAB) break;
+		if (_em->getVEnemy()[i]->getState() == E_GRAB)
+		{
+			check = true;
+			break;
+		}
+	}
+	if (!check && _pl->getEnumState() == GRAB) _pl->setState(IDLE);
+
 	// ############ 쓰레기통 제외한 오브젝트라면 진로방해하는 기능 ######################
 	//RECT temp1;	
 	//RECT temp2 = _pl->getShadow();// 50은 나중에 플레이어 너비수정하면 변경할것
