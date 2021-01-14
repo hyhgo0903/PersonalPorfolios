@@ -274,6 +274,7 @@ void boss::bossState()
 
 void boss::phase1() // 공격렉트가 전신에 생겨서 치고다님
 {
+	_state = E_HIT;
 	if (getDistance(_x, _y, _destX, _destY) > 30)
 	{
 		_x += 10.f * cosf(getAngle(_x, _y, _destX, _destY));
@@ -309,6 +310,7 @@ void boss::phase1() // 공격렉트가 전신에 생겨서 치고다님
 
 void boss::phase2()
 { 
+	_state = E_HIT;
 	if (_jumping)
 	{ // 점프중
 		_attackRc = { 0,0,0,0 };
@@ -397,13 +399,11 @@ void boss::update()
 	}	
 	if (_phase == 1)
 	{ // 차탔음
-		_state = E_WALK;
 		_rc = RectMakeCenter(_x, _y, 200, 200);
 		_shadow = RectMakeCenter(_rc.left + 100, _rc.bottom + 50, 350, 70);
 	}
 	if (_phase == 2)
 	{
-		_state = E_SHAKE;
 		_rc = RectMakeCenter(_x, _y, 180, 120);
 		if (_jumping)
 		{

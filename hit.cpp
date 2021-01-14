@@ -4,6 +4,7 @@
 
 void hit::EnterState()
 {
+	_pl->getFlyY() = _pl->getGroundY();
     _pl->getIndex() = 0;
     _pl->getPlHP() -= 10.0f;
     count = 30;

@@ -3,7 +3,7 @@
 class boss :public enemy
 {
 private:
-	int _phase; int _phaseCount;
+	int _phaseCount;
 	int _destX; // 목적지
 	int _destY; // 목적지. 보스페이즈2일땐 그림자위치로도 씀
 	bool _jumping; // 점프

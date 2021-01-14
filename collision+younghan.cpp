@@ -17,6 +17,7 @@ void collision::younghanUpdate()
 		for (int i = 0; i < _em->getVEnemy().size(); ++i)
 		{
 			RECT sour;
+			if (_em->getVEnemy()[i]->getPhase() == 1 || _em->getVEnemy()[i]->getPhase() == 2) continue;
 			if (_em->getVEnemy()[i]->getState() == E_HIT || _em->getVEnemy()[i]->getState() == E_DEAD) continue;
 			if (IntersectRect(&sour, &_em->getVEnemy()[i]->getShadow(), &_pl->getShadow()))
 			{
@@ -25,13 +26,13 @@ void collision::younghanUpdate()
 					RECT temp;
 					if (IntersectRect(&temp, &_em->getVEnemy()[i]->getRect(), &_pl->getAttack()->getVAttack()[j].rc))
 					{
-						
+						_pl->getAttack()->removeAttack(j);
 						if (_em->getVEnemy()[i]->getState() == E_GRAB && _pl->getFlyCount() >= 20)
 						{
 							_em->getVEnemy()[i]->getState() = E_FLYING;
 						}
 						_score += 100;
-						hitted = true;
+						
 						break;
 					}
 				}
@@ -43,6 +44,7 @@ void collision::younghanUpdate()
 		for (int i = 0; i < _em->getVEnemy().size(); ++i)
 		{
 			RECT sour;
+			if (_em->getVEnemy()[i]->getPhase() == 1 || _em->getVEnemy()[i]->getPhase() == 2) continue;
 			if (_em->getVEnemy()[i]->getState() == E_HIT || _em->getVEnemy()[i]->getState() == E_DEAD) continue;
 			if (IntersectRect(&sour, &_em->getVEnemy()[i]->getShadow(), &_pl->getShadow()))
 			{

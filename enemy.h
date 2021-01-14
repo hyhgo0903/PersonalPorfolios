@@ -6,6 +6,7 @@ enum enemyState { E_IDLE, E_WALK, E_ATK, E_DEAD, E_HIT, E_GRAB, E_FLYING, E_WALK
 class enemy : public gameNode
 {
 protected:
+	int _phase;
 	RECT _rc;
 	RECT _attackRc;
 	float _x; float _y; // 중점. RectMakeCenter를 이용하기로 함
@@ -56,4 +57,6 @@ public:
 	float getY() { return _y; }
 	void setAtkNum() { _plAtkNum = RND->getFromIntTo(1, 3); }
 	bool& getLeft() { return _left; }
+	int getPhase() { return _phase; }
+
 };
