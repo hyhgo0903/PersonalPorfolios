@@ -52,6 +52,7 @@ private:
     float _jumpPower; // 점프 파워
     bool _isHit;        //맞았는지, 잡았는지 불바다
     bool _isGrab;
+	int _flyCount; // 적당한 때에 날아가기 위한? 카운트
 
 	// ############ 커맨드 입력 관련 변수(대시, 특수기) #############
 	int _directionChanged;		// 좌우가 몇번 바뀌었는지 카운트(커맨드)
@@ -99,5 +100,6 @@ public:
     bool& getIsGrab() { return _isGrab; }
     float& getPlHP() { return _currentHP; }
     void getDamage(int x) { _currentHP -= x; }
+	int& getFlyCount() { return _flyCount; }
 };
 
