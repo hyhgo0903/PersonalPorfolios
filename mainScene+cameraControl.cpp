@@ -65,21 +65,21 @@ void mainScene::cameraControl()
 	else _redCount = 0;
 
 	// ¸÷Á¨
-	if (_phase == NO_PHASE && CAMX > 400)
+	if (_phase == NO_PHASE && CAMX > 500)
 	{
 		_phase = FIRST_PHASE;
 		_em->createMinion(- 100, 500);
 		_em->createMinion(WINSIZEX + 100, 500);
 		_em->createMinion(WINSIZEX + 100, 700);
 	}
-	else if (_phase == FIRST_PHASE && CAMX > 2200)
+	else if (_phase == FIRST_PHASE && CAMX > 2300)
 	{
 		_phase = SECOND_PHASE;
 		_em->createMinion2(- 200, 500);
 		_em->createMinion2(WINSIZEX + 100, 500);
 		_em->createMinion2(WINSIZEX + 100, 700);
 	}
-	else if (_phase == SECOND_PHASE && CAMX > 3000)
+	else if (_phase == SECOND_PHASE && CAMX > 3500)
 	{
 		_phase = THIRD_PHASE;
 		_em->createMinion3(- 100, 500);
@@ -95,10 +95,11 @@ void mainScene::cameraControl()
 	{
 		_phase = END_PHASE;
 		_im->createBat((_em->getVEnemy()[0]->getRect().left + _em->getVEnemy()[0]->getRect().right) / 2, _em->getVEnemy()[0]->getY());
+		_im->createFood(_em->getVEnemy()[0]->getRect().left + 150, _em->getVEnemy()[0]->getY());
+		_im->createFood(_em->getVEnemy()[0]->getRect().right - 150, _em->getVEnemy()[0]->getY());
 		_im->createFood(_em->getVEnemy()[0]->getRect().left  + 70, _em->getVEnemy()[0]->getY());
 		_im->createFood(_em->getVEnemy()[0]->getRect().right - 70, _em->getVEnemy()[0]->getY());
 		_im->createFood((_em->getVEnemy()[0]->getRect().left + _em->getVEnemy()[0]->getRect().right) / 2, _em->getVEnemy()[0]->getY()+120);
-		_im->createFood((_em->getVEnemy()[0]->getRect().left + _em->getVEnemy()[0]->getRect().right) / 2, _em->getVEnemy()[0]->getY()-120);
 	}
 	
 	for (int i = 0; i < _im->getVItem().size(); i++)

@@ -59,6 +59,7 @@ private:
 	int _directionChangeCount;	// 카운트체크해서 내림
 	int _dirMemory;				// 방향 기억(대쉬용)
 	int _dirMemoryCount;		// 카운트체크해서 내림
+	int _shadowWidth;
 
 	enemyManager* _em;
 

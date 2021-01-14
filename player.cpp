@@ -504,7 +504,9 @@ void player::stateRender()
 		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 16);
 		break;
 	case JUMP:
-		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200 - ((_groundRc.bottom - _flyRc.bottom)/2), 50);
+		_shadowWidth = 200 - ((_groundRc.bottom - _flyRc.bottom) / 2);
+		if (_shadowWidth < 0) _shadowWidth = 0;
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, _shadowWidth, 50);
 		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 23, imageCenterY - 18);
 		else playerImage->frameRender(getMemDC(), imageCenterX - 23, imageCenterY - 18);
 		break;
@@ -569,7 +571,9 @@ void player::stateRender()
 		else playerImage->frameRender(getMemDC(), imageCenterX, imageCenterY - 10);
         break;
     case JUMPATTACK:
-		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, 200 - ((_groundRc.bottom - _flyRc.bottom) / 2), 50);
+		_shadowWidth = 200 - ((_groundRc.bottom - _flyRc.bottom) / 2);
+		if (_shadowWidth < 0) _shadowWidth = 0;
+		_shadow = RectMakeCenter(_groundX, _groundRc.bottom, _shadowWidth, 50);
 		if (!_left) playerImage->frameRender(getMemDC(), imageCenterX + 60, imageCenterY - 10);
 		else playerImage->frameRender(getMemDC(), imageCenterX - 60, imageCenterY - 10);
         break;

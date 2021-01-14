@@ -26,7 +26,7 @@ void boss::bossState()
 
 
 	if (_phaseCount > 300 && _state != E_GRAB && _state != E_DEAD && _state != E_HIT
-		&& _state != E_FLYING) // 페이즈 바꿈
+		&& _state != E_FLYING && _currentHP > 0) // 페이즈 바꿈
 	{
 		_phase = 1 + rand() % 2;
 		_destX = _pX;	_destY = _pY; // 목적지설정
