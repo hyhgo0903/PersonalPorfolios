@@ -26,7 +26,7 @@ HRESULT cereal::init(float x, float y, float bottom)
 	_image = FINDIMG("¾¾¸®¾ó");
 	_x = _xg = x;
 	_y = y;
-	_yg = bottom;
+	_yg = bottom - _image->getHeight() * 2 / 3;
 	_distance = _yg - _y;
 	int shadowWidth = _image->getWidth() - (_distance / 2);
 	int shadowHeight = (_image->getHeight() - (_distance / 2)) / 3;
@@ -37,6 +37,7 @@ HRESULT cereal::init(float x, float y, float bottom)
 
 	_delete = false;
 	_gravity = 2;
+	_movement = 0;
 	_food = true;
 
 	return S_OK;
@@ -88,6 +89,8 @@ void cereal::drop()
 	{
 		_gravity -= 0.2f;
 		_y -= _gravity;
+		_x += _movement;
+		_xg += _movement;
 	}
 	else _y = _yg;
 }

@@ -41,7 +41,7 @@ HRESULT bomb::init(float x, float y, float bottom)
 	_moving = false;
 
 	_xg = _x;
-	_yg = bottom;
+	_yg = bottom - _image->getHeight()*2 / 3;
 	_rcg = RectMakeCenter(_xg, _yg, _image->getFrameWidth(), _image->getFrameHeight());//¶¥·ºÆ®
 	_distance = _yg - _y;
 	_shadow = RectMakeCenter(_xg, _rcg.bottom, _image->getFrameWidth() - (_distance / 2), (_image->getFrameHeight() - (_distance / 2) / 3));
@@ -53,6 +53,7 @@ HRESULT bomb::init(float x, float y, float bottom)
 
 	_ID = 2;
 	_food = false;
+	_movement = 0;
 	return S_OK;
 }
 

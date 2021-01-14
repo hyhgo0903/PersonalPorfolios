@@ -40,7 +40,7 @@ HRESULT bat::init(float x, float y)
 HRESULT bat::init(float x, float y, float bottom)
 {
 	_image = IMAGEMANAGER->findImage("배트");//이미지 삽입
-	_gravity = -3;//중력
+	_gravity = -7;//중력
 	_x = x;	_y = y;//공중렉트 중심
 	_rc = RectMakeCenter(_x, _y, _image->getWidth(), _image->getHeight());//공중렉트
 
@@ -48,7 +48,7 @@ HRESULT bat::init(float x, float y, float bottom)
 	_moving = false;//던져지지 않음.
 
 	_xg = _x;//땅렉트
-	_yg = bottom;
+	_yg = bottom - _image->getHeight() * 2 / 3;
 	_rcg = RectMakeCenter(_xg, _yg, _image->getWidth(), _image->getHeight());//땅렉트
 
 	_distance = _yg - _y;//렉트간 거리.
@@ -60,6 +60,7 @@ HRESULT bat::init(float x, float y, float bottom)
 
 	_ID = 0;
 	_food = false;
+	_movement = 0;
 	return S_OK;
 }
 
@@ -142,7 +143,7 @@ void bat::attackMove(bool direction)
 {//매니저에서 사용할 함수.
 	if (_pickup)
 	{
-		_gravity = -3;
+		_gravity = -5;
 		_yg -= (RND->getFromIntTo(3, 9))*10;
 	}
 	_pickup = false;

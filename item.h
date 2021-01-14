@@ -27,6 +27,8 @@ protected:
 	bool _delete; //매니저에서 지우라는 신호로 쓸 거임.
 	bool _food;   //먹을 건지 던질 건지 확인합시다.
 
+	int _movement;
+
 public:
 	item();
 	~item();
@@ -44,6 +46,7 @@ public:
 	RECT getRect() { return _rc; }
 	RECT getShadow() { return _shadow; }
 
+	inline void setMovement(int movement) { _movement = movement; }
 	inline int getID() { return _ID; }
 	inline bool getDelete() { return _delete; }
 	inline bool getPickup() { return _pickup; }

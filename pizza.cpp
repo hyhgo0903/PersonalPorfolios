@@ -27,7 +27,7 @@ HRESULT pizza::init(float x, float y, float bottom)
 	_image = FINDIMG("ÇÇÀÚ");
 	_x = _xg = x;
 	_y = y;
-	_yg = bottom;
+	_yg = bottom - _image->getHeight() * 2 / 3;
 	_distance = _yg - _y;
 	int shadowWidth = _image->getWidth() - (_distance / 2);
 	int shadowHeight = (_image->getHeight() - (_distance / 2)) / 3;
@@ -39,7 +39,7 @@ HRESULT pizza::init(float x, float y, float bottom)
 	_delete = false;
 	_gravity = 2;
 	_food = true;
-
+	_movement = 0;
 	return S_OK;
 }
 

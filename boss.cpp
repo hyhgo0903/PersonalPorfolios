@@ -9,6 +9,25 @@ boss::~boss()
 {
 }
 
+HRESULT boss::init(float x, float y)
+{
+	_x = CAMX + x;	_y = CAMY + y;
+	_currentHP = _maxHP = 500.f;
+	_count = _index = _attackCount = _hitCount = _grabCount = _phaseCount = _rideCount = 0;
+	_state = E_IDLE;
+	_phase = 1;
+	_plAtkNum = 1;
+	_flying = _atkArea = false;
+	_left = true;
+	_alpha = 255;
+	_destX = CAMX + WINSIZEY / 2;
+	_destY = CAMY + WINSIZEY / 2;
+
+	SOUNDMANAGER->stop("메인브금");
+	SOUNDMANAGER->play("보스등장");
+	return S_OK;
+}
+
 void boss::bossState()
 {
 
@@ -21,6 +40,7 @@ void boss::bossState()
 
 	//공격범위 안에 플레이어가 있는지 체크함, 플레이어와 에너미의 간격이 100미만이면 true
 	if (getDistance(_x, _y, _pX, _pY) < 100) _atkArea = true;
+
 	//간격이 100이상이면 false
 	if (getDistance(_x, _y, _pX, _pY) >= 100) _atkArea = false;
 
@@ -38,7 +58,6 @@ void boss::bossState()
 		return;
 	}
 
-	//상태마다 기능을 정의해
 	switch (_state)
 	{
 	case E_SHAKE:
@@ -54,6 +73,7 @@ void boss::bossState()
 			++_shakeCount;
 		}
 		break;
+
 	case E_IDLE:
 		//프레임 이미지의 최대 렌더값을 초과하지 않도록 설정해줌
 		if (_index > 0) _index = 0;
@@ -64,8 +84,7 @@ void boss::bossState()
 			//플레이어가 에너미의 오른쪽에 있다면
 			if (_x > _pX)
 			{
-				//에너미는 왼쪽을 보고있다고 설정해주고 WALK상태로 변경 후 
-				//애니메이션을 처음부터 처리하기위해 인덱스를 0으로 초기화
+				//에너미는 왼쪽을 보고있다고 설정해주고 WALK상태로 변경
 				_left = true;
 				setState(E_WALK);
 			}
@@ -92,10 +111,11 @@ void boss::bossState()
 		//프레임 이미지 최대 렌더값을 초과하지않도록 초기화해줌
 		if (_index > 3) _index = 0;
 
+		//??
 		if (_destX > _x) _left = false;
 		else _left = true;
-		//플레이어와 에너미의 거리가 200이하라면 ATK상태로 변경 후
-		//이미지를 처음부터 렌더하기위해 인덱스 초기화
+
+		//플레이어와 에너미의 거리가 200이하라면 ATK상태로 변경
 		if (getDistance(_x, _y, _pX, _pY) <= 200)
 		{
 			_attackCount++;
@@ -105,12 +125,13 @@ void boss::bossState()
 				_attackCount = 0;
 			}
 		}
-		//플레이어와 에너미의 거리가 450이상이라면 WALK2상태로 변경 후
-		//이미지를 처음부터 렌더하기위해 인덱스 초기화
+
+		//플레이어와 에너미의 거리가 450이상이라면 WALK2상태로 변경
 		if (getDistance(_x, _y, _pX, _pY) >= 450)
 		{
 			setState(E_WALK2);
 		}
+
 		//플레이어와 에너미의 거리가 450미만이고
 		if (getDistance(_x, _y, _pX, _pY) < 450)
 		{
@@ -139,8 +160,8 @@ void boss::bossState()
 	case E_WALK2:
 		//프레임 이미지 최대 렌더값을 초과하지않도록 인덱스 초기화
 		if (_index > 2) _index = 0;
-		//플레이어와 에너미의 거리가 450미만이라면 WALK상태로 변경 후
-		//프레임 이미지 정상 렌더를 위해 인덱스 초기화
+
+		//플레이어와 에너미의 거리가 450미만이라면 WALK상태로 변경
 		if (getDistance(_x, _y, _pX, _pY) < 450)
 		{
 			setState(E_WALK);
@@ -167,6 +188,7 @@ void boss::bossState()
 		break;
 
 	case E_ATK:
+		//E_ATK의 _index == 2의 이미지를 렌더할때 공격렉트를 아래의 위치에 생성한다
 		if (_index == 2)
 		{
 			if (_left)
@@ -178,6 +200,7 @@ void boss::bossState()
 				_attackRc = RectMakeCenter(_x + 110, _y - 45, 120, 80);
 			}
 		}
+		//이미지 렌더의 최대값을 초과하면 공격렉트를 다른 위치로 치우고 E_WALK상태로 변경시킨다
 		if (_index > 2)
 		{
 			_attackRc = RectMakeCenter(0, 0, 0, 0);
@@ -186,6 +209,7 @@ void boss::bossState()
 		break;
 
 	case E_DEAD:
+		//???
 		if (_index >= 3)
 		{
 			_index = 3;
@@ -198,17 +222,25 @@ void boss::bossState()
 		break;
 
 	case E_HIT:
+		//피격시 알파를 순식간에 더했다빼서 반짝거리는 효과를 추가
+		_alpha -= 255;
+		if (_alpha < 0) _alpha = 255;
+
+		//E_HIT 이미지는 한개의 이미지이기때문에 _index를 0으로 고정시켜 이미지가 고정되도록 해준다
 		_index = 0;
+
+		//enemy 피격시 타격감을 위해 보고있는 위치에따라 뒤로 밀려나게 만듬
 		if (_left) _x += 0.8f;
 		else _x -= 0.8f;
 
+		//enemy의 현재 체력이 0과 같거나 작아지면 E_DEAD상태로 변경
 		if (_currentHP <= 0)
 		{
+			_alpha = 255;
 			setState(E_DEAD);
 		}
 
-		//피격모션 유지시간 (30 = 0.5초)
-		//0.5초가 지나면 IDLE상태로 변경됨
+		//enemy가 피격 후 0.5초가 지나면 IDLE상태로 변경됨
 		if (_hitCount > 30 && _currentHP > 0)
 		{
 			setState(E_IDLE);
@@ -217,8 +249,10 @@ void boss::bossState()
 		break;
 
 	case E_GRAB:
+		//E_GRAB 이미지는 한개의 이미지이기때문에 _index를 0으로 고정시켜 이미지가 고정되도록 해준다
 		_index = 0;
 
+		//E_GRAB 상태가 될때 enemy를 player의 좌표에 비교하여 위치보정을 해준다
 		if (_left)
 		{
 			_x = _pX + 120;
@@ -229,14 +263,13 @@ void boss::bossState()
 			_x = _pX - 120;
 			_y = _pY;
 		}
-
 		break;
 
 	case E_FLYING:
-		//몬스터 렉트의 라이트가 카메라 화면 오른쪽 밖으로 나가려고한다면 체공상태를 풀고 인덱스를 1로 바꾼다
+		//날고있는상태에서 인덱스를 고정시켜줌
 		if (_flying) _index = 0;
 
-		//몬스터 렉트의 라이트가 카메라 화면 오른쪽 밖으로 나가려고한다면 체공상태를 풀고 인덱스를 1로 바꾼다
+		//enemy가 카메라 화면 오른쪽 밖으로 나가려고한다면 E_FLYING2로 변경
 		if (_rc.right > CAMX + WINSIZEX && _flying && _left)
 		{
 			if (_currentHP <= 0) setState(E_DEAD);
@@ -244,10 +277,10 @@ void boss::bossState()
 
 			_flying = false;
 			_index = 1;
-			//x좌표 위치를 보정해주는 이유는 안해주면 애가 가끔 낑김
 			_x -= 5;
 		}
-		//몬스터 렉트의 레프트가 카메라 화면 왼쪽 밖으로 나가려고한다면 체공상태를 풀고 인덱스를 1로 바꾼다
+
+		//enemy가 카메라 화면 왼쪽 밖으로 나가려고한다면 E_FLYING2로 변경
 		if (_rc.left < CAMX && _flying && !_left)
 		{
 			if (_currentHP <= 0) setState(E_DEAD);
@@ -255,14 +288,15 @@ void boss::bossState()
 
 			_flying = false;
 			_index = 1;
-			//x좌표 위치를 보정해주는 이유는 안해주면 애가 가끔 낑김
 			_x += 5;
 		}
-		//인덱스가 정상적으로 초기화되었고 지상에있는 상태라면 플라잉상태로 변경시켜줌
+
+		//enemy가 지상에있는 상태라면 _flying 상태로 변경시켜줌
 		if (!_flying && _index == 0) _flying = true;
-		//플라잉 상태에서만 좌표를 이동시킨다
+		//_flying가 true일때만 좌표를 이동시킨다(날고있는 상태이기 때문에)
 		if (_flying && _left) _x += 15.5f;
 		if (_flying && !_left) _x -= 15.5f;
+
 		//이미지가 정상적으로 마지막까지 렌더된다면 IDLE상태로 변경시키고 인덱스를 초기화
 		if (_index > 3)
 		{
@@ -340,25 +374,6 @@ void boss::phase2()
 	{
 		_index = 0;
 	}
-}
-
-
-HRESULT boss::init(float x, float y)
-{
-	_x = CAMX + x;	_y = CAMY + y;
-	_currentHP = _maxHP = 500.f;
-	_count = _index = _attackCount = _hitCount = _grabCount = _phaseCount = _rideCount = 0;
-	_state = E_IDLE;
-	_phase = 1;
-	_plAtkNum = 1;
-	_flying = _atkArea = false;
-	_left = true;
-	_destX = CAMX + WINSIZEY / 2;
-	_destY = CAMY + WINSIZEY / 2;
-
-	SOUNDMANAGER->stop("메인브금");
-	SOUNDMANAGER->play("보스등장");
-	return S_OK;
 }
 
 void boss::release()
@@ -451,13 +466,13 @@ void boss::render()
 			// 1 = 오른쪽에서 왼쪽으로 공격 , 2 = 왼쪽에서 오른쪽으로 공격
 			if (_plAtkNum == 1)
 			{
-				if (_left) FINDIMG("boss_hit4")->frameRender(getMemDC(), _rc.left - 33, _rc.top, 0, 1);
-				else FINDIMG("boss_hit4")->frameRender(getMemDC(), _rc.left - 3, _rc.top, 0, 0);	break;
+				if (_left) FINDIMG("boss_hit4")->alphaFrameRender(getMemDC(), _rc.left - 33, _rc.top, 0, 1, _alpha);
+				else FINDIMG("boss_hit4")->alphaFrameRender(getMemDC(), _rc.left - 3, _rc.top, 0, 0, _alpha);	break;
 			}
 			if (_plAtkNum == 2)
 			{
-				if (_left) FINDIMG("boss_hit4")->frameRender(getMemDC(), _rc.left - 33, _rc.top, 0, 1);
-				else FINDIMG("boss_hit4")->frameRender(getMemDC(), _rc.left - 3, _rc.top, 0, 0);	break;
+				if (_left) FINDIMG("boss_hit4")->alphaFrameRender(getMemDC(), _rc.left - 33, _rc.top, 0, 1, _alpha);
+				else FINDIMG("boss_hit4")->alphaFrameRender(getMemDC(), _rc.left - 3, _rc.top, 0, 0, _alpha);	break;
 			}
 		case E_GRAB:
 

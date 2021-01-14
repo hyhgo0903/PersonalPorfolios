@@ -49,7 +49,7 @@ HRESULT baseball::init(float x, float y, float bottom)
 	_moving = false;//던져지지 않음.
 
 	_xg = _x;//땅렉트
-	_yg = bottom;
+	_yg = bottom - _image->getHeight() * 2 / 3;
 	_rcg = RectMakeCenter(_xg, _yg, _image->getWidth(), _image->getHeight());//땅렉트
 
 	_distance = _yg - _y;//렉트간 거리.
@@ -61,6 +61,7 @@ HRESULT baseball::init(float x, float y, float bottom)
 	_strach = false;
 	_ID = 1;
 	_food = false;
+	_movement = 0;
 	return S_OK;
 }
 

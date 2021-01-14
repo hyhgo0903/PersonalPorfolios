@@ -11,7 +11,6 @@ itemManager::~itemManager()
 
 HRESULT itemManager::init()
 {
-	createBaseball(300, CAMY + 500);
 	return S_OK;
 }
 
@@ -42,8 +41,6 @@ void itemManager::update()
 					{
 						SOUNDMANAGER->play("气藕");
 						EFFECTMANAGER->play("气惯", ((_vItem[i]->getRect().right + _vItem[i]->getRect().left) / 2), _vItem[i]->getRect().top);
-						EFFECTMANAGER->play("气惯", _vItem[i]->getRect().right + 50, _vItem[i]->getRect().top - 150);
-						EFFECTMANAGER->play("气惯", _vItem[i]->getRect().left - 50, _vItem[i]->getRect().top - 150);
 						_vItem.erase(_vItem.begin() + i);
 					}
 
@@ -129,74 +126,93 @@ void itemManager::createPizza(float x, float y, float bottom)
 
 void itemManager::createFood(float x, float y)
 {
+	
 	switch (RND->getInt(5))
 	{
 	case 0:
 		pudding* vPudding;
 		vPudding = new pudding;
 		vPudding->init(x, y);
+		vPudding->setMovement(5 - (RND->getInt(10)));
 		_vItem.push_back(vPudding);
 		break;
 	case 1:
 		hamberger* vHamberger;
 		vHamberger = new hamberger;
-		vHamberger->init(x + 50, y);
+		vHamberger->init(x, y);
+		vHamberger->setMovement(5 - (RND->getInt(10)));
 		_vItem.push_back(vHamberger);
 		break;
 	case 2:
 		cereal* vCereal;
 		vCereal = new cereal;
-		vCereal->init(x + 100, y);
+		vCereal->init(x, y);
+		vCereal->setMovement(5 - (RND->getInt(10)));
 		_vItem.push_back(vCereal);
 		break;
 	case 3:
 		fries* vFries;
 		vFries = new fries;
-		vFries->init(x + 150, y);
+		vFries->init(x, y);
+		vFries->setMovement(5 - (RND->getInt(10)));
 		_vItem.push_back(vFries);
 		break;
 	case 4:
 		juice* vjuice;
 		vjuice = new juice;
 		vjuice->init(x, y);
+		vjuice->setMovement(5 - (RND->getInt(10)));
 		_vItem.push_back(vjuice);
 		break;
 	default:
 		break;
 	}
-
-
-
-
-
-
-
-
-
 }
 
 void itemManager::createFood(float x, float y, float bottom)
 {
-	pudding* vPudding;
-	vPudding = new pudding;
-	vPudding->init(x, y, bottom);
+	switch (RND->getInt(5))
+	{
+	case 0:
+		pudding* vPudding;
+		vPudding = new pudding;
+		vPudding->init(x, y, bottom);
+		_vItem.push_back(vPudding);
+		break;
+	case 1:
+		hamberger* vHamberger;
+		vHamberger = new hamberger;
+		vHamberger->init(x + 50, y, bottom);
+		_vItem.push_back(vHamberger);
+		break;
+	case 2:
+		cereal* vCereal;
+		vCereal = new cereal;
+		vCereal->init(x + 100, y, bottom);
+		_vItem.push_back(vCereal);
+		break;
+	case 3:
+		juice* vjuice;
+		vjuice = new juice;
+		vjuice->init(x, y, bottom);
+		_vItem.push_back(vjuice);
+		break;
+	case 4:
+		fries* vFries;
+		vFries = new fries;
+		vFries->init(x, y, bottom);
+		_vItem.push_back(vFries);
+		break;
+	default:
+		break;
+	}
+	
 
-	_vItem.push_back(vPudding);
+	
 
-	hamberger* vHamberger;
-	vHamberger = new hamberger;
-	vHamberger->init(x + 50, y, bottom);
-	_vItem.push_back(vHamberger);
+	
 
-	cereal* vCereal;
-	vCereal = new cereal;
-	vCereal->init(x + 100, y, bottom);
-	_vItem.push_back(vCereal);
-
-	juice* vjuice;
-	vjuice = new juice;
-	vjuice->init(x, y, bottom);
-	_vItem.push_back(vjuice);
+	
 }
 
 void itemManager::createBat(float x, float y)
@@ -204,6 +220,7 @@ void itemManager::createBat(float x, float y)
 	bat* vBat;
 	vBat = new bat;
 	vBat->init(x, y);
+	vBat->setMovement(5 - (RND->getInt(10)));
 	_vItem.push_back(vBat);
 }
 
@@ -212,6 +229,7 @@ void itemManager::createBat(float x, float y, float bottom)
 	bat* vBat;
 	vBat = new bat;
 	vBat->init(x, y, bottom);
+	vBat->setMovement(5 - (RND->getInt(10)));
 	_vItem.push_back(vBat);
 }
 

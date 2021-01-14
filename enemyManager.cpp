@@ -13,11 +13,6 @@ enemyManager::~enemyManager()
 HRESULT enemyManager::init()
 {
 	_pl = new player;
-	//몬스터 웨이브 초기 설정
-	_wave = 1;
-	//몬스터 생성유무 체크(무한생성 방지)
-	_create = WAIT;
-	
 	return S_OK;
 }
 
@@ -63,7 +58,6 @@ void enemyManager::release()
 
 void enemyManager::update()
 {
-
 	//만들어진 모든 에너미들의 업데이트 연산
 	for (int i = 0; i < _vEnemy.size(); ++i)
 	{
@@ -71,15 +65,7 @@ void enemyManager::update()
 		_vEnemy[i]->setPlayerPt(_pl->getGroundX(), _pl->getGroundY());
 	}
 
-	//몬스터가 만들어졌는지 유무를 이넘으로 체크하여 몬스터 무한 생성 방지
-	if (_wave == 1 && _create == WAIT)
-	{
-		//첫 몬스터 웨이브(볼 몬스터 3마리)
-		_create = END;
-	}
-
-	//몬스터를 삭제시켜주는 것
-	//E_DEAD상태가 되면 프레임이미지가 모두 순환하고 or 0.5초가 경과한 뒤 삭제됨
+	//E_DEAD상태가 되면 프레임이미지가 모두 순환하고 or 0.5초가 경과한 뒤 _isDead가 트루가 되며 벡터가 삭제됨
 	for (int i = 0; i < _vEnemy.size(); ++i)
 	{
 		if (_vEnemy[i]->getState() == E_DEAD && _vEnemy[i]->getIsDead())
@@ -88,9 +74,8 @@ void enemyManager::update()
 			break;
 		}
 	}
-
 }
 
 void enemyManager::render()
-{ // 적들은 제트오더에서 한번에 그릴거임
+{
 }
