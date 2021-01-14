@@ -25,7 +25,8 @@ void boss::bossState()
 	if (getDistance(_x, _y, _pX, _pY) >= 100) _atkArea = false;
 
 
-	if (_phaseCount > 300 && _state != E_GRAB && _state != E_DEAD) // 페이즈 바꿈
+	if (_phaseCount > 300 && _state != E_GRAB && _state != E_DEAD && _state != E_HIT
+		&& _state != E_FLYING) // 페이즈 바꿈
 	{
 		_phase = 1 + rand() % 2;
 		_destX = _pX;	_destY = _pY; // 목적지설정
@@ -220,22 +221,15 @@ void boss::bossState()
 
 		if (_left)
 		{
-			_x = _pX + 150;
-			_y = _pY + 10;
+			_x = _pX + 120;
+			_y = _pY;
 		}
 		else
 		{
-			_x = _pX - 150;
-			_y = _pY + 10;
+			_x = _pX - 120;
+			_y = _pY;
 		}
 
-		//그랩모션 유지시간 (90 = 1.5초)
-		//1.5초가 지나면 IDLE상태로 변경됨
-		if (_grabCount > 90)
-		{
-			setState(E_IDLE);
-			_grabCount = 0;
-		}
 		break;
 
 	case E_FLYING:
@@ -403,11 +397,13 @@ void boss::update()
 	}	
 	if (_phase == 1)
 	{ // 차탔음
+		_state = E_WALK;
 		_rc = RectMakeCenter(_x, _y, 200, 200);
 		_shadow = RectMakeCenter(_rc.left + 100, _rc.bottom + 50, 350, 70);
 	}
 	if (_phase == 2)
 	{
+		_state = E_SHAKE;
 		_rc = RectMakeCenter(_x, _y, 180, 120);
 		if (_jumping)
 		{

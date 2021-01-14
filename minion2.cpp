@@ -169,12 +169,6 @@ void minion2::enemyState()
 			_y = _pY + 10;
 		}
 
-		//그랩모션 유지시간 (90 = 1.5초)
-		if (_grabCount > 90)
-		{
-			setState(E_IDLE);
-			_grabCount = 0;
-		}
 		break;
 
 	case E_FLYING:

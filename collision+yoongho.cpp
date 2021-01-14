@@ -7,7 +7,7 @@ void collision::yoonghoInit()
 }
 
 void collision::yoonghoUpdate()
-{
+{ // 아무도 잡히지 않았으면 풀음
 	bool check = false;
 	for (int i = 0; i < _em->getVEnemy().size(); ++i)
 	{
@@ -19,6 +19,19 @@ void collision::yoonghoUpdate()
 		}
 	}
 	if (!check && _pl->getEnumState() == GRAB) _pl->setState(IDLE);
+	
+	// 잡거나 잡기스윙이 아니면 풀림
+	if (_pl->getEnumState() != GRAB && _pl->getEnumState() != GRABSWING)
+	{
+		for (int i = 0; i < _em->getVEnemy().size(); ++i)
+		{
+			if (_em->getVEnemy()[i]->getState() == E_GRAB)
+			{
+				_em->getVEnemy()[i]->setState(E_WALK);
+			}
+		}
+	}
+
 
 	// ############ 쓰레기통 제외한 오브젝트라면 진로방해하는 기능 ######################
 	//RECT temp1;	

@@ -200,13 +200,6 @@ void minion::enemyState()
 			_y = _pY + 10;
 		}
 
-		//그랩모션 유지시간 (90 = 1.5초)
-		//1.5초가 지나면 IDLE상태로 변경됨
-		if (_grabCount > 90)
-		{
-			setState(E_IDLE);
-			_grabCount = 0;
-		}
 		break;
 
 	case E_FLYING:
