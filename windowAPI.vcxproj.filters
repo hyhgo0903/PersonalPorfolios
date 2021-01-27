@@ -49,44 +49,38 @@
     <Filter Include="2DGameFramework\button">
       <UniqueIdentifier>{3a0acedc-e823-40ff-b206-87b61c533603}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\enemy">
-      <UniqueIdentifier>{84d083b6-60cb-4f35-98ba-fc1aeefc2765}</UniqueIdentifier>
+    <Filter Include="playGround\mainScene">
+      <UniqueIdentifier>{40333941-efca-4c60-89b5-debf9078b841}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\player">
-      <UniqueIdentifier>{f0e4e5e8-8d7f-4a9b-9d05-0d317681a0cd}</UniqueIdentifier>
+    <Filter Include="playGround\otherScenes">
+      <UniqueIdentifier>{3dc7f296-37f9-496c-85fe-52ba47593e53}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\player\STATE">
-      <UniqueIdentifier>{31895314-3907-4c1e-a676-b1b06cc1c8f9}</UniqueIdentifier>
+    <Filter Include="playGround\loadingScene">
+      <UniqueIdentifier>{83503810-96bd-4e37-bc9a-259ad8a7fc1d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\scene">
-      <UniqueIdentifier>{c5741256-846d-496a-bc4c-0754a628af6e}</UniqueIdentifier>
+    <Filter Include="playGround\mainScene\interaction">
+      <UniqueIdentifier>{cf1b5f6d-f1f3-462b-8cf0-d38dc5149509}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\enemy\subclass">
-      <UniqueIdentifier>{9b073b92-df2b-4849-a242-9b9c42a9c4a0}</UniqueIdentifier>
+    <Filter Include="playGround\mainScene\skillNEffect">
+      <UniqueIdentifier>{44dc9ced-7862-4dd7-8268-e1f7b5070ea9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\item">
-      <UniqueIdentifier>{b0c91aba-e3b6-4b38-aa07-35080043b329}</UniqueIdentifier>
+    <Filter Include="playGround\mainScene\skillNEffect\subclass">
+      <UniqueIdentifier>{85ebfc08-6ee8-4e91-9eb1-17cef1579c7e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\collision">
-      <UniqueIdentifier>{f3e3f066-0c9f-46c2-896b-6d13234a2bf0}</UniqueIdentifier>
+    <Filter Include="playGround\mainScene\unit">
+      <UniqueIdentifier>{7f37394a-c441-42e8-8b0e-e87c935da5f0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\stage">
-      <UniqueIdentifier>{409d3477-2438-4e1d-9c26-8ad04a4e5600}</UniqueIdentifier>
+    <Filter Include="playGround\mainScene\unit\subclass">
+      <UniqueIdentifier>{da87926c-f2de-41f0-b1c6-b3d4f713b531}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\item\subclass">
-      <UniqueIdentifier>{216eb060-ff3a-42e5-a528-ecd7b0346091}</UniqueIdentifier>
+    <Filter Include="playGround\mainScene\stage">
+      <UniqueIdentifier>{479a72d3-325d-4d96-89dd-e0ee07792465}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\stage\subclass">
-      <UniqueIdentifier>{8f7f957c-d6f7-4725-bb87-07928fe2720b}</UniqueIdentifier>
+    <Filter Include="playGround\mainScene\unit\unitInteraction">
+      <UniqueIdentifier>{4b244335-ec1b-442f-b33b-cddca6ed5cce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="playGround\scene\mainScene">
-      <UniqueIdentifier>{0380463a-eeff-47c4-aa80-20daee59a0f5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="playGround\player\STATE\combo">
-      <UniqueIdentifier>{870678d6-c5f1-47d0-98b4-d83f892a3b34}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="playGround\item\subclass\food">
-      <UniqueIdentifier>{742b31a4-24b0-4c4f-8c25-395632959e54}</UniqueIdentifier>
+    <Filter Include="playGround\mapTool">
+      <UniqueIdentifier>{367e18f3-291e-4162-a248-0206d3cd4b6e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -162,158 +156,68 @@
     <ClInclude Include="keyAniManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="enemy.h">
-      <Filter>playGround\enemy</Filter>
+    <ClInclude Include="iniDataManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="enemyManager.h">
-      <Filter>playGround\enemy</Filter>
+    <ClInclude Include="mapTool.h">
+      <Filter>playGround\mapTool</Filter>
     </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>playGround\player</Filter>
+    <ClInclude Include="mainScene.h">
+      <Filter>playGround\mainScene</Filter>
     </ClInclude>
-    <ClInclude Include="Idle.h">
-      <Filter>playGround\player\STATE</Filter>
+    <ClInclude Include="loadingScene.h">
+      <Filter>playGround\loadingScene</Filter>
     </ClInclude>
-    <ClInclude Include="jump.h">
-      <Filter>playGround\player\STATE</Filter>
+    <ClInclude Include="endingScene.h">
+      <Filter>playGround\otherScenes</Filter>
     </ClInclude>
-    <ClInclude Include="STATE.h">
-      <Filter>playGround\player\STATE</Filter>
+    <ClInclude Include="titleScene.h">
+      <Filter>playGround\otherScenes</Filter>
     </ClInclude>
-    <ClInclude Include="walk.h">
-      <Filter>playGround\player\STATE</Filter>
+    <ClInclude Include="unit.h">
+      <Filter>playGround\mainScene\unit</Filter>
     </ClInclude>
-    <ClInclude Include="run.h">
-      <Filter>playGround\player\STATE</Filter>
+    <ClInclude Include="civilian.h">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClInclude>
-    <ClInclude Include="boss.h">
-      <Filter>playGround\enemy\subclass</Filter>
+    <ClInclude Include="zergling.h">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClInclude>
-    <ClInclude Include="minion.h">
-      <Filter>playGround\enemy\subclass</Filter>
+    <ClInclude Include="interaction.h">
+      <Filter>playGround\mainScene\interaction</Filter>
+    </ClInclude>
+    <ClInclude Include="unitManager.h">
+      <Filter>playGround\mainScene\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="skillNEffectManager.h">
+      <Filter>playGround\mainScene\skillNEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="skillNEffect.h">
+      <Filter>playGround\mainScene\skillNEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="psionic.h">
+      <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="flague.h">
+      <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="stageManager.h">
+      <Filter>playGround\mainScene\stage</Filter>
+    </ClInclude>
+    <ClInclude Include="tile.h">
+      <Filter>playGround\mapTool</Filter>
     </ClInclude>
     <ClInclude Include="cameraManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="collision.h">
-      <Filter>playGround\collision</Filter>
+    <ClInclude Include="marine.h">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClInclude>
-    <ClInclude Include="titleScene.h">
-      <Filter>playGround\scene</Filter>
+    <ClInclude Include="templar.h">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClInclude>
-    <ClInclude Include="endingScene.h">
-      <Filter>playGround\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="iniDataManager.h">
-      <Filter>2DGameFramework\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="itemManager.h">
-      <Filter>playGround\item</Filter>
-    </ClInclude>
-    <ClInclude Include="stageManager.h">
-      <Filter>playGround\stage</Filter>
-    </ClInclude>
-    <ClInclude Include="object.h">
-      <Filter>playGround\stage</Filter>
-    </ClInclude>
-    <ClInclude Include="item.h">
-      <Filter>playGround\item</Filter>
-    </ClInclude>
-    <ClInclude Include="baseball.h">
-      <Filter>playGround\item\subclass</Filter>
-    </ClInclude>
-    <ClInclude Include="bat.h">
-      <Filter>playGround\item\subclass</Filter>
-    </ClInclude>
-    <ClInclude Include="chair.h">
-      <Filter>playGround\stage\subclass</Filter>
-    </ClInclude>
-    <ClInclude Include="trashCan.h">
-      <Filter>playGround\stage\subclass</Filter>
-    </ClInclude>
-    <ClInclude Include="mainScene.h">
-      <Filter>playGround\scene\mainScene</Filter>
-    </ClInclude>
-    <ClInclude Include="videoScene.h">
-      <Filter>playGround\scene</Filter>
-    </ClInclude>
-    <ClInclude Include="attack.h">
-      <Filter>playGround\player</Filter>
-    </ClInclude>
-    <ClInclude Include="bomb.h">
-      <Filter>playGround\item\subclass</Filter>
-    </ClInclude>
-    <ClInclude Include="minion2.h">
-      <Filter>playGround\enemy\subclass</Filter>
-    </ClInclude>
-    <ClInclude Include="minion3.h">
-      <Filter>playGround\enemy\subclass</Filter>
-    </ClInclude>
-    <ClInclude Include="combo11.h">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClInclude>
-    <ClInclude Include="combo1.h">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClInclude>
-    <ClInclude Include="combo12.h">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClInclude>
-    <ClInclude Include="combo13.h">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClInclude>
-    <ClInclude Include="combo21.h">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClInclude>
-    <ClInclude Include="combo22.h">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClInclude>
-    <ClInclude Include="combo23.h">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClInclude>
-    <ClInclude Include="jumpAttack.h">
-      <Filter>playGround\player\STATE</Filter>
-    </ClInclude>
-    <ClInclude Include="slide.h">
-      <Filter>playGround\player\STATE</Filter>
-    </ClInclude>
-    <ClInclude Include="tackle.h">
-      <Filter>playGround\player\STATE</Filter>
-    </ClInclude>
-    <ClInclude Include="cereal.h">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClInclude>
-    <ClInclude Include="fries.h">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClInclude>
-    <ClInclude Include="hamberger.h">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClInclude>
-    <ClInclude Include="juice.h">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClInclude>
-    <ClInclude Include="pizza.h">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClInclude>
-    <ClInclude Include="pudding.h">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClInclude>
-    <ClInclude Include="grab.h">
-      <Filter>playGround\player\STATE</Filter>
-    </ClInclude>
-    <ClInclude Include="grabswing.h">
-      <Filter>playGround\player\STATE</Filter>
-    </ClInclude>
-    <ClInclude Include="cidleAnimation.h">
-      <Filter>playGround\player\STATE</Filter>
-    </ClInclude>
-    <ClInclude Include="windmill.h">
-      <Filter>playGround\player\STATE</Filter>
-    </ClInclude>
-    <ClInclude Include="hit.h">
-      <Filter>playGround\player\STATE</Filter>
-    </ClInclude>
-    <ClInclude Include="dead.h">
-      <Filter>playGround\player\STATE</Filter>
+    <ClInclude Include="bishop.h">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -374,197 +278,140 @@
     <ClCompile Include="keyAniManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="enemy.cpp">
-      <Filter>playGround\enemy</Filter>
+    <ClCompile Include="iniDataManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="enemyManager.cpp">
-      <Filter>playGround\enemy</Filter>
+    <ClCompile Include="mapTool.cpp">
+      <Filter>playGround\mapTool</Filter>
     </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>playGround\player</Filter>
+    <ClCompile Include="mainScene.cpp">
+      <Filter>playGround\mainScene</Filter>
     </ClCompile>
-    <ClCompile Include="Idle.cpp">
-      <Filter>playGround\player\STATE</Filter>
+    <ClCompile Include="loadingScene.cpp">
+      <Filter>playGround\loadingScene</Filter>
     </ClCompile>
-    <ClCompile Include="jump.cpp">
-      <Filter>playGround\player\STATE</Filter>
+    <ClCompile Include="loadingScene+chanho.cpp">
+      <Filter>playGround\loadingScene</Filter>
     </ClCompile>
-    <ClCompile Include="STATE.cpp">
-      <Filter>playGround\player\STATE</Filter>
+    <ClCompile Include="loadingScene+younghan.cpp">
+      <Filter>playGround\loadingScene</Filter>
     </ClCompile>
-    <ClCompile Include="walk.cpp">
-      <Filter>playGround\player\STATE</Filter>
+    <ClCompile Include="loadingScene+deokho.cpp">
+      <Filter>playGround\loadingScene</Filter>
     </ClCompile>
-    <ClCompile Include="run.cpp">
-      <Filter>playGround\player\STATE</Filter>
+    <ClCompile Include="loadingScene+yoongho.cpp">
+      <Filter>playGround\loadingScene</Filter>
     </ClCompile>
-    <ClCompile Include="boss.cpp">
-      <Filter>playGround\enemy\subclass</Filter>
+    <ClCompile Include="loadingScene+hyunjeong.cpp">
+      <Filter>playGround\loadingScene</Filter>
     </ClCompile>
-    <ClCompile Include="minion.cpp">
-      <Filter>playGround\enemy\subclass</Filter>
+    <ClCompile Include="mainScene+uiRender.cpp">
+      <Filter>playGround\mainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="titleScene.cpp">
+      <Filter>playGround\otherScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="endingScene.cpp">
+      <Filter>playGround\otherScenes</Filter>
+    </ClCompile>
+    <ClCompile Include="unit.cpp">
+      <Filter>playGround\mainScene\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="civilian.cpp">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="zergling.cpp">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="interaction.cpp">
+      <Filter>playGround\mainScene\interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="interaction+chanho.cpp">
+      <Filter>playGround\mainScene\interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="interaction+deokho.cpp">
+      <Filter>playGround\mainScene\interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="interaction+hyunjeong.cpp">
+      <Filter>playGround\mainScene\interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="interaction+yoongho.cpp">
+      <Filter>playGround\mainScene\interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="interaction+younghan.cpp">
+      <Filter>playGround\mainScene\interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="unitManager.cpp">
+      <Filter>playGround\mainScene\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="skillNEffectManager.cpp">
+      <Filter>playGround\mainScene\skillNEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="skillNEffect.cpp">
+      <Filter>playGround\mainScene\skillNEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="psionic.cpp">
+      <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="flague.cpp">
+      <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="stageManager.cpp">
+      <Filter>playGround\mainScene\stage</Filter>
+    </ClCompile>
+    <ClCompile Include="um+yoongho.cpp">
+      <Filter>playGround\mainScene\unit\unitInteraction</Filter>
+    </ClCompile>
+    <ClCompile Include="um+younghan.cpp">
+      <Filter>playGround\mainScene\unit\unitInteraction</Filter>
+    </ClCompile>
+    <ClCompile Include="um+deokho.cpp">
+      <Filter>playGround\mainScene\unit\unitInteraction</Filter>
+    </ClCompile>
+    <ClCompile Include="um+hyunjeong.cpp">
+      <Filter>playGround\mainScene\unit\unitInteraction</Filter>
+    </ClCompile>
+    <ClCompile Include="um+chanho.cpp">
+      <Filter>playGround\mainScene\unit\unitInteraction</Filter>
+    </ClCompile>
+    <ClCompile Include="unit+commonInit.cpp">
+      <Filter>playGround\mainScene\unit\unitInteraction</Filter>
+    </ClCompile>
+    <ClCompile Include="unit+commonUpdate.cpp">
+      <Filter>playGround\mainScene\unit\unitInteraction</Filter>
     </ClCompile>
     <ClCompile Include="cameraManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="collision.cpp">
-      <Filter>playGround\collision</Filter>
+    <ClCompile Include="marine.cpp">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClCompile>
-    <ClCompile Include="titleScene.cpp">
-      <Filter>playGround\scene</Filter>
+    <ClCompile Include="templar.cpp">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClCompile>
-    <ClCompile Include="endingScene.cpp">
-      <Filter>playGround\scene</Filter>
+    <ClCompile Include="mapTool+image.cpp">
+      <Filter>playGround\mapTool</Filter>
     </ClCompile>
-    <ClCompile Include="iniDataManager.cpp">
-      <Filter>2DGameFramework\Manager</Filter>
+    <ClCompile Include="mapTool+saveLoad.cpp">
+      <Filter>playGround\mapTool</Filter>
     </ClCompile>
-    <ClCompile Include="collision+yoongho.cpp">
-      <Filter>playGround\collision</Filter>
+    <ClCompile Include="mapTool+button.cpp">
+      <Filter>playGround\mapTool</Filter>
     </ClCompile>
-    <ClCompile Include="collision+chanho.cpp">
-      <Filter>playGround\collision</Filter>
+    <ClCompile Include="mapTool+isoTile.cpp">
+      <Filter>playGround\mapTool</Filter>
     </ClCompile>
-    <ClCompile Include="itemManager.cpp">
-      <Filter>playGround\item</Filter>
+    <ClCompile Include="mapTool+camera.cpp">
+      <Filter>playGround\mapTool</Filter>
     </ClCompile>
-    <ClCompile Include="collision+younghan.cpp">
-      <Filter>playGround\collision</Filter>
+    <ClCompile Include="mapTool+object.cpp">
+      <Filter>playGround\mapTool</Filter>
     </ClCompile>
-    <ClCompile Include="collision+hyunjeong.cpp">
-      <Filter>playGround\collision</Filter>
+    <ClCompile Include="mainScene+yoongho.cpp">
+      <Filter>playGround\mainScene</Filter>
     </ClCompile>
-    <ClCompile Include="collision+deokho.cpp">
-      <Filter>playGround\collision</Filter>
-    </ClCompile>
-    <ClCompile Include="stageManager.cpp">
-      <Filter>playGround\stage</Filter>
-    </ClCompile>
-    <ClCompile Include="object.cpp">
-      <Filter>playGround\stage</Filter>
-    </ClCompile>
-    <ClCompile Include="item.cpp">
-      <Filter>playGround\item</Filter>
-    </ClCompile>
-    <ClCompile Include="baseball.cpp">
-      <Filter>playGround\item\subclass</Filter>
-    </ClCompile>
-    <ClCompile Include="bat.cpp">
-      <Filter>playGround\item\subclass</Filter>
-    </ClCompile>
-    <ClCompile Include="chair.cpp">
-      <Filter>playGround\stage\subclass</Filter>
-    </ClCompile>
-    <ClCompile Include="trashCan.cpp">
-      <Filter>playGround\stage\subclass</Filter>
-    </ClCompile>
-    <ClCompile Include="mainScene.cpp">
-      <Filter>playGround\scene\mainScene</Filter>
-    </ClCompile>
-    <ClCompile Include="mainScene+cameraControl.cpp">
-      <Filter>playGround\scene\mainScene</Filter>
-    </ClCompile>
-    <ClCompile Include="videoScene.cpp">
-      <Filter>playGround\scene</Filter>
-    </ClCompile>
-    <ClCompile Include="imageInit+chanho.cpp">
-      <Filter>playGround</Filter>
-    </ClCompile>
-    <ClCompile Include="imageInit+deokho.cpp">
-      <Filter>playGround</Filter>
-    </ClCompile>
-    <ClCompile Include="imageInit+hyunjeong.cpp">
-      <Filter>playGround</Filter>
-    </ClCompile>
-    <ClCompile Include="imageInit+younghan.cpp">
-      <Filter>playGround</Filter>
-    </ClCompile>
-    <ClCompile Include="imageInit+yoongho.cpp">
-      <Filter>playGround</Filter>
-    </ClCompile>
-    <ClCompile Include="mainScene+renderFunctions.cpp">
-      <Filter>playGround\scene\mainScene</Filter>
-    </ClCompile>
-    <ClCompile Include="attack.cpp">
-      <Filter>playGround\player</Filter>
-    </ClCompile>
-    <ClCompile Include="bomb.cpp">
-      <Filter>playGround\item\subclass</Filter>
-    </ClCompile>
-    <ClCompile Include="minion2.cpp">
-      <Filter>playGround\enemy\subclass</Filter>
-    </ClCompile>
-    <ClCompile Include="minion3.cpp">
-      <Filter>playGround\enemy\subclass</Filter>
-    </ClCompile>
-    <ClCompile Include="combo1.cpp">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClCompile>
-    <ClCompile Include="combo11.cpp">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClCompile>
-    <ClCompile Include="combo12.cpp">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClCompile>
-    <ClCompile Include="combo13.cpp">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClCompile>
-    <ClCompile Include="combo21.cpp">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClCompile>
-    <ClCompile Include="combo22.cpp">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClCompile>
-    <ClCompile Include="combo23.cpp">
-      <Filter>playGround\player\STATE\combo</Filter>
-    </ClCompile>
-    <ClCompile Include="jumpAttack.cpp">
-      <Filter>playGround\player\STATE</Filter>
-    </ClCompile>
-    <ClCompile Include="slide.cpp">
-      <Filter>playGround\player\STATE</Filter>
-    </ClCompile>
-    <ClCompile Include="tackle.cpp">
-      <Filter>playGround\player\STATE</Filter>
-    </ClCompile>
-    <ClCompile Include="cereal.cpp">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClCompile>
-    <ClCompile Include="fries.cpp">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClCompile>
-    <ClCompile Include="hamberger.cpp">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClCompile>
-    <ClCompile Include="juice.cpp">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClCompile>
-    <ClCompile Include="pizza.cpp">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClCompile>
-    <ClCompile Include="pudding.cpp">
-      <Filter>playGround\item\subclass\food</Filter>
-    </ClCompile>
-    <ClCompile Include="grab.cpp">
-      <Filter>playGround\player\STATE</Filter>
-    </ClCompile>
-    <ClCompile Include="grabswing.cpp">
-      <Filter>playGround\player\STATE</Filter>
-    </ClCompile>
-    <ClCompile Include="soundInit.cpp">
-      <Filter>playGround</Filter>
-    </ClCompile>
-    <ClCompile Include="cidleAnimation.cpp">
-      <Filter>playGround\player\STATE</Filter>
-    </ClCompile>
-    <ClCompile Include="windmill.cpp">
-      <Filter>playGround\player\STATE</Filter>
-    </ClCompile>
-    <ClCompile Include="hit.cpp">
-      <Filter>playGround\player\STATE</Filter>
-    </ClCompile>
-    <ClCompile Include="dead.cpp">
-      <Filter>playGround\player\STATE</Filter>
+    <ClCompile Include="bishop.cpp">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

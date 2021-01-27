@@ -37,7 +37,7 @@ image* imageManager::addImage(string strKey, int width, int height)
 
 		return nullptr;
 	}
-
+	
 	_mImageList.insert(make_pair(strKey, img));
 
 	return img;
@@ -60,6 +60,7 @@ image* imageManager::addImage(string strKey, const char * fileName, int width, i
 		return nullptr;
 	}
 
+	_loading = fileName;
 	_mImageList.insert(make_pair(strKey, img));
 
 	return img;
@@ -82,6 +83,7 @@ image * imageManager::addFrameImage(string strKey, const char * fileName, float 
 		return nullptr;
 	}
 
+	_loading = fileName;
 	_mImageList.insert(make_pair(strKey, img));
 
 	return img;
@@ -104,6 +106,7 @@ image * imageManager::addFrameImage(string strKey, const char * fileName, int wi
 		return nullptr;
 	}
 
+	_loading = fileName;
 	_mImageList.insert(make_pair(strKey, img));
 
 	return img;

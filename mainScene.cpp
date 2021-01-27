@@ -11,71 +11,83 @@ mainScene::~mainScene()
 
 HRESULT mainScene::init()
 {
-	_phase = NO_PHASE; _ending = false;
 	CAMERAMANAGER->setCameraX(0);
-	CAMERAMANAGER->setCameraY(MAPSIZEY - WINSIZEY);
-	_loopX = 0;	_loopY = 300; _loopCount = _timeCount = _score = _redCount = 0;
-	_timeLimit = 99; _life = 3;
-	_bossHpRatio = _playerHpRatio = 1.0f;
-	_mapChanging = false;
-	_pl = new player;		_pl->init();
-	_em = new enemyManager;	_em->init();
-	_sm = new stageManager; _sm->init();
-	_im = new itemManager;	_im->init();
-	_cl = new collision;	_cl->init();
+	CAMERAMANAGER->setCameraY(0);
+	_sm = new stageManager;
+	_sm->init();
+	_um = new unitManager;
+	_um->init();
+	_se = new skillNEffectManager;
+	_se->init();
+	_ia = new interaction;
+	_ia->init();
 
-	_cl->setPlMemoryAddressLink(_pl);
-	_cl->setEmMemoryAddressLink(_em);
-	_cl->setSmMemoryAddressLink(_sm);
-	_cl->setImMemoryAddressLink(_im);
-	_pl->setLinkEnemy(_em);
-	_em->setLinkPlayer(_pl);
+	_ia->umLink(_um);
+	_ia->smLink(_sm);
+	_ia->seLink(_se);
 
-	SOUNDMANAGER->play("¸ŞÀÎºê±İ");
-	_time = 0.0f;
+	_um->createZergling(ENEMY, 800, 400);
+	_um->createZergling(ENEMY, 900, 400);
+	_um->createZergling(ENEMY, 700, 400);
+	_um->createZergling(PLAYER, 210, 370);
+	_um->createZergling(PLAYER, 310, 530);
+	_um->createZergling(PLAYER, 270, 500);
+	_um->createMarine(ENEMY, 800, 400);
+	_um->createMarine(PLAYER, 110, 370);
+	_um->createCivilian(ENEMY, 700, 400);
+	_um->createCivilian(PLAYER, 110, 370);
+	_um->createTemplar(ENEMY, 800, 480);
+	_um->createTemplar(PLAYER, 200, 480);
+	_um->createBishop(ENEMY, 800, 400);
+	_um->createBishop(PLAYER, 200, 350);
+
+	_um->setLinkSm(_sm);								//ìœ ë‹› ë§¤ë‹ˆì €ì™€ ìŠ¤í…Œì´ì§€ ë§¤ë‹ˆì €ë¥¼ ë§í¬ë¡œ ì—°ê²°í•´ì¤Œ
+
+	for (int i = 0; i < TILEX*TILEY; ++i)
+	{
+		if (_sm->getTileObj()[i] == ZERGLING)
+		{
+			_um->createZergling(ENEMY, _sm->getIsoTile()[i].drawX + 10, _sm->getIsoTile()[i].drawY - 5);
+		}
+	}
+
+
 	return S_OK;
 }
 
 void mainScene::release()
 {
-	_cl->release();
-	_pl->release();
-	_em->release();
 	_sm->release();
-	_im->release();
+	_um->release();
+	_se->release();
+	_ia->release();
 }
 
 void mainScene::update()
 {
-
-	_pl->update();
-	_em->update();
 	_sm->update();
-	_im->update();
-	_cl->update();
-	cameraControl();
-	if (_timeCount < 120) ++_timeCount;
-	else
+	_um->update();
+	_se->update();
+	_ia->update();
+
+	if (KEYMANAGER->isStayKeyDown(VK_RBUTTON))
 	{
-		_timeCount = 0;
-		--_timeLimit;
+		for (int i = 0; i < _um->getVUnit().size(); ++i)
+		{
+			_um->getVUnit()[i]->setState(DEAD);
+		}
 	}
+
+	yoonghoUpdate();
 }
 
 void mainScene::render()
 {
-	//FINDIMG("¸Ê")->render(getMemDC()); //ÀÌ·¸°Ô¾²¸é ·º °³½ÉÇÔ(ÁÖ¼®Ç®°í ÇØº¸·Á¸é ÇØº¸°í)
-	if (CAMY < 700) FINDIMG("Ã¢¹®¹è°æ")->loopRender(getMemDC(), &_loopRc, _loopX, _loopY + rand() % 4);
-	FINDIMG("¸Ê")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); // Æ¯Á¤ºÎºĞ¸¸ °®°í¿À±â
-	if (KEYMANAGER->isToggleKey(VK_TAB))
-	{
-		TIMEMANAGER->render(getMemDC(), CAMX, CAMY);
-	}
-	_pl->render();
-	_cl->render(); // ´Ù¸¥ º¤ÅÍµéÀº z¿À´õ ÇÔ¼ö¿¡¼­ ±×¸®°Ô µÇ¾î ÀÖÀ½.
+	_sm->render();
+	_ia->render();
+	_um->render();
+	_se->render();
 
-	zOrderRender();
-	
-	if (CAMX > 2060 - WINSIZEX && CAMX < 2133)FINDIMG("±âµÕ")->render(getMemDC(), 2060, 1536);
-	uiRender(); // ±æ¾îÁú°Å°°¾Æ¼­ µû·Î •û´Ù¾¸
+	uiRender();
+
 }

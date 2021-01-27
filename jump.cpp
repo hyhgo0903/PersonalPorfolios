@@ -1,59 +1,50 @@
 #include "stdafx.h"
-#include "Jump.h"
-#include "player.h"
+#include "jump.h"
 
-#define GRAVITY 0.6f
-
-void Jump::EnterState()
+HRESULT jump::init()
 {
-	_pl->getFlyRc() = _pl->getGroundRc();
-	// 여기서 방향에따라 이미지넣고 인덱스 대충 초기화해줌
+	_isJumping = _jumpPower = _gravity = 0;
+
+	return S_OK;
 }
 
-void Jump::updateState()
-{
-	if (KEYMANAGER->isStayKeyDown(VK_LEFT))
-	{
-		if (!_pl->getLeft())
-		{
-			_pl->plusDirectionChanged();
-			_pl->getLeft() = true; // 방향바뀜 카운트 올려주고 왼쪽으로
-		}
-		_pl->getFlyX() -= 3;	_pl->getGroundX() -= 3;
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_RIGHT) && !KEYMANAGER->isStayKeyDown(VK_LEFT))
-	{
-		if (_pl->getLeft())
-		{
-			_pl->plusDirectionChanged();
-			_pl->getLeft() = false; // 방향바뀜 카운트 올려주고 오른쪽으로
-		}
-		_pl->getFlyX() += 3;	_pl->getGroundX() += 3;
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_UP))
-	{
-		_pl->getFlyY() -= 3;	_pl->getGroundY() -= 3;
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_DOWN) && !KEYMANAGER->isStayKeyDown(VK_UP))
-	{
-		_pl->getFlyY() += 3;	_pl->getGroundY() += 3;
-	}
-
-    _pl->getJumpPower() -= GRAVITY;
-    _pl->getFlyY() -= _pl->getJumpPower(); // 늘상 보던 중력과 점프파워
-	if (_pl->getFlyY() > _pl->getGroundY())
-	{ // 
-		_pl->getFlyY() = _pl->getGroundY();
-		_pl->setState(IDLE);
-	}
-
-    if (KEYMANAGER->isOnceKeyDown('Z'))
-    {
-        _pl->setState(JUMPATTACK);
-    }
-}
-
-void Jump::ExitState()
+void jump::release()
 {
 }
 
+void jump::update()
+{
+	if (!_isJumping) return;
+
+	*_y -= _jumpPower;
+	_jumpPower -= _gravity;
+
+	//현재 위치가 처음 뛴 위치보다 커진다면 (더 내려가려고 하면)
+	if (_startY <= *_y)
+	{
+		_isJumping = false;
+		*_y = _startY;
+	}
+
+}
+
+void jump::render()
+{
+}
+
+void jump::jumping(float* x, float* y, float power, float gravity)
+{
+	if (_isJumping) return;
+
+	_isJumping = true;
+
+	_x = x;
+	_y = y;
+
+	_startX = *x;
+	_startY = *y;
+
+	_gravity = gravity;
+	_jumpPower = power;
+
+}

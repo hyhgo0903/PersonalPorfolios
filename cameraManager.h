@@ -1,37 +1,6 @@
 #pragma once
 #include "singletonBase.h"
 
-/*
-##################사용법######################
-1. cameraManager.h, cameraManager,cpp를 불러온다
-
-2. playGround 렌더함수의
-_backBuffer->render(getHDC());를
-_backBuffer->render(getHDC(),0,0,CAMX,CAMY, WINSIZEX, WINSIZEY);
-
-3.stdafx.h에서
-#include "cameraManager.h"
-로 헤더에 넣고
-#define CAMERAMANAGER cameraManager::getSingleton()
-#define CAMX cameraManager::getSingleton()->getCameraX()
-#define CAMY cameraManager::getSingleton()->getCameraY()
-#define MAPSIZEX 1440
-#define MAPSIZEY 2096
-로 정의해서 사용. 맵사이즈는 최대 맵크기
-
-4. gameNode.cpp에서
-CAMERAMANAGER->init();
-CAMERAMANAGER->release();
-CAMERAMANAGER->releaseSingleton();
-적절한 위치에 추가
-
-5. gameNode.h에서
-static image* _backBuffer = IMAGEMANAGER->addImage("backBuffer", MAPSIZEX, MAPSIZEY);
-*/
-
-
-
-
 class cameraManager : public singletonBase<cameraManager>
 {
 private:

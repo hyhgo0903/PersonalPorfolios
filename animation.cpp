@@ -15,7 +15,6 @@ animation::animation()
 
 animation::~animation()
 {
-	난 b 난 공교롭게도 a와 같은곳에 작업을 하고있었다구!
 }
 
 HRESULT animation::init(int totalW, int totalH, int frameW, int frameH)

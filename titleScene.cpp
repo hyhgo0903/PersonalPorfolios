@@ -3,8 +3,6 @@
 
 titleScene::titleScene()
 {
-	_rc = RectMake(0, 0, WINSIZEX, WINSIZEY);
-	_cursor = 0;
 }
 
 titleScene::~titleScene()
@@ -15,12 +13,6 @@ HRESULT titleScene::init()
 {
 	CAMERAMANAGER->setCameraX(0);
 	CAMERAMANAGER->setCameraY(0);
-
-	_loopX = _loopY = _cursorCount = 0;
-	_cursorFrame = 1;
-
-	_selected = false;
-	SOUNDMANAGER->play("셀렉트씬");
 	return S_OK;
 }
 
@@ -30,45 +22,19 @@ void titleScene::release()
 
 void titleScene::update()
 {
-	++_cursorCount;
-	if (_cursorCount > 6)
+	if (KEYMANAGER->isStayKeyDown('A'))
 	{
-		_cursorCount = 0;
-		_cursorFrame *= -1;
+		SCENEMANAGER->changeScene("메인씬");
 	}
-	_loopX += 1;
-	_loopY += 1;
-	if (KEYMANAGER->isOnceKeyDown(VK_RIGHT) && _cursor < 3 && !_selected)
+	if (KEYMANAGER->isStayKeyDown('S'))
 	{
-		++_cursor;
-		SOUNDMANAGER->play("선택 이동");
-	}
-	if (KEYMANAGER->isOnceKeyDown(VK_LEFT) && _cursor > 0 && !_selected)
-	{
-		--_cursor;
-		SOUNDMANAGER->play("선택 이동");
-	}
-	if (KEYMANAGER->isOnceKeyDown(VK_RETURN))
-	{
-		if (!_selected && _cursor == 0)
-		{
-			_selected = true;
-			SOUNDMANAGER->play("선택 엔터");
-		}
-		else if (_selected)
-		{
-			SOUNDMANAGER->stop("셀렉트씬");
-			SCENEMANAGER->changeScene("메인씬");
-		}
+		SCENEMANAGER->changeScene("맵툴");
 	}
 }
 
 void titleScene::render()
 {
-	FINDIMG("셀렉배경")->loopRender(getMemDC(), &_rc, _loopX, _loopY);
-	if (_cursorFrame == 1 && !_selected) FINDIMG("셀렉커서")->frameRender(getMemDC(), 134 + 240 * _cursor, 165, 0, 0);
-	else if (_cursorFrame == -1 && !_selected) FINDIMG("셀렉커서")->frameRender(getMemDC(), 134 + 240 * _cursor, 165, 1, 0);
-	FINDIMG("셀렉캐릭")->render(getMemDC());
-	if (!_selected) FINDIMG("셀렉레드")->frameRender(getMemDC(), 34, 178, 0, 0);
-	else FINDIMG("셀렉레드")->frameRender(getMemDC(), 34, 178, 1, 0);
+	TextOut(getMemDC(), WINSIZEX / 3, WINSIZEY / 2,
+		"A스타트     S맵툴     D옵션(아직X)",
+		strlen("A스타트     S맵툴     D옵션(아직X)"));
 }

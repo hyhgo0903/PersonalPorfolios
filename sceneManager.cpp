@@ -49,7 +49,7 @@ gameNode* sceneManager::addScene(string sceneName, gameNode* scene)
 
 
 //나중에 눈여겨봤다가 자기입맛 또는 팀프로젝트의 구조대로 손봐야하면 손볼것
-HRESULT sceneManager::changeScene(string sceneName, int x)
+HRESULT sceneManager::changeScene(string sceneName)
 {
 	//이터레이터에 찾고자 하는 씬의 키 값을 넣는다
 	mapSceneIter find = _mSceneList.find(sceneName);

@@ -71,7 +71,7 @@ void soundManager::addSound(string keyName, string soundName, bool bgm, bool loo
 			_system->createSound(soundName.c_str(), FMOD_DEFAULT, NULL, &_sound[_mTotalSounds.size()]);
 		}
 	}
-
+	_latestAdded = soundName;
 	_mTotalSounds.insert(make_pair(keyName, &_sound[_mTotalSounds.size()]));
 }
 

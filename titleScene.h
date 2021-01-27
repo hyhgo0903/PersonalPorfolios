@@ -3,20 +3,14 @@
 class titleScene : public gameNode
 {
 private:
-	RECT _rc;
-	int _loopX; int _loopY;
-	int _cursor;
-	int _cursorCount;
-	int _cursorFrame;
-	bool _selected;
 
 public:
 	titleScene();
 	~titleScene();
 
-	virtual HRESULT init();
-	virtual void release();
-	virtual void update();
-	virtual void render();
+	virtual HRESULT init();	//초기화 전용 함수
+	virtual void release();	//메모리 해제 함수
+	virtual void update();	//연산 전용
+	virtual void render();	//그리기 전용
 };
 

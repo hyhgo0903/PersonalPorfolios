@@ -467,92 +467,6 @@ void image::alphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int
 {
 	//여기는 여러분이 한 번 채워보세요~ *^^*
 	//한 번 공부해보라고~
-
-	_blendFunc.SourceConstantAlpha = alpha;
-
-	if (_trans)
-	{
-		BitBlt(_blendImage->hMemDC, 0, 0,
-			sourWidth, sourHeight,
-			hdc,
-			destX, destY, SRCCOPY);
-
-		GdiTransparentBlt(_blendImage->hMemDC, 0, 0,
-			sourWidth, sourHeight,
-			_imageInfo->hMemDC,
-			sourX, sourY,
-			sourWidth, sourHeight, _transColor); // 위 둘에서 sour할 만큼만 그려줌
-
-		AlphaBlend(hdc, destX, destY, sourWidth,
-			sourHeight, _blendImage->hMemDC,
-			0, 0, // 이미 hMemDC의 0,0에 그렸으므로 여기는 그냥 0,0 으로 갖고오면 되는 거였음
-			sourWidth, sourHeight, _blendFunc);
-	}
-	else
-	{
-		AlphaBlend(hdc, destX, destY, sourWidth,
-			sourHeight, _blendImage->hMemDC,
-			0, 0,
-			sourWidth, sourHeight, _blendFunc);
-	}
-}
-
-
-// 활용예: enemy.cpp랑 bullets.cpp의 렉트 미사일 렌더
-void image::alphaFrameRender(HDC hdc, int destX, int destY, BYTE alpha)
-{
-	_blendFunc.SourceConstantAlpha = alpha;
-
-	if (_trans)
-	{
-		BitBlt(_blendImage->hMemDC, 0, 0, _imageInfo->frameWidth, _imageInfo->frameHeight,
-			hdc, destX, destY, SRCCOPY);
-
-		GdiTransparentBlt(_blendImage->hMemDC, 0, 0, _imageInfo->frameWidth,
-			_imageInfo->frameHeight, _imageInfo->hMemDC, _imageInfo->currentFrameX * _imageInfo->frameWidth,
-			_imageInfo->currentFrameY * _imageInfo->frameHeight,
-			_imageInfo->frameWidth,
-			_imageInfo->frameHeight, _transColor);
-
-		AlphaBlend(hdc, destX, destY, _imageInfo->frameWidth,
-			_imageInfo->frameHeight, _blendImage->hMemDC, 0, 0,
-			_imageInfo->frameWidth, _imageInfo->frameHeight, _blendFunc);
-	}
-	else
-	{
-		AlphaBlend(hdc, destX, destY, _imageInfo->frameWidth,
-			_imageInfo->frameHeight, _blendImage->hMemDC, 0, 0,
-			_imageInfo->frameWidth, _imageInfo->frameHeight, _blendFunc);
-	}
-}
-
-void image::alphaFrameRender(HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY, BYTE alpha)
-{
-	_imageInfo->currentFrameX = currentFrameX;
-	_imageInfo->currentFrameY = currentFrameY;
-	_blendFunc.SourceConstantAlpha = alpha;
-
-	if (_trans)
-	{
-		BitBlt(_blendImage->hMemDC, 0, 0, _imageInfo->frameWidth, _imageInfo->frameHeight,
-			hdc, destX, destY, SRCCOPY);
-
-		GdiTransparentBlt(_blendImage->hMemDC, 0, 0, _imageInfo->frameWidth,
-			_imageInfo->frameHeight, _imageInfo->hMemDC, _imageInfo->currentFrameX * _imageInfo->frameWidth,
-			_imageInfo->currentFrameY * _imageInfo->frameHeight,
-			_imageInfo->frameWidth,
-			_imageInfo->frameHeight, _transColor);
-
-		AlphaBlend(hdc, destX, destY, _imageInfo->frameWidth,
-			_imageInfo->frameHeight, _blendImage->hMemDC, 0, 0,
-			_imageInfo->frameWidth, _imageInfo->frameHeight, _blendFunc);
-	}
-	else
-	{
-		AlphaBlend(hdc, destX, destY, _imageInfo->frameWidth,
-			_imageInfo->frameHeight, _blendImage->hMemDC, 0, 0,
-			_imageInfo->frameWidth, _imageInfo->frameHeight, _blendFunc);
-	}
 }
 
 //애니메이션 렌더용 함수
@@ -624,4 +538,126 @@ void image::loopRender(HDC hdc, const LPRECT drawArea, int offSetX, int offSetY)
 	}
 
 
+}
+
+void image::alphaFrameRender(HDC hdc, int destX, int destY, BYTE alpha)
+{
+	_blendFunc.SourceConstantAlpha = alpha;
+
+	if (_trans)
+	{
+		BitBlt(_blendImage->hMemDC, 0, 0, _imageInfo->frameWidth, _imageInfo->frameHeight,
+			hdc, destX, destY, SRCCOPY);
+
+		GdiTransparentBlt(_blendImage->hMemDC, 0, 0, _imageInfo->frameWidth,
+			_imageInfo->frameHeight, _imageInfo->hMemDC, _imageInfo->currentFrameX * _imageInfo->frameWidth,
+			_imageInfo->currentFrameY * _imageInfo->frameHeight,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight, _transColor);
+
+		AlphaBlend(hdc, destX, destY, _imageInfo->frameWidth,
+			_imageInfo->frameHeight, _blendImage->hMemDC, 0, 0,
+			_imageInfo->frameWidth, _imageInfo->frameHeight, _blendFunc);
+	}
+	else
+	{
+		AlphaBlend(hdc, destX, destY, _imageInfo->frameWidth,
+			_imageInfo->frameHeight, _blendImage->hMemDC, 0, 0,
+			_imageInfo->frameWidth, _imageInfo->frameHeight, _blendFunc);
+	}
+}
+
+void image::alphaFrameRender(HDC hdc, int destX, int destY, int currentFrameX, int currentFrameY, BYTE alpha)
+{
+	_imageInfo->currentFrameX = currentFrameX;
+	_imageInfo->currentFrameY = currentFrameY;
+	_blendFunc.SourceConstantAlpha = alpha;
+
+	if (_trans)
+	{
+		BitBlt(_blendImage->hMemDC, 0, 0, _imageInfo->frameWidth, _imageInfo->frameHeight,
+			hdc, destX, destY, SRCCOPY);
+
+		GdiTransparentBlt(_blendImage->hMemDC, 0, 0, _imageInfo->frameWidth,
+			_imageInfo->frameHeight, _imageInfo->hMemDC, _imageInfo->currentFrameX * _imageInfo->frameWidth,
+			_imageInfo->currentFrameY * _imageInfo->frameHeight,
+			_imageInfo->frameWidth,
+			_imageInfo->frameHeight, _transColor);
+
+		AlphaBlend(hdc, destX, destY, _imageInfo->frameWidth,
+			_imageInfo->frameHeight, _blendImage->hMemDC, 0, 0,
+			_imageInfo->frameWidth, _imageInfo->frameHeight, _blendFunc);
+	}
+	else
+	{
+		AlphaBlend(hdc, destX, destY, _imageInfo->frameWidth,
+			_imageInfo->frameHeight, _blendImage->hMemDC, 0, 0,
+			_imageInfo->frameWidth, _imageInfo->frameHeight, _blendFunc);
+	}
+}
+
+
+void image::resizedRender(HDC hdc, int destX, int destY, int sourWidth, int sourHeight)
+{
+	if (_trans)
+	{
+		TransparentBlt( // 찾아보니 요건 투명이랑 크기조정을 같이 해준다고 함
+			hdc,					// 출력할 위치의 핸들
+			destX,					// 출력할 위치XY
+			destY,
+			sourWidth,				// 출력할 너비, 높이
+			sourHeight,
+			_imageInfo->hMemDC,		// 이미지의 핸들
+			0, 0,					//복사해올 좌표 X, Y
+			_imageInfo->width,		//복사할 가로크기
+			_imageInfo->height,		//복사할 세로크기
+			_transColor);
+	}
+	else
+	{
+		StretchBlt( // 요건 크기조정만 가능
+			hdc,					// 출력할 위치의 핸들
+			destX,					// 출력할 위치XY
+			destY,
+			sourWidth,				// 출력할 너비, 높이
+			sourHeight,
+			_imageInfo->hMemDC,		// 이미지의 핸들
+			0, 0,					//복사해올 좌표 X, Y
+			_imageInfo->width,		//복사할 가로크기
+			_imageInfo->height,		//복사할 세로크기
+			SRCCOPY);
+	}
+}
+
+void image::resizedRender(HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight
+	, int originalWidth, int originalHeight)
+{
+	if (_trans)
+	{
+		TransparentBlt( // 찾아보니 요건 투명이랑 크기조정을 같이 해준다고 함
+			hdc,					// 출력할 위치의 핸들
+			destX,					// 출력할 위치XY
+			destY,
+			sourWidth,				// 출력할 너비, 높이
+			sourHeight,
+			_imageInfo->hMemDC,		// 이미지의 핸들
+			sourX, sourY,					//복사해올 좌표 X, Y
+			originalWidth,				//복사할 가로크기
+			originalHeight,				//복사할 세로크기
+			_transColor);
+	}
+	else
+	{
+		StretchBlt( // 요건 크기조정만 가능
+			hdc,					// 출력할 위치의 핸들
+			destX,					// 출력할 위치XY
+			destY,
+			sourWidth,				// 출력할 너비, 높이
+			sourHeight,
+			_imageInfo->hMemDC,		// 이미지의 핸들
+			sourX, sourY,					//복사해올 좌표 X, Y
+			originalWidth,		//복사할 가로크기
+			originalHeight,		//복사할 세로크기
+			SRCCOPY);
+	}
 }

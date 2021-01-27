@@ -55,15 +55,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCla
 	{
 		return NULL;
 	}
-
-	/*
-	while (GetMessage(&message, 0, 0, 0))
-	{
-		TranslateMessage(&message);
-		DispatchMessage(&message);
-	}
-	*/
-
+	
 	while (true)
 	{
 		if (PeekMessage(&message, NULL, 0, 0, PM_REMOVE))

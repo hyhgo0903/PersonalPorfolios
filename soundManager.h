@@ -7,7 +7,7 @@
 
 using namespace FMOD;
 
-#define SOUNDBUFFER 50
+#define SOUNDBUFFER 10
 #define EXTRACHANNELBUFFER 5
 
 #define TOTALSOUNDBUFFER SOUNDBUFFER + EXTRACHANNELBUFFER
@@ -29,6 +29,8 @@ private:
 
 	arrSounds		_mTotalSounds;
 
+	string _latestAdded;
+
 public:
 	soundManager();
 	~soundManager();
@@ -49,5 +51,7 @@ public:
 	//È£¿Á½ÃÀÌ ¸ô¶ó¼­ ¸¸µé¾îµÒ
 	bool isPlaySound(string keyName);
 	bool isPauseSound(string keyName);
+
+	string getLatestAdded() { return _latestAdded; }
 };
 

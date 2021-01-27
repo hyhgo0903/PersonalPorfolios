@@ -11,6 +11,7 @@ private:
 
 private:
 	mapImageList _mImageList;
+	string _loading; // 뭘 불러오는 중인지
 
 public:
 	imageManager();
@@ -41,5 +42,6 @@ public:
 	void render(string strKey, HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight);
 
 	void loopRender(string strKey, HDC hdc, const LPRECT drawArea, int offSetX, int offSetY);
+	string getLoading() { return _loading; }
 };
 

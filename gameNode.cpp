@@ -36,8 +36,8 @@ HRESULT gameNode::init(bool managerInit)
 		SOUNDMANAGER->init();
 		KEYANIMANAGER->init();
 		TXTDATA->init();
-		CAMERAMANAGER->init();
 		INIDATA->init();
+		CAMERAMANAGER->init();
 	}
 
 	return S_OK;
@@ -64,9 +64,9 @@ void gameNode::release()
 		KEYANIMANAGER->releaseSingleton();
 		TXTDATA->release();
 		TXTDATA->releaseSingleton();
+		INIDATA->releaseSingleton();
 		CAMERAMANAGER->release();
 		CAMERAMANAGER->releaseSingleton();
-		INIDATA->releaseSingleton();
 	}
 	ReleaseDC(_hWnd, _hdc);
 }
@@ -82,6 +82,7 @@ void gameNode::render()
 
 }
 
+
 LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
 	
@@ -90,14 +91,10 @@ LRESULT gameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 
 	switch (iMessage)
 	{
-		
 		case WM_MOUSEMOVE:
-		_ptMouse.x = static_cast<float>(LOWORD(lParam));
-		_ptMouse.y = static_cast<float>(HIWORD(lParam));
-
+			_ptMouse.x = static_cast<float>(LOWORD(lParam));
+			_ptMouse.y = static_cast<float>(HIWORD(lParam));	
 		break;
-
-
 		case WM_KEYDOWN:
 			switch (wParam)
 			{

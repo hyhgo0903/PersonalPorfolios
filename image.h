@@ -96,15 +96,19 @@ public:
 	void alphaRender(HDC hdc, BYTE alpha);
 	void alphaRender(HDC hdc, int destX, int destY, BYTE alpha);
 	void alphaRender(HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight, BYTE alpha);
-	void alphaFrameRender(HDC hdc, int destX, int destY, BYTE alpha);
-	void alphaFrameRender(HDC hdc, int destX, int destY,
-		int currentFrameX, int currentFrameY, BYTE alpha);
 
 	void aniRender(HDC hdc, int destX, int destY, animation* ani);
 
 	void loopRender(HDC hdc, const LPRECT drawArea, int offSetX, int offSetY);
+	void alphaFrameRender(HDC hdc, int destX, int destY, BYTE alpha);
+	void alphaFrameRender(HDC hdc, int destX, int destY,
+		int currentFrameX, int currentFrameY, BYTE alpha);
 
+	void resizedRender(HDC hdc, int destX, int destY, int sourWidth, int sourHeight);
+	void resizedRender(HDC hdc, int destX, int destY, int sourX, int sourY, int sourWidth, int sourHeight
+		, int originalWidth, int originalHeight);
 	inline HDC getMemDC() { return _imageInfo->hMemDC; }
+
 
 	//===========================================
 	// ## 이미지 관련 접근자, 설정자 ##

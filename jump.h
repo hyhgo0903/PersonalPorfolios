@@ -1,13 +1,32 @@
 #pragma once
-#include "STATE.h"
-class player;
-class Jump :
-    public STATE
+#include "gameNode.h"
+
+class jump : public gameNode
 {
 private:
+	float _jumpPower;
+	float _gravity;
+
+	float* _x;
+	float* _y;
+
+	float _startX;
+	float _startY;
+
+	bool _isJumping;
+
 public:
-	void EnterState(); // 들어갔을떄 이닛의역할
-	void updateState(); // 계속 업데이트
-	void ExitState(); // 상태해제
+	jump() {};
+	~jump() {};
+
+	HRESULT init();
+	void release();
+	void update();
+	void render();
+
+	void jumping(float* x, float* y, float power, float gravity);
+
+	bool getIsJumping() { return _isJumping; }
+
 };
 

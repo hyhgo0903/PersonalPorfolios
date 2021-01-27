@@ -4,6 +4,7 @@
 //백버퍼라는 빈 비트맵 이미지를 하나 생성해둔다
 static image* _backBuffer = IMAGEMANAGER->addImage("backBuffer", MAPSIZEX, MAPSIZEY);
 
+
 class gameNode
 {
 private:
@@ -13,6 +14,7 @@ private:
 public:
 	gameNode();
 	virtual ~gameNode();
+
 
 	virtual HRESULT init();			//초기화 전용 함수
 	virtual HRESULT init(bool managerInit);

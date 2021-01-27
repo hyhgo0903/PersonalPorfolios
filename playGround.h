@@ -1,14 +1,18 @@
 #pragma once
+#include "gameNode.h"
+#include "mapTool.h"
+#include "loadingScene.h"
 #include "mainScene.h"
-#include "endingScene.h"
 #include "titleScene.h"
-#include "videoScene.h"
+#include "endingScene.h"
+
 
 class playGround : public gameNode
 {
 private:
-	bool _videoPlaying;
-
+	float _x; int _y;
+	image* _backGround;
+	
 public:
 	playGround();
 	~playGround();
@@ -17,12 +21,6 @@ public:
 	virtual void release();	//메모리 해제 함수
 	virtual void update();	//연산 전용
 	virtual void render();	//그리기 전용
-
-	void imageInitChanho();
-	void imageInitDeokho();
-	void imageInitHyunjeong();
-	void imageInitYoongho();
-	void imageInitYounghan();
-	void soundInit();
+	
 };
 

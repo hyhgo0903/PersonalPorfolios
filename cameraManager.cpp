@@ -81,9 +81,29 @@ void cameraManager::focusOnRect(RECT & rc, int x, int y)
 			cameraLocation.x = (rc.left + rc.right) / 2 - WINSIZEX + WINSIZEX / x;
 		}
 	}
+	// rc의 y중점이 카메라+윈사이즈/y보다 작은경우 위쪽으로 카메라 이동
+	if ((rc.top + rc.bottom) / 2 <= cameraLocation.y + WINSIZEY / y)
+	{
+		cameraLocation.y -= 10;
+		if (cameraLocation.y < (rc.top + rc.bottom) / 2 - WINSIZEY / y)
+		{
+			cameraLocation.y = (rc.top + rc.bottom) / 2 - WINSIZEY / y;
+		}
+	}
+	// rc의 y중점이 카메라+(y-1)*윈사이즈/y보다 큰경우 아랫쪽으로 카메라 이동
+	if ((rc.top + rc.bottom) / 2 >= cameraLocation.y + WINSIZEY - WINSIZEY / y)
+	{
+		cameraLocation.y += 10;
+		if (cameraLocation.y > (rc.top + rc.bottom) / 2 - WINSIZEY + WINSIZEY / y)
+		{
+			cameraLocation.y = (rc.top + rc.bottom) / 2 - WINSIZEY + WINSIZEY / y;
+		}
+	}
 
 	if (cameraLocation.x < rangeX1) cameraLocation.x = rangeX1;
-	if (cameraLocation.x > rangeX2 - WINSIZEX) cameraLocation.x = rangeX2 - WINSIZEX; // 예외처리
+	if (cameraLocation.y < rangeY1) cameraLocation.y = rangeY1;
+	if (cameraLocation.x > rangeX2 - WINSIZEX) cameraLocation.x = rangeX2 - WINSIZEX;
+	if (cameraLocation.y > rangeY2 - WINSIZEY) cameraLocation.y = rangeY2 - WINSIZEY; // 예외처리
 }
 
 
