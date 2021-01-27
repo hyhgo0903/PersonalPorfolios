@@ -11,6 +11,7 @@ animation::animation()
 	_nowPlayIndex(0),
 	_play(FALSE)
 {
+	난 코드를 열심히 저ㅏㄱ성했습니다.
 }
 
 animation::~animation()
