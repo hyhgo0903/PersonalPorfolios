@@ -84,6 +84,14 @@ void unitManager::deadErase()
 	}
 }
 
+void unitManager::progressBarRender()
+{
+	for (int i = 0; i < _vUnit.size(); ++i)
+	{
+		if (_vUnit[i]->getState() != DEAD)_vUnit[i]->progressBarRender();
+	}
+}
+
 void unitManager::createZergling(BELONG belong, float x, float y)
 {
 	zergling* zergl = new zergling;

@@ -36,6 +36,7 @@ public:
 
 	// 피0이하면 죽음으로만들고 죽었는데 일정프레임이상이면 지움
 	void deadErase();
+	void progressBarRender();
 
 	void createZergling(BELONG belong, float x, float y);
 	void createCivilian(BELONG belong, float x, float y);

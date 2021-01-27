@@ -109,6 +109,7 @@ public:
 
 	// 공통렌더도 하고 싶었지만 이미지마다 위치보정해줘야해서
 
+	void progressBarRender();
 
 	virtual void setState(STATE state) = 0;
 	// 이건 유닛들마다 이미지가 다르므로 각각 만들어 씁시다.

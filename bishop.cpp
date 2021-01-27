@@ -33,7 +33,7 @@ void bishop::release()
 void bishop::update()
 {
 	commonUpdate();
-	_rangeRc = RectMakeCenter(_x, _y, _width + 100, _height + 100);
+	_rangeRc = RectMakeCenter(_x, _y, _width + 250, _height + 250);
 
 }
 

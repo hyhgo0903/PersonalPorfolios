@@ -26,6 +26,23 @@ void unit::render()
 {
 }
 
+void unit::progressBarRender()
+{
+	FINDIMG("체력바뒤")->resizedRender(getMemDC(), _rc.left - 5, _rc.top - 10, _width + 10, 6);
+	if (_HP / _maxHP > 0.5f)
+	{
+		FINDIMG("초록피")->resizedRender(getMemDC(), _rc.left - 5, _rc.top - 10, (_width + 10) *_HP / _maxHP, 6);
+	}
+	else if (_HP / _maxHP > 0.3f)
+	{
+		FINDIMG("노랑피")->resizedRender(getMemDC(), _rc.left - 5, _rc.top - 10, (_width + 10) *_HP / _maxHP, 6);
+	}
+	else
+	{
+		FINDIMG("빨간피")->resizedRender(getMemDC(), _rc.left - 5, _rc.top - 10, (_width + 10) *_HP / _maxHP, 6);
+	}
+}
+
 void unit::RMC()
 {
 	_rc = RectMakeCenter(_x, _y, _width, _height);

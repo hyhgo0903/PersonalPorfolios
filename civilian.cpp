@@ -15,7 +15,7 @@ HRESULT civilian::init(BELONG belong, float x, float y)
 	_ID = 3;
 	_x = x; _y = y;
 	_speed = 2.0f;
-	_maxDelay = 300; // 대충 5초에 한번 스킬시전
+	_maxDelay = 180; // 대충 3초에 한번 스킬시전
 	_damage = 0;
 	_maxHP = 40;
 	_attackIndex = 1; // 1번 인덱스가 될때 스킬판정
@@ -33,7 +33,7 @@ void civilian::release()
 void civilian::update()
 {
 	commonUpdate();
-	_rangeRc = RectMakeCenter(_x, _y, _width + 100, _height + 100);
+	_rangeRc = RectMakeCenter(_x, _y, _width + 6, _height + 6);
 
 }
 

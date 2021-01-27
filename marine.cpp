@@ -13,7 +13,6 @@ HRESULT marine::init(BELONG belong, float x, float y)
 	_attackIndex = 2; // 2번 인덱스가 될때 공격판정
 	_width = FINDIMG("마린기본파랑")->getFrameWidth();
 	_height = FINDIMG("마린기본파랑")->getFrameHeight(); // 일단은 대충 설정해놓은거임(이미지크기)
-	_rangeRc = RectMakeCenter(_x, _y, _width + 100, _height + 100);
 
 	commonInit(); // 앞에변수 참조해서 만드는 변수도 있으므로 뒤에다 만들어야함
 	return S_OK;
@@ -27,7 +26,7 @@ void marine::release()
 void marine::update()
 {
 	commonUpdate();
-	_rangeRc = RectMakeCenter(_x, _y, _width + 100, _height + 100);
+	_rangeRc = RectMakeCenter(_x, _y, _width + 200, _height + 200);
 }
 
 void marine::render()

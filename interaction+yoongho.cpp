@@ -38,15 +38,7 @@ void interaction::yoonghoUpdate()
 		{ // 타겟이 있는 상태에서 공격준비되면
 			if (_um->getVUnit()[i]->getID() == 3)
 			{ // 시민이면 어그로끔(타겟을 내쪽으로)
-				for (int j = 0; j < _um->getVUnit().size(); ++j)
-				{
-					if (IntersectRect(&temp, &_um->getVUnit()[i]->getFocusRect(), &_um->getVUnit()[j]->getRect())
-						&& _um->getVUnit()[j]->getState() != DEAD 
-						&& _um->getVUnit()[i]->getBelong() != _um->getVUnit()[j]->getBelong())
-					{
-						_um->getVUnit()[j]->getTarget() = i;
-					}
-				}
+				_um->getVUnit()[tg]->getTarget() = i;
 			}
 			else if (_um->getVUnit()[i]->getID() == 4)
 			{ // 템플러면 스톰을 생성함

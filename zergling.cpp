@@ -35,7 +35,7 @@ void zergling::release()
 void zergling::update()
 {
 	commonUpdate();
-	_rangeRc = RectMakeCenter(_x, _y, _width + 4, _height + 4);
+	_rangeRc = RectMakeCenter(_x, _y, _width + 6, _height + 6);
 	// 사거리 맞춰서 여기서 설정
 
 

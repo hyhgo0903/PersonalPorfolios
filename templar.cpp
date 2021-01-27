@@ -37,7 +37,7 @@ void templar::release()
 void templar::update()
 {
 	commonUpdate();
-	_rangeRc = RectMakeCenter(_x, _y, _width + 200, _height + 200);
+	_rangeRc = RectMakeCenter(_x, _y, _width + 250, _height + 250);
 
 	// 이하는 잔상그리기용
 	if (_state == WALK && (_x < _afterImage.left+5 ||
