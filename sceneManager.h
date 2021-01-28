@@ -28,6 +28,8 @@ public:
 	//씬 변경 함수
 	HRESULT changeScene(string sceneName);
 
+	bool getMinimapScene(); // 미니맵을 그려야하는 씬인지?
+
 	sceneManager() {};
 	~sceneManager() {};
 };

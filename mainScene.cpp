@@ -77,18 +77,15 @@ void mainScene::update()
 			_um->getVUnit()[i]->setState(DEAD);
 		}
 	}
-
-	yoonghoUpdate();
 }
 
 void mainScene::render()
 {
+
 	_sm->render();
 	_ia->render();
 	_um->render();
 	_se->render();
 
 	_um->progressBarRender();
-	uiRender();
-
 }

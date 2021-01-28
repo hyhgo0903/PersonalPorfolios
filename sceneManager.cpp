@@ -75,3 +75,24 @@ HRESULT sceneManager::changeScene(string sceneName)
 
 	return E_FAIL;
 }
+
+bool sceneManager::getMinimapScene()
+{ // 없으면 false반환
+	if (!_currentScene) return false;
+
+	//이터레이터에 찾고자 하는 씬의 키 값을 넣는다
+	mapSceneIter miSceneList = _mSceneList.begin();
+
+	for (; miSceneList != _mSceneList.end();)
+	{
+		if (miSceneList->second == _currentScene)
+		{
+			if (miSceneList->first == "메인씬" ||
+				miSceneList->first == "맵툴") return true;
+			else return false;
+		}
+		else ++miSceneList;
+	}
+
+	return false;
+}

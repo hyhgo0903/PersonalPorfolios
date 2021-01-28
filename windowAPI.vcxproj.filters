@@ -305,9 +305,6 @@
     <ClCompile Include="loadingScene+hyunjeong.cpp">
       <Filter>playGround\loadingScene</Filter>
     </ClCompile>
-    <ClCompile Include="mainScene+uiRender.cpp">
-      <Filter>playGround\mainScene</Filter>
-    </ClCompile>
     <ClCompile Include="titleScene.cpp">
       <Filter>playGround\otherScenes</Filter>
     </ClCompile>
@@ -407,11 +404,11 @@
     <ClCompile Include="mapTool+object.cpp">
       <Filter>playGround\mapTool</Filter>
     </ClCompile>
-    <ClCompile Include="mainScene+yoongho.cpp">
-      <Filter>playGround\mainScene</Filter>
-    </ClCompile>
     <ClCompile Include="bishop.cpp">
       <Filter>playGround\mainScene\unit\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="playGround+minimap.cpp">
+      <Filter>playGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

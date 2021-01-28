@@ -221,8 +221,6 @@
     <ClCompile Include="loadingScene+yoongho.cpp" />
     <ClCompile Include="loadingScene+younghan.cpp" />
     <ClCompile Include="loadingScene.cpp" />
-    <ClCompile Include="mainScene+uiRender.cpp" />
-    <ClCompile Include="mainScene+yoongho.cpp" />
     <ClCompile Include="mainScene.cpp" />
     <ClCompile Include="mapTool+button.cpp" />
     <ClCompile Include="mapTool+camera.cpp" />
@@ -232,6 +230,7 @@
     <ClCompile Include="mapTool+saveLoad.cpp" />
     <ClCompile Include="mapTool.cpp" />
     <ClCompile Include="marine.cpp" />
+    <ClCompile Include="playGround+minimap.cpp" />
     <ClCompile Include="playGround.cpp" />
     <ClCompile Include="progressBar.cpp" />
     <ClCompile Include="psionic.cpp" />

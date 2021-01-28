@@ -17,7 +17,7 @@ void interaction::yoonghoUpdate()
 			RECT temp; // 피아식별을 하는 사이오닉스톰으로.. 이넘문은 다르지만 0,1로 비교하므로 비교가능하다
 			if (IntersectRect(&temp, &_um->getVUnit()[j]->getRect(), &_se->getVSne()[i]->getRect()))
 			{
-				_um->getVUnit()[j]->getHP() -= 0.2f;
+				_um->getVUnit()[j]->getHP() -= 0.1f;
 			}
 		}
 	}

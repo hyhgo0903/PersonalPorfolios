@@ -86,6 +86,7 @@ void unitManager::deadErase()
 
 void unitManager::progressBarRender()
 {
+	Rectangle(getMemDC(), CAMX, CAMY+580, CAMX+240, CAMY+700);
 	for (int i = 0; i < _vUnit.size(); ++i)
 	{
 		if (_vUnit[i]->getState() != DEAD)_vUnit[i]->progressBarRender();

@@ -11,7 +11,10 @@ class playGround : public gameNode
 {
 private:
 	float _x; int _y;
+	bool _seeMinimap;
 	image* _backGround;
+
+	RECT					_camMap;
 	
 public:
 	playGround();
@@ -22,5 +25,7 @@ public:
 	virtual void update();	//연산 전용
 	virtual void render();	//그리기 전용
 	
+	void yoonghoUpdate();
+	void uiRender();
 };
 

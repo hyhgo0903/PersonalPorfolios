@@ -14,8 +14,6 @@ private:
 	skillNEffectManager*	_se;
 	interaction*			_ia;
 
-	RECT					_camMap;
-
 
 public:
 	mainScene();
@@ -26,8 +24,7 @@ public:
 	virtual void update();	//연산 전용
 	virtual void render();	//그리기 전용
 	
-	void yoonghoUpdate();
-	void uiRender();
+	unitManager* getUM() { return _um; } // 이건 플레이그라운드에서 미니맵 그리라고 있는거
 
 	
 };

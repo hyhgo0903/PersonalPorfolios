@@ -11,8 +11,8 @@ HRESULT marine::init(BELONG belong, float x, float y)
 	_damage = 5;
 	_maxHP = 40;
 	_attackIndex = 2; // 2번 인덱스가 될때 공격판정
-	_width = FINDIMG("마린기본파랑")->getFrameWidth();
-	_height = FINDIMG("마린기본파랑")->getFrameHeight(); // 일단은 대충 설정해놓은거임(이미지크기)
+	_width = 20;
+	_height = 20; // 일단은 대충 설정해놓은거임(이미지크기)
 
 	commonInit(); // 앞에변수 참조해서 만드는 변수도 있으므로 뒤에다 만들어야함
 	return S_OK;
@@ -31,21 +31,19 @@ void marine::update()
 
 void marine::render()
 {
-	int left = _x - _image->getFrameWidth() / 2;
-	int top = _y - _image->getFrameHeight() / 2;
 	switch (_state)
 	{ // 위치 적당히 보정해서 쓸것
 	case WALK:
-		_image->frameRender(getMemDC(), left, top, _frame, _frameDirection);
+		_image->frameRender(getMemDC(), _rc.left-5, _rc.top - 5, _frame, _frameDirection);
 		break;
 	case ATTACKWAIT: // 첫번쨰 프레임으로 고정
-		_image->frameRender(getMemDC(), left, top, 0, _frameDirection);
+		_image->frameRender(getMemDC(), _rc.left - 7, _rc.top - 10, 0, _frameDirection);
 		break;
 	case ATTACK:
-		_image->frameRender(getMemDC(), left, top, _frame, _frameDirection);
+		_image->frameRender(getMemDC(), _rc.left - 7, _rc.top - 10, _frame, _frameDirection);
 		break;
 	case DEAD: // 프레임인덱스 다르게 도니까 주의
-		_image->frameRender(getMemDC(), left, top, _frame, 0);
+		_image->frameRender(getMemDC(), _rc.left - 18, _rc.top - 8, _frame, 0);
 		break;
 	}
 }
