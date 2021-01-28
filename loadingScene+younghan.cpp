@@ -4,7 +4,7 @@
 void loadingScene::younghanInit()
 {
 	//이미지 영역
-	IMAGEMANAGER->addFrameImage("mapTiles", "image/maptool/tile512x384.bmp", 0, 0, 512, 384, 8, 12, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("mapTiles", "image/maptool/tile512x384ver2.bmp", 0, 0, 512, 384, 8, 12, true, RGB(255, 0, 255));
 	imgLoaded();
 	IMAGEMANAGER->addImage("save1", "image/maptool/save1.bmp", 64, 32, false, RGB(255, 0, 255));
 	imgLoaded();
@@ -59,6 +59,8 @@ void loadingScene::younghanInit()
 	IMAGEMANAGER->addImage("tree4", "image/maptool/tree4.bmp", 94, 128, true, RGB(255, 0, 255));
 	imgLoaded();
 	IMAGEMANAGER->addImage("tree5", "image/maptool/tree5.bmp", 76, 83, true, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addFrameImage("ghost_move", "image/unit/ghost/ghost_move.bmp", 320, 324, 8, 9, true, RGB(255, 0, 255));
 	imgLoaded();
 }
 

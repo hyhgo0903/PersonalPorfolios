@@ -85,6 +85,23 @@ void templar::render()
 	
 }
 
+void templar::reRender()
+{
+	switch (_state)
+	{ // 위치 적당히 보정해서 쓸것
+	case WALK:
+		_image->alphaFrameRender(getMemDC(), _rc.left - 4, _rc.top - 6, _frameDirection, 0, 150);
+		break;
+	case ATTACKWAIT: // 첫번쨰 프레임으로 고정
+		if (_frame == 0) _frame = 1; // 0번프레임이 이상함 ㅡㅡ
+		_image->alphaFrameRender(getMemDC(), _rc.left - 4, _rc.top - 5, _frameDirection, _frame, 150);
+		break;
+	case ATTACK:
+		_image->alphaFrameRender(getMemDC(), _rc.left - 23, _rc.top - 24, _frameDirection, _frame, 150);
+		break;
+	}
+}
+
 void templar::setState(STATE state)
 {
 	if (_state == state) return; // 같은걸로 셋한거면 처리 안해줌

@@ -25,6 +25,7 @@ protected:
 	// 2 : 마린
 	// 3 : 시민(어그로)
 	// 4 : 템플러(스톰)
+	// 5 : 고스트(저격)
 	// ####################################
 
 	int _frameCount;	// 프레임용 카운트
@@ -110,6 +111,7 @@ public:
 	// 공통렌더도 하고 싶었지만 이미지마다 위치보정해줘야해서
 
 	void progressBarRender();
+	virtual void reRender();
 
 	virtual void setState(STATE state) = 0;
 	// 이건 유닛들마다 이미지가 다르므로 각각 만들어 씁시다.

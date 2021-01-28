@@ -58,6 +58,14 @@ void unitManager::render()
 	}
 }
 
+void unitManager::reRender()
+{ // 투명하게
+	for (int i = _vUnit.size() - 1; i > -1; --i)
+	{
+		_vUnit[i]->reRender();
+	}
+}
+
 void unitManager::deadErase()
 {
 	bool erased = true;
@@ -126,4 +134,11 @@ void unitManager::createBishop(BELONG belong, float x, float y)
 	bishop* bi = new bishop;
 	bi->init(belong, x, y);
 	_vUnit.push_back(bi);
+}
+
+void unitManager::createGhost(BELONG belong, float x, float y)
+{
+	ghost* gt = new ghost;
+	gt->init(belong, x, y);
+	_vUnit.push_back(gt);
 }

@@ -56,6 +56,22 @@ void bishop::render()
 	}
 }
 
+void bishop::reRender()
+{
+	switch (_state)
+	{ // 위치 적당히 보정해서 쓸것
+	case WALK:
+		_image->alphaFrameRender(getMemDC(), _rc.left - 5, _rc.top, _frameDirection, _frame,150);
+		break;
+	case ATTACKWAIT: // 첫번쨰 프레임으로 고정
+		_image->alphaFrameRender(getMemDC(), _rc.left - 5, _rc.top, _frameDirection, 0, 150);
+		break;
+	case ATTACK:
+		_image->alphaFrameRender(getMemDC(), _rc.left - 5, _rc.top, _frameDirection / 2, 0, 150);
+		break;
+	}
+}
+
 void bishop::setState(STATE state)
 {
 	if (_state == state) return; // 같은걸로 셋한거면 처리 안해줌

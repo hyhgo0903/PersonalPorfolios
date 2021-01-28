@@ -70,31 +70,43 @@ void mapTool::update()
 
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
-		if (PtInRect(&_undo, _cameraPtMouse)) tempLoad();
-		tempSave();
-		if (_pickingPt.x >= 0 && _pickingPt.y >= 0) createTile();
-		sampleInTemp();
-		save();
-		load();
-		moveUnMove();
-		if (PtInRect(&_fill, _cameraPtMouse) && _tempTile.fX >= 0 && _tempTile.fY >= 0) fill(_tempTile.fX, _tempTile.fY);
-		openClose();
-		renderSize();
-		if (_brushOn) leftRightBt();
-		ptInObj();
-		if (_pickingPt.x >= 0 && _pickingPt.y >= 0) createObj();
-		if (PtInRect(&_objDel, _cameraPtMouse)) objDel();
-		if (PtInRect(&_delAll, _cameraPtMouse)) objDelAll();
+		if (_ptMouse.x > 240 || _ptMouse.y < 580) // 미니맵 밖 누를때만
+		{
+			if (PtInRect(&_undo, _cameraPtMouse)) tempLoad();
+			tempSave();
+			if (_pickingPt.x >= 0 && _pickingPt.y >= 0) createTile();
+			sampleInTemp();
+			save();
+			load();
+			moveUnMove();
+			if (PtInRect(&_fill, _cameraPtMouse) && _tempTile.fX >= 0 && _tempTile.fY >= 0) fill(_tempTile.fX, _tempTile.fY);
+			openClose();
+			renderSize();
+			if (_brushOn) leftRightBt();
+			ptInObj();
+			if (_pickingPt.x >= 0 && _pickingPt.y >= 0) createObj();
+			if (PtInRect(&_objDel, _cameraPtMouse)) objDel();
+			if (PtInRect(&_delAll, _cameraPtMouse)) objDelAll();
+		}
 	}
 
 	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
 	{
-		if (_pickingPt.x >= 0 && _pickingPt.y >= 0) createTile();
-		ptInObj();
-		if (_pickingPt.x >= 0 && _pickingPt.y >= 0) createObj();
+		if (_ptMouse.x > 240 || _ptMouse.y < 580) // 미니맵 밖 누를때만
+		{
+			if (_pickingPt.x >= 0 && _pickingPt.y >= 0) createTile();
+			ptInObj();
+			if (_pickingPt.x >= 0 && _pickingPt.y >= 0) createObj();
+		}
 	}
 	ptInIso();
-	if (KEYMANAGER->isOnceKeyDown(VK_F4)) SCENEMANAGER->changeScene("메인씬");
+	if (KEYMANAGER->isOnceKeyDown(VK_F4)) SCENEMANAGER->changeScene("타이틀씬");
+
+	if (KEYMANAGER->isStayKeyDown(VK_RBUTTON))
+	{
+		_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = NONE;
+		InvalidateRect(_hWnd, NULL, false);
+	}
 }
 
 void mapTool::render()
@@ -116,6 +128,8 @@ void mapTool::render()
 	TextOut(getMemDC(), CAMX+ 150, CAMY+ 70, str, strlen(str));
 }
 
+
+
 inline POINT mapTool::picking(long x, long y)
 { // 이게 피킹
 	int xx; int yy;
@@ -128,9 +142,17 @@ inline POINT mapTool::picking(long x, long y)
 
 	 // 64는 타일 높이(TILEHEIGHT)에 양변 2곱한값이며 이만큼씩 이격된(밑으로간) 직선이라 보면 됨
 	xx = (2 * y + (x - 960)) / 64; // y절편을 이용한 방식으로 바꾸었음
+	// xx = ((y + 1/2*(x - 960)) / 32
+	// (x좌표) = ((y + 1/2 *(x - 맵x절반)) / 타일높이
+	//           ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	//           ㄴ>이 부분이 y절편(h)
 	if (xx > 29) return { -1,0 }; // 맵밖 벗어난거면 예외처리
 
 	yy = (2 * y - (x - 960)) / 64; // 기울기만 음수고 나머진 상동
+	// yy = ((y - 1/2*(x - 960)) / 32
+	// (y좌표) = ((y - 1/2 *(x - 맵x절반)) / 타일높이
+	//           ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+	//           ㄴ>이 부분이 y절편(h)
 	if (yy > 29) return { -1,0 };
 
 	return { xx , yy };

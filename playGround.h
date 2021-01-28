@@ -14,7 +14,8 @@ private:
 	bool _seeMinimap;
 	image* _backGround;
 
-	RECT					_camMap;
+	mainScene* _ms;
+	RECT	_camMap;
 	
 public:
 	playGround();

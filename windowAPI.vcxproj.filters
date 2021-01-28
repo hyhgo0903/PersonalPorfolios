@@ -219,6 +219,9 @@
     <ClInclude Include="bishop.h">
       <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClInclude>
+    <ClInclude Include="ghost.h">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -409,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="playGround+minimap.cpp">
       <Filter>playGround</Filter>
+    </ClCompile>
+    <ClCompile Include="ghost.cpp">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

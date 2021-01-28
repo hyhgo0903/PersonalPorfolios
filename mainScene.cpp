@@ -87,5 +87,6 @@ void mainScene::render()
 	_um->render();
 	_se->render();
 
+	_um->reRender(); // 겹친거면 이것만 그려진다(반투명)
 	_um->progressBarRender();
 }

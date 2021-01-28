@@ -1,18 +1,20 @@
 #include "stdafx.h"
-#include "zergling.h"
+#include "ghost.h"
 
-zergling::zergling()
+
+ghost::ghost()
 {
 }
 
-zergling::~zergling()
-{	
+
+ghost::~ghost()
+{
 }
 
-HRESULT zergling::init(BELONG belong, float x, float y)
+HRESULT ghost::init(BELONG belong, float x, float y)
 { // 뭐 놓치지 않게 이거 복붙해서 각각 바꿔놓는걸 추천
 	_belong = belong;
-	_ID = 1;
+	_ID = 5;
 	_x = x; _y = y;
 	_speed = 2.0f;
 	_maxDelay = 60; // 대충 1초에 한대 치게끔
@@ -23,16 +25,16 @@ HRESULT zergling::init(BELONG belong, float x, float y)
 	_height = 20; // 일단은 대충 설정해놓은거임(이미지크기)
 
 	commonInit(); // 앞에변수 참조해서 만드는 변수도 있으므로 뒤에다 만들어야함
-	
+
 	return S_OK;
 }
 
-void zergling::release()
+void ghost::release()
 {
 	SAFE_DELETE(_image);
 }
 
-void zergling::update()
+void ghost::update()
 {
 	commonUpdate();
 	_rangeRc = RectMakeCenter(_x, _y, _width + 6, _height + 6);
@@ -46,12 +48,12 @@ void zergling::update()
 	}
 }
 
-void zergling::render()
+void ghost::render()
 {
 	switch (_state)
 	{ // 위치 적당히 보정해서 쓸것
 	case WALK:
-		_image->frameRender(getMemDC(), _rc.left-9, _rc.top-9, _frameDirection, _frame);
+		_image->frameRender(getMemDC(), _rc.left - 9, _rc.top - 9, _frameDirection, _frame);
 		break;
 	case ATTACKWAIT: // 첫번쨰 프레임으로 고정
 		_image->frameRender(getMemDC(), _rc.left - 9, _rc.top - 9, _frameDirection, 0);
@@ -65,7 +67,7 @@ void zergling::render()
 	}
 }
 
-void zergling::reRender()
+void ghost::reRender()
 {
 	switch (_state)
 	{ // 위치 적당히 보정해서 쓸것
@@ -81,7 +83,7 @@ void zergling::reRender()
 	}
 }
 
-void zergling::setState(STATE state)
+void ghost::setState(STATE state)
 { // 이거에 준해서 만들어주세요
 	if (_state == state) return; // 같은걸로 셋한거면 처리 안해줌
 	_frame = 0;
@@ -92,7 +94,7 @@ void zergling::setState(STATE state)
 		switch (_state)
 		{
 		case WALK:
-			_image = FINDIMG("저글링이동블루");
+			_image = FINDIMG("ghost_move");
 			_maxFrame = _image->getMaxFrameY();
 			break;
 		case ATTACKWAIT:
@@ -133,5 +135,5 @@ void zergling::setState(STATE state)
 			break;
 		}
 	}
-	
+
 }

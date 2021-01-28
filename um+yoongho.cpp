@@ -23,9 +23,10 @@ void unitManager::yoonghoUpdate()
 		}
 
 		// 유닛과유닛 렉트충돌
+		if (_vUnit[i]->getID() == 1 || _vUnit[i]->getID() == 3) continue; // 일단 근접유닛간 충돌은 막아둠
 		for (int j = 0; j < _vUnit.size(); ++j)
 		{// 타겟팅하는 포문(타겟 없는놈 대상)
-			if (_vUnit[j]->getState() == DEAD) continue;			
+			if (_vUnit[j]->getState() == DEAD) continue;
 			if (IntersectRect(&temp, &_vUnit[j]->getRect(), &_vUnit[i]->getRect()))
 			{ // 그냥 렉트간 충돌
 				if (_vUnit[i]->getBelong() != _vUnit[j]->getBelong())

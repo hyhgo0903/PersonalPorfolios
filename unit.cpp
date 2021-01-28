@@ -45,6 +45,11 @@ void unit::progressBarRender()
 	}
 }
 
+void unit::reRender()
+{
+}
+
+
 void unit::RMC()
 {
 	_rc = RectMakeCenter(_x, _y, _width, _height);
