@@ -87,6 +87,8 @@ protected:
 	int _deathDuration;
 	// 죽었을떄 시체(?)가 치워지는데까지 걸리는 카운트
 
+	bool _active;
+
 public:
 	unit();
 	~unit();
@@ -142,5 +144,6 @@ public:
 	RECT getRangeRect() { return _rangeRc; }
 	RECT getFocusRect() { return _focusRc; }
 	int& getTileNum() { return _tileNum; }
+	bool& getActive() { return _active; }
 };
 

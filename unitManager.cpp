@@ -24,6 +24,7 @@ void unitManager::update()
 	deadErase();
 	for (int i = 0; i < _vUnit.size(); ++i)
 	{
+		if (!_vUnit[i]->getActive()) continue;
 		_vUnit[i]->update();
 
 		if (_vUnit[i]->getState() == DEAD)
@@ -98,6 +99,14 @@ void unitManager::progressBarRender()
 	for (int i = 0; i < _vUnit.size(); ++i)
 	{
 		if (_vUnit[i]->getState() != DEAD)_vUnit[i]->progressBarRender();
+	}
+}
+
+void unitManager::setActive()
+{
+	for (int i = 0; i < _vUnit.size(); ++i)
+	{
+		_vUnit[i]->getActive() = true;
 	}
 }
 

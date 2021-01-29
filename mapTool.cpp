@@ -44,6 +44,7 @@ void mapTool::createIsoMap(int tileX, int tileY)
 		{
 			_isoTile[i * tileX + j].fX = 0;
 			_isoTile[i * tileX + j].fY = 0;
+			_isoTile[i * tileX + j].gold = 0;
 			_isoTile[i * tileX + j].nX = j;
 			_isoTile[i * tileX + j].nY = i;
 

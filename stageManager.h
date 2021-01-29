@@ -1,6 +1,7 @@
 #pragma once
 #include "gameNode.h"
 #include "tile.h"
+#include "unitManager.h"
 
 enum STAGE
 {
@@ -24,9 +25,11 @@ class stageManager : public gameNode
 private:
 	isoTile _isoTile[TILEX*TILEY];
 	STAGE _stage;
-	STAGEMOVE			_sMove[TILEX * TILEY];					//맵툴에서 가져온 속성이 무브인지 언무브인지 담아둘 곳
-	tileObj				_tileObj[TILEX * TILEY];				//맵툴에서 가져온 오브젝트 속성이 무엇인지 담아둘 곳
+	int _gold; // 좋은 구조인진 모르겠지만 골드는 스테이지매니저에서 관리하기로 했음
 
+	unitManager* _um;
+	bool _battlePhase; // 이게 false면 배치페이즈 true면 교전페이즈
+	
 public:
 	stageManager();
 	~stageManager();
@@ -35,10 +38,10 @@ public:
 	virtual void release();	//메모리 해제 함수
 	virtual void update();	//연산 전용
 	virtual void render();	//그리기 전용
+	void objectRender();    //오브젝트 그리는건 따로 뻄. 왜냐면 유닛 다음에 그려줘야하므로
 
 	void setStage(STAGE stage);
-	isoTile* getIsoTile() { return _isoTile; }
-	STAGEMOVE* getStageMove() { return _sMove; }				//무브 ,언무브 게터
-	tileObj* getTileObj() { return _tileObj; }					//타일이 가진 오브젝트 속성 게터
+	isoTile* getIsoTile() { return _isoTile; }		//타일이 가진 오브젝트 속성 게터
+	void umLink(unitManager * um) { _um = um; }
 };
 

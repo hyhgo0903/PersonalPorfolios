@@ -4,6 +4,11 @@
 
 void unit::commonUpdate()
 {
+	if (_x < -100 || _x > MAPSIZEX + 100 || _y < -100 || _y > MAPSIZEY + 100)
+	{
+		_HP = 0;
+	}
+
 	if (_HP <= 0 && _state != DEAD)
 	{
 		_target = -1;

@@ -26,8 +26,9 @@ HRESULT mainScene::init()
 	_ia->smLink(_sm);
 	_ia->seLink(_se);
 
-	_um->createZergling(ENEMY, 1200, 400);
-	_um->createZergling(ENEMY, 1300, 400);
+	_sm->umLink(_um);								//유닛 매니저와 스테이지 매니저를 링크로 연결해줌
+	_sm->setStage(STAGE1);
+
 	_um->createZergling(PLAYER, 210, 370);
 	_um->createZergling(PLAYER, 310, 530);
 	_um->createMarine(ENEMY, 1350, 400);
@@ -36,20 +37,9 @@ HRESULT mainScene::init()
 	_um->createMarine(PLAYER, 110, 500);
 	_um->createCivilian(ENEMY, 1100, 450);
 	_um->createCivilian(PLAYER, 110, 600);
-	_um->createTemplar(ENEMY, 1200, 480);
 	_um->createTemplar(PLAYER, 200, 480);
 	_um->createBishop(ENEMY, 1200, 600);
 	_um->createBishop(PLAYER, 200, 350);
-
-	_um->setLinkSm(_sm);								//유닛 매니저와 스테이지 매니저를 링크로 연결해줌
-
-	for (int i = 0; i < TILEX*TILEY; ++i)
-	{
-		if (_sm->getTileObj()[i] == ZERGLING)
-		{
-			_um->createZergling(ENEMY, _sm->getIsoTile()[i].drawX + 10, _sm->getIsoTile()[i].drawY - 5);
-		}
-	}
 
 
 	return S_OK;
@@ -80,13 +70,12 @@ void mainScene::update()
 }
 
 void mainScene::render()
-{
-
-	_sm->render();
-	_ia->render();
-	_um->render();
-	_se->render();
-
-	_um->reRender(); // 겹친거면 이것만 그려진다(반투명)
-	_um->progressBarRender();
+{// 서순이 왜 이런지 주석을 달았읍니다
+	_sm->render();			// 맵그려주구요
+	_ia->render();			// 이건 사실 안 그릴듯?
+	_um->render();			// 유닛그려줍니다
+	_sm->objectRender();	// 유닛이 가려지게끔 오브젝트는 여기서 그리는 거
+	_se->render();			// 스킬과 이펙트가 잘 보이게 나중에 그림
+	_um->reRender();		// 반투명 유닛이 그려서 가려진건 반투명하게 보임
+	_um->progressBarRender(); // 체력바는 안가려지게끔
 }
