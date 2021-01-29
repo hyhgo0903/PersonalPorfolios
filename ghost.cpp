@@ -14,7 +14,7 @@ ghost::~ghost()
 HRESULT ghost::init(BELONG belong, float x, float y)
 { // 뭐 놓치지 않게 이거 복붙해서 각각 바꿔놓는걸 추천
 	_belong = belong;
-	_ID = 5;
+	_ID = 8;
 	_x = x; _y = y;
 	_speed = 2.0f;
 	_maxDelay = 120; // 대충 1초에 한대 치게끔

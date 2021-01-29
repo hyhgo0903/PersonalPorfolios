@@ -72,5 +72,19 @@ void loadingScene::younghanInit()
 	imgLoaded();
 	IMAGEMANAGER->addFrameImage("ghost_dead_blue", "image/unit/ghost/ghost_dead_blue.bmp", 280, 41, 5, 1, true, RGB(255, 255, 0));
 	imgLoaded();
+	IMAGEMANAGER->addImage("icon_marine", "image/icon/icon_marine.bmp", 80, 90, false, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("icon_bishop", "image/icon/icon_bishop.bmp", 80, 90, false, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("icon_civilian", "image/icon/icon_aggroman.bmp", 80, 90, false, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("icon_diablo", "image/icon/icon_diablo.bmp", 80, 90, false, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("icon_ghost", "image/icon/icon_ghost.bmp", 80, 90, false, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("icon_templar", "image/icon/icon_templar.bmp", 80, 90, false, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("icon_skeleton", "image/icon/icon_skeleton.bmp", 80, 90, false, RGB(255, 0, 255));
+	imgLoaded();
 }
 

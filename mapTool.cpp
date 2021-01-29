@@ -15,7 +15,7 @@ HRESULT mapTool::init()
 	CAMERAMANAGER->setCameraX(0);
 	CAMERAMANAGER->setCameraY(0);
 	createSampleTiles();
-
+	_currentStage = 1;
 	createIsoMap(TILEX, TILEY);
 	_tempTile.fX = 0;
 	_tempTile.fY = 0;
@@ -59,6 +59,7 @@ void mapTool::createIsoMap(int tileX, int tileY)
 			_isoTile[i * tileX + j].drawY = _isoTile[i * tileX + j].centerY - TILESIZEY / 2;
 		}
 	}
+	_isoTile[0].gold = 1000;
 }
 
 
@@ -127,6 +128,10 @@ void mapTool::render()
 
 	sprintf_s(str, "ptMouse X : %d , Y : %d", CAMX + _cameraPtMouse.x, CAMY + _cameraPtMouse.y);
 	TextOut(getMemDC(), CAMX+ 150, CAMY+ 70, str, strlen(str));
+
+
+	sprintf_s(str, "작업중인 스테이지 : %d 스테이지, 시작 골드 : %d ", _currentStage, _isoTile[0].gold);
+	TextOut(getMemDC(), CAMX + 100, CAMY + 100, str, strlen(str));
 }
 
 

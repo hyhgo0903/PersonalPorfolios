@@ -25,7 +25,10 @@ protected:
 	// 2 : 마린
 	// 3 : 시민(어그로)
 	// 4 : 템플러(스톰)
-	// 5 : 고스트(저격)
+	// 5 : 비숍
+	// 6 : 디아블로
+	// 7 : 해골병사
+	// 8 : 고스트
 	// ####################################
 
 	int _frameCount;	// 프레임용 카운트
@@ -117,6 +120,7 @@ public:
 
 	void progressBarRender();
 	virtual void reRender();
+	void moveCancel(); // 이동했을테니 다시 돌려주는 함수(롤백)
 
 	virtual void setState(STATE state) = 0;
 	// 이건 유닛들마다 이미지가 다르므로 각각 만들어 씁시다.
@@ -148,5 +152,6 @@ public:
 	RECT getFocusRect() { return _focusRc; }
 	int& getTileNum() { return _tileNum; }
 	bool& getActive() { return _active; }
+	float getSpeed() { return _speed; }
 };
 

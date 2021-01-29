@@ -23,10 +23,9 @@ void unitManager::yoonghoUpdate()
 		}
 
 		// 유닛과유닛 렉트충돌
-		if (_vUnit[i]->getID() == 1 || _vUnit[i]->getID() == 3) continue; // 일단 근접유닛간 충돌은 막아둠
 		for (int j = 0; j < _vUnit.size(); ++j)
-		{// 타겟팅하는 포문(타겟 없는놈 대상)
-			if (_vUnit[j]->getState() == DEAD) continue;
+		{
+			if (_vUnit[i]->getState() != WALK || _vUnit[j]->getState() == DEAD || i==j) continue;
 			if (IntersectRect(&temp, &_vUnit[j]->getRect(), &_vUnit[i]->getRect()))
 			{ // 그냥 렉트간 충돌
 				if (_vUnit[i]->getBelong() != _vUnit[j]->getBelong())
@@ -34,36 +33,31 @@ void unitManager::yoonghoUpdate()
 					_vUnit[i]->getTarget() = j;
 					_vUnit[j]->getTarget() = i;
 				}
-				int widthHalf = (temp.right - temp.left)/2;
-				int heightHalf = (temp.bottom - temp.top)/2;
-				if (widthHalf > heightHalf)
+				int width = (temp.right - temp.left);
+				int height = (temp.bottom - temp.top);
+				if (width > height)
 				{ // 위아래로 부딪힌 경우임
 					if (_vUnit[i]->getY() < _vUnit[j]->getY())
 					{
-						_vUnit[i]->getY() -= heightHalf;
-						_vUnit[j]->getY() += heightHalf;
+						_vUnit[i]->getY() -= height;
 					} // 서로 반씩 미는걸로 해봄
 					else if(_vUnit[i]->getY() > _vUnit[j]->getY())
 					{
-						_vUnit[i]->getY() += heightHalf;
-						_vUnit[j]->getY() -= heightHalf;
+						_vUnit[i]->getY() += height;
 					}
 				}
-				else if (widthHalf < heightHalf)
+				else if (width < height)
 				{
 					if (_vUnit[i]->getX() < _vUnit[j]->getX())
 					{
-						_vUnit[i]->getX() -= widthHalf;
-						_vUnit[j]->getX() += widthHalf;
+						_vUnit[i]->getX() -= width;
 					}
 					else if(_vUnit[i]->getX() > _vUnit[j]->getX())
 					{
-						_vUnit[i]->getX() += widthHalf;
-						_vUnit[j]->getX() -= widthHalf;
+						_vUnit[i]->getX() += width;
 					}
 				}
 				_vUnit[i]->RMC();
-				_vUnit[j]->RMC();
 			}
 		}
 	}

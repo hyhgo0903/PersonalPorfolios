@@ -30,5 +30,7 @@ public:
 	void smLink(stageManager* sm) { _sm = sm; }
 	void umLink(unitManager* um) { _um = um; }
 	void seLink(skillNEffectManager* se) { _se = se; }
+
+	inline POINT picking(long x, long y);
 };
 

@@ -22,8 +22,8 @@ void stageManager::release()
 
 void stageManager::update()
 {
-	if (KEYMANAGER->isOnceKeyDown(VK_F1) || _um->getVUnit().size() == 0)
-	{ // 벡터 0은 단순히 저글링 블러드를 보기 위해서임.. 나중에 지울거
+	if (KEYMANAGER->isOnceKeyDown(VK_F1))
+	{
 		_stage = STAGE1;
 		setStage(_stage);
 	}

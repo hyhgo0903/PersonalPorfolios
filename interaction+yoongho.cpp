@@ -70,8 +70,60 @@ void interaction::yoonghoUpdate()
 		}
 	}
 
+	for (int i = 0; i < _um->getVUnit().size(); ++i)
+	{
+		if (_um->getVUnit()[i]->getState() != WALK) continue;
+		POINT tempPtLT = picking(_um->getVUnit()[i]->getRect().left, _um->getVUnit()[i]->getRect().top);
+		POINT tempPtRT = picking(_um->getVUnit()[i]->getRect().right, _um->getVUnit()[i]->getRect().top);
+		POINT tempPtLB = picking(_um->getVUnit()[i]->getRect().left, _um->getVUnit()[i]->getRect().bottom);
+		POINT tempPtRB = picking(_um->getVUnit()[i]->getRect().right, _um->getVUnit()[i]->getRect().bottom);
+		if (_sm->getIsoTile()[tempPtLT.x + tempPtLT.y * 30].MUM == UNMOVE)
+		{
+			_um->getVUnit()[i]->moveCancel();
+			_um->getVUnit()[i]->getX() += _um->getVUnit()[i]->getSpeed() * cosf(0.464f);
+			_um->getVUnit()[i]->getY() -= _um->getVUnit()[i]->getSpeed() * sinf(0.464f);
+			continue;
+		}
+		else if (_sm->getIsoTile()[tempPtRT.x + tempPtRT.y * 30].MUM == UNMOVE)
+		{
+			_um->getVUnit()[i]->moveCancel();
+			_um->getVUnit()[i]->getX() -= _um->getVUnit()[i]->getSpeed() * cosf(0.464f);
+			_um->getVUnit()[i]->getY() -= _um->getVUnit()[i]->getSpeed() * sinf(0.464f);
+			continue;
+		}
+		else if (_sm->getIsoTile()[tempPtLB.x + tempPtLB.y * 30].MUM == UNMOVE)
+		{
+			_um->getVUnit()[i]->moveCancel();
+			_um->getVUnit()[i]->getX() += _um->getVUnit()[i]->getSpeed() * cosf(0.464f);
+			_um->getVUnit()[i]->getY() += _um->getVUnit()[i]->getSpeed() * sinf(0.464f);
+			continue;
+		}
+		else if (_sm->getIsoTile()[tempPtRB.x + tempPtRB.y * 30].MUM == UNMOVE)
+		{
+			_um->getVUnit()[i]->moveCancel();
+			_um->getVUnit()[i]->getX() += _um->getVUnit()[i]->getSpeed() * cosf(0.464f);
+			_um->getVUnit()[i]->getY() -= _um->getVUnit()[i]->getSpeed() * sinf(0.464f);
+			continue;
+		}
+	}
 }
 
 void interaction::yoonghoRender()
 {
+}
+
+
+
+inline POINT interaction::picking(long x, long y)
+{
+	int xx; int yy;
+	if (2 * y < (x - 960))	return { -1,0 }; // y=1/2x보다 위에있는지 (맵밖 벗어남)
+	if (2 * y < -(x - 960))	return { -1,0 }; // y=-1/2x보다 위에있는지 (맵밖 벗어남)
+	xx = (2 * y + (x - 960)) / 64;
+	if (xx > 29) return { -1,0 }; // 맵밖 벗어난거면 예외처리
+
+	yy = (2 * y - (x - 960)) / 64;
+	if (yy > 29) return { -1,0 };
+
+	return { xx , yy };
 }

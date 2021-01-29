@@ -40,6 +40,13 @@ void mapTool::imageInit()
 	_tree5 = RectMake(CAMX + WINSIZEX - 122, CAMY, 76, 83);
 
 	_icZergling = RectMake(CAMX + WINSIZEX - 512, CAMY, 80, 90);
+	_icMarine = RectMake(CAMX + WINSIZEX - 432, CAMY, 80, 90);
+	_icCivilian = RectMake(CAMX + WINSIZEX - 352, CAMY, 80, 90);
+	_icTemplar = RectMake(CAMX + WINSIZEX - 272, CAMY, 80, 90);
+	_icBishop = RectMake(CAMX + WINSIZEX - 192, CAMY, 80, 90);
+	_icDiablo = RectMake(CAMX + WINSIZEX - 112, CAMY, 80, 90);
+	_icSkeleton = RectMake(CAMX + WINSIZEX - 512, CAMY + 90, 80, 90);
+	_icGhost = RectMake(CAMX + WINSIZEX - 432, CAMY + 90, 80, 90);
 }
 
 void mapTool::imageRender()
@@ -92,7 +99,40 @@ void mapTool::imageRender()
 			else if (_isoTile[i].name == ZERGLING)
 			{
 				IMAGEMANAGER->findImage("mapTiles")->alphaFrameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY, 100);
-				IMAGEMANAGER->findImage("저글링이동퍼플")->frameRender(getMemDC(), _isoTile[i].drawX + 10, _isoTile[i].drawY - 5, 5, 0);
+				IMAGEMANAGER->findImage("저글링이동퍼플")->frameRender(getMemDC(), _isoTile[i].drawX + 11, _isoTile[i].drawY - 5, 4, 0);
+			}
+			else if (_isoTile[i].name == MARINE)
+			{
+				IMAGEMANAGER->findImage("mapTiles")->alphaFrameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY, 100);
+				IMAGEMANAGER->findImage("마린기본빨강")->frameRender(getMemDC(), _isoTile[i].drawX + 15, _isoTile[i].drawY - 5, 0, 4);
+			}
+			else if (_isoTile[i].name == CIVILIAN)
+			{
+				IMAGEMANAGER->findImage("mapTiles")->alphaFrameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY, 100);
+				IMAGEMANAGER->findImage("시민퍼플")->frameRender(getMemDC(), _isoTile[i].drawX + 23, _isoTile[i].drawY - 5, 4, 7);
+			}
+			else if (_isoTile[i].name == TEMPLAR)
+			{
+				IMAGEMANAGER->findImage("mapTiles")->alphaFrameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY, 100);
+				IMAGEMANAGER->findImage("템플러대기퍼플")->frameRender(getMemDC(), _isoTile[i].drawX + 18, _isoTile[i].drawY - 10, 4, 7);
+			}
+			else if (_isoTile[i].name == BISHOP)
+			{
+				IMAGEMANAGER->findImage("mapTiles")->alphaFrameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY, 100);
+				IMAGEMANAGER->findImage("레드비숍대기")->frameRender(getMemDC(), _isoTile[i].drawX + 5, _isoTile[i].drawY - 65, 4, 0);
+			}
+			else if (_isoTile[i].name == DIABLO)
+			{
+				//아직 이미지가 없음
+			}
+			else if (_isoTile[i].name == SKELETON)
+			{
+				//아직 이미지가 없음
+			}
+			else if (_isoTile[i].name == GHOST)
+			{
+				IMAGEMANAGER->findImage("mapTiles")->alphaFrameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY, 100);
+				IMAGEMANAGER->findImage("ghost_move_red")->frameRender(getMemDC(), _isoTile[i].drawX + 7, _isoTile[i].drawY - 10, 4, 0);
 			}
 			else IMAGEMANAGER->findImage("mapTiles")->alphaFrameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY, 100);
 		}//여기는 마우스와 타일이 닿지 않았을때
@@ -128,8 +168,41 @@ void mapTool::imageRender()
 		else if (_isoTile[i].name == ZERGLING)
 		{
 			IMAGEMANAGER->findImage("mapTiles")->frameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY);
-			IMAGEMANAGER->findImage("저글링이동퍼플")->frameRender(getMemDC(), _isoTile[i].drawX + 10, _isoTile[i].drawY - 5, 5, 0);
+			IMAGEMANAGER->findImage("저글링이동퍼플")->frameRender(getMemDC(), _isoTile[i].drawX + 11, _isoTile[i].drawY - 5, 4, 0);
 		}
+		else if (_isoTile[i].name == MARINE)
+			{
+			IMAGEMANAGER->findImage("mapTiles")->frameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY);
+			IMAGEMANAGER->findImage("마린기본빨강")->frameRender(getMemDC(), _isoTile[i].drawX + 15, _isoTile[i].drawY - 5, 0, 4);
+			}
+		else if (_isoTile[i].name == CIVILIAN)
+			{
+			IMAGEMANAGER->findImage("mapTiles")->frameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY);
+			IMAGEMANAGER->findImage("시민퍼플")->frameRender(getMemDC(), _isoTile[i].drawX + 23, _isoTile[i].drawY - 5, 4, 7);
+			}
+		else if (_isoTile[i].name == TEMPLAR)
+			{
+			IMAGEMANAGER->findImage("mapTiles")->frameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY);
+			IMAGEMANAGER->findImage("템플러대기퍼플")->frameRender(getMemDC(), _isoTile[i].drawX + 18, _isoTile[i].drawY - 10, 4, 7);
+			}
+		else if (_isoTile[i].name == BISHOP)
+			{
+			IMAGEMANAGER->findImage("mapTiles")->frameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY);
+			IMAGEMANAGER->findImage("레드비숍대기")->frameRender(getMemDC(), _isoTile[i].drawX + 5, _isoTile[i].drawY - 65, 4, 0);
+			}
+		else if (_isoTile[i].name == DIABLO)
+			{
+			//아직 이미지가 없음
+			}
+		else if (_isoTile[i].name == SKELETON)
+			{
+			//아직 이미지가 없음
+			}
+		else if (_isoTile[i].name == GHOST)
+			{
+			IMAGEMANAGER->findImage("mapTiles")->frameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY);
+			IMAGEMANAGER->findImage("ghost_move_red")->frameRender(getMemDC(), _isoTile[i].drawX + 7, _isoTile[i].drawY - 10, 4, 0);
+			}
 
 		//언무브 타일 표시
 		if (_isoTile[i].MUM == UNMOVE) IMAGEMANAGER->findImage("un")->render(getMemDC(), _isoTile[i].drawX + 23, _isoTile[i].drawY + 7);
@@ -175,6 +248,13 @@ void mapTool::imageRender()
 		else if (_menuNum == THREE)
 		{
 			IMAGEMANAGER->findImage("icon_zergling")->render(getMemDC(), _icZergling.left, _icZergling.top);
+			IMAGEMANAGER->findImage("icon_marine")->render(getMemDC(), _icMarine.left, _icMarine.top);
+			IMAGEMANAGER->findImage("icon_civilian")->render(getMemDC(), _icCivilian.left, _icCivilian.top);
+			IMAGEMANAGER->findImage("icon_templar")->render(getMemDC(), _icTemplar.left, _icTemplar.top);
+			IMAGEMANAGER->findImage("icon_bishop")->render(getMemDC(), _icBishop.left, _icBishop.top);
+			IMAGEMANAGER->findImage("icon_diablo")->render(getMemDC(), _icDiablo.left, _icDiablo.top);
+			IMAGEMANAGER->findImage("icon_skeleton")->render(getMemDC(), _icSkeleton.left, _icSkeleton.top);
+			IMAGEMANAGER->findImage("icon_ghost")->render(getMemDC(), _icGhost.left, _icGhost.top);
 		}
 	}
 	//세이브와 로드

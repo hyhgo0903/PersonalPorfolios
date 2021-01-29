@@ -69,7 +69,15 @@ private:
 	RECT			_tree4;
 	RECT			_tree5;
 
+	/////////////////////////////////////
 	RECT			_icZergling;
+	RECT			_icMarine;
+	RECT			_icCivilian;
+	RECT			_icTemplar;
+	RECT			_icBishop;
+	RECT			_icDiablo;
+	RECT			_icSkeleton;
+	RECT			_icGhost;
 	/////////////////////////////////////
 	POINT			_pickingPt;
 
@@ -80,6 +88,8 @@ private:
 	bool			_brushOn;
 	bool			_objDelOn;
 	bool			_menuInPt;
+
+	int _currentStage; // 몇 스테이지 작업중인지 (편의상 1,2,3)
 
 	renderSize		_rs;
 	menuNum			_menuNum;

@@ -18,6 +18,7 @@ void playGround::uiRender()
 	for (int i = 0; i < _ms->getUM()->getVUnit().size(); ++i)
 	{
 		RECT temp = _ms->getUM()->getVUnit()[i]->getRect();
+		if (_ms->getUM()->getVUnit()[i]->getState() == DEAD) continue;
 		if (_ms->getUM()->getVUnit()[i]->getBelong() == PLAYER)
 		{
 			HBRUSH brush = CreateSolidBrush(RGB(0, 255, 0));

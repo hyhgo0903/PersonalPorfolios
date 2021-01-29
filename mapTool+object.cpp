@@ -10,6 +10,13 @@ void mapTool::ptInObj()
 	else if (PtInRect(&_tree4, _cameraPtMouse) && _menuNum == TWO)	_objName = TREE4;
 	else if (PtInRect(&_tree5, _cameraPtMouse) && _menuNum == TWO)	_objName = TREE5;
 	else if (PtInRect(&_icZergling, _cameraPtMouse) && _menuNum == THREE)	_objName = ZERGLING;
+	else if (PtInRect(&_icMarine, _cameraPtMouse) && _menuNum == THREE)		_objName = MARINE;
+	else if (PtInRect(&_icCivilian, _cameraPtMouse) && _menuNum == THREE)	_objName = CIVILIAN;
+	else if (PtInRect(&_icTemplar, _cameraPtMouse) && _menuNum == THREE)	_objName = TEMPLAR;
+	else if (PtInRect(&_icBishop, _cameraPtMouse) && _menuNum == THREE)		_objName = BISHOP;
+	else if (PtInRect(&_icDiablo, _cameraPtMouse) && _menuNum == THREE)		_objName = DIABLO;
+	else if (PtInRect(&_icSkeleton, _cameraPtMouse) && _menuNum == THREE)	_objName = SKELETON;
+	else if (PtInRect(&_icGhost, _cameraPtMouse) && _menuNum == THREE)		_objName = GHOST;
 }
 
 //얘는 선택된 오브젝트가 어떤건지 판단해서 선택한 타일에 그 오브젝트 값을 부여해주는겁니다
@@ -56,6 +63,42 @@ void mapTool::createObj()
 		else if (_objName == ZERGLING && !_objDelOn)
 		{
 			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = ZERGLING;
+			InvalidateRect(_hWnd, NULL, false);
+		}
+		else if (_objName == MARINE && !_objDelOn)
+		{
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = MARINE;
+			InvalidateRect(_hWnd, NULL, false);
+		}
+		else if (_objName == CIVILIAN && !_objDelOn)
+		{
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = CIVILIAN;
+			InvalidateRect(_hWnd, NULL, false);
+		}
+		else if (_objName == TEMPLAR && !_objDelOn)
+		{
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = TEMPLAR;
+			InvalidateRect(_hWnd, NULL, false);
+		}
+		else if (_objName == BISHOP && !_objDelOn)
+		{
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = BISHOP;
+			InvalidateRect(_hWnd, NULL, false);
+		}
+		//이미지가없음 아직
+		//else if (_objName == DIABLO && !_objDelOn)
+		//{
+		//	_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = DIABLO;
+		//	InvalidateRect(_hWnd, NULL, false);
+		//}
+		//else if (_objName == SKELETON && !_objDelOn)
+		//{
+		//	_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = SKELETON;
+		//	InvalidateRect(_hWnd, NULL, false);
+		//}
+		else if (_objName == GHOST && !_objDelOn)
+		{
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = GHOST;
 			InvalidateRect(_hWnd, NULL, false);
 		}
 	}
