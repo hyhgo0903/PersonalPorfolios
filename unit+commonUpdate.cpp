@@ -47,14 +47,14 @@ void unit::commonUpdate()
 		}
 		break;
 	case ATTACK:
-		if (_frame >= _maxFrame)
+		if (_frame > _maxFrame)
 		{
 			if (_target == -1)	setState(WALK);
 			else		setState(ATTACKWAIT);
 		}
 		break;
 	case DEAD:
-		if (_frame >= _maxFrame)
+		if (_frame > _maxFrame)
 		{
 			_frame = _maxFrame;
 			if (_deathDuration > 0) --_deathDuration;

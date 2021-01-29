@@ -26,26 +26,31 @@ void mapTool::createObj()
 		else if (_objName == TREE1 && !_objDelOn)
 		{
 			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = TREE1;
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM = UNMOVE;
 			InvalidateRect(_hWnd, NULL, false);
 		}
 		else if (_objName == TREE2 && !_objDelOn)
 		{
 			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = TREE2;
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM = UNMOVE;
 			InvalidateRect(_hWnd, NULL, false);
 		}
 		else if (_objName == TREE3 && !_objDelOn)
 		{
 			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = TREE3;
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM = UNMOVE;
 			InvalidateRect(_hWnd, NULL, false);
 		}
 		else if (_objName == TREE4 && !_objDelOn)
 		{
 			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = TREE4;
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM = UNMOVE;
 			InvalidateRect(_hWnd, NULL, false);
 		}
 		else if (_objName == TREE5 && !_objDelOn)
 		{
 			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = TREE5;
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM = UNMOVE;
 			InvalidateRect(_hWnd, NULL, false);
 		}
 		else if (_objName == ZERGLING && !_objDelOn)

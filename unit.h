@@ -89,6 +89,9 @@ protected:
 
 	bool _active;
 
+	int _count;
+	bool _used;
+
 public:
 	unit();
 	~unit();
