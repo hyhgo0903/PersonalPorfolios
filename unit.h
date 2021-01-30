@@ -82,10 +82,14 @@ protected:
 	bool _erase;
 	// 죽음애니메이션 끝나면 이게 켜지고 유닛매니저에서 삭제
 
+	bool _return; // 교전끝나면 원래목적지로 돌아가야하고 이게 켜진다.
+
 	int _tileNum;
 	// 가장 최근 몇번타일까지 밟았는지
 	// 그거에따라 목적지 바꿔줌. 플레이어면 역순으로 밟고
 	// 적이면 순차대로 밟도록 함
+	vector<int> _vPath;
+	vector<int>::iterator _viPath; // 경로타일을 저장하는 벡터
 
 	int _deathDuration;
 	// 죽었을떄 시체(?)가 치워지는데까지 걸리는 카운트
@@ -122,11 +126,12 @@ public:
 	virtual void reRender();
 	void moveCancel(); // 이동했을테니 다시 돌려주는 함수(롤백)
 
-	virtual void setState(STATE state) = 0;
 	// 이건 유닛들마다 이미지가 다르므로 각각 만들어 씁시다.
+	virtual void setState(STATE state) = 0;
 
-	void RMC();
 	// 렉트메이크센터 편하게 하려고
+	void RMC();
+
 
 	// 게터들도 무지막지하게 많음
 	int getID() { return _ID; }
@@ -153,5 +158,15 @@ public:
 	int& getTileNum() { return _tileNum; }
 	bool& getActive() { return _active; }
 	float getSpeed() { return _speed; }
+	bool& getReturn() { return _return; }
+
+
+	// 이하는 벡터관련
+	vector<int> getVPath() { return _vPath; }
+	void eraseVPath(int num) { _vPath.erase(_vPath.begin() + num); }
+	void addTilePath(int tileNum) { _vPath.push_back(tileNum); }
+	void clearVPath() { _vPath.clear(); }
+	vector<int>::iterator getViPath() { return _viPath; }
+
 };
 

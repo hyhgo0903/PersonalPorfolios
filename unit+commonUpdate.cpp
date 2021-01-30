@@ -40,7 +40,11 @@ void unit::commonUpdate()
 		RMC();
 		break;
 	case ATTACKWAIT:
-		if (_target == -1) setState(WALK);
+		if (_target == -1)
+		{
+			_return = true;
+			setState(WALK);
+		}	
 		if (_target != -1 && _delay <= 0)
 		{
 			setState(ATTACK);
@@ -49,8 +53,12 @@ void unit::commonUpdate()
 	case ATTACK:
 		if (_frame > _maxFrame)
 		{
-			if (_target == -1)	setState(WALK);
-			else		setState(ATTACKWAIT);
+			if (_target == -1)
+			{
+				_return = true;
+				setState(WALK);
+			}
+			else	setState(ATTACKWAIT);
 		}
 		break;
 	case DEAD:

@@ -29,8 +29,18 @@ HRESULT mainScene::init()
 	_sm->umLink(_um);								//유닛 매니저와 스테이지 매니저를 링크로 연결해줌
 	_sm->setStage(STAGE1);
 
-	_um->createZergling(PLAYER, 210, 370);
-	_um->createZergling(PLAYER, 310, 530);
+	_um->createZergling(PLAYER, 960, 300);
+	_um->getVUnit()[0]->setDest(960,16);
+	_um->getVUnit()[0]->addTilePath(1);
+	_um->getVUnit()[0]->addTilePath(2);
+	_um->getVUnit()[0]->addTilePath(32);
+	_um->getVUnit()[0]->addTilePath(62);
+	_um->getVUnit()[0]->addTilePath(63);
+	_um->getVUnit()[0]->addTilePath(64);
+	_um->getVUnit()[0]->addTilePath(65);
+	_um->getVUnit()[0]->addTilePath(66);
+	_um->getVUnit()[0]->addTilePath(96);
+	/*_um->createZergling(PLAYER, 310, 530);
 	_um->createMarine(ENEMY, 1350, 400);
 	_um->createMarine(PLAYER, 110, 370);
 	_um->createMarine(ENEMY, 1350, 500);
@@ -41,7 +51,7 @@ HRESULT mainScene::init()
 	_um->createBishop(ENEMY, 1200, 600);
 	_um->createBishop(PLAYER, 200, 350);
 	_um->createGhost(PLAYER, 250, 400);
-	_um->createGhost(ENEMY, 1250, 650);
+	_um->createGhost(ENEMY, 1250, 650);*/
 
 
 	return S_OK;

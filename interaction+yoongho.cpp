@@ -87,8 +87,8 @@ void interaction::yoonghoUpdate()
 		else if (_sm->getIsoTile()[tempPtRT.x + tempPtRT.y * 30].MUM == UNMOVE)
 		{
 			_um->getVUnit()[i]->moveCancel();
-			_um->getVUnit()[i]->getX() -= _um->getVUnit()[i]->getSpeed() * cosf(0.464f);
-			_um->getVUnit()[i]->getY() -= _um->getVUnit()[i]->getSpeed() * sinf(0.464f);
+			_um->getVUnit()[i]->getX() += _um->getVUnit()[i]->getSpeed() * cosf(0.464f);
+			_um->getVUnit()[i]->getY() += _um->getVUnit()[i]->getSpeed() * sinf(0.464f);
 			continue;
 		}
 		else if (_sm->getIsoTile()[tempPtLB.x + tempPtLB.y * 30].MUM == UNMOVE)
@@ -106,6 +106,56 @@ void interaction::yoonghoUpdate()
 			continue;
 		}
 	}
+
+	for (int i = 0; i < _um->getVUnit().size(); ++i)
+	{
+		if (_um->getVUnit()[i]->getState() != WALK || _um->getVUnit()[i]->getTarget() != -1
+			|| !_um->getVUnit()[i]->getReturn()) continue;
+		_um->getVUnit()[i]->setDest(_sm->getIsoTile()[_um->getVUnit()[i]->getTileNum()].centerX,
+			_sm->getIsoTile()[_um->getVUnit()[i]->getTileNum()].centerY);
+		_um->getVUnit()[i]->getReturn() = false;
+	}
+
+
+	for (int i = 0; i < _um->getVUnit().size();++i)
+	{ // 도달시 다음으로 넘겨주는 함수
+		if (_um->getVUnit()[i]->getState() != WALK || _um->getVUnit()[i]->getTarget() != -1) continue;
+		int tempTileNum = _um->getVUnit()[i]->getTileNum();
+		RECT tempRc;
+		RECT temp1 = RectMakeCenter(_um->getVUnit()[i]->getX(),
+			_um->getVUnit()[i]->getY(), 4, 4);
+		RECT temp2 = RectMakeCenter(_sm->getIsoTile()[tempTileNum].centerX,
+			_sm->getIsoTile()[tempTileNum].centerY, 4, 4);
+		if (IntersectRect(&tempRc, &temp1, &temp2))
+		{			
+			for (int j = 0; _um->getVUnit()[i]->getVPath().size(); ++j)
+			{	//상하좌우 먼저검사함
+				if (_um->getVUnit()[i]->getVPath()[j] == tempTileNum + 1
+					|| _um->getVUnit()[i]->getVPath()[j] == tempTileNum - 1
+					|| _um->getVUnit()[i]->getVPath()[j] == tempTileNum + 30
+					|| _um->getVUnit()[i]->getVPath()[j] == tempTileNum - 30)
+				{
+					tempTileNum = _um->getVUnit()[i]->getVPath()[j];
+					_um->getVUnit()[i]->getTileNum() = tempTileNum;
+					_um->getVUnit()[i]->setDest(_sm->getIsoTile()[tempTileNum].centerX, _sm->getIsoTile()[tempTileNum].centerY);
+					_um->getVUnit()[i]->eraseVPath(j);
+					break;
+				}//대각선 검사함
+				else if (_um->getVUnit()[i]->getVPath()[j] == tempTileNum + 29
+					|| _um->getVUnit()[i]->getVPath()[j] == tempTileNum + 31
+					|| _um->getVUnit()[i]->getVPath()[j] == tempTileNum - 29
+					|| _um->getVUnit()[i]->getVPath()[j] == tempTileNum - 31)
+				{
+					tempTileNum = _um->getVUnit()[i]->getVPath()[j];
+					_um->getVUnit()[i]->getTileNum() = tempTileNum;
+					_um->getVUnit()[i]->setDest(_sm->getIsoTile()[tempTileNum].centerX, _sm->getIsoTile()[tempTileNum].centerY);
+					_um->getVUnit()[i]->eraseVPath(j);
+					break;
+				}
+			}
+		}
+	}
+
 }
 
 void interaction::yoonghoRender()
