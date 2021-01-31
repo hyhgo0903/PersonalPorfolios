@@ -416,6 +416,9 @@
     <ClCompile Include="ghost.cpp">
       <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClCompile>
+    <ClCompile Include="interaction+aStar.cpp">
+      <Filter>playGround\mainScene\interaction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc">

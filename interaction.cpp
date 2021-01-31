@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "interaction.h"
+#include "tile.h"
 
 interaction::interaction()
 {
@@ -11,6 +12,7 @@ interaction::~interaction()
 
 HRESULT interaction::init()
 {
+
 	chanhoInit();
 	deokhoInit();
 	hyunjeongInit();

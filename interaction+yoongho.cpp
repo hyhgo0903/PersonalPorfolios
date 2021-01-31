@@ -22,8 +22,6 @@ void interaction::yoonghoUpdate()
 		}
 	}
 
-
-
 	for (int i = 0; i < _um->getVUnit().size(); ++i)
 	{ // 타겟있는놈만
 		int tg = _um->getVUnit()[i]->getTarget();
@@ -127,8 +125,8 @@ void interaction::yoonghoUpdate()
 		RECT temp2 = RectMakeCenter(_sm->getIsoTile()[tempTileNum].centerX,
 			_sm->getIsoTile()[tempTileNum].centerY, 4, 4);
 		if (IntersectRect(&tempRc, &temp1, &temp2))
-		{			
-			for (int j = 0; _um->getVUnit()[i]->getVPath().size(); ++j)
+		{	// 뒷번호부터 하는게 검사 덜함		
+			for (int j = _um->getVUnit()[i]->getVPath().size()-1; j>=0; --j)
 			{	//상하좌우 먼저검사함
 				if (_um->getVUnit()[i]->getVPath()[j] == tempTileNum + 1
 					|| _um->getVUnit()[i]->getVPath()[j] == tempTileNum - 1

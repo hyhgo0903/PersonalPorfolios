@@ -63,6 +63,13 @@ void zergling::render()
 		_image->frameRender(getMemDC(), _rc.left - 22, _rc.top - 24, _frame, 0);
 		break;
 	}
+
+	for (int i = 0; i < _vPath.size(); ++i)
+	{
+		char str[128];
+		sprintf_s(str, "%d", _vPath[i]);
+		TextOut(getMemDC(), CAMX, CAMY + 20 * i, str, strlen(str));
+	}
 }
 
 void zergling::reRender()

@@ -1,5 +1,6 @@
 #pragma once
 #include "gameNode.h"
+#include <vector>
 
 enum BELONG
 {
@@ -162,7 +163,7 @@ public:
 
 
 	// 이하는 벡터관련
-	vector<int> getVPath() { return _vPath; }
+	vector<int>& getVPath() { return _vPath; }
 	void eraseVPath(int num) { _vPath.erase(_vPath.begin() + num); }
 	void addTilePath(int tileNum) { _vPath.push_back(tileNum); }
 	void clearVPath() { _vPath.clear(); }
