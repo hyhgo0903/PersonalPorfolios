@@ -20,7 +20,7 @@ HRESULT civilian::init(BELONG belong, float x, float y)
 	_maxHP = 40;
 	_attackIndex = 1; // 1번 인덱스가 될때 스킬판정
 	_width = 12;
-	_height = 30; // 일단은 대충 설정해놓은거임(이미지크기)
+	_height = 20; // 일단은 대충 설정해놓은거임(이미지크기)
 	commonInit(); // 앞에변수 참조해서 만드는 변수도 있으므로 뒤에다 만들어야함
 
 	return S_OK;
@@ -34,6 +34,7 @@ void civilian::update()
 {
 	commonUpdate();
 	_rangeRc = RectMakeCenter(_x, _y, _width + 6, _height + 6);
+	_focusRc = RectMakeCenter(_x, _y, _width + 30, _height + 30);
 
 }
 
@@ -42,16 +43,16 @@ void civilian::render()
 	switch (_state)
 	{ // 위치 적당히 보정해서 쓸것
 	case WALK:
-		_image->frameRender(getMemDC(), _rc.left - 5, _rc.top, _frameDirection, _frame);
+		_image->frameRender(getMemDC(), _rc.left - 5, _rc.top-5, _frameDirection, _frame);
 		break;
 	case ATTACKWAIT: // 첫번쨰 프레임으로 고정
-		_image->frameRender(getMemDC(), _rc.left - 5, _rc.top, _frameDirection, 0);
+		_image->frameRender(getMemDC(), _rc.left - 5, _rc.top-5, _frameDirection, 0);
 		break;
 	case ATTACK:
-		_image->frameRender(getMemDC(), _rc.left - 5, _rc.top, _frameDirection, 0);
+		_image->frameRender(getMemDC(), _rc.left - 5, _rc.top-5, _frameDirection, 0);
 		break;
 	case DEAD: // 프레임인덱스 다르게 도니까 주의
-		_image->frameRender(getMemDC(), _rc.left - 24, _rc.top - 4, _frame, 0);
+		_image->frameRender(getMemDC(), _rc.left - 24, _rc.top - 9, _frame, 0);
 		break;
 	}
 }
@@ -61,16 +62,13 @@ void civilian::reRender()
 	switch (_state)
 	{ // 위치 적당히 보정해서 쓸것
 	case WALK:
-		_image->alphaFrameRender(getMemDC(), _rc.left - 5, _rc.top, _frameDirection, _frame, 150);
+		_image->alphaFrameRender(getMemDC(), _rc.left - 5, _rc.top-5, _frameDirection, _frame, 150);
 		break;
 	case ATTACKWAIT: // 첫번쨰 프레임으로 고정
-		_image->alphaFrameRender(getMemDC(), _rc.left - 5, _rc.top, _frameDirection, 0, 150);
+		_image->alphaFrameRender(getMemDC(), _rc.left - 5, _rc.top-5, _frameDirection, 0, 150);
 		break;
 	case ATTACK:
-		_image->alphaFrameRender(getMemDC(), _rc.left - 5, _rc.top, _frameDirection, 0, 150);
-		break;
-	case DEAD: // 프레임인덱스 다르게 도니까 주의
-		_image->alphaFrameRender(getMemDC(), _rc.left - 24, _rc.top - 4, _frame, 0, 150);
+		_image->alphaFrameRender(getMemDC(), _rc.left - 5, _rc.top-5, _frameDirection, 0, 150);
 		break;
 	}
 }

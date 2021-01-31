@@ -111,6 +111,8 @@ void mapTool::fill(int x, int y)
 {
 	for (int i = 0; i < TILEX* TILEY; ++i)
 	{
+		if (!_moveUnMove) _isoTile[i].MUM = MOVE;
+		else  _isoTile[i].MUM = UNMOVE;
 		_isoTile[i].fX = x;
 		_isoTile[i].fY = y;
 	}

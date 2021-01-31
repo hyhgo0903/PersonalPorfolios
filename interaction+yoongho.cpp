@@ -72,35 +72,31 @@ void interaction::yoonghoUpdate()
 	{
 		if (_um->getVUnit()[i]->getState() != WALK) continue;
 		POINT tempPtLT = picking(_um->getVUnit()[i]->getRect().left, _um->getVUnit()[i]->getRect().top);
-		POINT tempPtRT = picking(_um->getVUnit()[i]->getRect().right, _um->getVUnit()[i]->getRect().top);
-		POINT tempPtLB = picking(_um->getVUnit()[i]->getRect().left, _um->getVUnit()[i]->getRect().bottom);
-		POINT tempPtRB = picking(_um->getVUnit()[i]->getRect().right, _um->getVUnit()[i]->getRect().bottom);
 		if (_sm->getIsoTile()[tempPtLT.x + tempPtLT.y * 30].MUM == UNMOVE)
 		{
 			_um->getVUnit()[i]->moveCancel();
-			_um->getVUnit()[i]->getX() += _um->getVUnit()[i]->getSpeed() * cosf(0.464f);
-			_um->getVUnit()[i]->getY() -= _um->getVUnit()[i]->getSpeed() * sinf(0.464f);
+			_um->getVUnit()[i]->getX() += _um->getVUnit()[i]->getSpeed();
 			continue;
 		}
-		else if (_sm->getIsoTile()[tempPtRT.x + tempPtRT.y * 30].MUM == UNMOVE)
+		POINT tempPtRT = picking(_um->getVUnit()[i]->getRect().right, _um->getVUnit()[i]->getRect().top);
+		if (_sm->getIsoTile()[tempPtRT.x + tempPtRT.y * 30].MUM == UNMOVE)
 		{
 			_um->getVUnit()[i]->moveCancel();
-			_um->getVUnit()[i]->getX() += _um->getVUnit()[i]->getSpeed() * cosf(0.464f);
-			_um->getVUnit()[i]->getY() += _um->getVUnit()[i]->getSpeed() * sinf(0.464f);
+			_um->getVUnit()[i]->getX() -= _um->getVUnit()[i]->getSpeed();
 			continue;
 		}
-		else if (_sm->getIsoTile()[tempPtLB.x + tempPtLB.y * 30].MUM == UNMOVE)
+		POINT tempPtLB = picking(_um->getVUnit()[i]->getRect().left, _um->getVUnit()[i]->getRect().bottom);
+		if (_sm->getIsoTile()[tempPtLB.x + tempPtLB.y * 30].MUM == UNMOVE)
 		{
 			_um->getVUnit()[i]->moveCancel();
-			_um->getVUnit()[i]->getX() += _um->getVUnit()[i]->getSpeed() * cosf(0.464f);
-			_um->getVUnit()[i]->getY() += _um->getVUnit()[i]->getSpeed() * sinf(0.464f);
+			_um->getVUnit()[i]->getX() += _um->getVUnit()[i]->getSpeed();
 			continue;
 		}
-		else if (_sm->getIsoTile()[tempPtRB.x + tempPtRB.y * 30].MUM == UNMOVE)
+		POINT tempPtRB = picking(_um->getVUnit()[i]->getRect().right, _um->getVUnit()[i]->getRect().bottom);
+		if (_sm->getIsoTile()[tempPtRB.x + tempPtRB.y * 30].MUM == UNMOVE)
 		{
 			_um->getVUnit()[i]->moveCancel();
-			_um->getVUnit()[i]->getX() += _um->getVUnit()[i]->getSpeed() * cosf(0.464f);
-			_um->getVUnit()[i]->getY() -= _um->getVUnit()[i]->getSpeed() * sinf(0.464f);
+			_um->getVUnit()[i]->getX() -= _um->getVUnit()[i]->getSpeed();
 			continue;
 		}
 	}

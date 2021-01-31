@@ -27,6 +27,17 @@ HRESULT mapTool::init()
 	_objName = NONE;
 	_objDelOn = false;
 	_menuInPt = false;
+
+	HANDLE file;
+	DWORD read;
+
+	file = CreateFile("stage1.map", GENERIC_READ, NULL, NULL,
+		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	ReadFile(file, _isoTile, sizeof(isoTile) * TILEX * TILEY, &read, NULL);
+
+	CloseHandle(file);
+
 	return S_OK;
 }
 

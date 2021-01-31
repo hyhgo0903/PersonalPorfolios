@@ -115,11 +115,11 @@ void interaction::pathFinder(int currentTile)
 		if (_vOpenList[i]->tileNum + 1 == _vOpenList[i]->parentNodeTileNum
 			|| _vOpenList[i]->tileNum - 1 == _vOpenList[i]->parentNodeTileNum
 			|| _vOpenList[i]->tileNum + 30 == _vOpenList[i]->parentNodeTileNum
-			|| _vOpenList[i]->tileNum - 30 == _vOpenList[i]->parentNodeTileNum) cost = 11;
+			|| _vOpenList[i]->tileNum - 30 == _vOpenList[i]->parentNodeTileNum) cost = 9;
 		else if (_vOpenList[i]->tileNum + 31 == _vOpenList[i]->parentNodeTileNum
-			|| _vOpenList[i]->tileNum - 31 == _vOpenList[i]->parentNodeTileNum) cost = 10;
+			|| _vOpenList[i]->tileNum - 31 == _vOpenList[i]->parentNodeTileNum) cost = 8;
 		else if (_vOpenList[i]->tileNum + 29 == _vOpenList[i]->parentNodeTileNum
-			|| _vOpenList[i]->tileNum - 29 == _vOpenList[i]->parentNodeTileNum) cost = 20;
+			|| _vOpenList[i]->tileNum - 29 == _vOpenList[i]->parentNodeTileNum) cost = 16;
 
 		_vOpenList[i]->costFromStart = cost;
 
@@ -161,8 +161,8 @@ void interaction::pathFinder(int currentTile)
 	{
 		while (_currentTile != _startTile)
 		{
-			_currentTile = _vTotalList[_currentTile]->parentNodeTileNum;
 			_path.push_back(_currentTile);
+			_currentTile = _vTotalList[_currentTile]->parentNodeTileNum;
 		}
 		_stop = true;
 		return;

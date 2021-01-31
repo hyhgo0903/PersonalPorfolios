@@ -20,7 +20,7 @@ HRESULT bishop::init(BELONG belong, float x, float y)
 	_maxHP = 40;
 	_attackIndex = 3; // 1번 인덱스가 될때 스킬판정
 	_width = 12;
-	_height = 30; // 일단은 대충 설정해놓은거임(이미지크기)
+	_height = 20; // 일단은 대충 설정해놓은거임(이미지크기)
 	commonInit(); // 앞에변수 참조해서 만드는 변수도 있으므로 뒤에다 만들어야함
 
 	return S_OK;

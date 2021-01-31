@@ -16,6 +16,6 @@ void unit::commonInit()
 	setState(WALK);		// 셋스테이트때매 워크로 바뀌니 놀라지말것..
 
 	_rc = RectMakeCenter(_x, _y, _width, _height);
-	_destX = _x; _destY = _y;
+	setDest(_x, _y);
 	_HP = _maxHP;
 }
