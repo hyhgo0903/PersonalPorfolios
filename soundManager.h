@@ -1,6 +1,7 @@
 #pragma once
 #include "singletonBase.h"
 #include <map>
+#include <vector>
 
 #include "inc/fmod.hpp"
 #pragma comment(lib, "lib/fmodex64_vc.lib")
@@ -29,7 +30,12 @@ private:
 
 	arrSounds		_mTotalSounds;
 
+	vector<string> _vBgmKey;
+	vector<string>::iterator _viBgmKey;
+
 	string _latestAdded;
+	float _bgmVolume;
+	float _effectVolume;
 
 public:
 	soundManager();
@@ -42,8 +48,8 @@ public:
 	//   사운드 추가함수(키 값, 음악파일명, 브금or효과음, 루프할껀지)
 	void addSound(string keyName, string soundName, bool bgm, bool loop);
 
-	//                             0.0f ~ 1.0f -> 0 ~ 255
-	void play(string keyName, float volume = 1.0f);
+	// 볼륨은 bgm, 사운드 알아서 들어가게했음
+	void play(string keyName);
 	void stop(string keyName);
 	void pause(string keyName);
 	void resume(string keyName);
@@ -51,6 +57,11 @@ public:
 	//호옥시이 몰라서 만들어둠
 	bool isPlaySound(string keyName);
 	bool isPauseSound(string keyName);
+
+	void setBgmVolume(float volume);
+	void setEffectVolume(float volume);
+	float getBgmVolume() { return _bgmVolume; }
+	float getEffectVolume() { return _effectVolume; }
 
 	string getLatestAdded() { return _latestAdded; }
 };

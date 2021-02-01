@@ -25,6 +25,8 @@ HRESULT soundManager::init()
 	memset(_sound, 0, sizeof(Sound*) * TOTALSOUNDBUFFER);
 	memset(_channel, 0, sizeof(Channel*) * TOTALSOUNDBUFFER);
 
+	_bgmVolume = 1.0f;
+	_effectVolume = 1.0f;
 	return S_OK;
 }
 
@@ -51,8 +53,8 @@ void soundManager::addSound(string keyName, string soundName, bool bgm, bool loo
 	{
 		if (bgm)
 		{
+			_vBgmKey.push_back(keyName);
 			_system->createStream(soundName.c_str(), FMOD_LOOP_NORMAL, NULL, &_sound[_mTotalSounds.size()]);
-
 		}
 		else
 		{
@@ -63,8 +65,8 @@ void soundManager::addSound(string keyName, string soundName, bool bgm, bool loo
 	{
 		if (bgm)
 		{
+			_vBgmKey.push_back(keyName);
 			_system->createStream(soundName.c_str(), FMOD_DEFAULT, NULL, &_sound[_mTotalSounds.size()]);
-
 		}
 		else
 		{
@@ -75,7 +77,8 @@ void soundManager::addSound(string keyName, string soundName, bool bgm, bool loo
 	_mTotalSounds.insert(make_pair(keyName, &_sound[_mTotalSounds.size()]));
 }
 
-void soundManager::play(string keyName, float volume)
+// 볼륨은 알아서 쓰도록했음
+void soundManager::play(string keyName)
 {
 	arrSoundsIter iter = _mTotalSounds.begin();
 
@@ -88,8 +91,17 @@ void soundManager::play(string keyName, float volume)
 			//사운드가 계속 재생하려다보니까 끊키고 안나와요!
 			_system->playSound(FMOD_CHANNEL_FREE, *iter->second, false, &_channel[count]);
 
-			_channel[count]->setVolume(volume);
-			break;
+			bool isBgm = false;
+			for (int i = 0; i < _vBgmKey.size(); ++i)
+			{
+				if (iter->first == _vBgmKey[i])
+				{
+					_channel[count]->setVolume(_bgmVolume);
+					isBgm = true;
+					break;
+				}
+			}
+			if (!isBgm) _channel[count]->setVolume(_effectVolume);
 		}
 	}
 }
@@ -178,4 +190,46 @@ bool soundManager::isPauseSound(string keyName)
 	}
 
 	return isPause;
+}
+
+void soundManager::setBgmVolume(float volume)
+{
+	_bgmVolume = volume;
+	arrSoundsIter iter = _mTotalSounds.begin();
+
+	int count = 0;
+
+	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
+	{
+		for (int i = 0; i < _vBgmKey.size(); ++i)
+		{
+			if (iter->first == _vBgmKey[i])
+			{
+				_channel[count]->setVolume(_bgmVolume);
+				break;
+			}
+		}
+	}
+}
+
+void soundManager::setEffectVolume(float volume)
+{
+	_effectVolume = volume;
+	arrSoundsIter iter = _mTotalSounds.begin();
+
+	int count = 0;
+
+	for (iter; iter != _mTotalSounds.end(); ++iter, count++)
+	{
+		bool isBgm = false;
+		for (int i = 0; i < _vBgmKey.size(); ++i)
+		{
+			if (iter->first == _vBgmKey[i])
+			{
+				isBgm = true;
+				break;
+			}
+		}
+		if (!isBgm) _channel[count]->setVolume(_effectVolume);
+	}
 }
