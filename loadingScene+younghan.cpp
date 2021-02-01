@@ -4,8 +4,10 @@
 void loadingScene::younghanInit()
 {
 	//이미지 영역
+	///////////맵 타일
 	IMAGEMANAGER->addFrameImage("mapTiles", "image/maptool/tile512x384ver2.bmp", 0, 0, 512, 384, 8, 12, true, RGB(255, 0, 255));
 	imgLoaded();
+	///////////버튼
 	IMAGEMANAGER->addImage("save1", "image/maptool/save1.bmp", 64, 32, false, RGB(255, 0, 255));
 	imgLoaded();
 	IMAGEMANAGER->addImage("save2", "image/maptool/save2.bmp", 64, 32, false, RGB(255, 0, 255));
@@ -42,15 +44,14 @@ void loadingScene::younghanInit()
 	imgLoaded();
 	IMAGEMANAGER->addImage("rightBt", "image/maptool/right.bmp", 32, 32, false, RGB(255, 0, 255));
 	imgLoaded();
-	IMAGEMANAGER->addImage("tree", "image/maptool/tree.bmp", 107, 113, true, RGB(255, 0, 255));
-	imgLoaded();
 	IMAGEMANAGER->addImage("objDel", "image/maptool/objdel.bmp", 64, 32, false, RGB(255, 0, 255));
-	imgLoaded();
-	IMAGEMANAGER->addImage("icon_zergling", "image/icon/icon_zergling.bmp", 80, 90, false, RGB(255, 0, 255));
 	imgLoaded();
 	IMAGEMANAGER->addImage("delAll", "image/maptool/delall.bmp", 64, 32, false, RGB(255, 0, 255));
 	imgLoaded();
 	IMAGEMANAGER->addImage("un", "image/maptool/un.bmp", 16, 16, false, RGB(255, 0, 255));
+	imgLoaded();
+	//////////////////오브젝트
+	IMAGEMANAGER->addImage("tree", "image/maptool/tree.bmp", 107, 113, true, RGB(255, 0, 255));
 	imgLoaded();
 	IMAGEMANAGER->addImage("tree2", "image/maptool/tree2.bmp", 89, 115, true, RGB(255, 0, 255));
 	imgLoaded();
@@ -60,6 +61,7 @@ void loadingScene::younghanInit()
 	imgLoaded();
 	IMAGEMANAGER->addImage("tree5", "image/maptool/tree5.bmp", 76, 83, true, RGB(255, 0, 255));
 	imgLoaded();
+	/////////////////유닛
 	IMAGEMANAGER->addFrameImage("ghost_move_red", "image/unit/ghost/ghost_move_red.bmp", 320, 324, 8, 9, true, RGB(255, 255, 0));
 	imgLoaded();
 	IMAGEMANAGER->addFrameImage("ghost_move_blue", "image/unit/ghost/ghost_move_blue.bmp", 320, 324, 8, 9, true, RGB(255, 255, 0));
@@ -71,6 +73,9 @@ void loadingScene::younghanInit()
 	IMAGEMANAGER->addFrameImage("ghost_dead_red", "image/unit/ghost/ghost_dead_red.bmp", 280, 41, 5, 1, true, RGB(255, 255, 0));
 	imgLoaded();
 	IMAGEMANAGER->addFrameImage("ghost_dead_blue", "image/unit/ghost/ghost_dead_blue.bmp", 280, 41, 5, 1, true, RGB(255, 255, 0));
+	imgLoaded();
+	/////////////////아이콘
+	IMAGEMANAGER->addImage("icon_zergling", "image/icon/icon_zergling.bmp", 80, 90, false, RGB(255, 0, 255));
 	imgLoaded();
 	IMAGEMANAGER->addImage("icon_marine", "image/icon/icon_marine.bmp", 80, 90, false, RGB(255, 0, 255));
 	imgLoaded();
@@ -85,6 +90,17 @@ void loadingScene::younghanInit()
 	IMAGEMANAGER->addImage("icon_templar", "image/icon/icon_templar.bmp", 80, 90, false, RGB(255, 0, 255));
 	imgLoaded();
 	IMAGEMANAGER->addImage("icon_skeleton", "image/icon/icon_skeleton.bmp", 80, 90, false, RGB(255, 0, 255));
+	imgLoaded();
+	//////////////////////UI///////////////////////
+	IMAGEMANAGER->addImage("ui_menu", "image/ui/ui_menu.bmp", 900, 132, true, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("ui_home", "image/ui/ui_home.bmp", 64, 32, false, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("ui_retry", "image/ui/ui_retry.bmp", 64, 32, false, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("ui_clear", "image/ui/ui_clear.bmp", 64, 32, false, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("ui_start", "image/ui/ui_start.bmp", 64, 32, false, RGB(255, 0, 255));
 	imgLoaded();
 }
 
