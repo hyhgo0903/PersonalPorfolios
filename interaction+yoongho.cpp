@@ -20,6 +20,17 @@ void interaction::yoonghoUpdate()
 				_um->getVUnit()[j]->getHP() -= 0.1f;
 			}
 		}
+		if (_se->getVSne()[i]->getID() != 2) continue;
+		for (int j = 0; j < _um->getVUnit().size(); ++j)
+		{ // 힐
+			if (_um->getVUnit()[j]->getState() == DEAD) continue;
+			if (_um->getVUnit()[j]->getBelong() == _se->getVSne()[i]->getBelong()) continue;
+			RECT temp;
+			if (IntersectRect(&temp, &_um->getVUnit()[j]->getRect(), &_se->getVSne()[i]->getRect()))
+			{
+				_um->getVUnit()[j]->getHP() += 0.1f;
+			}
+		}
 	}
 
 	for (int i = 0; i < _um->getVUnit().size(); ++i)
@@ -49,8 +60,27 @@ void interaction::yoonghoUpdate()
 					_se->createPsionic(S_ENEMY, _um->getVUnit()[tg]->getX(), _um->getVUnit()[tg]->getY());
 				}
 			}
+			else if (_um->getVUnit()[i]->getID() == 5)
+			{ // 비숍이면 힐장판 생성
+				if (_um->getVUnit()[i]->getBelong() == PLAYER)
+				{ 
+					_se->createHeal(S_PLAYER, _um->getVUnit()[i]->getX(), _um->getVUnit()[i]->getY());
+				}
+				if (_um->getVUnit()[i]->getBelong() == ENEMY)
+				{
+					_se->createHeal(S_ENEMY, _um->getVUnit()[i]->getX(), _um->getVUnit()[i]->getY());
+				}
+			}
 			_um->getVUnit()[i]->getAttackReady() = false;
-			_um->getVUnit()[tg]->getHP() -= _um->getVUnit()[i]->getDamage();
+			if (_um->getVUnit()[i]->getID() != 5) // 힐장판이 아니면 데미지
+			{
+				_um->getVUnit()[tg]->getHP() -= _um->getVUnit()[i]->getDamage();
+			}
+			else if (_um->getVUnit()[i]->getID() == 5) // 힐장판이면 HP 회복하는 것으로 변경
+			{
+				_um->getVUnit()[i]->getHP() += _um->getVUnit()[i]->getDamage();
+			}
+			
 		}
 		else if (IntersectRect(&temp, &_um->getVUnit()[tg]->getRect(), &_um->getVUnit()[i]->getRangeRect())
 			&& _um->getVUnit()[i]->getState() != ATTACK)

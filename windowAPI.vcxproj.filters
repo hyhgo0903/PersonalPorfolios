@@ -222,6 +222,9 @@
     <ClInclude Include="ghost.h">
       <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClInclude>
+    <ClInclude Include="heal.h">
+      <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -418,6 +421,9 @@
     </ClCompile>
     <ClCompile Include="interaction+aStar.cpp">
       <Filter>playGround\mainScene\interaction</Filter>
+    </ClCompile>
+    <ClCompile Include="heal.cpp">
+      <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

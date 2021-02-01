@@ -55,3 +55,10 @@ void skillNEffectManager::createPlague(S_BELONG belong, float x, float y)
 	flagu->init(belong, x, y);
 	_vSne.push_back(flagu);
 }
+
+void skillNEffectManager::createHeal(S_BELONG belong, float x, float y)
+{
+	heal* cure = new heal;
+	cure->init(belong, x, y);
+	_vSne.push_back(cure);
+}

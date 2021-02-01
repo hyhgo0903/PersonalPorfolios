@@ -4,12 +4,16 @@ class titleScene : public gameNode
 {
 private:
 
-	image* _image;
+	image* _titleImage;
+	image* _volumeSetImage;
 	RECT _gameStart;
 	RECT _mapTool;
 	RECT _option;
 	RECT _exit;
+	RECT _volumeExit; 
+	RECT _volumRect;
 	POINT _point;
+	bool _isVolumeSetOn;
 
 public:
 	titleScene();

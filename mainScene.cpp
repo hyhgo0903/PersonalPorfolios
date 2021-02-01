@@ -29,7 +29,7 @@ HRESULT mainScene::init()
 	_sm->umLink(_um);								//유닛 매니저와 스테이지 매니저를 링크로 연결해줌
 	_sm->setStage(STAGE1);
 
-	_um->createZergling(PLAYER, 960, 16);
+	_um->createBishop(PLAYER, 960, 16);
 	_um->getVUnit()[0]->setVPath(_ia->aStarPath(0, 899));
 	_um->getVUnit()[0]->getTileNum() = 0;
 	_um->createCivilian(ENEMY, 960, 944);
@@ -85,5 +85,4 @@ void mainScene::render()
 	_se->render();			// 스킬과 이펙트가 잘 보이게 나중에 그림
 	_um->reRender();		// 반투명 유닛이 그려서 가려진건 반투명하게 보임
 	_um->progressBarRender(); // 체력바는 안가려지게끔
-	_sm->uiRender();			//UI그려줌
 }
