@@ -14,6 +14,7 @@ private:
 	skillNEffectManager*	_se;
 	interaction*			_ia;
 
+	int _alpha; // 밝아지며 등장시키려고
 
 public:
 	mainScene();

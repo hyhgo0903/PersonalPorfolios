@@ -25,6 +25,9 @@ private:
 	RECT _effectMinus;
 
 	bool _isVolumeSetOn;
+	bool _isStart;
+	bool _isEnd;
+	int _alpha; // 어두워지며 끝나려고
 
 public:
 	titleScene();

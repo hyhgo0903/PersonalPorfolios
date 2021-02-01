@@ -16,6 +16,8 @@ private:
 
 	mapSceneList _mSceneList;
 
+	int _alpha;
+
 public:
 	HRESULT init();
 	void release();
@@ -24,6 +26,7 @@ public:
 
 	//¾ÀÃß°¡ ÇÔ¼ö
 	gameNode* addScene(string sceneName, gameNode* scene);
+	int getAlpha() { return _alpha; }
 
 	//¾À º¯°æ ÇÔ¼ö
 	HRESULT changeScene(string sceneName);

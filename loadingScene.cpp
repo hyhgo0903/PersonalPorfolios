@@ -94,12 +94,12 @@ void loadingScene::imgLoaded()
 {
 	_soundLoaded = false;
 	++_currentCount;
-	Sleep(20);
+	//Sleep(20);
 }
 
 void loadingScene::soundLoaded()
 {
 	_soundLoaded = true;
 	++_currentCount;
-	Sleep(20);
+	//Sleep(20);
 }

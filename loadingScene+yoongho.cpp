@@ -9,8 +9,6 @@ void loadingScene::yoonghoInit()
 	SOUNDMANAGER->addSound("테란브금", "sound/treamedterran1.mp3", true, true);
 	soundLoaded();
 
-	IMAGEMANAGER->addFrameImage("tile", "isoprac.bmp", 448, 32, 7, 1, true, RGB(255, 0, 255));
-	imgLoaded();
 	IMAGEMANAGER->addFrameImage("저글링이동블루", "image/unit/zergling/zerglingwalkblue.bmp", 320, 273, 8, 7, true, RGB(255, 0, 255));
 	imgLoaded();
 	IMAGEMANAGER->addFrameImage("저글링이동퍼플", "image/unit/zergling/zerglingwalk.bmp", 320, 273, 8, 7, true, RGB(255, 0, 255));
@@ -55,5 +53,7 @@ void loadingScene::yoonghoInit()
 	IMAGEMANAGER->addImage("효과음조절바", "image/ui/vol/voleffectbar.bmp", 120, 29, true, RGB(255, 0, 255));
 	imgLoaded();
 	IMAGEMANAGER->addFrameImage("소리키고끄기", "image/ui/vol/volumetest.bmp", 36, 15, 2, 1, true, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("씬체인지", "image/ui/scenechange.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
 	imgLoaded();
 }

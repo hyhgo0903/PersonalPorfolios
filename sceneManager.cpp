@@ -7,6 +7,7 @@ gameNode* sceneManager::_currentScene = NULL;
 HRESULT sceneManager::init()
 {
 	_currentScene = NULL;
+	_alpha = 0;
 
 	return S_OK;
 }
@@ -31,6 +32,7 @@ void sceneManager::release()
 void sceneManager::update()
 {
 	if (_currentScene) _currentScene->update();
+	if (_alpha > 0) _alpha -= 5;
 }
 
 void sceneManager::render()
@@ -51,6 +53,7 @@ gameNode* sceneManager::addScene(string sceneName, gameNode* scene)
 //나중에 눈여겨봤다가 자기입맛 또는 팀프로젝트의 구조대로 손봐야하면 손볼것
 HRESULT sceneManager::changeScene(string sceneName)
 {
+	if (sceneName == "메인씬") _alpha = 255;
 	//이터레이터에 찾고자 하는 씬의 키 값을 넣는다
 	mapSceneIter find = _mSceneList.find(sceneName);
 

@@ -83,6 +83,7 @@ void playGround::render()
 	{
 		if (KEYMANAGER->isToggleKey(VK_TAB)) TIMEMANAGER->render(getMemDC(), CAMX, CAMY);
 		uiRender();
+		if (SCENEMANAGER->getAlpha() > 0) FINDIMG("¾ÀÃ¼ÀÎÁö")->alphaRender(getMemDC(), CAMX, CAMY, SCENEMANAGER->getAlpha());
 		_backBuffer->render(getHDC(), 0, 0, CAMX, CAMY, WINSIZEX, WINSIZEY);
 	}
 	else
@@ -90,6 +91,7 @@ void playGround::render()
 		_backBuffer->resizedRender(getMemDC(), CAMX, CAMY, CAMX + _x, CAMY + _y, WINSIZEX, WINSIZEY, WINSIZEX - 2 * _x, WINSIZEY - 2 * _y);
 		if (KEYMANAGER->isToggleKey(VK_TAB)) TIMEMANAGER->render(getMemDC(), CAMX,CAMY);
 		uiRender();
+		if (SCENEMANAGER->getAlpha() > 0) FINDIMG("¾ÀÃ¼ÀÎÁö")->alphaRender(getMemDC(), CAMX, CAMY, SCENEMANAGER->getAlpha());
 		_backBuffer->render(getHDC(), 0, 0, CAMX, CAMY, WINSIZEX, WINSIZEY);
 	}
 }

@@ -21,7 +21,8 @@ HRESULT titleScene::init()
 	_option = RectMakeCenter(WINSIZEX / 2, 510, 200, 60);
 	_volumeExit = RectMakeCenter(_volumRect.bottom + 98, _volumRect.top + 271, 50, 30);
 	_exit = RectMakeCenter(WINSIZEX / 2 - 1, 593, 200, 60);
-	_isVolumeSetOn = false;
+	_isVolumeSetOn = _isStart = _isEnd = false;
+	_alpha = 0;
 
 	_testBgm = RectMake(_volumRect.left+ 250, _volumRect.top+133, 18, 15);
 	_testEffect = RectMake(_volumRect.left + 250, _volumRect.top + 181, 18, 15);
@@ -42,11 +43,21 @@ void titleScene::release()
 
 void titleScene::update()
 {
+	if (_isStart)
+	{
+		_alpha += 5;
+		if (_alpha > 255) SCENEMANAGER->changeScene("¸ÞÀÎ¾À");
+	}
+	if (_isEnd)
+	{
+		_alpha += 5;
+		if (_alpha > 250) PostQuitMessage(0);
+	}
 	if (KEYMANAGER->isOnceKeyDown(MK_LBUTTON))
 	{
 		if (PtInRect(&_gameStart, _ptMouse) == true && !_isVolumeSetOn)
 		{
-			SCENEMANAGER->changeScene("¸ÞÀÎ¾À");
+			_isStart = true;
 		}
 
 		else if (PtInRect(&_mapTool, _ptMouse) == true && !_isVolumeSetOn)
@@ -78,7 +89,7 @@ void titleScene::update()
 
 		else if (PtInRect(&_exit, _ptMouse) == true)
 		{
-			PostQuitMessage(0);
+			_isEnd = true;
 		}
 	}
 	if (KEYMANAGER->isStayKeyDown(MK_LBUTTON))
@@ -133,5 +144,9 @@ void titleScene::render()
 			FINDIMG("¼Ò¸®Å°°í²ô±â")->frameRender(getMemDC(), _testEffect.left, _testEffect.top, 1, 0);
 		else
 			FINDIMG("¼Ò¸®Å°°í²ô±â")->frameRender(getMemDC(), _testEffect.left, _testEffect.top, 0, 0);
+	}
+	if (_isStart || _isEnd)
+	{
+		FINDIMG("¾ÀÃ¼ÀÎÁö")->alphaRender(getMemDC(), _alpha);
 	}
 }

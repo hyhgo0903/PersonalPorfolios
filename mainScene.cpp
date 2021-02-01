@@ -85,4 +85,5 @@ void mainScene::render()
 	_se->render();			// 스킬과 이펙트가 잘 보이게 나중에 그림
 	_um->reRender();		// 반투명 유닛이 그려서 가려진건 반투명하게 보임
 	_um->progressBarRender(); // 체력바는 안가려지게끔
+	_sm->uiRender();
 }
