@@ -82,6 +82,9 @@
     <Filter Include="playGround\mapTool">
       <UniqueIdentifier>{367e18f3-291e-4162-a248-0206d3cd4b6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\mainScene\unit\subclass\summoner">
+      <UniqueIdentifier>{f2b8a1ed-3d97-4332-8a79-615b0e5fc994}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -224,6 +227,12 @@
     </ClInclude>
     <ClInclude Include="heal.h">
       <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="bone.h">
+      <Filter>playGround\mainScene\unit\subclass\summoner</Filter>
+    </ClInclude>
+    <ClInclude Include="diablo.h">
+      <Filter>playGround\mainScene\unit\subclass\summoner</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -424,6 +433,12 @@
     </ClCompile>
     <ClCompile Include="heal.cpp">
       <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="bone.cpp">
+      <Filter>playGround\mainScene\unit\subclass\summoner</Filter>
+    </ClCompile>
+    <ClCompile Include="diablo.cpp">
+      <Filter>playGround\mainScene\unit\subclass\summoner</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

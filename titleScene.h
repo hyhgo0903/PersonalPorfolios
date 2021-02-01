@@ -13,6 +13,17 @@ private:
 	RECT _volumeExit; 
 	RECT _volumRect;
 	POINT _point;
+
+	RECT _testBgm;
+	RECT _testEffect;
+
+	RECT _bgmPlus;
+	RECT _bgmBar;
+	RECT _bgmMinus;
+	RECT _effectPlus;
+	RECT _effectBar;
+	RECT _effectMinus;
+
 	bool _isVolumeSetOn;
 
 public:

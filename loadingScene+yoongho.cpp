@@ -4,7 +4,9 @@
 void loadingScene::yoonghoInit()
 { // 로디드가 뭐냐면 로딩바 올리기용 함수. 이미지 추가할떄마다 넣어주길	
 
-	SOUNDMANAGER->addSound("사운드추가예시", "sound/PTeSto00.wav", false, false);
+	SOUNDMANAGER->addSound("사이오닉스톰", "sound/PTeSto00.wav", false, false);
+	soundLoaded();
+	SOUNDMANAGER->addSound("테란브금", "sound/treamedterran1.mp3", true, true);
 	soundLoaded();
 
 	IMAGEMANAGER->addFrameImage("tile", "isoprac.bmp", 448, 32, 7, 1, true, RGB(255, 0, 255));
@@ -42,5 +44,16 @@ void loadingScene::yoonghoInit()
 	IMAGEMANAGER->addFrameImage("템플러죽음", "image/unit/templar/dead.bmp", 217, 53, 7, 1, true, RGB(255, 255, 0));
 	imgLoaded();
 	IMAGEMANAGER->addFrameImage("템플러잔상", "image/unit/templar/afterimage.bmp", 240, 168, 8, 4, true, RGB(255, 255, 0));
+	imgLoaded();
+
+	IMAGEMANAGER->addImage("타이틀메뉴", "image/title.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("볼륨조절", "image/ui/vol/VolumeSet.bmp", 300, 300, true, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("브금조절바", "image/ui/vol/volbgmbar.bmp", 120, 29, true, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("효과음조절바", "image/ui/vol/voleffectbar.bmp", 120, 29, true, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addFrameImage("소리키고끄기", "image/ui/vol/volumetest.bmp", 36, 15, 2, 1, true, RGB(255, 0, 255));
 	imgLoaded();
 }
