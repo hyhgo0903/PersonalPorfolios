@@ -33,6 +33,8 @@ void mapTool::save()
 {
 	if (PtInRect(&_saveBt, _cameraPtMouse))
 	{
+		aStarPath(0, 899); // 임시로. 원래대로면 aStarPath(_playerTile, _enemyTile)임.
+		_seePath = true;
 		HANDLE file;
 		DWORD write;
 

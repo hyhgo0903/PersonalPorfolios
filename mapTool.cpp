@@ -20,14 +20,14 @@ HRESULT mapTool::init()
 	_tempTile.fX = 0;
 	_tempTile.fY = 0;
 	_pickingPt = { 0,0 };
-	_moveUnMove = false;
+	_moveUnMove = _seePath = false;
 	_brushOn = false;
 	_rs = MAX;
 	_menuNum = ONE;
 	_objName = NONE;
 	_objDelOn = false;
 	_menuInPt = false;
-
+	
 	HANDLE file;
 	DWORD read;
 
@@ -83,6 +83,7 @@ void mapTool::update()
 
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
+		_seePath = false;
 		if (_ptMouse.x > 240 || _ptMouse.y < 580) // 미니맵 밖 누를때만
 		{
 			if (PtInRect(&_undo, _cameraPtMouse)) tempLoad();
@@ -126,7 +127,7 @@ void mapTool::update()
 void mapTool::render()
 {
 	imageRender();
-
+	
 	//아래는 편의상 만든 숫자보이게하는거
 	char str[256];
 	sprintf_s(str, "TempTile X : %d , Y : %d", _tempTile.fX, _tempTile.fY);

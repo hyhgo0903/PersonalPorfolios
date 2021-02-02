@@ -440,6 +440,9 @@
     <ClCompile Include="diablo.cpp">
       <Filter>playGround\mainScene\unit\subclass\summoner</Filter>
     </ClCompile>
+    <ClCompile Include="mapTool+aStar.cpp">
+      <Filter>playGround\mapTool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc">

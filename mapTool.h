@@ -1,9 +1,22 @@
 #pragma once
 #include "gameNode.h"
 #include "tile.h"
+#include <vector>
 
 //멀까 이건
 #define ISO_UNMOVE UNMOVE
+
+//########aStar관련 변수###########
+struct tagMAStarTile
+{
+	int tileNum;
+	int parentNodeTileNum;
+	int totalCost;
+	int costFromStart;
+	int costToGoal;
+	bool isOpen;
+};
+//########aStar관련 변수###########
 
 struct tagTilePoint
 {
@@ -95,6 +108,33 @@ private:
 	renderSize		_rs;
 	menuNum			_menuNum;
 	objName			_objName;
+
+	//########aStar관련 변수###########
+	vector<tagMAStarTile*>			_vTotalList;
+	vector<tagMAStarTile*>::iterator _viTotalList;
+	vector<tagMAStarTile*>			_vOpenList;
+	vector<tagMAStarTile*>::iterator _viOpenList;
+	vector<tagMAStarTile*>			_vCloseList;
+	vector<tagMAStarTile*>::iterator _viCloseList;
+	vector<int> _path;
+	int _startTile;		//시작타일의 번호
+	int _endTile;			//도착타일
+	int _currentTile;		//현재타일
+
+	bool _stop; // 못찾은거
+	bool _seePath;
+
+	int _playerTile; // 플레이어 깃발이 몇타일에 있는지 로드할때 불러온다.
+	int _enemyTile; // 에너미 깃발이 몇타일에 있는지 로드할때 불러온다.
+public:
+	vector<int> aStarPath(int fromTileNum, int toTileNum);
+
+	//갈수 있는 길을 찾아내서 담아줄 함수
+	vector<tagMAStarTile*> addOpenList(int currentTile);
+	//빠른 경로 찾을 함수
+	void pathFinder(int currentTile);
+	//########aStar관련###########
+
 public:
 	mapTool();
 	~mapTool();

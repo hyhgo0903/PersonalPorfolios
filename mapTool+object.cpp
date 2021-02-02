@@ -60,27 +60,27 @@ void mapTool::createObj()
 			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM = UNMOVE;
 			InvalidateRect(_hWnd, NULL, false);
 		}
-		else if (_objName == ZERGLING && !_objDelOn)
+		else if (_objName == ZERGLING && !_objDelOn && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE)
 		{
 			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = ZERGLING;
 			InvalidateRect(_hWnd, NULL, false);
 		}
-		else if (_objName == MARINE && !_objDelOn)
+		else if (_objName == MARINE && !_objDelOn && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE)
 		{
 			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = MARINE;
 			InvalidateRect(_hWnd, NULL, false);
 		}
-		else if (_objName == CIVILIAN && !_objDelOn)
+		else if (_objName == CIVILIAN && !_objDelOn && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE)
 		{
 			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = CIVILIAN;
 			InvalidateRect(_hWnd, NULL, false);
 		}
-		else if (_objName == TEMPLAR && !_objDelOn)
+		else if (_objName == TEMPLAR && !_objDelOn && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE)
 		{
 			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = TEMPLAR;
 			InvalidateRect(_hWnd, NULL, false);
 		}
-		else if (_objName == BISHOP && !_objDelOn)
+		else if (_objName == BISHOP && !_objDelOn && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE)
 		{
 			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = BISHOP;
 			InvalidateRect(_hWnd, NULL, false);
@@ -96,7 +96,7 @@ void mapTool::createObj()
 		//	_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = SKELETON;
 		//	InvalidateRect(_hWnd, NULL, false);
 		//}
-		else if (_objName == GHOST && !_objDelOn)
+		else if (_objName == GHOST && !_objDelOn && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE)
 		{
 			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = GHOST;
 			InvalidateRect(_hWnd, NULL, false);

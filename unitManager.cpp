@@ -151,3 +151,17 @@ void unitManager::createGhost(BELONG belong, float x, float y)
 	gt->init(belong, x, y);
 	_vUnit.push_back(gt);
 }
+
+void unitManager::createDiablo(BELONG belong, float x, float y)
+{
+	diablo* db = new diablo;
+	db->init(belong, x, y);
+	_vUnit.push_back(db);
+}
+
+void unitManager::createBone(BELONG belong, float x, float y)
+{
+	bone* bn = new bone;
+	bn->init(belong, x, y);
+	_vUnit.push_back(bn);
+}

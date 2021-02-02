@@ -42,6 +42,12 @@ void stageManager::update()
 			retryBt();
 			ptInCreateMenu();
 		}
+		if (_pickUnit != P_NONE) createUnit();
+	}
+
+	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
+	{
+		if (_pickUnit != P_NONE) createUnit();
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_F1))
@@ -76,9 +82,20 @@ void stageManager::render()
 
 		if (_isoTile[i].inRect)	IMAGEMANAGER->findImage("mapTiles")->alphaFrameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY, 100);
 		else IMAGEMANAGER->findImage("mapTiles")->frameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY);
-	}
 
-	if (_pickUnit == P_ZERGLING)	IMAGEMANAGER->findImage("저글링이동퍼플")->alphaFrameRender(getMemDC(), _cameraPtMouse.x - 18, _cameraPtMouse.y - 18, 4, 0, 100);
+
+		//타일 위에 유닛을 그려주는 기능
+		if (_isoTile[i].name == ZERGLING)	IMAGEMANAGER->findImage("저글링이동블루")->frameRender(getMemDC(), _isoTile[i].drawX + 11, _isoTile[i].drawY - 5, 4, 0);
+		else if (_isoTile[i].name == MARINE)	IMAGEMANAGER->findImage("마린기본파랑")->frameRender(getMemDC(), _isoTile[i].drawX + 15, _isoTile[i].drawY - 5, 0, 4);
+		else if (_isoTile[i].name == CIVILIAN)	IMAGEMANAGER->findImage("시민블루")->frameRender(getMemDC(), _isoTile[i].drawX + 23, _isoTile[i].drawY - 5, 4, 7);
+		else if (_isoTile[i].name == TEMPLAR)	IMAGEMANAGER->findImage("템플러대기블루")->frameRender(getMemDC(), _isoTile[i].drawX + 18, _isoTile[i].drawY - 10, 4, 7);
+		else if (_isoTile[i].name == BISHOP)	IMAGEMANAGER->findImage("블루비숍대기")->frameRender(getMemDC(), _isoTile[i].drawX + 25, _isoTile[i].drawY - 2, 4, 0);
+		else if (_isoTile[i].name == DIABLO) {}	//아직 이미지가 없음
+		else if (_isoTile[i].name == SKELETON) {}	//아직 이미지가 없음
+		else if (_isoTile[i].name == GHOST)	IMAGEMANAGER->findImage("ghost_move_blue")->frameRender(getMemDC(), _isoTile[i].drawX + 7, _isoTile[i].drawY - 10, 4, 0);
+	}
+	//마우스에 선택유닛 보여주는 기능
+	if (_pickUnit == P_ZERGLING)	IMAGEMANAGER->findImage("저글링이동블루")->alphaFrameRender(getMemDC(), _cameraPtMouse.x - 18, _cameraPtMouse.y - 18, 4, 0, 100);
 }
 
 void stageManager::objectRender()
@@ -200,6 +217,19 @@ void stageManager::ptInMenu()
 	else _menuInPt = false;
 }
 
+void stageManager::createUnit()
+{
+	//언무브 타일에는 안깔립니당
+	if (_isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE)
+	{
+		if (_pickUnit == P_ZERGLING)
+		{
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = ZERGLING;
+			InvalidateRect(_hWnd, NULL, false);
+		}
+	}
+}
+
 inline POINT stageManager::picking(long x, long y)
 { // 이게 피킹
 	int xx; int yy;
@@ -244,38 +274,14 @@ void stageManager::setStage(STAGE stage)
 		_gold = _isoTile[0].gold;
 		for (int i = 0; i < TILEX * TILEY; ++i)
 		{
-			if (_isoTile[i].name == ZERGLING)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createZergling(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
-			if (_isoTile[i].name == MARINE)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createMarine(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
-			if (_isoTile[i].name == CIVILIAN)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createCivilian(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
-			if (_isoTile[i].name == TEMPLAR)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createTemplar(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
-			if (_isoTile[i].name == BISHOP)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createBishop(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
+			if (_isoTile[i].name == ZERGLING)	_um->createZergling(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			if (_isoTile[i].name == MARINE)		_um->createMarine(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			if (_isoTile[i].name == CIVILIAN)	_um->createCivilian(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			if (_isoTile[i].name == TEMPLAR)	_um->createTemplar(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			if (_isoTile[i].name == BISHOP)		_um->createBishop(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
 			//if (_isoTile[i].name == DIABLO)
-			//{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-			//	_um->createDiablo(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			//}
 			//if (_isoTile[i].name == SKELETON)
-			//{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-			//	_um->createSkeleton(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			//}
-			if (_isoTile[i].name == GHOST)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createGhost(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
+			if (_isoTile[i].name == GHOST)		_um->createGhost(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
 		}
 
 		break;
@@ -288,38 +294,14 @@ void stageManager::setStage(STAGE stage)
 		_gold = _isoTile[0].gold;
 		for (int i = 0; i < TILEX * TILEY; ++i)
 		{
-			if (_isoTile[i].name == ZERGLING)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createZergling(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
-			if (_isoTile[i].name == MARINE)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createMarine(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
-			if (_isoTile[i].name == CIVILIAN)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createCivilian(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
-			if (_isoTile[i].name == TEMPLAR)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createTemplar(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
-			if (_isoTile[i].name == BISHOP)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createBishop(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
+			if (_isoTile[i].name == ZERGLING)	_um->createZergling(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			if (_isoTile[i].name == MARINE)		_um->createMarine(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			if (_isoTile[i].name == CIVILIAN)	_um->createCivilian(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			if (_isoTile[i].name == TEMPLAR)	_um->createTemplar(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			if (_isoTile[i].name == BISHOP)		_um->createBishop(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
 			//if (_isoTile[i].name == DIABLO)
-			//{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-			//	_um->createDiablo(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			//}
 			//if (_isoTile[i].name == SKELETON)
-			//{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-			//	_um->createSkeleton(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			//}
-			if (_isoTile[i].name == GHOST)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createGhost(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
+			if (_isoTile[i].name == GHOST)		_um->createGhost(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
 		}
 
 		break;
@@ -332,38 +314,14 @@ void stageManager::setStage(STAGE stage)
 		_gold = _isoTile[0].gold;
 		for (int i = 0; i < TILEX * TILEY; ++i)
 		{
-			if (_isoTile[i].name == ZERGLING)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createZergling(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
-			if (_isoTile[i].name == MARINE)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createMarine(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
-			if (_isoTile[i].name == CIVILIAN)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createCivilian(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
-			if (_isoTile[i].name == TEMPLAR)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createTemplar(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
-			if (_isoTile[i].name == BISHOP)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createBishop(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
+			if (_isoTile[i].name == ZERGLING)	_um->createZergling(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			if (_isoTile[i].name == MARINE)		_um->createMarine(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			if (_isoTile[i].name == CIVILIAN)	_um->createCivilian(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			if (_isoTile[i].name == TEMPLAR)	_um->createTemplar(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			if (_isoTile[i].name == BISHOP)		_um->createBishop(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
 			//if (_isoTile[i].name == DIABLO)
-			//{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-			//	_um->createDiablo(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			//}
 			//if (_isoTile[i].name == SKELETON)
-			//{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-			//	_um->createSkeleton(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			//}
-			if (_isoTile[i].name == GHOST)
-			{ // 에너미 생성은 여기서하고 오브젝트는 우리가 그려주면됨(유닛보다 나중에 그려줄거임. 가리도록)
-				_um->createGhost(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			}
+			if (_isoTile[i].name == GHOST)		_um->createGhost(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
 		}
 		break;
 	}

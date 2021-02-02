@@ -57,13 +57,13 @@ void mapTool::imageRender()
 	{ // 화면 밖의 맵은 그리지 않도록 함. 렉 방지용. 메인씬에도 이거 쓰고 시연떄도 이거 줄여서 보여줘도 될듯
 		if (_rs == SMALL)
 		{
-			if (_isoTile[i].nX > 9) continue;
-			if (_isoTile[i].nY > 9) continue;
+			if (_isoTile[i].nX < 9 || _isoTile[i].nX > 19) continue;
+			if (_isoTile[i].nY < 9 || _isoTile[i].nY > 19) continue;
 		}
 		else if (_rs == MEDIUM)
 		{
-			if (_isoTile[i].nX > 19) continue;
-			if (_isoTile[i].nY > 19) continue;
+			if (_isoTile[i].nX < 4 || _isoTile[i].nX > 24) continue;
+			if (_isoTile[i].nY < 4 || _isoTile[i].nY > 24) continue;
 		}
 		else
 
@@ -73,6 +73,7 @@ void mapTool::imageRender()
 		//아이소 타일 그려줌
 		if (_isoTile[i].inRect)	IMAGEMANAGER->findImage("mapTiles")->alphaFrameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY, 100);
 		else IMAGEMANAGER->findImage("mapTiles")->frameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY);
+
 
 		//여기는 타일 위에 오브젝트를 그려주는 부분
 		if (_isoTile[i].name == TREE1)	IMAGEMANAGER->findImage("tree")->render(getMemDC(), _isoTile[i].drawX - 32, _isoTile[i].drawY - 90);
@@ -91,6 +92,12 @@ void mapTool::imageRender()
 
 		//언무브 타일 표시
 		if (_isoTile[i].MUM == UNMOVE) IMAGEMANAGER->findImage("un")->render(getMemDC(), _isoTile[i].drawX + 23, _isoTile[i].drawY + 7);
+	}
+
+	for (int i = 0; i < _path.size(); ++i)
+	{
+		if (!_seePath) break;
+		FINDIMG("가이드타일")->alphaRender(getMemDC(), _isoTile[_path[i]].drawX, _isoTile[_path[i]].drawY,150);
 	}
 
 	if (_brushOn)

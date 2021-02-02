@@ -231,6 +231,7 @@
     <ClCompile Include="loadingScene+younghan.cpp" />
     <ClCompile Include="loadingScene.cpp" />
     <ClCompile Include="mainScene.cpp" />
+    <ClCompile Include="mapTool+aStar.cpp" />
     <ClCompile Include="mapTool+button.cpp" />
     <ClCompile Include="mapTool+camera.cpp" />
     <ClCompile Include="mapTool+image.cpp" />

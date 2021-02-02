@@ -6,6 +6,8 @@
 #include "templar.h"
 #include "bishop.h"
 #include "ghost.h"
+#include "diablo.h"
+#include "bone.h"
 #include <vector>
 
 class unitManager : public gameNode
@@ -46,5 +48,7 @@ public:
 	void createTemplar(BELONG belong, float x, float y);
 	void createBishop(BELONG belong, float x, float y);
 	void createGhost(BELONG belong, float x, float y);
+	void createDiablo(BELONG belong, float x, float y);
+	void createBone(BELONG belong, float x, float y);
 };
 
