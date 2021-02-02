@@ -60,8 +60,8 @@ protected:
 
 	float _speed;	// 이동속도
 	
-	int _delay;		// 딜레이가 0일때 공격하도록 했음.
-	int _maxDelay;	// 연사속도(얼마 주기로 한방씩 치는지). 60이면 1초에 한방씩 때릴듯
+	float _delay;		// 딜레이가 0일때 공격하도록 했음.
+	float _maxDelay;	// 연사속도(얼마 주기로 한방씩 치는지). 60이면 1초에 한방씩 때릴듯
 
 	float _damage;	// 데미지(이건 인터섹트에서 인자로 쓸거)
 
@@ -145,7 +145,7 @@ public:
 	void setDest(float destX, float destY); // 목표설정은 이걸로할거임
 	float getAngle1() { return _angle; }	// 왜 앵글에 1이 붙냐면 getAngle함수는 이미있기때문임..
 	void setAngle(float angle);				// 각도설정은 이걸로 할거임
-	int& getDelay() { return _delay; }
+	float& getDelay() { return _delay; }
 	float getDamage() { return _damage; }
 	float& getHP() { return _HP; }
 	int& getTarget() { return _target; }

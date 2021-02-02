@@ -47,7 +47,7 @@ void stageManager::update()
 
 	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
 	{
-		if (_pickUnit != P_NONE && _onOff) createUnit();
+		//if (_pickUnit != P_NONE && _onOff) createUnit();
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_F1))
@@ -77,18 +77,14 @@ void stageManager::render()
 
 		if (_isoTile[i].inRect)	IMAGEMANAGER->findImage("mapTiles")->alphaFrameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY, 100);
 		else IMAGEMANAGER->findImage("mapTiles")->frameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY);
-
-
-		//타일 위에 유닛을 그려주는 기능
-		if (_isoTile[i].name == A_ZERGLING)	IMAGEMANAGER->findImage("저글링이동블루")->frameRender(getMemDC(), _isoTile[i].drawX + 11, _isoTile[i].drawY - 5, 4, 0);
-		else if (_isoTile[i].name == A_MARINE)	IMAGEMANAGER->findImage("마린기본파랑")->frameRender(getMemDC(), _isoTile[i].drawX + 15, _isoTile[i].drawY - 5, 0, 4);
-		else if (_isoTile[i].name == A_CIVILIAN)	IMAGEMANAGER->findImage("시민파랑")->frameRender(getMemDC(), _isoTile[i].drawX + 23, _isoTile[i].drawY - 5, 4, 7);
-		else if (_isoTile[i].name == A_TEMPLAR)	IMAGEMANAGER->findImage("템플러대기블루")->frameRender(getMemDC(), _isoTile[i].drawX + 18, _isoTile[i].drawY - 10, 4, 7);
-		else if (_isoTile[i].name == A_BISHOP)	IMAGEMANAGER->findImage("블루비숍대기")->frameRender(getMemDC(), _isoTile[i].drawX + 25, _isoTile[i].drawY - 2, 4, 0);
-		else if (_isoTile[i].name == A_GHOST)	IMAGEMANAGER->findImage("ghost_move_blue")->frameRender(getMemDC(), _isoTile[i].drawX + 7, _isoTile[i].drawY - 10, 4, 0);
 	}
 	//마우스에 선택유닛 보여주는 기능
 	if (_pickUnit == P_ZERGLING && _onOff)	IMAGEMANAGER->findImage("저글링이동블루")->alphaFrameRender(getMemDC(), _cameraPtMouse.x - 18, _cameraPtMouse.y - 18, 4, 0, 100);
+	if (_pickUnit == P_MARINE && _onOff)	IMAGEMANAGER->findImage("마린기본파랑")->alphaFrameRender(getMemDC(), _cameraPtMouse.x - 16, _cameraPtMouse.y - 18, 0, 4, 100);
+	if (_pickUnit == P_CIVILIAN && _onOff)	IMAGEMANAGER->findImage("시민파랑")->alphaFrameRender(getMemDC(), _cameraPtMouse.x - 10, _cameraPtMouse.y - 18, 4, 7, 100);
+	if (_pickUnit == P_TEMPLAR && _onOff)	IMAGEMANAGER->findImage("템플러대기블루")->alphaFrameRender(getMemDC(), _cameraPtMouse.x - 18, _cameraPtMouse.y - 18, 4, 7, 100);
+	if (_pickUnit == P_BISHOP && _onOff)	IMAGEMANAGER->findImage("블루비숍대기")->alphaFrameRender(getMemDC(), _cameraPtMouse.x - 18, _cameraPtMouse.y - 18, 4, 0, 100);
+	if (_pickUnit == P_GHOST && _onOff)	IMAGEMANAGER->findImage("ghost_move_blue")->alphaFrameRender(getMemDC(), _cameraPtMouse.x - 18, _cameraPtMouse.y - 18, 4, 0, 100);
 }
 
 void stageManager::objectRender()
@@ -170,7 +166,6 @@ void stageManager::startBt()
 	if (PtInRect(&_startBt, _cameraPtMouse))
 	{
 		_battlePhase = true;
-		createAlly();
 		_um->setActive();
 		_onOff = false;
 	}
@@ -228,73 +223,47 @@ void stageManager::createUnit()
 	//언무브 타일에는 안깔립니당
 	if (_isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE && !_menuInPt)
 	{
-		if (_pickUnit == P_ZERGLING)
+		if (_pickUnit == P_ZERGLING && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE && _isoTile[0].gold >= 100)
 		{
-			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = A_ZERGLING;
+			_isoTile[0].gold -= 100; //유닛 가격
+			_um->createZergling(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = ZERGLING;
 			InvalidateRect(_hWnd, NULL, false);
 		}
-		else if (_pickUnit == P_MARINE)
+		else if (_pickUnit == P_MARINE && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE && _isoTile[0].gold >= 150)
 		{
-			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = A_MARINE;
+			_isoTile[0].gold -= 150; //유닛 가격
+			_um->createMarine(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = MARINE;
 			InvalidateRect(_hWnd, NULL, false);
 		}
-		else if (_pickUnit == P_CIVILIAN)
+		else if (_pickUnit == P_CIVILIAN && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE && _isoTile[0].gold >= 70)
 		{
-			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = A_CIVILIAN;
+			_isoTile[0].gold -= 70; //유닛 가격
+			_um->createCivilian(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = CIVILIAN;
 			InvalidateRect(_hWnd, NULL, false);
 		}
-		else if (_pickUnit == P_TEMPLAR)
+		else if (_pickUnit == P_TEMPLAR && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE && _isoTile[0].gold >= 200)
 		{
-			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = A_TEMPLAR;
+			_isoTile[0].gold -= 200; //유닛 가격
+			_um->createTemplar(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 9);
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = TEMPLAR;
 			InvalidateRect(_hWnd, NULL, false);
 		}
-		else if (_pickUnit == P_BISHOP)
+		else if (_pickUnit == P_BISHOP && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE && _isoTile[0].gold >= 200)
 		{
-			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = A_BISHOP;
+			_isoTile[0].gold -= 200; //유닛 가격
+			_um->createBishop(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX + 5, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = BISHOP;
 			InvalidateRect(_hWnd, NULL, false);
 		}
-		else if (_pickUnit == P_GHOST)
+		else if (_pickUnit == P_GHOST && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE && _isoTile[0].gold >= 150)
 		{
-			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = A_GHOST;
+			_isoTile[0].gold -= 150; //유닛 가격
+			_um->createGhost(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 2);
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = GHOST;
 			InvalidateRect(_hWnd, NULL, false);
-		}
-	}
-}
-
-void stageManager::createAlly()
-{
-	//유닛 생성하고 타일의 이름을 NONE으로 만들어서 이미지는 띄우지않음
-	for (int i = 0; i < TILEX * TILEY; ++i)
-	{
-		if (_isoTile[i].name == A_ZERGLING)
-		{
-			_um->createZergling(PLAYER, _isoTile[i].centerX, _isoTile[i].centerY);
-			_isoTile[i].name = NONE;
-		}
-		if (_isoTile[i].name == A_MARINE)
-		{
-			_um->createMarine(PLAYER, _isoTile[i].centerX, _isoTile[i].centerY);
-			_isoTile[i].name = NONE;
-		}
-		if (_isoTile[i].name == A_CIVILIAN)
-		{
-			_um->createCivilian(PLAYER, _isoTile[i].centerX, _isoTile[i].centerY);
-			_isoTile[i].name = NONE;
-		}
-		if (_isoTile[i].name == A_TEMPLAR)
-		{
-			_um->createTemplar(PLAYER, _isoTile[i].centerX, _isoTile[i].centerY);
-			_isoTile[i].name = NONE;
-		}
-		if (_isoTile[i].name == A_BISHOP)
-		{
-			_um->createBishop(PLAYER, _isoTile[i].centerX, _isoTile[i].centerY);
-			_isoTile[i].name = NONE;
-		}
-		if (_isoTile[i].name == A_GHOST)
-		{
-			_um->createGhost(PLAYER, _isoTile[i].centerX, _isoTile[i].centerY);
-			_isoTile[i].name = NONE;
 		}
 	}
 }

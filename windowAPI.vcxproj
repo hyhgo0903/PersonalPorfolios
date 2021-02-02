@@ -149,7 +149,7 @@
   <ItemGroup>
     <ClInclude Include="animation.h" />
     <ClInclude Include="bishop.h" />
-    <ClInclude Include="bone.h" />
+    <ClInclude Include="skeleton.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="cameraManager.h" />
     <ClInclude Include="civilian.h" />
@@ -199,7 +199,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
-    <ClCompile Include="bone.cpp" />
+    <ClCompile Include="skeleton.cpp" />
     <ClCompile Include="diablo.cpp" />
     <ClCompile Include="heal.cpp" />
     <ClCompile Include="interaction+aStar.cpp" />

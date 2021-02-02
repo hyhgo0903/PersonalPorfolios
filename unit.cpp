@@ -43,6 +43,7 @@ void unit::progressBarRender()
 	{
 		FINDIMG("»¡°£ÇÇ")->resizedRender(getMemDC(), _rc.left - 5, _rc.top - 10, (_width + 10) *_HP / _maxHP, 6);
 	}
+	FINDIMG("µô·¹ÀÌ¹Ù")->resizedRender(getMemDC(), _rc.left - 5, _rc.top - 4, (_width + 10)* (1.f - _delay / _maxDelay), 3);
 }
 
 void unit::reRender()

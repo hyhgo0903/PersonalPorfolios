@@ -58,4 +58,7 @@ void loadingScene::yoonghoInit()
 	imgLoaded();
 	IMAGEMANAGER->addImage("가이드타일", "image/maptool/guidetile.bmp", 64, 32, true, RGB(255, 0, 255));
 	imgLoaded();
+
+	IMAGEMANAGER->addImage("딜레이바", "image/ui/progress_Bar/delaybar.bmp", 50, 3, false, RGB(255, 0, 255));
+	imgLoaded();
 }

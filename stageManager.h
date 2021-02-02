@@ -67,7 +67,6 @@ public:
 	void ptInCreateMenu();	//마우스가 생성 메뉴안에 들어갔을때
 	void ptInMenu();		//메뉴안에 마우스가 들어갔는지 체크해주는 기능
 	void createUnit();		//유닛 생성하는 코드
-	void createAlly();		//게임 시작시 아군 생성해주는 함수
 
 	inline POINT picking(long x, long y); // 피킹하는 함수 
 

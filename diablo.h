@@ -1,20 +1,13 @@
 #pragma once
 #include "unit.h"
 
-enum ATTACK_PHASE
-{
-	SUMMON,
-	EARTHQUAKE,
-	FIREBALL
-};
-
 class diablo :
 	public unit
 {
 
 private:
 
-	ATTACK_PHASE _attackPhase;
+	
 	RECT _summonRc; // 소환범위 렉트
 	//bool _isAttack; // 소환 했는지 안했는지 
 	//int _isAttackCount; // 공격실행 카운트 입니다.

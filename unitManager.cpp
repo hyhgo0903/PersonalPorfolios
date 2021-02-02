@@ -39,6 +39,23 @@ void unitManager::update()
 		}
 	}
 
+	//for (int i = 0; i < _vUnit.size(); i++) // 디아블로 소환실험 2번 setSkeleton함수가 3번(마지막)입니다
+	//{
+	//	if (_vUnit[i]->getID() == 6 &&
+	//		_vUnit[i]->getState() == ATTACK)
+	//	{
+
+	//		createskeleton(ENEMY, _vUnit[i]->getX() + RND->getFromIntTo(10, 50), _vUnit[i]->getY() + RND->getFromIntTo(10, 50));
+	//		createskeleton(ENEMY, _vUnit[i]->getX() + RND->getFromIntTo(10, 50), _vUnit[i]->getY() + RND->getFromIntTo(10, 50));
+	//		createskeleton(ENEMY, _vUnit[i]->getX() + RND->getFromIntTo(10, 50), _vUnit[i]->getY() + RND->getFromIntTo(10, 50));
+
+	//	}
+	//	/*	if (_vUnit[i]->getID() == 7 && _vUnit.size() > 4)
+	//		{
+	//			break;
+	//		}*/
+	//}
+
 	chanhoUpdate();
 	deokhoUpdate();
 	hyunjeongUpdate();
@@ -159,9 +176,26 @@ void unitManager::createDiablo(BELONG belong, float x, float y)
 	_vUnit.push_back(db);
 }
 
-void unitManager::createBone(BELONG belong, float x, float y)
+void unitManager::createskeleton(BELONG belong, float x, float y)
 {
-	bone* bn = new bone;
+	skeleton* bn = new skeleton;
 	bn->init(belong, x, y);
 	_vUnit.push_back(bn);
+}
+void unitManager::setSkeleton() // 디아블로 소환실험 3번(진짜 마지막)
+{
+	//for (int i = 0; i < _vUnit.size(); i++)
+	//{
+	//	createskeleton(ENEMY, _vUnit[i]->getX() + RND->getFromIntTo(10, 50), _vUnit[i]->getY() + RND->getFromIntTo(10, 50));
+	//	createskeleton(ENEMY, _vUnit[i]->getX() + RND->getFromIntTo(10, 50), _vUnit[i]->getY() + RND->getFromIntTo(10, 50));
+	//	createskeleton(ENEMY, _vUnit[i]->getX() + RND->getFromIntTo(10, 50), _vUnit[i]->getY() + RND->getFromIntTo(10, 50));
+
+	//	/*if (_vUnit[i]->getID() == 6 &&
+	//		_vUnit[i]->getState() == ATTACK)
+	//	{
+	//		createskeleton(ENEMY, _vUnit[i]->getX() + RND->getFromIntTo(10, 50), _vUnit[i]->getY() + RND->getFromIntTo(10, 50));
+	//		createskeleton(ENEMY, _vUnit[i]->getX() + RND->getFromIntTo(10, 50), _vUnit[i]->getY() + RND->getFromIntTo(10, 50));
+	//		createskeleton(ENEMY, _vUnit[i]->getX() + RND->getFromIntTo(10, 50), _vUnit[i]->getY() + RND->getFromIntTo(10, 50));
+	//	}*/
+	//}
 }

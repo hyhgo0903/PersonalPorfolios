@@ -228,10 +228,10 @@
     <ClInclude Include="heal.h">
       <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
     </ClInclude>
-    <ClInclude Include="bone.h">
+    <ClInclude Include="diablo.h">
       <Filter>playGround\mainScene\unit\subclass\summoner</Filter>
     </ClInclude>
-    <ClInclude Include="diablo.h">
+    <ClInclude Include="skeleton.h">
       <Filter>playGround\mainScene\unit\subclass\summoner</Filter>
     </ClInclude>
   </ItemGroup>
@@ -434,14 +434,14 @@
     <ClCompile Include="heal.cpp">
       <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
     </ClCompile>
-    <ClCompile Include="bone.cpp">
-      <Filter>playGround\mainScene\unit\subclass\summoner</Filter>
-    </ClCompile>
     <ClCompile Include="diablo.cpp">
       <Filter>playGround\mainScene\unit\subclass\summoner</Filter>
     </ClCompile>
     <ClCompile Include="mapTool+aStar.cpp">
       <Filter>playGround\mapTool</Filter>
+    </ClCompile>
+    <ClCompile Include="skeleton.cpp">
+      <Filter>playGround\mainScene\unit\subclass\summoner</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

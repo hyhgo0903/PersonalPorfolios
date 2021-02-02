@@ -7,7 +7,7 @@
 #include "bishop.h"
 #include "ghost.h"
 #include "diablo.h"
-#include "bone.h"
+#include "skeleton.h"
 #include <vector>
 
 class unitManager : public gameNode
@@ -49,6 +49,7 @@ public:
 	void createBishop(BELONG belong, float x, float y);
 	void createGhost(BELONG belong, float x, float y);
 	void createDiablo(BELONG belong, float x, float y);
-	void createBone(BELONG belong, float x, float y);
+	void createskeleton(BELONG belong, float x, float y);
+	void setSkeleton(); // 디아블로 소환실험 3번
 };
 
