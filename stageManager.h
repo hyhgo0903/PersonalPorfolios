@@ -17,7 +17,7 @@ enum STAGEMOVE
 
 enum pickUnit
 {
-	P_NONE, P_ZERGLING
+	P_NONE, P_ZERGLING, P_MARINE, P_CIVILIAN, P_TEMPLAR, P_BISHOP, P_GHOST
 };
 
 class stageManager : public gameNode
@@ -37,6 +37,11 @@ private:
 
 	//유닛 생성 렉트
 	RECT	_zerglingBt;
+	RECT	_marineBt;
+	RECT	_civilianBt;
+	RECT	_templarBt;
+	RECT	_bishopBt;
+	RECT	_ghostBt;
 
 	unitManager* _um;
 	bool	_battlePhase; // 이게 false면 배치페이즈 true면 교전페이즈
@@ -62,6 +67,7 @@ public:
 	void ptInCreateMenu();	//마우스가 생성 메뉴안에 들어갔을때
 	void ptInMenu();		//메뉴안에 마우스가 들어갔는지 체크해주는 기능
 	void createUnit();		//유닛 생성하는 코드
+	void createAlly();		//게임 시작시 아군 생성해주는 함수
 
 	inline POINT picking(long x, long y); // 피킹하는 함수 
 

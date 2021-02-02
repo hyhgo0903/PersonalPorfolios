@@ -59,6 +59,7 @@ using namespace TFIVE_UTIL;
 
 
 #define FINDIMG imageManager::getSingleton()->findImage
+#define PLAYSND soundManager::getSingleton()->play
 
 #define SAFE_DELETE(p) {if(p) {delete(p); (p)=NULL;}}
 #define SAFE_RELEASE(p) {if(p) {(p)->release(); (p)=NULL;}}

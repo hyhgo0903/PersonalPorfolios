@@ -74,7 +74,7 @@ void titleScene::update()
 		{
 			_isVolumeSetOn = false;
 			SOUNDMANAGER->stop("테란브금");
-			SOUNDMANAGER->stop("사이오닉스톰");
+			SOUNDMANAGER->stop("템플러공격");
 		}
 		else if (_isVolumeSetOn && PtInRect(&_testBgm, _ptMouse))
 		{
@@ -83,8 +83,8 @@ void titleScene::update()
 		}
 		else if (_isVolumeSetOn && PtInRect(&_testEffect, _ptMouse))
 		{
-			if (SOUNDMANAGER->isPlaySound("사이오닉스톰")) SOUNDMANAGER->stop("사이오닉스톰");
-			else  SOUNDMANAGER->play("사이오닉스톰");
+			if (SOUNDMANAGER->isPlaySound("템플러공격")) SOUNDMANAGER->stop("사이오닉스톰");
+			else  SOUNDMANAGER->play("템플러공격");
 		}
 
 		else if (PtInRect(&_exit, _ptMouse) == true)
@@ -140,7 +140,7 @@ void titleScene::render()
 		if (SOUNDMANAGER->isPlaySound("테란브금"))
 			FINDIMG("소리키고끄기")->frameRender(getMemDC(), _testBgm.left, _testBgm.top, 1, 0);
 		else FINDIMG("소리키고끄기")->frameRender(getMemDC(), _testBgm.left, _testBgm.top, 0, 0);
-		if (SOUNDMANAGER->isPlaySound("사이오닉스톰"))
+		if (SOUNDMANAGER->isPlaySound("템플러공격"))
 			FINDIMG("소리키고끄기")->frameRender(getMemDC(), _testEffect.left, _testEffect.top, 1, 0);
 		else
 			FINDIMG("소리키고끄기")->frameRender(getMemDC(), _testEffect.left, _testEffect.top, 0, 0);

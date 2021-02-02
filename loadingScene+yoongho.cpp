@@ -4,8 +4,6 @@
 void loadingScene::yoonghoInit()
 { // 로디드가 뭐냐면 로딩바 올리기용 함수. 이미지 추가할떄마다 넣어주길	
 
-	SOUNDMANAGER->addSound("사이오닉스톰", "sound/PTeSto00.wav", false, false);
-	soundLoaded();
 	SOUNDMANAGER->addSound("테란브금", "sound/treamedterran1.mp3", true, true);
 	soundLoaded();
 
