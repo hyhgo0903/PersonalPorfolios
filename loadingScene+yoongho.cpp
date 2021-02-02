@@ -56,4 +56,8 @@ void loadingScene::yoonghoInit()
 	imgLoaded();
 	IMAGEMANAGER->addImage("씬체인지", "image/ui/scenechange.bmp", WINSIZEX, WINSIZEY, true, RGB(255, 0, 255));
 	imgLoaded();
+	IMAGEMANAGER->addFrameImage("저장팝업", "image/maptool/savepopup.bmp", 349, 200, 1, 2, true, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("가이드타일", "image/maptool/guidetile.bmp", 64, 32, true, RGB(255, 0, 255));
+	imgLoaded();
 }
