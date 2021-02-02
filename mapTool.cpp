@@ -100,6 +100,7 @@ void mapTool::update()
 			if (_pickingPt.x >= 0 && _pickingPt.y >= 0) createObj();
 			if (PtInRect(&_objDel, _cameraPtMouse)) objDel();
 			if (PtInRect(&_delAll, _cameraPtMouse)) objDelAll();
+			if (PtInRect(&_homeBt, _cameraPtMouse)) homeBt();
 		}
 	}
 
@@ -112,8 +113,8 @@ void mapTool::update()
 			if (_pickingPt.x >= 0 && _pickingPt.y >= 0) createObj();
 		}
 	}
+
 	ptInIso();
-	if (KEYMANAGER->isOnceKeyDown(VK_F4)) SCENEMANAGER->changeScene("Å¸ÀÌÆ²¾À");
 
 	if (KEYMANAGER->isStayKeyDown(VK_RBUTTON))
 	{

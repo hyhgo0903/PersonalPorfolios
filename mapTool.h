@@ -62,6 +62,7 @@ private:
 	RECT			_objDel;
 
 	RECT			_delAll;
+	RECT			_homeBt;
 
 	RECT			_tree1;
 	RECT			_tree2;
@@ -118,6 +119,7 @@ public:
 	void objDel();													//오브젝트 지우개
 	void menuInPt();												//메뉴 안에 마우스가 들어갔을때 타일 안찍히게 막음
 	void sampleInTemp();											//샘플 타일의 값을 템프에 담아주는 함수
+	void homeBt();
 
 	void save();
 	void load();

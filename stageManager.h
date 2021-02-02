@@ -15,9 +15,9 @@ enum STAGEMOVE
 	S_MOVE, S_UNMOVE
 };
 
-enum tileObj
+enum pickUnit
 {
-	S_NONE, S_TREE1, S_TREE2, S_TREE3, S_TREE4, S_TREE5, S_ZERGLING = 11
+	P_NONE, P_ZERGLING
 };
 
 class stageManager : public gameNode
@@ -29,13 +29,20 @@ private:
 	POINT _pickingPt;
 	POINT _cameraPtMouse; // 걍피티마우스말고 카메라위치 보정한 피티마우스
 
-	RECT _homeBt;
+	RECT	_homeBt;
+	RECT	_onBt;
+	RECT	_offBt;
+	RECT	_startBt;
+	RECT	_retryBt;
 
+	//유닛 생성 렉트
+	RECT	_zerglingBt;
 
 	unitManager* _um;
-	bool _battlePhase; // 이게 false면 배치페이즈 true면 교전페이즈
-	bool _menuInPt;			//마우스가 메뉴안에 들어갔을때 불필요한 행동들을 제어하기 위해 만듬
-	
+	bool	_battlePhase; // 이게 false면 배치페이즈 true면 교전페이즈
+	bool	_menuInPt;			//마우스가 메뉴안에 들어갔을때 불필요한 행동들을 제어하기 위해 만듬
+	bool	_onOff;				//유닛구매 메뉴 온오프(게임시작누를때는 자동으로 오프로 변경되야함)
+	pickUnit	_pickUnit;
 public:
 	stageManager();
 	~stageManager();
@@ -48,6 +55,13 @@ public:
 	void uiRender();		//UI렌더 (최상단 노출을 위해 따로선언)
 	void uiRect();			//UI위치에 렉트를 깔아서 기능을 부여해주기위함
 	void homeBt();			//홈버튼 기능
+	void onOffBt();			//메뉴 ON/OFF 버튼 기능
+	void startBt();			//스타트 버튼 기능
+	void retryBt();			//리트라이 버튼 기능
+	void ptInIso();			//아이소타일안에 마우스가 들어왔는지 판단해줌
+	void ptInCreateMenu();	//마우스가 생성 메뉴안에 들어갔을때
+	void ptInMenu();		//메뉴안에 마우스가 들어갔는지 체크해주는 기능
+
 	inline POINT picking(long x, long y); // 피킹하는 함수 
 
 	void setStage(STAGE stage);

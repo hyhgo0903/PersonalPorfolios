@@ -102,5 +102,9 @@ void loadingScene::younghanInit()
 	imgLoaded();
 	IMAGEMANAGER->addImage("ui_start", "image/ui/ui_start.bmp", 64, 32, false, RGB(255, 0, 255));
 	imgLoaded();
+	IMAGEMANAGER->addImage("ui_on", "image/ui/ui_on.bmp", 64, 32, false, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("ui_off", "image/ui/ui_off.bmp", 64, 32, false, RGB(255, 0, 255));
+	imgLoaded();
 }
 

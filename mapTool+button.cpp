@@ -65,6 +65,7 @@ void mapTool::menuInPt()
 	else if (PtInRect(&_rightBt, _cameraPtMouse)) _menuInPt = true;
 	else if (PtInRect(&_objDel, _cameraPtMouse))  _menuInPt = true;
 	else if (PtInRect(&_delAll, _cameraPtMouse))  _menuInPt = true;
+	else if (PtInRect(&_homeBt, _cameraPtMouse))  _menuInPt = true;
 	else _menuInPt = false;
 }
 
@@ -125,4 +126,9 @@ void mapTool::objDelAll()
 	{
 		_isoTile[i].name = NONE;
 	}
+}
+
+void mapTool::homeBt()
+{
+	SCENEMANAGER->changeScene("≈∏¿Ã∆≤æ¿");
 }

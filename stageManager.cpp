@@ -14,6 +14,8 @@ HRESULT stageManager::init()
 	_stage = STAGE1;
 	_battlePhase = false;
 	_menuInPt = false;
+	_onOff = true;
+	_pickUnit = P_NONE;
 	return S_OK;
 }
 
@@ -27,9 +29,19 @@ void stageManager::update()
 	_cameraPtMouse.y = _ptMouse.y + CAMY;
 	_pickingPt = picking(_cameraPtMouse.x, _cameraPtMouse.y);
 	uiRect();
+	ptInIso();
+	ptInMenu();
+
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
-		homeBt();
+		if (_menuInPt)
+		{
+			homeBt();
+			onOffBt();
+			startBt();
+			retryBt();
+			ptInCreateMenu();
+		}
 	}
 
 	if (KEYMANAGER->isOnceKeyDown(VK_F1))
@@ -47,11 +59,11 @@ void stageManager::update()
 		_stage = STAGE3;
 		setStage(_stage);
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_RETURN))
-	{ // 지금은 엔터키로해놨지만 나중에 배치페이즈 끝내는 버튼(게임시작)을 누른 경우로 바꿀거임
-		_battlePhase = true;
-		_um->setActive();
-	}
+	//if (KEYMANAGER->isStayKeyDown(VK_RETURN))
+	//{ // 지금은 엔터키로해놨지만 나중에 배치페이즈 끝내는 버튼(게임시작)을 누른 경우로 바꿀거임
+	//	_battlePhase = true;
+	//	_um->setActive();
+	//}
 }
 
 void stageManager::render()
@@ -62,8 +74,11 @@ void stageManager::render()
 		if (_isoTile[i].centerX < CAMX - 32 || _isoTile[i].centerX > CAMX + WINSIZEX + 32 ||
 			_isoTile[i].centerY < CAMY - 16 || _isoTile[i].centerY > CAMY + WINSIZEY + 16) continue;
 
-		IMAGEMANAGER->findImage("mapTiles")->frameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY);
+		if (_isoTile[i].inRect)	IMAGEMANAGER->findImage("mapTiles")->alphaFrameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY, 100);
+		else IMAGEMANAGER->findImage("mapTiles")->frameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY);
 	}
+
+	if (_pickUnit == P_ZERGLING)	IMAGEMANAGER->findImage("저글링이동퍼플")->alphaFrameRender(getMemDC(), _cameraPtMouse.x - 18, _cameraPtMouse.y - 18, 4, 0, 100);
 }
 
 void stageManager::objectRender()
@@ -74,58 +89,114 @@ void stageManager::objectRender()
 		if (_isoTile[i].centerX < CAMX - 32 || _isoTile[i].centerX > CAMX + WINSIZEX + 32 ||
 			_isoTile[i].centerY < CAMY - 16 || _isoTile[i].centerY > CAMY + WINSIZEY + 16) continue;
 
-		else if (_isoTile[i].name == TREE1)
-		{
-			IMAGEMANAGER->findImage("tree")->render(getMemDC(), _isoTile[i].drawX - 32, _isoTile[i].drawY - 90);
-		}
-		else if (_isoTile[i].name == TREE2)
-		{
-			IMAGEMANAGER->findImage("tree2")->render(getMemDC(), _isoTile[i].drawX - 10, _isoTile[i].drawY - 90);
-		}
-		else if (_isoTile[i].name == TREE3)
-		{
-			IMAGEMANAGER->findImage("tree3")->render(getMemDC(), _isoTile[i].drawX - 12, _isoTile[i].drawY - 118);
-		}
-		else if (_isoTile[i].name == TREE4)
-		{
-			IMAGEMANAGER->findImage("tree4")->render(getMemDC(), _isoTile[i].drawX - 15, _isoTile[i].drawY - 105);
-		}
-		else if (_isoTile[i].name == TREE5)
-		{
-			IMAGEMANAGER->findImage("tree5")->render(getMemDC(), _isoTile[i].drawX - 3, _isoTile[i].drawY - 58);
-		}
+		else if (_isoTile[i].name == TREE1)	IMAGEMANAGER->findImage("tree")->render(getMemDC(), _isoTile[i].drawX - 32, _isoTile[i].drawY - 90);
+		else if (_isoTile[i].name == TREE2)	IMAGEMANAGER->findImage("tree2")->render(getMemDC(), _isoTile[i].drawX - 10, _isoTile[i].drawY - 90);
+		else if (_isoTile[i].name == TREE3)	IMAGEMANAGER->findImage("tree3")->render(getMemDC(), _isoTile[i].drawX - 12, _isoTile[i].drawY - 118);
+		else if (_isoTile[i].name == TREE4)	IMAGEMANAGER->findImage("tree4")->render(getMemDC(), _isoTile[i].drawX - 15, _isoTile[i].drawY - 105);
+		else if (_isoTile[i].name == TREE5)	IMAGEMANAGER->findImage("tree5")->render(getMemDC(), _isoTile[i].drawX - 3, _isoTile[i].drawY - 58);
 	}
 }
 
 void stageManager::uiRender()
 {
 	IMAGEMANAGER->findImage("ui_clear")->render(getMemDC(), CAMX + WINSIZEX - 128, CAMY);
-	IMAGEMANAGER->findImage("ui_start")->render(getMemDC(), CAMX + WINSIZEX - 64, CAMY);
-	IMAGEMANAGER->findImage("ui_home")->render(getMemDC(), CAMX, CAMY + 500);
-	IMAGEMANAGER->findImage("ui_retry")->render(getMemDC(), CAMX, CAMY + 532);
+	IMAGEMANAGER->findImage("ui_start")->render(getMemDC(), _startBt.left, _startBt.top);
+	IMAGEMANAGER->findImage("ui_home")->render(getMemDC(), _homeBt.left, _homeBt.top);
+	IMAGEMANAGER->findImage("ui_retry")->render(getMemDC(), _retryBt.left, _retryBt.top);
+
+	if(_onOff) IMAGEMANAGER->findImage("ui_on")->render(getMemDC(), _onBt.left, _onBt.top);
+	else IMAGEMANAGER->findImage("ui_off")->render(getMemDC(), _offBt.left, _offBt.top);
 
 	//유닛 선택 메뉴
-	IMAGEMANAGER->findImage("ui_menu")->render(getMemDC(), CAMX + WINSIZEX - 930, CAMY + WINSIZEY - 132);
-	IMAGEMANAGER->findImage("icon_zergling")->render(getMemDC(), CAMX + 280, CAMY + WINSIZEY - 95);
-	IMAGEMANAGER->findImage("icon_marine")->render(getMemDC(), CAMX + 360, CAMY + WINSIZEY - 95);
-	IMAGEMANAGER->findImage("icon_civilian")->render(getMemDC(), CAMX + 440, CAMY + WINSIZEY - 95);
-	IMAGEMANAGER->findImage("icon_templar")->render(getMemDC(), CAMX + 520, CAMY + WINSIZEY - 95);
-	IMAGEMANAGER->findImage("icon_bishop")->render(getMemDC(), CAMX + 600, CAMY + WINSIZEY - 95);
-	IMAGEMANAGER->findImage("icon_ghost")->render(getMemDC(), CAMX + 680, CAMY + WINSIZEY - 95);
+	if (_onOff)
+	{
+		IMAGEMANAGER->findImage("ui_menu")->render(getMemDC(), CAMX + WINSIZEX - 930, CAMY + WINSIZEY - 132);
+		IMAGEMANAGER->findImage("icon_zergling")->render(getMemDC(), _zerglingBt.left, _zerglingBt.top);
+		IMAGEMANAGER->findImage("icon_marine")->render(getMemDC(), CAMX + 360, CAMY + WINSIZEY - 95);
+		IMAGEMANAGER->findImage("icon_civilian")->render(getMemDC(), CAMX + 440, CAMY + WINSIZEY - 95);
+		IMAGEMANAGER->findImage("icon_templar")->render(getMemDC(), CAMX + 520, CAMY + WINSIZEY - 95);
+		IMAGEMANAGER->findImage("icon_bishop")->render(getMemDC(), CAMX + 600, CAMY + WINSIZEY - 95);
+		IMAGEMANAGER->findImage("icon_ghost")->render(getMemDC(), CAMX + 680, CAMY + WINSIZEY - 95);
+		//소지금
+		char str[256];
+		sprintf_s(str, "%d", _isoTile[0].gold);
+		TextOut(getMemDC(), CAMX + WINSIZEX - 800, CAMY + WINSIZEY - 125, str, strlen(str));
+	}
 }
 
 void stageManager::uiRect()
 {
 	_homeBt = RectMake(CAMX, CAMY + 500, 64, 32);
+	_onBt = RectMake(CAMX, CAMY + 468, 64, 32);
+	_offBt = RectMake(CAMX, CAMY + 468, 64, 32);
+	_startBt = RectMake(CAMX + WINSIZEX - 64, CAMY, 64, 32);
+	_retryBt = RectMake(CAMX, CAMY + 532, 64, 32);
+
+	//유닛 생성 렉트
+	_zerglingBt = RectMake(CAMX + 280, CAMY + WINSIZEY - 95, 80, 90);
 }
 
 void stageManager::homeBt()
 {
 	if (PtInRect(&_homeBt, _cameraPtMouse))
 	{
-		_menuInPt = true;
-		if (_menuInPt) SCENEMANAGER->changeScene("타이틀씬");
+		SCENEMANAGER->changeScene("타이틀씬");
 	}
+}
+
+void stageManager::onOffBt()
+{	
+	if (PtInRect(&_offBt, _cameraPtMouse) && !_onOff)	_onOff = true;
+	else if (PtInRect(&_onBt, _cameraPtMouse) && _onOff)	_onOff = false;
+}
+
+void stageManager::startBt()
+{
+	if (PtInRect(&_startBt, _cameraPtMouse))
+	{
+		_battlePhase = true;
+		_um->setActive();
+		_onOff = false;
+	}
+}
+
+void stageManager::retryBt()
+{//아직 구현중... 방법 생각중
+	if (PtInRect(&_retryBt, _cameraPtMouse))
+	{
+		_onOff = true;
+	}
+}
+
+void stageManager::ptInIso()
+{
+	//마우스포인트가 아이소타일안에 들어왔는지 확인해줌
+	for (int i = 0; i < TILEX * TILEY; ++i)
+	{
+		if (i == _pickingPt.y * TILEX + _pickingPt.x)
+		{
+			_isoTile[i].inRect = true;
+		}
+		else _isoTile[i].inRect = false;
+	}
+}
+
+void stageManager::ptInCreateMenu()
+{
+	if (PtInRect(&_zerglingBt, _cameraPtMouse))
+	{
+		_pickUnit = P_ZERGLING;
+	}
+}
+
+void stageManager::ptInMenu()
+{
+	if (PtInRect(&_homeBt, _cameraPtMouse))	_menuInPt = true;
+	else if (PtInRect(&_offBt, _cameraPtMouse)) _menuInPt = true;
+	else if (PtInRect(&_onBt, _cameraPtMouse))	_menuInPt = true;
+	else if (PtInRect(&_startBt, _cameraPtMouse)) _menuInPt = true;
+	else if (PtInRect(&_retryBt, _cameraPtMouse)) _menuInPt = true;
+	else if (PtInRect(&_zerglingBt, _cameraPtMouse)) _menuInPt = true;
 	else _menuInPt = false;
 }
 
