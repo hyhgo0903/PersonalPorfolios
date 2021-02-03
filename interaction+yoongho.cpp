@@ -162,6 +162,7 @@ void interaction::yoonghoUpdate()
 	{ // 도달시 다음으로 넘겨주는 함수
 		if (_um->getVUnit()[i]->getState() != WALK || _um->getVUnit()[i]->getTarget() != -1) continue;
 		int tempTileNum = _um->getVUnit()[i]->getTileNum();
+		_um->getVUnit()[i]->setDest(_sm->getIsoTile()[tempTileNum].centerX, _sm->getIsoTile()[tempTileNum].centerY);
 		RECT tempRc;
 		RECT temp1 = RectMakeCenter(_um->getVUnit()[i]->getX(),
 			_um->getVUnit()[i]->getY(), 4, 4);
@@ -178,7 +179,6 @@ void interaction::yoonghoUpdate()
 				{
 					tempTileNum = _um->getVUnit()[i]->getVPath()[j];
 					_um->getVUnit()[i]->getTileNum() = tempTileNum;
-					_um->getVUnit()[i]->setDest(_sm->getIsoTile()[tempTileNum].centerX, _sm->getIsoTile()[tempTileNum].centerY);
 					_um->getVUnit()[i]->eraseVPath(j);
 					break;
 				}//대각선 검사함
@@ -189,7 +189,6 @@ void interaction::yoonghoUpdate()
 				{
 					tempTileNum = _um->getVUnit()[i]->getVPath()[j];
 					_um->getVUnit()[i]->getTileNum() = tempTileNum;
-					_um->getVUnit()[i]->setDest(_sm->getIsoTile()[tempTileNum].centerX, _sm->getIsoTile()[tempTileNum].centerY);
 					_um->getVUnit()[i]->eraseVPath(j);
 					break;
 				}

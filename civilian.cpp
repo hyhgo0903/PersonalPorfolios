@@ -34,7 +34,6 @@ void civilian::update()
 {
 	commonUpdate();
 	_rangeRc = RectMakeCenter(_x, _y, _width + 6, _height + 6);
-	_focusRc = RectMakeCenter(_x, _y, _width + 30, _height + 30);
 
 }
 

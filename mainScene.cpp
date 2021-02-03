@@ -49,8 +49,6 @@ HRESULT mainScene::init()
 	//_um->createGhost(PLAYER, 250, 400);
 	//_um->createGhost(ENEMY, 1250, 650);
 
-	 _um->createDiablo(ENEMY, 400, 400);
-
 	return S_OK;
 }
 
@@ -80,7 +78,7 @@ void mainScene::update()
 
 void mainScene::render()
 {// 서순이 왜 이런지 주석을 달았읍니다
-	_backGround->render(getMemDC());
+	_backGround->render(getMemDC(),CAMX,CAMY,CAMX,CAMY,WINSIZEX,WINSIZEY); // 이렇게 윈사이즈만큼만 그려주는게 부하가 덜함
 	_sm->render();			// 맵그려주구요
 	_ia->render();			// 이건 사실 안 그릴듯?
 	_um->render();			// 유닛그려줍니다
