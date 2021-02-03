@@ -134,9 +134,11 @@ void stageManager::uiRender()
 		IMAGEMANAGER->findImage("icon_bishop")->render(getMemDC(), _bishopBt.left, _bishopBt.top);
 		IMAGEMANAGER->findImage("icon_ghost")->render(getMemDC(), _ghostBt.left, _ghostBt.top);
 		//소지금
-		char str[256];
-		sprintf_s(str, "%d", _gold);
-		TextOut(getMemDC(), CAMX + WINSIZEX - 800, CAMY + WINSIZEY - 125, str, strlen(str));
+		FINDIMG("달러")->render(getMemDC(), CAMX + WINSIZEX - 825, CAMY + WINSIZEY - 128);
+		if (_gold > 999) FINDIMG("숫자")->frameRender(getMemDC(), CAMX + WINSIZEX - 800, CAMY + WINSIZEY - 126, _gold / 1000%10, 0);
+		if (_gold > 99) FINDIMG("숫자")->frameRender(getMemDC(), CAMX + WINSIZEX - 785, CAMY + WINSIZEY - 126, _gold / 100%10, 0);
+		if (_gold > 9) FINDIMG("숫자")->frameRender(getMemDC(), CAMX + WINSIZEX - 770, CAMY + WINSIZEY - 126, _gold / 10%10, 0);
+		FINDIMG("숫자")->frameRender(getMemDC(), CAMX + WINSIZEX - 755, CAMY + WINSIZEY - 126, _gold % 10, 0);
 	}
 	
 	if (_alpha > 0)
@@ -259,6 +261,7 @@ void stageManager::ptInMenu()
 
 void stageManager::createUnit()
 {
+	if (_battlePhase) return;
 	//언무브 타일에는 안깔립니당
 	if (_isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE 
 		&& !_menuInPt && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
@@ -336,28 +339,13 @@ void stageManager::createUnit()
 }
 
 inline POINT stageManager::picking(long x, long y)
-{ // 이게 피킹
+{ // 설명은 맵툴에 있음
 	int xx; int yy;
-	if (2 * y < (x - 960))	return { -1,0 }; // y=1/2x보다 위에있는지 (맵밖 벗어남)
-	if (2 * y < -(x - 960))	return { -1,0 }; // y=-1/2x보다 위에있는지 (맵밖 벗어남)
-	//-1이면 예외처리됨(키매니저 L버튼 참고)
-
-	// 왜 y=1/2x가 아니라 2y=x로 썼냐면 나눗셈연산이 느리기때문에 이렇게 쓴거임.
-	// 320은 TILEWIDTH * TILEX / 2 (=맵전체 가로크기의 절반값)와 같은데 부하를 줄이기 위해 계산하고 넣은것임
-
-	 // 64는 타일 높이(TILEHEIGHT)에 양변 2곱한값이며 이만큼씩 이격된(밑으로간) 직선이라 보면 됨
-	xx = (2 * y + (x - 960)) / 64; // y절편을 이용한 방식으로 바꾸었음
-	// xx = ((y + 1/2*(x - 960)) / 32
-	// (x좌표) = ((y + 1/2 *(x - 맵x절반)) / 타일높이
-	//           ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-	//           ㄴ>이 부분이 y절편(h)
-	if (xx > 29) return { -1,0 }; // 맵밖 벗어난거면 예외처리
-
-	yy = (2 * y - (x - 960)) / 64; // 기울기만 음수고 나머진 상동
-	// yy = ((y - 1/2*(x - 960)) / 32
-	// (y좌표) = ((y - 1/2 *(x - 맵x절반)) / 타일높이
-	//           ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-	//           ㄴ>이 부분이 y절편(h)
+	if (2 * y < (x - 960))	return { -1,0 };
+	if (2 * y < -(x - 960))	return { -1,0 };
+	xx = (2 * y + (x - 960)) / 64;
+	if (xx > 29) return { -1,0 };
+	yy = (2 * y - (x - 960)) / 64;
 	if (yy > 29) return { -1,0 };
 
 	return { xx , yy };
@@ -392,7 +380,7 @@ void stageManager::setStage(STAGE stage)
 	}
 	_um->getVUnit().clear();
 	_gold = _tempGold = _isoTile[0].gold;
-
+	_battlePhase = false;
 
 	for (int i = 0; i < TILEX * TILEY; ++i)
 	{ // 서순 지켜야하므로 따로 뺌

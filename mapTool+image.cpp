@@ -32,6 +32,7 @@ void mapTool::imageInit()
 
 	_delAll = RectMake(WINSIZEX - 70 + CAMX, 500 + CAMY, 64, 32);
 	_homeBt = RectMake(CAMX, CAMY + 500, 64, 32);
+	_goldBt = RectMake(CAMX, CAMY + 548, 200, 32);
 
 	//예는 menuRc안에 있어서 예외처리 필요없음
 	_tree1 = RectMake(CAMX + WINSIZEX - 512, CAMY, 107, 113);
@@ -191,6 +192,26 @@ void mapTool::imageRender()
 	IMAGEMANAGER->findImage("fill")->render(getMemDC(), _fill.left, _fill.top);
 	IMAGEMANAGER->findImage("delAll")->render(getMemDC(), _delAll.left, _delAll.top);
 	IMAGEMANAGER->findImage("ui_home")->render(getMemDC(), _homeBt.left, _homeBt.top);
+	if (_currentStage == 1)
+	{
+		FINDIMG("현재스테이지")->alphaRender(getMemDC(), _loadBt.left + 2, _loadBt.top + 2, 100);
+	}
+	if (_currentStage == 2)
+	{
+		FINDIMG("현재스테이지")->alphaRender(getMemDC(), _loadBt2.left + 2, _loadBt2.top + 2, 100);
+	}
+	if (_currentStage == 3)
+	{
+		FINDIMG("현재스테이지")->alphaRender(getMemDC(), _loadBt3.left + 2, _loadBt3.top + 2, 100);
+	}
+	FINDIMG("지급골드")->render(getMemDC(), _goldBt.left, _goldBt.top);
+	FINDIMG("달러")->render(getMemDC(), CAMX + 102, CAMY + 552);
+	if (_modifyingNum != 1 || _modifyingCount % 12 > 6) FINDIMG("숫자")->frameRender(getMemDC(), CAMX + 132, CAMY + 555, _isoTile[0].gold / 1000 % 10, 0);
+	if (_modifyingNum != 2 || _modifyingCount % 12 > 6) FINDIMG("숫자")->frameRender(getMemDC(), CAMX + 147, CAMY + 555, _isoTile[0].gold / 100 % 10, 0);
+	if (_modifyingNum != 3 || _modifyingCount % 12 > 6) FINDIMG("숫자")->frameRender(getMemDC(), CAMX + 162, CAMY + 555, _isoTile[0].gold / 10 % 10, 0);
+	if (_modifyingNum != 4 || _modifyingCount % 12 > 6) FINDIMG("숫자")->frameRender(getMemDC(), CAMX + 177, CAMY + 555, _isoTile[0].gold % 10, 0);
+
+
 
 	if (!_objDelOn) IMAGEMANAGER->findImage("objDel")->alphaRender(getMemDC(), _objDel.left, _objDel.top, 80);
 	else IMAGEMANAGER->findImage("objDel")->render(getMemDC(), _objDel.left, _objDel.top);

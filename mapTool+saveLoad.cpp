@@ -120,7 +120,7 @@ void mapTool::load()
 		ReadFile(file, _isoTile, sizeof(isoTile) * TILEX * TILEY, &read, NULL);
 
 		CloseHandle(file);
-
+		_currentStage = 1;
 		_playerTile = _enemyTile = -1;
 		for (int i = 0; i < 900; ++i)
 		{
@@ -140,6 +140,7 @@ void mapTool::load()
 		ReadFile(file, _isoTile, sizeof(isoTile) * TILEX * TILEY, &read, NULL);
 
 		CloseHandle(file);
+		_currentStage = 2;
 
 		_playerTile = _enemyTile = -1;
 		for (int i = 0; i < 900; ++i)
@@ -160,6 +161,7 @@ void mapTool::load()
 		ReadFile(file, _isoTile, sizeof(isoTile) * TILEX * TILEY, &read, NULL);
 
 		CloseHandle(file);
+		_currentStage = 3;
 
 		_playerTile = _enemyTile = -1;
 		for (int i = 0; i < 900; ++i)

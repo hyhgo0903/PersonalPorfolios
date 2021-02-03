@@ -71,6 +71,8 @@ private:
 	RECT			_leftBt;
 	RECT			_rightBt;
 
+	RECT			_goldBt;
+
 	RECT			_menuRc;
 	RECT			_objDel;
 
@@ -135,6 +137,9 @@ private:
 
 	int _playerTile; // 플레이어 깃발이 몇타일에 있는지 로드할때 불러온다.
 	int _enemyTile; // 에너미 깃발이 몇타일에 있는지 로드할때 불러온다.
+
+	int _modifyingNum; // 몇자리수째를 수정중인지 (0=수정중x, 1천자릿수 2백자릿수 3십자리수 4일의자리수)
+	int _modifyingCount; // 5초카운트
 public:
 	vector<int> aStarPath(int fromTileNum, int toTileNum);
 
@@ -183,5 +188,8 @@ public:
 	void sampleTileMove();
 
 	inline POINT picking(long x, long y); // 피킹하는 함수
+
+
+	void numberInput();
 };
 

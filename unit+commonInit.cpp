@@ -11,7 +11,7 @@ void unit::commonInit()
 	if (_belong == PLAYER) setAngle(0.f);
 	else setAngle(PI);
 	// bool
-	_attackReady = _erase = _active = _return = false;
+	_attackReady = _erase = _active = _return = _stuck = false;
 	_state = ATTACKWAIT; // 이거 안하면 처음에 WALK로 안하니 이미지를 못넣어서 터짐	
 	setState(WALK);		// 셋스테이트때매 워크로 바뀌니 놀라지말것..
 

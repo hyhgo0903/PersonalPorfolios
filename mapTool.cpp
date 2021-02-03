@@ -18,7 +18,7 @@ HRESULT mapTool::init()
 	_currentStage = 1;
 	createIsoMap(TILEX, TILEY);
 	_tempTile.fX = _tempTile.fY = 0;
-	_savePopUp = _popUpCount = 0;
+	_savePopUp = _popUpCount = _modifyingCount = _modifyingNum = 0;
 	_pickingPt = { 0,0 };
 	_moveUnMove = _seePath = false;
 	_brushOn = false;
@@ -115,6 +115,27 @@ void mapTool::update()
 			if (PtInRect(&_objDel, _cameraPtMouse)) objDel();
 			if (PtInRect(&_delAll, _cameraPtMouse)) objDelAll();
 			if (PtInRect(&_homeBt, _cameraPtMouse)) homeBt();
+
+			if (_ptMouse.x > 132 && _ptMouse.x < 147 && _ptMouse.y>555 && _ptMouse.y < 574)
+			{ // 천의자릿수 클릭
+				_modifyingNum = 1;
+				_modifyingCount = 300;
+			}
+			else if (_ptMouse.x > 147 && _ptMouse.x < 162 && _ptMouse.y>555 && _ptMouse.y < 574)
+			{ // 백의자릿수 클릭
+				_modifyingNum = 2;
+				_modifyingCount = 300;
+			}
+			else if (_ptMouse.x > 162 && _ptMouse.x < 177 && _ptMouse.y>555 && _ptMouse.y < 574)
+			{ // 십의자릿수 클릭
+				_modifyingNum = 3;
+				_modifyingCount = 300;
+			}
+			else if (_ptMouse.x > 177 && _ptMouse.x < 192 && _ptMouse.y>555 && _ptMouse.y < 574)
+			{ // 일의자릿수 클릭
+				_modifyingNum = 4;
+				_modifyingCount = 300;
+			}
 		}
 	}
 
@@ -139,15 +160,8 @@ void mapTool::update()
 		InvalidateRect(_hWnd, NULL, false);
 	}
 
-	if (KEYMANAGER->isStayKeyDown('S'))
-	{
-		_isoTile[0].gold += 5;
-	}
-	if (KEYMANAGER->isStayKeyDown('A'))
-	{
-		if (_isoTile[0].gold > 5) _isoTile[0].gold -= 5;
-	}
 
+	numberInput();
 }
 
 void mapTool::render()
@@ -202,3 +216,4 @@ inline POINT mapTool::picking(long x, long y)
 
 	return { xx , yy };
 }
+

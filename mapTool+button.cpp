@@ -66,6 +66,7 @@ void mapTool::menuInPt()
 	else if (PtInRect(&_objDel, _cameraPtMouse))  _menuInPt = true;
 	else if (PtInRect(&_delAll, _cameraPtMouse))  _menuInPt = true;
 	else if (PtInRect(&_homeBt, _cameraPtMouse))  _menuInPt = true;
+	else if (PtInRect(&_goldBt, _cameraPtMouse))  _menuInPt = true;	
 	else _menuInPt = false;
 }
 
@@ -126,6 +127,8 @@ void mapTool::objDelAll()
 	{
 		_isoTile[i].name = NONE;
 	}
+	_playerTile = -1;
+	_enemyTile = -1;
 }
 
 void mapTool::homeBt()

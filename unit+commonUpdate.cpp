@@ -72,4 +72,5 @@ void unit::commonUpdate()
 	}
 	_focusRc = RectMakeCenter(_x, _y, 300, 300);
 
+	if (getDistance(_x, _y, _destX, _destY) < _speed) _stuck = false;
 }

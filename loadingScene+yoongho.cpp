@@ -67,4 +67,12 @@ void loadingScene::yoonghoInit()
 	imgLoaded();
 	IMAGEMANAGER->addImage("에너미깃발", "image/maptool/flagenemy.bmp", 64, 118, true, RGB(255, 0, 255));
 	imgLoaded();
+	IMAGEMANAGER->addFrameImage("숫자", "image/ui/number.bmp", 150, 19, 10, 1, true, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("달러", "image/ui/dollar.bmp", 18, 25, true, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("현재스테이지", "image/ui/currentstage.bmp", 60, 28, false, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("지급골드", "image/ui/stagegold.bmp", 200, 32, false, RGB(255, 0, 255));
+	imgLoaded();
 }

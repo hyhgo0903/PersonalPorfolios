@@ -443,6 +443,9 @@
     <ClCompile Include="stageManager+aStar.cpp">
       <Filter>playGround\mainScene\stage</Filter>
     </ClCompile>
+    <ClCompile Include="mapTool+numberinput.cpp">
+      <Filter>playGround\mapTool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="windowAPI.rc">
