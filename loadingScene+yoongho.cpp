@@ -61,4 +61,8 @@ void loadingScene::yoonghoInit()
 
 	IMAGEMANAGER->addImage("µô·¹ÀÌ¹Ù", "image/ui/progress_Bar/delaybar.bmp", 50, 3, false, RGB(255, 0, 255));
 	imgLoaded();
+	IMAGEMANAGER->addImage("ÇÃ·¹ÀÌ¾î±ê¹ß", "image/maptool/flagplayer.bmp", 64, 118, true, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("¿¡³Ê¹Ì±ê¹ß", "image/maptool/flagenemy.bmp", 64, 118, true, RGB(255, 0, 255));
+	imgLoaded();
 }

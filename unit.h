@@ -150,7 +150,7 @@ public:
 	float& getHP() { return _HP; }
 	int& getTarget() { return _target; }
 	bool& getAttackReady() { return _attackReady; }
-	bool getErase() { return _erase; }
+	bool &getErase() { return _erase; }
 	int getWidth() { return _width; }
 	int getHeight() { return _height; }
 	RECT getRect() { return _rc; }

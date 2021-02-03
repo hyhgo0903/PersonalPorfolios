@@ -83,6 +83,11 @@ private:
 	RECT			_tree4;
 	RECT			_tree5;
 
+	RECT			_playerFlagRc;
+	RECT			_enemyFlagRc;
+	int _savePopUp; // 0이면 없는거고 1이면 저장잘됐다 2이면 오류메세지 팝업
+	int _popUpCount;
+
 	/////////////////////////////////////
 	RECT			_icZergling;
 	RECT			_icMarine;

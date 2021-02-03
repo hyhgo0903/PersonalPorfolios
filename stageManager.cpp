@@ -41,6 +41,7 @@ void stageManager::update()
 			startBt();
 			retryBt();
 			ptInCreateMenu();
+			clearBt();
 		}
 		if (_pickUnit != P_NONE && _onOff) createUnit();
 	}
@@ -105,7 +106,7 @@ void stageManager::objectRender()
 
 void stageManager::uiRender()
 {
-	IMAGEMANAGER->findImage("ui_clear")->render(getMemDC(), CAMX + WINSIZEX - 128, CAMY);
+	IMAGEMANAGER->findImage("ui_clear")->render(getMemDC(), _clearBt.left, _clearBt.top);
 	IMAGEMANAGER->findImage("ui_start")->render(getMemDC(), _startBt.left, _startBt.top);
 	IMAGEMANAGER->findImage("ui_home")->render(getMemDC(), _homeBt.left, _homeBt.top);
 	IMAGEMANAGER->findImage("ui_retry")->render(getMemDC(), _retryBt.left, _retryBt.top);
@@ -137,6 +138,7 @@ void stageManager::uiRect()
 	_offBt = RectMake(CAMX, CAMY + 468, 64, 32);
 	_startBt = RectMake(CAMX + WINSIZEX - 64, CAMY, 64, 32);
 	_retryBt = RectMake(CAMX, CAMY + 532, 64, 32);
+	_clearBt = RectMake(CAMX + WINSIZEX - 128, CAMY, 64, 32);
 
 	//유닛 생성 렉트
 	_zerglingBt = RectMake(CAMX + 280, CAMY + WINSIZEY - 95, 80, 90);
@@ -172,10 +174,25 @@ void stageManager::startBt()
 }
 
 void stageManager::retryBt()
-{//아직 구현중... 방법 생각중
-	if (PtInRect(&_retryBt, _cameraPtMouse))
+{
+	if (PtInRect(&_retryBt, _cameraPtMouse) && _battlePhase)
 	{
 		_onOff = true;
+		for (int i = 0; i < _um->getVUnit().size(); ++i)	_um->getVUnit()[i]->getErase() = true;
+		if (_stage == STAGE1)	_isoTile[0].gold = 1000;
+		setStage(_stage);
+	}
+}
+
+void stageManager::clearBt()
+{
+	if (PtInRect(&_clearBt, _cameraPtMouse) && !_battlePhase)
+	{
+		for (int i = 0; i < _um->getVUnit().size(); ++i)
+		{
+			if(_um->getVUnit()[i]->getBelong() == PLAYER)	_um->getVUnit()[i]->getErase() = true;
+		}
+		if (_stage == STAGE1)	_isoTile[0].gold = 1000;
 	}
 }
 
@@ -215,6 +232,7 @@ void stageManager::ptInMenu()
 	else if (PtInRect(&_templarBt, _cameraPtMouse)) _menuInPt = true;
 	else if (PtInRect(&_bishopBt, _cameraPtMouse)) _menuInPt = true;
 	else if (PtInRect(&_ghostBt, _cameraPtMouse)) _menuInPt = true;
+	else if (PtInRect(&_clearBt, _cameraPtMouse)) _menuInPt = true;
 	else _menuInPt = false;
 }
 

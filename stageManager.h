@@ -34,6 +34,7 @@ private:
 	RECT	_offBt;
 	RECT	_startBt;
 	RECT	_retryBt;
+	RECT	_clearBt;
 
 	//유닛 생성 렉트
 	RECT	_zerglingBt;
@@ -67,6 +68,7 @@ public:
 	void ptInCreateMenu();	//마우스가 생성 메뉴안에 들어갔을때
 	void ptInMenu();		//메뉴안에 마우스가 들어갔는지 체크해주는 기능
 	void createUnit();		//유닛 생성하는 코드
+	void clearBt();			//클리어버튼 기능
 
 	inline POINT picking(long x, long y); // 피킹하는 함수 
 

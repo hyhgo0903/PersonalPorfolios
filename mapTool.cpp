@@ -17,8 +17,8 @@ HRESULT mapTool::init()
 	createSampleTiles();
 	_currentStage = 1;
 	createIsoMap(TILEX, TILEY);
-	_tempTile.fX = 0;
-	_tempTile.fY = 0;
+	_tempTile.fX = _tempTile.fY = 0;
+	_savePopUp = _popUpCount = 0;
 	_pickingPt = { 0,0 };
 	_moveUnMove = _seePath = false;
 	_brushOn = false;
@@ -28,6 +28,8 @@ HRESULT mapTool::init()
 	_objDelOn = false;
 	_menuInPt = false;
 	
+	_playerTile = _enemyTile = -1;
+
 	HANDLE file;
 	DWORD read;
 
@@ -35,8 +37,13 @@ HRESULT mapTool::init()
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	ReadFile(file, _isoTile, sizeof(isoTile) * TILEX * TILEY, &read, NULL);
-
 	CloseHandle(file);
+
+	for (int i = 0; i < 900; ++i)
+	{
+		if (_isoTile[i].name == PLAYERFLAG) _playerTile = i;
+		else if (_isoTile[i].name == ENEMYFLAG) _enemyTile = i;
+	}
 
 	return S_OK;
 }
@@ -81,9 +88,15 @@ void mapTool::update()
 	imageInit();
 	menuInPt();
 
-	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	if (_popUpCount > 0) --_popUpCount;
+	if (_popUpCount == 0 && _savePopUp != 0)
 	{
 		_seePath = false;
+		_savePopUp = 0;
+	}
+
+	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
+	{
 		if (_ptMouse.x > 240 || _ptMouse.y < 580) // 미니맵 밖 누를때만
 		{
 			if (PtInRect(&_undo, _cameraPtMouse)) tempLoad();
@@ -119,9 +132,21 @@ void mapTool::update()
 
 	if (KEYMANAGER->isStayKeyDown(VK_RBUTTON))
 	{
+		if (_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == PLAYERFLAG) _playerTile = -1;
+		if (_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == ENEMYFLAG) _enemyTile = -1;
 		_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = NONE;
 		InvalidateRect(_hWnd, NULL, false);
 	}
+
+	if (KEYMANAGER->isStayKeyDown('S'))
+	{
+		_isoTile[0].gold += 5;
+	}
+	if (KEYMANAGER->isStayKeyDown('A'))
+	{
+		if (_isoTile[0].gold > 5) _isoTile[0].gold -= 5;
+	}
+
 }
 
 void mapTool::render()

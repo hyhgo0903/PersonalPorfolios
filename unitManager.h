@@ -25,8 +25,8 @@ public:
 	virtual void update();	//연산 전용
 	virtual void render();	//그리기 전용
 
-	vector<unit*> getVUnit() { return _vUnit; }
-	vector<unit*>::iterator getViUnit() { return _viUnit; }
+	vector<unit*> &getVUnit() { return _vUnit; }
+	vector<unit*>::iterator &getViUnit() { return _viUnit; }
 
 	void reRender();
 

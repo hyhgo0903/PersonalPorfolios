@@ -40,6 +40,9 @@ void mapTool::imageInit()
 	_tree4 = RectMake(CAMX + WINSIZEX - 222, CAMY, 94, 128);
 	_tree5 = RectMake(CAMX + WINSIZEX - 122, CAMY, 76, 83);
 
+	_playerFlagRc = RectMake(CAMX + WINSIZEX - 512, CAMY+266, 64, 118);
+	_enemyFlagRc = RectMake(CAMX + WINSIZEX - 448, CAMY+266, 64, 118);
+
 	_icZergling = RectMake(CAMX + WINSIZEX - 512, CAMY, 80, 90);
 	_icMarine = RectMake(CAMX + WINSIZEX - 432, CAMY, 80, 90);
 	_icCivilian = RectMake(CAMX + WINSIZEX - 352, CAMY, 80, 90);
@@ -81,6 +84,8 @@ void mapTool::imageRender()
 		else if (_isoTile[i].name == TREE3)	IMAGEMANAGER->findImage("tree3")->render(getMemDC(), _isoTile[i].drawX - 12, _isoTile[i].drawY - 118);
 		else if (_isoTile[i].name == TREE4)	IMAGEMANAGER->findImage("tree4")->render(getMemDC(), _isoTile[i].drawX - 15, _isoTile[i].drawY - 105);
 		else if (_isoTile[i].name == TREE5)	IMAGEMANAGER->findImage("tree5")->render(getMemDC(), _isoTile[i].drawX - 3, _isoTile[i].drawY - 58);
+		else if (_isoTile[i].name == PLAYERFLAG)	IMAGEMANAGER->findImage("플레이어깃발")->render(getMemDC(), _isoTile[i].centerX - 32, _isoTile[i].centerY - 118);
+		else if (_isoTile[i].name == ENEMYFLAG)	IMAGEMANAGER->findImage("에너미깃발")->render(getMemDC(), _isoTile[i].centerX - 32, _isoTile[i].centerY - 118);
 		else if (_isoTile[i].name == ZERGLING)	IMAGEMANAGER->findImage("저글링이동퍼플")->frameRender(getMemDC(), _isoTile[i].drawX + 11, _isoTile[i].drawY - 5, 4, 0);
 		else if (_isoTile[i].name == MARINE)	IMAGEMANAGER->findImage("마린기본빨강")->frameRender(getMemDC(), _isoTile[i].drawX + 15, _isoTile[i].drawY - 5, 0, 4);
 		else if (_isoTile[i].name == CIVILIAN)	IMAGEMANAGER->findImage("시민퍼플")->frameRender(getMemDC(), _isoTile[i].drawX + 23, _isoTile[i].drawY - 5, 4, 7);
@@ -134,8 +139,11 @@ void mapTool::imageRender()
 			if (PtInRect(&_tree4, _cameraPtMouse)) FillRect(getMemDC(), &_tree4, _brush);
 			IMAGEMANAGER->findImage("tree4")->render(getMemDC(), _tree4.left, _tree4.top);
 
-			if (PtInRect(&_tree5, _cameraPtMouse)) FillRect(getMemDC(), &_tree5, _brush);
-			IMAGEMANAGER->findImage("tree5")->render(getMemDC(), _tree5.left, _tree5.top);
+			if (PtInRect(&_playerFlagRc , _cameraPtMouse)) FillRect(getMemDC(), &_playerFlagRc, _brush);
+			IMAGEMANAGER->findImage("플레이어깃발")->render(getMemDC(), _playerFlagRc.left, _playerFlagRc.top);
+
+			if (PtInRect(&_enemyFlagRc, _cameraPtMouse)) FillRect(getMemDC(), &_enemyFlagRc, _brush);
+			IMAGEMANAGER->findImage("에너미깃발")->render(getMemDC(), _enemyFlagRc.left, _enemyFlagRc.top);
 		}
 		else if (_menuNum == THREE)
 		{
@@ -181,4 +189,7 @@ void mapTool::imageRender()
 		IMAGEMANAGER->findImage("move")->alphaRender(getMemDC(), _move.left, _move.top, 80);
 		IMAGEMANAGER->findImage("unmove")->render(getMemDC(), _unMove.left, _unMove.top);
 	}
+
+	if (_savePopUp == 1) FINDIMG("저장팝업")->alphaFrameRender(getMemDC(), CAMX + 425, CAMY + 300, 0, 0, 15+ 2*_popUpCount);
+	else if (_savePopUp == 2) FINDIMG("저장팝업")->alphaFrameRender(getMemDC(), CAMX + 425, CAMY + 300, 0, 1, 15+ 2 * _popUpCount);
 }

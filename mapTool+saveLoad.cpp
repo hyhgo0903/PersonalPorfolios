@@ -26,6 +26,12 @@ void mapTool::tempLoad()
 
 	ReadFile(file, _isoTile, sizeof(isoTile) * TILEX*TILEY, &read, NULL);
 
+	for (int i = 0; i < 900; ++i)
+	{
+		if (_isoTile[i].name == PLAYERFLAG) _playerTile = i;
+		else if (_isoTile[i].name == ENEMYFLAG) _enemyTile = i;
+	}
+
 	CloseHandle(file);
 }
 
@@ -33,7 +39,13 @@ void mapTool::save()
 {
 	if (PtInRect(&_saveBt, _cameraPtMouse))
 	{
-		aStarPath(0, 899); // 임시로. 원래대로면 aStarPath(_playerTile, _enemyTile)임.
+		if (_playerTile != -1 && _enemyTile != -1)	aStarPath(_playerTile, _enemyTile);
+		if (_path.empty() || _playerTile == -1 || _enemyTile == -1)
+		{
+			_savePopUp = 2;
+			_popUpCount = 120;
+			return;
+		}
 		_seePath = true;
 		HANDLE file;
 		DWORD write;
@@ -44,10 +56,20 @@ void mapTool::save()
 		WriteFile(file, _isoTile, sizeof(isoTile) * TILEX * TILEY, &write, NULL);
 
 		CloseHandle(file);
+		_savePopUp = 1;
+		_popUpCount = 120;
 	}
 
 	if (PtInRect(&_saveBt2, _cameraPtMouse))
 	{
+		if (_playerTile != -1 && _enemyTile != -1)	aStarPath(_playerTile, _enemyTile);
+		if (_path.empty() || _playerTile == -1 || _enemyTile == -1)
+		{
+			_savePopUp = 2;
+			_popUpCount = 120;
+			return;
+		}
+		_seePath = true;
 		HANDLE file;
 		DWORD write;
 
@@ -57,10 +79,20 @@ void mapTool::save()
 		WriteFile(file, _isoTile, sizeof(isoTile) * TILEX * TILEY, &write, NULL);
 
 		CloseHandle(file);
+		_savePopUp = 1;
+		_popUpCount = 120;
 	}
 
 	if (PtInRect(&_saveBt3, _cameraPtMouse))
 	{
+		if (_playerTile != -1 && _enemyTile != -1)	aStarPath(_playerTile, _enemyTile);
+		if (_path.empty() || _playerTile == -1 || _enemyTile == -1)
+		{
+			_savePopUp = 2;
+			_popUpCount = 120;
+			return;
+		}
+		_seePath = true;
 		HANDLE file;
 		DWORD write;
 
@@ -70,6 +102,8 @@ void mapTool::save()
 		WriteFile(file, _isoTile, sizeof(isoTile) * TILEX * TILEY, &write, NULL);
 
 		CloseHandle(file);
+		_savePopUp = 1;
+		_popUpCount = 120;
 	}
 }
 
@@ -86,6 +120,13 @@ void mapTool::load()
 		ReadFile(file, _isoTile, sizeof(isoTile) * TILEX * TILEY, &read, NULL);
 
 		CloseHandle(file);
+
+		_playerTile = _enemyTile = -1;
+		for (int i = 0; i < 900; ++i)
+		{
+			if (_isoTile[i].name == PLAYERFLAG) _playerTile = i;
+			else if (_isoTile[i].name == ENEMYFLAG) _enemyTile = i;
+		}
 	}
 
 	if (PtInRect(&_loadBt2, _cameraPtMouse))
@@ -99,6 +140,13 @@ void mapTool::load()
 		ReadFile(file, _isoTile, sizeof(isoTile) * TILEX * TILEY, &read, NULL);
 
 		CloseHandle(file);
+
+		_playerTile = _enemyTile = -1;
+		for (int i = 0; i < 900; ++i)
+		{
+			if (_isoTile[i].name == PLAYERFLAG) _playerTile = i;
+			else if (_isoTile[i].name == ENEMYFLAG) _enemyTile = i;
+		}
 	}
 
 	if (PtInRect(&_loadBt3, _cameraPtMouse))
@@ -112,5 +160,12 @@ void mapTool::load()
 		ReadFile(file, _isoTile, sizeof(isoTile) * TILEX * TILEY, &read, NULL);
 
 		CloseHandle(file);
+
+		_playerTile = _enemyTile = -1;
+		for (int i = 0; i < 900; ++i)
+		{
+			if (_isoTile[i].name == PLAYERFLAG) _playerTile = i;
+			else if (_isoTile[i].name == ENEMYFLAG) _enemyTile = i;
+		}
 	}
 }
