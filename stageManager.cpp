@@ -272,7 +272,6 @@ void stageManager::createUnit()
 			_gold -= 100; //유닛 가격
 			if (_gold > 0)
 			{
-				PLAYSND("저글링생성");
 				_um->createZergling(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
 			}
 		}
@@ -281,7 +280,6 @@ void stageManager::createUnit()
 			_gold -= 150; //유닛 가격
 			if (_gold > 0)
 			{
-				PLAYSND("마린생성");
 				_um->createMarine(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
 			}
 		}
@@ -290,7 +288,6 @@ void stageManager::createUnit()
 			_gold -= 70; //유닛 가격
 			if (_gold > 0)
 			{
-				PLAYSND("어그로맨생성");
 				_um->createCivilian(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
 			}
 		}
@@ -299,7 +296,6 @@ void stageManager::createUnit()
 			_gold -= 200; //유닛 가격
 			if (_gold > 0)
 			{
-				PLAYSND("템플러생성");
 				_um->createTemplar(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 9);
 			}
 		}
@@ -308,7 +304,6 @@ void stageManager::createUnit()
 			_gold -= 200; //유닛 가격
 			if (_gold > 0)
 			{
-				PLAYSND("비숍생성");
 				_um->createBishop(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX + 5, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
 			}
 		}
@@ -317,7 +312,6 @@ void stageManager::createUnit()
 			_gold -= 150; //유닛 가격
 			if (_gold > 0)
 			{
-				PLAYSND("고스트생성");
 				_um->createGhost(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 2);
 			}
 		}
