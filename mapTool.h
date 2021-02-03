@@ -147,8 +147,8 @@ public:
 public:
 	mapTool();
 	~mapTool();
-
 	vector<int> _path;
+
 	HRESULT init();
 	void release();
 	void update();
