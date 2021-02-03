@@ -22,7 +22,7 @@ HRESULT civilian::init(BELONG belong, float x, float y)
 	_width = 12;
 	_height = 20; // 일단은 대충 설정해놓은거임(이미지크기)
 	commonInit(); // 앞에변수 참조해서 만드는 변수도 있으므로 뒤에다 만들어야함
-
+	if (_belong == PLAYER)PLAYSND("어그로맨생성");
 	return S_OK;
 }
 
@@ -92,10 +92,12 @@ void civilian::setState(STATE state)
 			break;
 			// 저글링의경우 대기는 이동에서 y프레임 0으로만 쓸거임
 		case ATTACK:
+			PLAYSND("어그로맨공격");
 			_image = FINDIMG("시민파랑");
 			_maxFrame = _image->getMaxFrameY();
 			break;
 		case DEAD:
+			PLAYSND("어그로맨사망");
 			_damage = 0; // 어차피 안쓸테니 죽었을때 카운트로 재활용한다(..)
 			_image = FINDIMG("시민죽음");
 			_maxFrame = _image->getMaxFrameX();
@@ -116,10 +118,12 @@ void civilian::setState(STATE state)
 			break;
 			// 저글링의경우 대기는 이동에서 y프레임 0으로만 쓸거임
 		case ATTACK:
+			PLAYSND("어그로맨공격");
 			_image = FINDIMG("시민퍼플");
 			_maxFrame = _image->getMaxFrameY();
 			break;
 		case DEAD:
+			PLAYSND("어그로맨사망");
 			_image = FINDIMG("시민죽음");
 			_maxFrame = _image->getMaxFrameX();
 			break;

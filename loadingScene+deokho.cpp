@@ -47,6 +47,21 @@ void loadingScene::deokhoInit()
 	ADDS("고스트사망", "sound/GhostDie.wav", false, false);
 	soundLoaded();
 
+	ADDS("디아블로생성", "sound/DiabloBirth.wav", false, false);
+	soundLoaded();
+	ADDS("디아블로공격", "sound/DiabloAtk.wav", false, false);
+	soundLoaded();
+	ADDS("디아블로사망", "sound/DiabloDie.wav", false, false);
+	soundLoaded();
+
+	ADDS("해골병사생성", "sound/SkeletonBirth.wav", false, false);
+	soundLoaded();
+	ADDS("해골병사사망", "sound/SkeletonDie.wav", false, false);
+	soundLoaded();
+
+	ADDS("보스브금", "sound/SkeletonDie.wav", false, false);
+	soundLoaded();
+
 
 	ADDF("마린이동파랑", "image/unit/Marine/Marine_Walk_Blue.bmp", 288, 256, 9, 8, true, MGT);
 	imgLoaded();

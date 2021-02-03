@@ -85,6 +85,10 @@ void interaction::yoonghoUpdate()
 						_um->createSkeleton(ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(20, 100), _um->getVUnit()[i]->getY() + RND->getFromIntTo(20, 100));
 						_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
 					}
+					for (int j = 0; j < 2; j++)
+					{
+						_se->createThunder(S_ENEMY, _um->getVUnit()[tg]->getX(), _um->getVUnit()[tg]->getY());
+					}
 				}
 			}
 

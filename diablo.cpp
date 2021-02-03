@@ -23,14 +23,13 @@ HRESULT diablo::init(BELONG belong, float x, float y)
 	_damage = 20;
 	_maxHP = 1000;
 	_attackIndex = 2; // 2번 인덱스가 될때 공격판정
-	_width = 10;
-	_height = 7; // 일단은 대충 설정해놓은거임(이미지크기) 
+	_width = 22;
+	_height = 22; // 일단은 대충 설정해놓은거임(이미지크기) 
 	_count = 0;
 	_used = false;
 
 	//_isAttack = false;
 	//_isAttackCount = 0;
-
 	commonInit(); // 앞에변수 참조해서 만드는 변수도 있으므로 뒤에다 만들어야함
 
 	return S_OK;
@@ -58,15 +57,18 @@ void diablo::render()
 		break;
 	case ATTACKWAIT: // 첫번쨰 프레임으로 고정
 		//Rectangle(getMemDC(), _summonRc);
+		//Rectangle(getMemDC(), _rangeRc);
 		_image->frameRender(getMemDC(), _rc.left - 7, _rc.top - 10, _frameDirection, _frame);
 		break;
 	case ATTACK:
 		//Rectangle(getMemDC(), _summonRc);
+		//Rectangle(getMemDC(), _rangeRc);
 		_image->frameRender(getMemDC(), _rc.left - 7, _rc.top - 10, _frameDirection, _frame);
 		break;
 	case DEAD: // 프레임인덱스 다르게 도니까 주의
-		//Rectangle(getMemDC(), _summonRc); 
-		_image->frameRender(getMemDC(), _rc.left - 18, _rc.top - 8, _frame, 0);
+		//Rectangle(getMemDC(), _summonRc);
+		//Rectangle(getMemDC(), _rangeRc);
+		_image->frameRender(getMemDC(), _rc.left - 18, _rc.top - 8,  _frame , 0);
 		break;
 	}
 }
@@ -93,8 +95,10 @@ void diablo::setState(STATE state)
 		case ATTACK:
 			_image = FINDIMG("디아블로 소환");
 			_maxFrame = _image->getMaxFrameY();
+			PLAYSND("디아블로공격");
 			break;
 		case DEAD:
+			PLAYSND("디아블로사망");
 			_damage = 0; // 어차피 안쓸테니 죽었을때 카운트로 재활용한다(..)
 			_image = FINDIMG("디아블로 죽음");
 			_maxFrame = _image->getMaxFrameX();

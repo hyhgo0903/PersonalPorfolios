@@ -25,7 +25,7 @@ HRESULT templar::init(BELONG belong, float x, float y)
 	commonInit(); // 앞에변수 참조해서 만드는 변수도 있으므로 뒤에다 만들어야함
 
 	_afterImage = _rc;
-
+	if (_belong == PLAYER)PLAYSND("템플러생성");
 	return S_OK;
 }
 
@@ -121,10 +121,12 @@ void templar::setState(STATE state)
 			_maxFrame = _image->getMaxFrameY();
 			break;
 		case ATTACK:
+			PLAYSND("템플러공격");
 			_image = FINDIMG("템플러공격블루");
 			_maxFrame = _image->getMaxFrameY();
 			break;
 		case DEAD:
+			PLAYSND("템플러사망");
 			_image = FINDIMG("템플러죽음");
 			_maxFrame = _image->getMaxFrameX();
 			_deathDuration = 10; // 얘는 시체가 금방사라지기때문에 지속시간이 당겨짐
@@ -144,10 +146,12 @@ void templar::setState(STATE state)
 			_maxFrame = _image->getMaxFrameY();
 			break;
 		case ATTACK:
+			PLAYSND("템플러공격");
 			_image = FINDIMG("템플러공격퍼플");
 			_maxFrame = _image->getMaxFrameY();
 			break;
 		case DEAD:
+			PLAYSND("템플러사망");
 			_image = FINDIMG("템플러죽음");
 			_maxFrame = _image->getMaxFrameX();
 			_deathDuration = 10;

@@ -9,6 +9,13 @@ enum S_BELONG
 
 class skillNEffect :	public gameNode
 { // 유닛마냥 복잡하진 않으므로 일단 뼈대는 대충 마련함
+
+	 /* 이펙트 ID (혹시나 해서 적었습니다)
+		1 - 사이오닉 스톰
+		2 - 힐
+		3 - 번개
+	*/
+
 protected:
 	int _ID;
 	S_BELONG _belong;

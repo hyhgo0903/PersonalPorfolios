@@ -22,7 +22,7 @@ HRESULT bishop::init(BELONG belong, float x, float y)
 	_width = 12;
 	_height = 20; // 일단은 대충 설정해놓은거임(이미지크기)
 	commonInit(); // 앞에변수 참조해서 만드는 변수도 있으므로 뒤에다 만들어야함
-
+	if (_belong == PLAYER) PLAYSND("비숍생성");
 	return S_OK;
 }
 
@@ -94,6 +94,7 @@ void bishop::setState(STATE state)
 			break;
 			// 저글링의경우 대기는 이동에서 y프레임 0으로만 쓸거임
 		case ATTACK:
+			PLAYSND("비숍공격");
 			_image = FINDIMG("레드비숍힐");
 			_maxFrame = _image->getMaxFrameY();
 			break;
@@ -118,10 +119,12 @@ void bishop::setState(STATE state)
 			break;
 			// 저글링의경우 대기는 이동에서 y프레임 0으로만 쓸거임
 		case ATTACK:
+			PLAYSND("비숍공격");
 			_image = FINDIMG("블루비숍힐");
 			_maxFrame = _image->getMaxFrameY();
 			break;
 		case DEAD:
+			PLAYSND("비숍죽음");
 			_image = FINDIMG("블루비숍죽음");
 			_maxFrame = _image->getMaxFrameX();
 			break;

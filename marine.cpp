@@ -15,6 +15,7 @@ HRESULT marine::init(BELONG belong, float x, float y)
 	_height = 20; // 일단은 대충 설정해놓은거임(이미지크기)
 
 	commonInit(); // 앞에변수 참조해서 만드는 변수도 있으므로 뒤에다 만들어야함
+	if (_belong == PLAYER)PLAYSND("마린생성");
 	return S_OK;
 }
 
@@ -84,10 +85,12 @@ void marine::setState(STATE state)
 			break;
 			// 저글링의경우 대기는 이동에서 y프레임 0으로만 쓸거임
 		case ATTACK:
+			PLAYSND("마린공격");
 			_image = FINDIMG("마린공격파랑");
 			_maxFrame = _image->getMaxFrameX();
 			break;
 		case DEAD:
+			PLAYSND("마린사망");
 			_damage = 0; // 어차피 안쓸테니 죽었을때 카운트로 재활용한다(..)
 			_image = FINDIMG("마린죽음파랑");
 			_maxFrame = _image->getMaxFrameX();
@@ -108,10 +111,12 @@ void marine::setState(STATE state)
 			break;
 			// 저글링의경우 대기는 이동에서 y프레임 0으로만 쓸거임
 		case ATTACK:
+			PLAYSND("마린공격");
 			_image = FINDIMG("마린공격빨강");
 			_maxFrame = _image->getMaxFrameX();
 			break;
 		case DEAD:
+			PLAYSND("마린사망");
 			_damage = 0; // 어차피 안쓸테니 죽었을때 카운트로 재활용한다(..)
 			_image = FINDIMG("마린죽음빨강");
 			_maxFrame = _image->getMaxFrameX();

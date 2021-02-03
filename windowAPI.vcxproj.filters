@@ -234,6 +234,9 @@
     <ClInclude Include="skeleton.h">
       <Filter>playGround\mainScene\unit\subclass\summoner</Filter>
     </ClInclude>
+    <ClInclude Include="thunder.h">
+      <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -445,6 +448,9 @@
     </ClCompile>
     <ClCompile Include="mapTool+numberinput.cpp">
       <Filter>playGround\mapTool</Filter>
+    </ClCompile>
+    <ClCompile Include="thunder.cpp">
+      <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

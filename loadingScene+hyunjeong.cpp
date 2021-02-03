@@ -19,7 +19,7 @@ void loadingScene::hyunjeonghoInit()
 	imgLoaded();
 	IMAGEMANAGER->addFrameImage("디아블로 소환", "image/unit/diablo/Diablo_Summon.bmp", 2000, 2370, 8, 10, true, RGB(255, 0, 255));
 	imgLoaded();
-	IMAGEMANAGER->addFrameImage("디아블로 죽음", "image/unit/diablo/Diablo_Summon.bmp", 2000, 2370, 8, 10, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addFrameImage("디아블로 죽음", "image/unit/diablo/Diablo_deadEffect.bmp", 1611, 182, 9 , 1, true, RGB(0 , 255 , 0));
 	imgLoaded();
 
 	//################## 해골병사 ###################################################################
@@ -30,5 +30,9 @@ void loadingScene::hyunjeonghoInit()
 	IMAGEMANAGER->addFrameImage("해골병사 공격", "image/unit/diablo_Bone/Bone_Attack.bmp", 400, 450, 8, 9, true, RGB(255, 0, 255));
 	imgLoaded();
 	IMAGEMANAGER->addFrameImage("해골병사 죽음", "image/unit/diablo_Bone/Bone_Dead.bmp", 640, 560, 8, 7, true, RGB(255, 0, 255));
+	imgLoaded();
+
+	//################## 디아블로 스킬 이펙트 ###################################################################
+	IMAGEMANAGER->addFrameImage("번개 이펙트", "image/sne/thunderEffect.bmp", 1339, 300, 11, 1, true, RGB(255, 0, 255));
 	imgLoaded();
 }

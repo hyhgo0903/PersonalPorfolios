@@ -30,7 +30,6 @@ HRESULT skeleton::init(BELONG belong, float x, float y)
 	_used = false;
 
 	commonInit(); // 앞에변수 참조해서 만드는 변수도 있으므로 뒤에다 만들어야함
-
 	return S_OK;
 }
 
@@ -51,19 +50,19 @@ void skeleton::render()
 	switch (_state)
 	{ // 위치 적당히 보정해서 쓸것
 	case WALK:
-		Rectangle(getMemDC(), _rangeRc);
+		//Rectangle(getMemDC(), _rangeRc);
 		_image->frameRender(getMemDC(), _rc.left - 9, _rc.top - 11, _frameDirection, _frame);
 		break;
 	case ATTACKWAIT: // 첫번쨰 프레임으로 고정
-		Rectangle(getMemDC(), _rangeRc);
+		//Rectangle(getMemDC(), _rangeRc);
 		_image->frameRender(getMemDC(), _rc.left - 9, _rc.top - 11, _frameDirection, 0);
 		break;
 	case ATTACK:
-		Rectangle(getMemDC(), _rangeRc);
+		//Rectangle(getMemDC(), _rangeRc);
 		_image->frameRender(getMemDC(), _rc.left - 9, _rc.top - 11, _frameDirection, _frame);
 		break;
 	case DEAD: // 프레임인덱스 다르게 도니까 주의
-		Rectangle(getMemDC(), _rangeRc);
+		//Rectangle(getMemDC(), _rangeRc);
 		_image->frameRender(getMemDC(), _rc.left - 18, _rc.top - 8, _frame, 0);
 		break;
 	}
@@ -111,6 +110,7 @@ void skeleton::setState(STATE state)
 			_maxFrame = _image->getMaxFrameY();
 			break;
 		case DEAD:
+			PLAYSND("스켈레톤사망");
 			_image = FINDIMG("해골병사 죽음");
 			_maxFrame = _image->getMaxFrameX();
 			break;

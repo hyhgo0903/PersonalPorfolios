@@ -112,6 +112,7 @@ void unitManager::setActive()
 
 void unitManager::createZergling(BELONG belong, float x, float y)
 {
+	//PLAYSND("저글링생성");
 	zergling* zergl = new zergling;
 	zergl->init(belong, x, y);
 	_vUnit.push_back(zergl);
@@ -119,6 +120,7 @@ void unitManager::createZergling(BELONG belong, float x, float y)
 
 void unitManager::createCivilian(BELONG belong, float x, float y)
 {
+	//PLAYSND("어그로맨생성");
 	civilian* civil = new civilian;
 	civil->init(belong, x, y);
 	_vUnit.push_back(civil);
@@ -126,6 +128,7 @@ void unitManager::createCivilian(BELONG belong, float x, float y)
 
 void unitManager::createMarine(BELONG belong, float x, float y)
 {
+	//PLAYSND("마린생성");
 	marine* _marine = new marine;
 	_marine->init(belong, x, y);
 	_vUnit.push_back(_marine);
@@ -133,6 +136,7 @@ void unitManager::createMarine(BELONG belong, float x, float y)
 
 void unitManager::createTemplar(BELONG belong, float x, float y)
 {
+	//PLAYSND("템플러생성");
 	templar* templ = new templar;
 	templ->init(belong, x, y);
 	_vUnit.push_back(templ);
@@ -140,6 +144,7 @@ void unitManager::createTemplar(BELONG belong, float x, float y)
 
 void unitManager::createBishop(BELONG belong, float x, float y)
 {
+	//PLAYSND("비숍생성");
 	bishop* bi = new bishop;
 	bi->init(belong, x, y);
 	_vUnit.push_back(bi);
@@ -147,6 +152,7 @@ void unitManager::createBishop(BELONG belong, float x, float y)
 
 void unitManager::createGhost(BELONG belong, float x, float y)
 {
+	//PLAYSND("고스트생성");
 	ghost* gt = new ghost;
 	gt->init(belong, x, y);
 	_vUnit.push_back(gt);
@@ -154,6 +160,7 @@ void unitManager::createGhost(BELONG belong, float x, float y)
 
 void unitManager::createDiablo(BELONG belong, float x, float y)
 {
+	//PLAYSND("디아블로생성");
 	diablo* db = new diablo;
 	db->init(belong, x, y);
 	_vUnit.push_back(db);
@@ -161,6 +168,7 @@ void unitManager::createDiablo(BELONG belong, float x, float y)
 
 void unitManager::createskeleton(BELONG belong, float x, float y)
 {
+	PLAYSND("해골병사생성");
 	skeleton* bn = new skeleton;
 	bn->init(belong, x, y);
 	_vUnit.push_back(bn);
@@ -168,6 +176,7 @@ void unitManager::createskeleton(BELONG belong, float x, float y)
 
 void unitManager::createSkeleton(BELONG belong, float x, float y)
 {
+	PLAYSND("해골병사생성");
 	skeleton* sk = new skeleton;
 	sk->init(belong, x, y);
 	_vUnit.push_back(sk);

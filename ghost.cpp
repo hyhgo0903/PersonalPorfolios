@@ -27,7 +27,7 @@ HRESULT ghost::init(BELONG belong, float x, float y)
 	_used = false;
 
 	commonInit(); // 앞에변수 참조해서 만드는 변수도 있으므로 뒤에다 만들어야함
-
+	if (_belong == PLAYER)PLAYSND("고스트생성");
 	return S_OK;
 }
 
@@ -108,10 +108,12 @@ void ghost::setState(STATE state)
 			break;
 			// 저글링의경우 대기는 이동에서 y프레임 0으로만 쓸거임
 		case ATTACK:
+			PLAYSND("고스트공격");
 			_image = FINDIMG("ghost_atk_blue");
 			_maxFrame = _image->getMaxFrameY();
 			break;
 		case DEAD:
+			PLAYSND("고스트사망");
 			_image = FINDIMG("ghost_dead_blue");
 			_maxFrame = _image->getMaxFrameX();
 			break; // 얘는 x임 가로로 재생하기떄문
@@ -131,10 +133,12 @@ void ghost::setState(STATE state)
 			break;
 			// 저글링의경우 대기는 이동에서 y프레임 0으로만 쓸거임
 		case ATTACK:
+			PLAYSND("고스트공격");
 			_image = FINDIMG("ghost_atk_red");
 			_maxFrame = _image->getMaxFrameY();
 			break;
 		case DEAD:
+			PLAYSND("고스트사망");
 			_image = FINDIMG("ghost_dead_red");
 			_maxFrame = _image->getMaxFrameX();
 			break;

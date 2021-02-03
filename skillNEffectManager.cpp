@@ -62,3 +62,10 @@ void skillNEffectManager::createHeal(S_BELONG belong, float x, float y)
 	cure->init(belong, x, y);
 	_vSne.push_back(cure);
 }
+
+void skillNEffectManager::createThunder(S_BELONG belong, float x, float y)
+{
+	thunder* thd = new thunder;
+	thd->init(belong, x, y);
+	_vSne.push_back(thd);
+}
