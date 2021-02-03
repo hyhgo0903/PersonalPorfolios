@@ -15,6 +15,7 @@ HRESULT stageManager::init()
 	_menuInPt = false;
 	_onOff = true;
 	_pickUnit = P_NONE;
+	_alpha = 0;
 	return S_OK;
 }
 
@@ -31,7 +32,7 @@ void stageManager::update()
 	ptInIso();
 	ptInMenu();
 
-	if (_alpha < 256) ++_alpha;
+	if (_alpha > 0) --_alpha;
 
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
@@ -44,7 +45,7 @@ void stageManager::update()
 			ptInCreateMenu();
 			clearBt();
 		}
-		if (_pickUnit != P_NONE && _onOff) createUnit();
+		if (_pickUnit != P_NONE && _onOff && _ptMouse.x > 240 || _ptMouse.y < 580) createUnit();
 	}
 
 	if (KEYMANAGER->isStayKeyDown(VK_LBUTTON))
@@ -138,9 +139,12 @@ void stageManager::uiRender()
 		TextOut(getMemDC(), CAMX + WINSIZEX - 800, CAMY + WINSIZEY - 125, str, strlen(str));
 	}
 	
-	for (int i = 0; i < _path.size(); ++i)
+	if (_alpha > 0)
 	{
-		FINDIMG("가이드타일")->alphaRender(getMemDC(), _isoTile[_path[i]].drawX, _isoTile[_path[i]].drawY, 150);
+		for (int i = 0; i < _path.size(); ++i)
+		{
+			FINDIMG("가이드타일")->alphaRender(getMemDC(), _isoTile[_path[i]].drawX, _isoTile[_path[i]].drawY, _alpha);
+		}
 	}
 }
 
@@ -263,38 +267,61 @@ void stageManager::createUnit()
 		if (_pickUnit == P_ZERGLING )
 		{
 			_gold -= 100; //유닛 가격
-			_um->createZergling(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
+			if (_gold > 0)
+			{
+				PLAYSND("저글링생성");
+				_um->createZergling(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
+			}
 		}
 		else if (_pickUnit == P_MARINE && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
 		{
 			_gold -= 150; //유닛 가격
-			_um->createMarine(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
+			if (_gold > 0)
+			{
+				PLAYSND("마린생성");
+				_um->createMarine(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
+			}
 		}
 		else if (_pickUnit == P_CIVILIAN && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
 		{
 			_gold -= 70; //유닛 가격
-			_um->createCivilian(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
+			if (_gold > 0)
+			{
+				PLAYSND("어그로맨생성");
+				_um->createCivilian(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
+			}
 		}
 		else if (_pickUnit == P_TEMPLAR && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
 		{
 			_gold -= 200; //유닛 가격
-			_um->createTemplar(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 9);
+			if (_gold > 0)
+			{
+				PLAYSND("템플러생성");
+				_um->createTemplar(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 9);
+			}
 		}
 		else if (_pickUnit == P_BISHOP && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
 		{
 			_gold -= 200; //유닛 가격
-			_um->createBishop(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX + 5, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
+			if (_gold > 0)
+			{
+				PLAYSND("비숍생성");
+				_um->createBishop(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX + 5, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
+			}
 		}
 		else if (_pickUnit == P_GHOST && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
 		{
 			_gold -= 150; //유닛 가격
-			_um->createGhost(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 2);
+			if (_gold > 0)
+			{
+				PLAYSND("고스트생성");
+				_um->createGhost(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 2);
+			}
 		}
 		if (_gold < 0) // 가격이 0이하로 떨어지면 만든거 취소
 		{
 			_gold = _tempGold;
 			PLAYSND("골드부족");
-			_um->getVUnit()[_um->getVUnit().size() - 1]->getErase() = true;
 		}
 		else // 생성 되었으니 경로할당함
 		{
