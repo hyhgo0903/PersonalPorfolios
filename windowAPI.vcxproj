@@ -202,7 +202,7 @@
     <ClCompile Include="skeleton.cpp" />
     <ClCompile Include="diablo.cpp" />
     <ClCompile Include="heal.cpp" />
-    <ClCompile Include="interaction+aStar.cpp" />
+    <ClCompile Include="stageManager+aStar.cpp" />
     <ClCompile Include="bishop.cpp" />
     <ClCompile Include="button.cpp" />
     <ClCompile Include="cameraManager.cpp" />

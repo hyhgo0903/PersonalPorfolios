@@ -21,7 +21,7 @@ HRESULT diablo::init(BELONG belong, float x, float y)
 	_speed = 0.9f;
 	_maxDelay = 120; // 대충 1초에 한대 치게끔
 	_damage = 20;
-	_maxHP = 300;
+	_maxHP = 1000;
 	_attackIndex = 2; // 2번 인덱스가 될때 공격판정
 	_width = 10;
 	_height = 7; // 일단은 대충 설정해놓은거임(이미지크기) 
@@ -43,8 +43,8 @@ void diablo::release()
 void diablo::update()
 {
 	commonUpdate();
-	_summonRc = RectMakeCenter(_x + 40, _y + 90, 80, 80);
-	_rangeRc = RectMakeCenter(_x + 40, _y + 90, _width + 200, _height + 100);
+	_summonRc = RectMakeCenter(_x + 40, _y + 90, 180, 180);
+	_rangeRc = RectMakeCenter(_x + 40, _y + 90, _width + 400, _height + 400);
 }
 
 void diablo::render()

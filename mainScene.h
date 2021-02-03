@@ -8,7 +8,7 @@
 class mainScene :public gameNode
 {
 private:
-
+	image*					_backGround;
 	stageManager*			_sm;
 	unitManager*			_um;
 	skillNEffectManager*	_se;

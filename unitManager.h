@@ -50,6 +50,6 @@ public:
 	void createGhost(BELONG belong, float x, float y);
 	void createDiablo(BELONG belong, float x, float y);
 	void createskeleton(BELONG belong, float x, float y);
-	void setSkeleton(); // 디아블로 소환실험 3번
+	void createSkeleton(BELONG belong, float x, float y);
 };
 

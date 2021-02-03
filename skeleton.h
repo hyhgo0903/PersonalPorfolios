@@ -1,13 +1,11 @@
 #pragma once
 #include "unit.h"
-#include "diablo.h"
+#include "skillNEffect.h"
 class skeleton :
 	public unit
 {
 
 private:
-
-	diablo* _diablo;
 
 public:
 	skeleton();

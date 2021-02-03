@@ -2,7 +2,16 @@
 #include "gameNode.h"
 #include "tile.h"
 #include "unitManager.h"
-#include "mapTool.h" // 단지 에이스타 함수를 가져오기 위함. 따라서 연결시킬 필요는 없음
+
+struct tagAStarTile
+{
+	int tileNum;
+	int parentNodeTileNum;
+	int totalCost;
+	int costFromStart;
+	int costToGoal;
+	bool isOpen;
+};
 
 enum STAGE
 {
@@ -51,11 +60,27 @@ private:
 	bool	_onOff;				//유닛구매 메뉴 온오프(게임시작누를때는 자동으로 오프로 변경되야함)
 	pickUnit	_pickUnit;
 	int _tempGold; //골드 음값으로 되면 이걸 다시 불러옴
-	mapTool _mapTool;
 	int _playerTile;
 	int _enemyTile;
 	int _alpha;
 	
+
+	vector<tagAStarTile*>			_vTotalList;
+	vector<tagAStarTile*>::iterator _viTotalList;
+	vector<tagAStarTile*>			_vOpenList;
+	vector<tagAStarTile*>::iterator _viOpenList;
+	vector<tagAStarTile*>			_vCloseList;
+	vector<tagAStarTile*>::iterator _viCloseList;
+	vector<int> _path;
+
+	int _startTile;		//시작타일의 번호
+	int _endTile;			//도착타일
+	int _currentTile;		//현재타일
+
+	bool _stop; // 못찾은거
+
+
+
 public:
 	stageManager();
 	~stageManager();
@@ -81,6 +106,15 @@ public:
 
 	void setStage(STAGE stage);
 	isoTile* getIsoTile() { return _isoTile; }		//타일이 가진 오브젝트 속성 게터
+
+
+	vector<int> aStarPath(int fromTileNum, int toTileNum);
+
+	//갈수 있는 길을 찾아내서 담아줄 함수
+	vector<tagAStarTile*> addOpenList(int currentTile);
+	//빠른 경로 찾을 함수
+	void pathFinder(int currentTile);
+
 	void umLink(unitManager * um) { _um = um; }
 };
 

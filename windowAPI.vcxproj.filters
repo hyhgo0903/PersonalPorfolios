@@ -428,9 +428,6 @@
     <ClCompile Include="ghost.cpp">
       <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClCompile>
-    <ClCompile Include="interaction+aStar.cpp">
-      <Filter>playGround\mainScene\interaction</Filter>
-    </ClCompile>
     <ClCompile Include="heal.cpp">
       <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
     </ClCompile>
@@ -442,6 +439,9 @@
     </ClCompile>
     <ClCompile Include="skeleton.cpp">
       <Filter>playGround\mainScene\unit\subclass\summoner</Filter>
+    </ClCompile>
+    <ClCompile Include="stageManager+aStar.cpp">
+      <Filter>playGround\mainScene\stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

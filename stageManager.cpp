@@ -138,9 +138,9 @@ void stageManager::uiRender()
 		TextOut(getMemDC(), CAMX + WINSIZEX - 800, CAMY + WINSIZEY - 125, str, strlen(str));
 	}
 	
-	for (int i = 0; i < _mapTool._path.size(); ++i)
+	for (int i = 0; i < _path.size(); ++i)
 	{
-		FINDIMG("가이드타일")->alphaRender(getMemDC(), _isoTile[_mapTool._path[i]].drawX, _isoTile[_mapTool._path[i]].drawY, 150);
+		FINDIMG("가이드타일")->alphaRender(getMemDC(), _isoTile[_path[i]].drawX, _isoTile[_path[i]].drawY, 150);
 	}
 }
 
@@ -300,7 +300,7 @@ void stageManager::createUnit()
 		{
 			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = PLAYEROCCUPIED; // NONE으로 검사했으니 통일해도 될듯
 			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = _pickingPt.y * TILEX + _pickingPt.x;
-			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(_mapTool.aStarPath(_pickingPt.y*TILEX + _pickingPt.x,
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(aStarPath(_pickingPt.y*TILEX + _pickingPt.x,
 				_enemyTile));
 			_alpha = 150;
 		}
@@ -379,31 +379,31 @@ void stageManager::setStage(STAGE stage)
 		{
 			_um->createZergling(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
 			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i;
-			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(_mapTool.aStarPath(i, _playerTile));
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(aStarPath(i, _playerTile));
 		}
 		else if (_isoTile[i].name == MARINE)
 		{
 			_um->createMarine(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
 			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i;
-			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(_mapTool.aStarPath(i, _playerTile));
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(aStarPath(i, _playerTile));
 		}
 		else if (_isoTile[i].name == CIVILIAN)
 		{
 			_um->createCivilian(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
 			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i;
-			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(_mapTool.aStarPath(i, _playerTile));
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(aStarPath(i, _playerTile));
 		}
 		else if (_isoTile[i].name == TEMPLAR)
 		{
 			_um->createTemplar(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
 			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i;
-			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(_mapTool.aStarPath(i, _playerTile));
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(aStarPath(i, _playerTile));
 		}
 		else if (_isoTile[i].name == BISHOP)
 		{
 			_um->createBishop(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
 			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i;
-			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(_mapTool.aStarPath(i, _playerTile));
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(aStarPath(i, _playerTile));
 		}
 		//if (_isoTile[i].name == DIABLO)
 		//if (_isoTile[i].name == SKELETON)
@@ -411,7 +411,7 @@ void stageManager::setStage(STAGE stage)
 		{
 			_um->createGhost(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
 			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i;
-			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(_mapTool.aStarPath(i, _playerTile));
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(aStarPath(i, _playerTile));
 		}
 	}
 }

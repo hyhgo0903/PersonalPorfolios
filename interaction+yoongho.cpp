@@ -76,6 +76,18 @@ void interaction::yoonghoUpdate()
 					_se->createHeal(S_ENEMY, _um->getVUnit()[i]->getX(), _um->getVUnit()[i]->getY());
 				}
 			}
+			else if (_um->getVUnit()[i]->getID() == 6)
+			{ // 디아블로면 해골생성 
+				if (_um->getVUnit()[i]->getBelong() == ENEMY)
+				{
+					for (int j = 0; j < 4; j++)
+					{
+						_um->createSkeleton(ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(20, 100), _um->getVUnit()[i]->getY() + RND->getFromIntTo(20, 100));
+						_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
+					}
+				}
+			}
+
 			_um->getVUnit()[i]->getAttackReady() = false;
 			if (_um->getVUnit()[i]->getID() != 5) // 힐장판이 아니면 데미지
 			{
