@@ -6,6 +6,8 @@ void loadingScene::yoonghoInit()
 
 	SOUNDMANAGER->addSound("테란브금", "sound/treamedterran1.mp3", true, true);
 	soundLoaded();
+	SOUNDMANAGER->addSound("골드부족", "sound/goldlack.wav", false, false);
+	soundLoaded();
 
 	IMAGEMANAGER->addFrameImage("저글링이동블루", "image/unit/zergling/zerglingwalkblue.bmp", 320, 273, 8, 7, true, RGB(255, 0, 255));
 	imgLoaded();

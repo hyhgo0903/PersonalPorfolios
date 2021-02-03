@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "tile.h"
 #include "unitManager.h"
+#include "mapTool.h" // 단지 에이스타 함수를 가져오기 위함. 따라서 연결시킬 필요는 없음
 
 enum STAGE
 {
@@ -49,6 +50,12 @@ private:
 	bool	_menuInPt;			//마우스가 메뉴안에 들어갔을때 불필요한 행동들을 제어하기 위해 만듬
 	bool	_onOff;				//유닛구매 메뉴 온오프(게임시작누를때는 자동으로 오프로 변경되야함)
 	pickUnit	_pickUnit;
+	int _tempGold; //골드 음값으로 되면 이걸 다시 불러옴
+	mapTool _mapTool;
+	int _playerTile;
+	int _enemyTile;
+	int _alpha;
+	
 public:
 	stageManager();
 	~stageManager();

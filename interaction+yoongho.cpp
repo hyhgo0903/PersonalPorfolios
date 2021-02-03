@@ -9,26 +9,31 @@ void interaction::yoonghoUpdate()
 {
 	for (int i = 0; i < _se->getVSne().size(); ++i)
 	{ // 사이오닉스톰
-		if (_se->getVSne()[i]->getID() != 1) continue;
-		for (int j = 0; j < _um->getVUnit().size(); ++j)
+		if (_se->getVSne()[i]->getID() == 1)
 		{
-			if (_um->getVUnit()[j]->getState() == DEAD) continue;
-			if (_um->getVUnit()[j]->getBelong() == _se->getVSne()[i]->getBelong()) continue;
-			RECT temp; // 피아식별을 하는 사이오닉스톰으로.. 이넘문은 다르지만 0,1로 비교하므로 비교가능하다
-			if (IntersectRect(&temp, &_um->getVUnit()[j]->getRect(), &_se->getVSne()[i]->getRect()))
+			for (int j = 0; j < _um->getVUnit().size(); ++j)
 			{
-				_um->getVUnit()[j]->getHP() -= 0.1f;
+				if (_um->getVUnit()[j]->getState() == DEAD) continue;
+				if (_um->getVUnit()[j]->getBelong() == _se->getVSne()[i]->getBelong()) continue;
+				RECT temp; // 피아식별을 하는 사이오닉스톰으로.. 이넘문은 다르지만 0,1로 비교하므로 비교가능하다
+				if (IntersectRect(&temp, &_um->getVUnit()[j]->getRect(), &_se->getVSne()[i]->getRect()))
+				{
+					_um->getVUnit()[j]->getHP() -= 0.1f;
+				}
 			}
-		}
-		if (_se->getVSne()[i]->getID() != 2) continue;
-		for (int j = 0; j < _um->getVUnit().size(); ++j)
-		{ // 힐
-			if (_um->getVUnit()[j]->getState() == DEAD) continue;
-			if (_um->getVUnit()[j]->getBelong() == _se->getVSne()[i]->getBelong()) continue;
-			RECT temp;
-			if (IntersectRect(&temp, &_um->getVUnit()[j]->getRect(), &_se->getVSne()[i]->getRect()))
-			{
-				_um->getVUnit()[j]->getHP() += 0.1f;
+		}		
+		if (_se->getVSne()[i]->getID() == 2)
+		{
+
+			for (int j = 0; j < _um->getVUnit().size(); ++j)
+			{ // 힐
+				if (_um->getVUnit()[j]->getState() == DEAD) continue;
+				if (_um->getVUnit()[j]->getBelong() == _se->getVSne()[i]->getBelong()) continue;
+				RECT temp;
+				if (IntersectRect(&temp, &_um->getVUnit()[j]->getRect(), &_se->getVSne()[i]->getRect()))
+				{
+					_um->getVUnit()[j]->getHP() += 0.1f;
+				}
 			}
 		}
 	}

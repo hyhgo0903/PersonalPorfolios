@@ -83,6 +83,11 @@ private:
 	RECT			_tree4;
 	RECT			_tree5;
 
+	RECT			_wall1;
+	RECT			_wall2;
+	RECT			_wall3;
+	RECT			_wall4;
+
 	RECT			_playerFlagRc;
 	RECT			_enemyFlagRc;
 	int _savePopUp; // 0이면 없는거고 1이면 저장잘됐다 2이면 오류메세지 팝업
@@ -121,7 +126,6 @@ private:
 	vector<tagMAStarTile*>::iterator _viOpenList;
 	vector<tagMAStarTile*>			_vCloseList;
 	vector<tagMAStarTile*>::iterator _viCloseList;
-	vector<int> _path;
 	int _startTile;		//시작타일의 번호
 	int _endTile;			//도착타일
 	int _currentTile;		//현재타일
@@ -144,6 +148,7 @@ public:
 	mapTool();
 	~mapTool();
 
+	vector<int> _path;
 	HRESULT init();
 	void release();
 	void update();

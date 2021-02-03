@@ -135,6 +135,7 @@ void mapTool::update()
 		if (_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == PLAYERFLAG) _playerTile = -1;
 		if (_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == ENEMYFLAG) _enemyTile = -1;
 		_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = NONE;
+		_isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM = MOVE;	//오브젝트설치시 자동으로 언무브가 깔려서 지울때도 무브로 바꿔주는거 추가함
 		InvalidateRect(_hWnd, NULL, false);
 	}
 

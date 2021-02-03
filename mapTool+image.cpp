@@ -39,6 +39,10 @@ void mapTool::imageInit()
 	_tree3 = RectMake(CAMX + WINSIZEX - 312, CAMY, 84, 139);
 	_tree4 = RectMake(CAMX + WINSIZEX - 222, CAMY, 94, 128);
 	_tree5 = RectMake(CAMX + WINSIZEX - 122, CAMY, 76, 83);
+	_wall1 = RectMake(CAMX + WINSIZEX - 512, CAMY + 113, 32, 45);
+	_wall2 = RectMake(CAMX + WINSIZEX - 480, CAMY + 113, 32, 45);
+	_wall3 = RectMake(CAMX + WINSIZEX - 448, CAMY + 113, 32, 45);
+	_wall4 = RectMake(CAMX + WINSIZEX - 416, CAMY + 113, 32, 45);
 
 	_playerFlagRc = RectMake(CAMX + WINSIZEX - 512, CAMY+266, 64, 118);
 	_enemyFlagRc = RectMake(CAMX + WINSIZEX - 448, CAMY+266, 64, 118);
@@ -84,6 +88,10 @@ void mapTool::imageRender()
 		else if (_isoTile[i].name == TREE3)	IMAGEMANAGER->findImage("tree3")->render(getMemDC(), _isoTile[i].drawX - 12, _isoTile[i].drawY - 118);
 		else if (_isoTile[i].name == TREE4)	IMAGEMANAGER->findImage("tree4")->render(getMemDC(), _isoTile[i].drawX - 15, _isoTile[i].drawY - 105);
 		else if (_isoTile[i].name == TREE5)	IMAGEMANAGER->findImage("tree5")->render(getMemDC(), _isoTile[i].drawX - 3, _isoTile[i].drawY - 58);
+		else if (_isoTile[i].name == WALL1)	IMAGEMANAGER->findImage("wall1")->render(getMemDC(), _isoTile[i].drawX + 8, _isoTile[i].drawY - 18);
+		else if (_isoTile[i].name == WALL2)	IMAGEMANAGER->findImage("wall2")->render(getMemDC(), _isoTile[i].drawX + 24, _isoTile[i].drawY - 18);
+		else if (_isoTile[i].name == WALL3)	IMAGEMANAGER->findImage("wall1")->render(getMemDC(), _isoTile[i].drawX + 32, _isoTile[i].drawY - 28);
+		else if (_isoTile[i].name == WALL4)	IMAGEMANAGER->findImage("wall2")->render(getMemDC(), _isoTile[i].drawX + 4, _isoTile[i].drawY - 28);
 		else if (_isoTile[i].name == PLAYERFLAG)	IMAGEMANAGER->findImage("플레이어깃발")->render(getMemDC(), _isoTile[i].centerX - 32, _isoTile[i].centerY - 118);
 		else if (_isoTile[i].name == ENEMYFLAG)	IMAGEMANAGER->findImage("에너미깃발")->render(getMemDC(), _isoTile[i].centerX - 32, _isoTile[i].centerY - 118);
 		else if (_isoTile[i].name == ZERGLING)	IMAGEMANAGER->findImage("저글링이동퍼플")->frameRender(getMemDC(), _isoTile[i].drawX + 11, _isoTile[i].drawY - 5, 4, 0);
@@ -139,11 +147,26 @@ void mapTool::imageRender()
 			if (PtInRect(&_tree4, _cameraPtMouse)) FillRect(getMemDC(), &_tree4, _brush);
 			IMAGEMANAGER->findImage("tree4")->render(getMemDC(), _tree4.left, _tree4.top);
 
+			if (PtInRect(&_tree5, _cameraPtMouse)) FillRect(getMemDC(), &_tree5, _brush);
+			IMAGEMANAGER->findImage("tree5")->render(getMemDC(), _tree5.left, _tree5.top);
+
 			if (PtInRect(&_playerFlagRc , _cameraPtMouse)) FillRect(getMemDC(), &_playerFlagRc, _brush);
 			IMAGEMANAGER->findImage("플레이어깃발")->render(getMemDC(), _playerFlagRc.left, _playerFlagRc.top);
 
 			if (PtInRect(&_enemyFlagRc, _cameraPtMouse)) FillRect(getMemDC(), &_enemyFlagRc, _brush);
 			IMAGEMANAGER->findImage("에너미깃발")->render(getMemDC(), _enemyFlagRc.left, _enemyFlagRc.top);
+
+			if (PtInRect(&_wall1, _cameraPtMouse)) FillRect(getMemDC(), &_wall1, _brush);
+			IMAGEMANAGER->findImage("wall1")->render(getMemDC(), _wall1.left, _wall1.top);
+
+			if (PtInRect(&_wall2, _cameraPtMouse)) FillRect(getMemDC(), &_wall2, _brush);
+			IMAGEMANAGER->findImage("wall2")->render(getMemDC(), _wall2.left, _wall2.top);
+
+			if (PtInRect(&_wall3, _cameraPtMouse)) FillRect(getMemDC(), &_wall3, _brush);
+			IMAGEMANAGER->findImage("wall1")->render(getMemDC(), _wall3.left, _wall3.top);
+
+			if (PtInRect(&_wall4, _cameraPtMouse)) FillRect(getMemDC(), &_wall4, _brush);
+			IMAGEMANAGER->findImage("wall2")->render(getMemDC(), _wall4.left, _wall4.top);
 		}
 		else if (_menuNum == THREE)
 		{

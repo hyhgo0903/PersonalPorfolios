@@ -11,7 +11,6 @@ stageManager::~stageManager()
 
 HRESULT stageManager::init()
 {
-	_stage = STAGE1;
 	_battlePhase = false;
 	_menuInPt = false;
 	_onOff = true;
@@ -31,6 +30,8 @@ void stageManager::update()
 	uiRect();
 	ptInIso();
 	ptInMenu();
+
+	if (_alpha < 256) ++_alpha;
 
 	if (KEYMANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
@@ -101,6 +102,13 @@ void stageManager::objectRender()
 		else if (_isoTile[i].name == TREE3)	IMAGEMANAGER->findImage("tree3")->render(getMemDC(), _isoTile[i].drawX - 12, _isoTile[i].drawY - 118);
 		else if (_isoTile[i].name == TREE4)	IMAGEMANAGER->findImage("tree4")->render(getMemDC(), _isoTile[i].drawX - 15, _isoTile[i].drawY - 105);
 		else if (_isoTile[i].name == TREE5)	IMAGEMANAGER->findImage("tree5")->render(getMemDC(), _isoTile[i].drawX - 3, _isoTile[i].drawY - 58);
+		else if (_isoTile[i].name == WALL1)    IMAGEMANAGER->findImage("wall1")->render(getMemDC(), _isoTile[i].drawX + 8, _isoTile[i].drawY - 18);
+		else if (_isoTile[i].name == WALL2)    IMAGEMANAGER->findImage("wall2")->render(getMemDC(), _isoTile[i].drawX + 24, _isoTile[i].drawY - 18);
+		else if (_isoTile[i].name == WALL3)    IMAGEMANAGER->findImage("wall1")->render(getMemDC(), _isoTile[i].drawX + 32, _isoTile[i].drawY - 28);
+		else if (_isoTile[i].name == WALL4)    IMAGEMANAGER->findImage("wall2")->render(getMemDC(), _isoTile[i].drawX + 4, _isoTile[i].drawY - 28); 
+		else if (_isoTile[i].name == PLAYERFLAG)IMAGEMANAGER->findImage("플레이어깃발")->render(getMemDC(), _isoTile[i].centerX - 32, _isoTile[i].centerY - 118);
+		else if (_isoTile[i].name == ENEMYFLAG)	IMAGEMANAGER->findImage("에너미깃발")->render(getMemDC(), _isoTile[i].centerX - 32, _isoTile[i].centerY - 118);
+
 	}
 }
 
@@ -126,8 +134,13 @@ void stageManager::uiRender()
 		IMAGEMANAGER->findImage("icon_ghost")->render(getMemDC(), _ghostBt.left, _ghostBt.top);
 		//소지금
 		char str[256];
-		sprintf_s(str, "%d", _isoTile[0].gold);
+		sprintf_s(str, "%d", _gold);
 		TextOut(getMemDC(), CAMX + WINSIZEX - 800, CAMY + WINSIZEY - 125, str, strlen(str));
+	}
+	
+	for (int i = 0; i < _mapTool._path.size(); ++i)
+	{
+		FINDIMG("가이드타일")->alphaRender(getMemDC(), _isoTile[_mapTool._path[i]].drawX, _isoTile[_mapTool._path[i]].drawY, 150);
 	}
 }
 
@@ -179,7 +192,7 @@ void stageManager::retryBt()
 	{
 		_onOff = true;
 		for (int i = 0; i < _um->getVUnit().size(); ++i)	_um->getVUnit()[i]->getErase() = true;
-		if (_stage == STAGE1)	_isoTile[0].gold = 1000;
+		_gold = _isoTile[0].gold;
 		setStage(_stage);
 	}
 }
@@ -192,7 +205,11 @@ void stageManager::clearBt()
 		{
 			if(_um->getVUnit()[i]->getBelong() == PLAYER)	_um->getVUnit()[i]->getErase() = true;
 		}
-		if (_stage == STAGE1)	_isoTile[0].gold = 1000;
+		_gold = _isoTile[0].gold;
+	}
+	for (int i = 0; i < 900; ++i)
+	{
+		if (_isoTile[i].name == PLAYEROCCUPIED) _isoTile[i].name = NONE;
 	}
 }
 
@@ -239,50 +256,55 @@ void stageManager::ptInMenu()
 void stageManager::createUnit()
 {
 	//언무브 타일에는 안깔립니당
-	if (_isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE && !_menuInPt)
+	if (_isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE 
+		&& !_menuInPt && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
 	{
-		if (_pickUnit == P_ZERGLING && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE && _isoTile[0].gold >= 100)
+		_tempGold = _gold;
+		if (_pickUnit == P_ZERGLING )
 		{
-			_isoTile[0].gold -= 100; //유닛 가격
+			_gold -= 100; //유닛 가격
 			_um->createZergling(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
-			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = ZERGLING;
-			InvalidateRect(_hWnd, NULL, false);
 		}
-		else if (_pickUnit == P_MARINE && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE && _isoTile[0].gold >= 150)
+		else if (_pickUnit == P_MARINE && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
 		{
-			_isoTile[0].gold -= 150; //유닛 가격
+			_gold -= 150; //유닛 가격
 			_um->createMarine(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
-			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = MARINE;
-			InvalidateRect(_hWnd, NULL, false);
 		}
-		else if (_pickUnit == P_CIVILIAN && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE && _isoTile[0].gold >= 70)
+		else if (_pickUnit == P_CIVILIAN && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
 		{
-			_isoTile[0].gold -= 70; //유닛 가격
+			_gold -= 70; //유닛 가격
 			_um->createCivilian(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
-			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = CIVILIAN;
-			InvalidateRect(_hWnd, NULL, false);
 		}
-		else if (_pickUnit == P_TEMPLAR && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE && _isoTile[0].gold >= 200)
+		else if (_pickUnit == P_TEMPLAR && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
 		{
-			_isoTile[0].gold -= 200; //유닛 가격
+			_gold -= 200; //유닛 가격
 			_um->createTemplar(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 9);
-			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = TEMPLAR;
-			InvalidateRect(_hWnd, NULL, false);
 		}
-		else if (_pickUnit == P_BISHOP && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE && _isoTile[0].gold >= 200)
+		else if (_pickUnit == P_BISHOP && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
 		{
-			_isoTile[0].gold -= 200; //유닛 가격
+			_gold -= 200; //유닛 가격
 			_um->createBishop(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX + 5, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
-			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = BISHOP;
-			InvalidateRect(_hWnd, NULL, false);
 		}
-		else if (_pickUnit == P_GHOST && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE && _isoTile[0].gold >= 150)
+		else if (_pickUnit == P_GHOST && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
 		{
-			_isoTile[0].gold -= 150; //유닛 가격
+			_gold -= 150; //유닛 가격
 			_um->createGhost(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 2);
-			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = GHOST;
-			InvalidateRect(_hWnd, NULL, false);
 		}
+		if (_gold < 0) // 가격이 0이하로 떨어지면 만든거 취소
+		{
+			_gold = _tempGold;
+			PLAYSND("골드부족");
+			_um->getVUnit()[_um->getVUnit().size() - 1]->getErase() = true;
+		}
+		else // 생성 되었으니 경로할당함
+		{
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = PLAYEROCCUPIED; // NONE으로 검사했으니 통일해도 될듯
+			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = _pickingPt.y * TILEX + _pickingPt.x;
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(_mapTool.aStarPath(_pickingPt.y*TILEX + _pickingPt.x,
+				_enemyTile));
+			_alpha = 150;
+		}
+		InvalidateRect(_hWnd, NULL, false);
 	}
 }
 
@@ -316,6 +338,7 @@ inline POINT stageManager::picking(long x, long y)
 
 void stageManager::setStage(STAGE stage)
 { // 적 유닛 생성도 요기서하기로 함
+	
 	HANDLE file;
 	DWORD read;
 
@@ -326,59 +349,69 @@ void stageManager::setStage(STAGE stage)
 			OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 		ReadFile(file, _isoTile, sizeof(isoTile) * TILEX*TILEY, &read, NULL);
 		CloseHandle(file);
-
-		_gold = _isoTile[0].gold;
-		for (int i = 0; i < TILEX * TILEY; ++i)
-		{
-			if (_isoTile[i].name == ZERGLING)	_um->createZergling(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			if (_isoTile[i].name == MARINE)		_um->createMarine(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			if (_isoTile[i].name == CIVILIAN)	_um->createCivilian(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			if (_isoTile[i].name == TEMPLAR)	_um->createTemplar(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			if (_isoTile[i].name == BISHOP)		_um->createBishop(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			//if (_isoTile[i].name == DIABLO)
-			//if (_isoTile[i].name == SKELETON)
-			if (_isoTile[i].name == GHOST)		_um->createGhost(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-		}
-
 		break;
 	case STAGE2:
 		file = CreateFile("stage2.map", GENERIC_READ, NULL, NULL,
 			OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 		ReadFile(file, _isoTile, sizeof(isoTile) * TILEX*TILEY, &read, NULL);
 		CloseHandle(file);
-
-		_gold = _isoTile[0].gold;
-		for (int i = 0; i < TILEX * TILEY; ++i)
-		{
-			if (_isoTile[i].name == ZERGLING)	_um->createZergling(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			if (_isoTile[i].name == MARINE)		_um->createMarine(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			if (_isoTile[i].name == CIVILIAN)	_um->createCivilian(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			if (_isoTile[i].name == TEMPLAR)	_um->createTemplar(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			if (_isoTile[i].name == BISHOP)		_um->createBishop(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			//if (_isoTile[i].name == DIABLO)
-			//if (_isoTile[i].name == SKELETON)
-			if (_isoTile[i].name == GHOST)		_um->createGhost(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-		}
-
 		break;
 	case STAGE3:
 		file = CreateFile("stage3.map", GENERIC_READ, NULL, NULL,
 			OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 		ReadFile(file, _isoTile, sizeof(isoTile) * TILEX*TILEY, &read, NULL);
 		CloseHandle(file);
-
-		_gold = _isoTile[0].gold;
-		for (int i = 0; i < TILEX * TILEY; ++i)
-		{
-			if (_isoTile[i].name == ZERGLING)	_um->createZergling(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			if (_isoTile[i].name == MARINE)		_um->createMarine(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			if (_isoTile[i].name == CIVILIAN)	_um->createCivilian(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			if (_isoTile[i].name == TEMPLAR)	_um->createTemplar(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			if (_isoTile[i].name == BISHOP)		_um->createBishop(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			//if (_isoTile[i].name == DIABLO)
-			//if (_isoTile[i].name == SKELETON)
-			if (_isoTile[i].name == GHOST)		_um->createGhost(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-		}
 		break;
+	}
+	_um->getVUnit().clear();
+	_gold = _tempGold = _isoTile[0].gold;
+
+
+	for (int i = 0; i < TILEX * TILEY; ++i)
+	{ // 서순 지켜야하므로 따로 뺌
+		if (_isoTile[i].name == PLAYERFLAG) _playerTile = i;
+		else if (_isoTile[i].name == ENEMYFLAG) _enemyTile = i;
+	}
+
+	for (int i = 0; i < TILEX * TILEY; ++i)
+	{
+		if (_isoTile[i].name == ZERGLING)
+		{
+			_um->createZergling(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i;
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(_mapTool.aStarPath(i, _playerTile));
+		}
+		else if (_isoTile[i].name == MARINE)
+		{
+			_um->createMarine(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i;
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(_mapTool.aStarPath(i, _playerTile));
+		}
+		else if (_isoTile[i].name == CIVILIAN)
+		{
+			_um->createCivilian(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i;
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(_mapTool.aStarPath(i, _playerTile));
+		}
+		else if (_isoTile[i].name == TEMPLAR)
+		{
+			_um->createTemplar(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i;
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(_mapTool.aStarPath(i, _playerTile));
+		}
+		else if (_isoTile[i].name == BISHOP)
+		{
+			_um->createBishop(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i;
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(_mapTool.aStarPath(i, _playerTile));
+		}
+		//if (_isoTile[i].name == DIABLO)
+		//if (_isoTile[i].name == SKELETON)
+		else if (_isoTile[i].name == GHOST)
+		{
+			_um->createGhost(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i;
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(_mapTool.aStarPath(i, _playerTile));
+		}
 	}
 }
