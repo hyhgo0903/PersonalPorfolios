@@ -252,15 +252,16 @@ void stageManager::createUnit()
 {
 	if (_battlePhase) return;
 	//언무브 타일에는 안깔립니당
-	if (getDistance(_isoTile[_playerTile].centerX, _isoTile[_playerTile].centerY,
-		_cameraPtMouse.x, _cameraPtMouse.y) > 400)
-	{
-		PLAYSND("배치실패");
-		return;
-	}
+	
 	if (_isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE 
 		&& !_menuInPt && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
 	{
+		if (getDistance(_isoTile[_playerTile].centerX, _isoTile[_playerTile].centerY,
+			_cameraPtMouse.x, _cameraPtMouse.y) > 400)
+		{
+			PLAYSND("배치실패");
+			return;
+		}
 		_tempGold = _gold;
 		if (_pickUnit == P_ZERGLING )
 		{
