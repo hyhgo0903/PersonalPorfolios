@@ -28,8 +28,9 @@ void unit::render()
 
 void unit::progressBarRender()
 {
-	if (_state == DEAD || _ID == 20) return;
+	if (_state == DEAD || _ID == 20) return; // 깃발은 따로그렸음
 	// 체력바 렌더하는거
+	if (_HP > _maxHP) _HP = _maxHP;
 	FINDIMG("체력바뒤")->resizedRender(getMemDC(), _rc.left - 5, _rc.top - 10, _width + 10, 6);
 	if (_HP / _maxHP > 0.5f)
 	{

@@ -39,7 +39,7 @@ protected:
 	int _maxFrame;
 	// 끝프레임. 도달시 넘기거나 상태바꾸거나 하기 위함임.
 	
-	bool _stuck; // 길막혀서 피하는 중이면 켜짐
+	int _stuck; // 길막혀서 피하는 중이면 켜짐
 
 	BELONG _belong;	// 누구소속인지(플레이어 아님 상대)
 	STATE _state;	// 현재 상태	
@@ -163,7 +163,7 @@ public:
 	float getSpeed() { return _speed; }
 	bool& getReturn() { return _return; }
 
-	bool& getStuck() { return _stuck; }
+	int& getStuck() { return _stuck; }
 
 	// 이하는 벡터관련
 	vector<int> getVPath() { return _vPath; }

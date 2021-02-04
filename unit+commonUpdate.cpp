@@ -4,6 +4,26 @@
 
 void unit::commonUpdate()
 {
+	if (_stuck < 0)
+	{
+		++_stuck;
+	}
+	if (_stuck > 60 && _state == WALK)
+	{ // 1초이상 맵에 끼이면 우회하는거(이땐 타겟팅을 안하고 원래 경로로 다시 감)
+		_stuck = -240;
+		_target = -1;
+		int x = _tileNum % 30;
+		int y = _tileNum / 30;
+		setDest(960+(x-y)*32, (x+y)*16);
+	}
+	if (_stuck > 12 && (_state == ATTACK || _state == ATTACKWAIT) && _target != -1)
+	{ // 무지막지하게 밀어내지는 않도록
+		_stuck = 0;
+		_x += _speed * cosf(_angle);
+		_y -= _speed * sinf(_angle);
+		RMC(); // 앞으로 이동시킴
+	}
+
 	if (_x < -100 || _x > MAPSIZEX + 100 || _y < -100 || _y > MAPSIZEY + 100)
 	{
 		_HP = 0;
@@ -71,6 +91,4 @@ void unit::commonUpdate()
 		break;
 	}
 	_focusRc = RectMakeCenter(_x, _y, 300, 300);
-
-	if (getDistance(_x, _y, _destX, _destY) < _speed) _stuck = false;
 }

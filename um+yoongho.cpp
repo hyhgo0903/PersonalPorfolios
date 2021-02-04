@@ -11,10 +11,11 @@ void unitManager::yoonghoUpdate()
 		// 감지범위 적발견시 타겟팅
 		for (int j = 0; j < _vUnit.size(); ++j)
 		{
-			if (_vUnit[i]->getTarget() != -1 || _vUnit[j]->getState() == DEAD) continue;
+			if (_vUnit[i]->getTarget() != -1 || _vUnit[j]->getState() == DEAD ||
+				_vUnit[i]->getStuck() < 0) continue;
 			if (_vUnit[i]->getBelong() == _vUnit[j]->getBelong()) continue; // 적아군구분
-			if (IntersectRect(&temp, &_vUnit[j]->getRect(), &_vUnit[i]->getFocusRect()) &&
-				_vUnit[i]->getTarget() == -1)
+			if (IntersectRect(&temp, &_vUnit[j]->getRect(), &_vUnit[i]->getFocusRect()) && _vUnit[i]->getStuck() >= 0
+				&& _vUnit[i]->getTarget() == -1)
 			{ // 감지렉트에 온 경우 타겟팅이랑 목표를 그쪽으로
 				_vUnit[i]->getTarget() = j;
 				_vUnit[i]->setDest(_vUnit[j]->getX(), _vUnit[j]->getY());
@@ -60,9 +61,7 @@ void unitManager::yoonghoUpdate()
 				_vUnit[i]->RMC();
 				if (_vUnit[i]->getBelong() == _vUnit[j]->getBelong())
 				{ // 같은팀이 밀면 원래 진행방향으로 좀 밀리게 해봤음
-					_vUnit[j]->getX() += _vUnit[j]->getSpeed() * cosf(_vUnit[j]->getAngle1());
-					_vUnit[j]->getY() -= _vUnit[j]->getSpeed() * sinf(_vUnit[j]->getAngle1());
-					_vUnit[j]->RMC();
+					_vUnit[j]->getStuck() += 1;
 				}
 			}
 		}

@@ -32,7 +32,7 @@ void interaction::yoonghoUpdate()
 				RECT temp;
 				if (IntersectRect(&temp, &_um->getVUnit()[j]->getRect(), &_se->getVSne()[i]->getRect()))
 				{
-					_um->getVUnit()[j]->getHP() += 0.1f;
+					_um->getVUnit()[j]->getHP() += 0.1f;					
 				}
 			}
 		}
@@ -45,7 +45,7 @@ void interaction::yoonghoUpdate()
 				RECT temp; // 피아식별을 하는 사이오닉스톰으로.. 이넘문은 다르지만 0,1로 비교하므로 비교가능하다
 				if (IntersectRect(&temp, &_um->getVUnit()[j]->getRect(), &_se->getVSne()[i]->getRect()))
 				{
-					_um->getVUnit()[j]->getHP() -= 1.f;
+					_um->getVUnit()[j]->getHP() -= 0.5f;
 				}
 			}
 		}
@@ -54,7 +54,7 @@ void interaction::yoonghoUpdate()
 	for (int i = 0; i < _um->getVUnit().size(); ++i)
 	{ // 타겟있는놈만
 		int tg = _um->getVUnit()[i]->getTarget();
-		if (tg == -1) continue; // 타겟없는놈은 컨티뉴
+		if (tg == -1 || _um->getVUnit()[i]->getStuck() < 0) continue; // 타겟없는놈은 컨티뉴
 		RECT temp;
 		if (_um->getVUnit()[tg]->getState() == DEAD)
 		{
@@ -141,49 +141,54 @@ void interaction::yoonghoUpdate()
 			_um->getVUnit()[i]->setState(ATTACKWAIT);
 		}
 		else if (!IntersectRect(&temp, &_um->getVUnit()[tg]->getRect(), &_um->getVUnit()[i]->getRangeRect())
-			&& _um->getVUnit()[i]->getState() == ATTACKWAIT) // 공격대기중에서 타겟이 사거리 벗어나면 추적
+			&& _um->getVUnit()[i]->getState() == ATTACKWAIT && _um->getVUnit()[i]->getStuck() >= 0) // 공격대기중에서 타겟이 사거리 벗어나면 추적
 		{
 			_um->getVUnit()[i]->setState(WALK);
 		}
-		if (_um->getVUnit()[i]->getState() == WALK)
+		if (_um->getVUnit()[i]->getState() == WALK && _um->getVUnit()[i]->getStuck() >= 0)
 		{ // 타겟있을떄 워크는 상대를 목표로 한다
 			_um->getVUnit()[i]->setDest(_um->getVUnit()[tg]->getX(), _um->getVUnit()[tg]->getY());
 		}
 	}
 
-	/*
+	
+	// 유닛이 맵충돌
 	for (int i = 0; i < _um->getVUnit().size(); ++i)
 	{
 		if (_um->getVUnit()[i]->getState() != WALK) continue;
-		POINT tempPtLT = picking(_um->getVUnit()[i]->getRect().left, _um->getVUnit()[i]->getRect().top);
-		if (_sm->getIsoTile()[tempPtLT.x + tempPtLT.y * 30].MUM == UNMOVE)
+		POINT tempPtL = picking(_um->getVUnit()[i]->getRect().left, _um->getVUnit()[i]->getY());
+		if (_sm->getIsoTile()[tempPtL.x + tempPtL.y * 30].MUM == UNMOVE)
 		{
 			_um->getVUnit()[i]->moveCancel();
 			_um->getVUnit()[i]->getX() += _um->getVUnit()[i]->getSpeed();
+			_um->getVUnit()[i]->getStuck() += 1;
 			continue;
 		}
-		POINT tempPtRT = picking(_um->getVUnit()[i]->getRect().right, _um->getVUnit()[i]->getRect().top);
-		if (_sm->getIsoTile()[tempPtRT.x + tempPtRT.y * 30].MUM == UNMOVE)
+		POINT tempPtR = picking(_um->getVUnit()[i]->getRect().right, _um->getVUnit()[i]->getY());
+		if (_sm->getIsoTile()[tempPtR.x + tempPtR.y * 30].MUM == UNMOVE)
 		{
 			_um->getVUnit()[i]->moveCancel();
 			_um->getVUnit()[i]->getX() -= _um->getVUnit()[i]->getSpeed();
+			_um->getVUnit()[i]->getStuck() += 1;
 			continue;
 		}
-		POINT tempPtLB = picking(_um->getVUnit()[i]->getRect().left, _um->getVUnit()[i]->getRect().bottom);
-		if (_sm->getIsoTile()[tempPtLB.x + tempPtLB.y * 30].MUM == UNMOVE)
+		POINT tempPtB = picking(_um->getVUnit()[i]->getX(), _um->getVUnit()[i]->getRect().bottom);
+		if (_sm->getIsoTile()[tempPtB.x + tempPtB.y * 30].MUM == UNMOVE)
 		{
 			_um->getVUnit()[i]->moveCancel();
-			_um->getVUnit()[i]->getX() += _um->getVUnit()[i]->getSpeed();
+			_um->getVUnit()[i]->getY() -= _um->getVUnit()[i]->getSpeed();
+			_um->getVUnit()[i]->getStuck() += 1;
 			continue;
 		}
-		POINT tempPtRB = picking(_um->getVUnit()[i]->getRect().right, _um->getVUnit()[i]->getRect().bottom);
-		if (_sm->getIsoTile()[tempPtRB.x + tempPtRB.y * 30].MUM == UNMOVE)
+		POINT tempPtT = picking(_um->getVUnit()[i]->getX(), _um->getVUnit()[i]->getRect().top);
+		if (_sm->getIsoTile()[tempPtT.x + tempPtT.y * 30].MUM == UNMOVE)
 		{
 			_um->getVUnit()[i]->moveCancel();
-			_um->getVUnit()[i]->getX() -= _um->getVUnit()[i]->getSpeed();
+			_um->getVUnit()[i]->getY() += _um->getVUnit()[i]->getSpeed();
+			_um->getVUnit()[i]->getStuck() += 1;
 			continue;
 		}
-	}*/
+	}
 
 	for (int i = 0; i < _um->getVUnit().size(); ++i)
 	{
