@@ -52,4 +52,5 @@ public:
 	int gold; // 오직 0번타일에만 저장됨. 스테이지 지급골드
 	moveUnMove MUM;
 	objName    name;
+	POINT	pt;
 };

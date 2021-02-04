@@ -67,6 +67,7 @@ void mapTool::menuInPt()
 	else if (PtInRect(&_delAll, _cameraPtMouse))  _menuInPt = true;
 	else if (PtInRect(&_homeBt, _cameraPtMouse))  _menuInPt = true;
 	else if (PtInRect(&_goldBt, _cameraPtMouse))  _menuInPt = true;	
+	else if (PtInRect(&_dragBt, _cameraPtMouse))  _menuInPt = true;
 	else _menuInPt = false;
 }
 
@@ -135,4 +136,10 @@ void mapTool::objDelAll()
 void mapTool::homeBt()
 {
 	SCENEMANAGER->changeScene("≈∏¿Ã∆≤æ¿");
+}
+
+void mapTool::dragOnOff()
+{
+	if (!_dragMode) _dragMode = true;
+	else if (_dragMode) _dragMode = false;
 }

@@ -78,6 +78,7 @@ private:
 
 	RECT			_delAll;
 	RECT			_homeBt;
+	RECT			_dragBt;
 
 	RECT			_tree1;
 	RECT			_tree2;
@@ -97,6 +98,7 @@ private:
 
 	RECT			_playerFlagRc;
 	RECT			_enemyFlagRc;
+	RECT			_dragRc;
 	int _savePopUp; // 0이면 없는거고 1이면 저장잘됐다 2이면 오류메세지 팝업
 	int _popUpCount;
 
@@ -119,6 +121,7 @@ private:
 	bool			_brushOn;
 	bool			_objDelOn;
 	bool			_menuInPt;
+	bool			_dragMode;
 
 	int _currentStage; // 몇 스테이지 작업중인지 (편의상 1,2,3)
 
@@ -145,6 +148,9 @@ private:
 
 	int _modifyingNum; // 몇자리수째를 수정중인지 (0=수정중x, 1천자릿수 2백자릿수 3십자리수 4일의자리수)
 	int _modifyingCount; // 5초카운트
+
+	float _dragX; float _dragY;
+	bool _push;
 public:
 	vector<int> aStarPath(int fromTileNum, int toTileNum);
 
@@ -180,6 +186,9 @@ public:
 	void menuInPt();												//메뉴 안에 마우스가 들어갔을때 타일 안찍히게 막음
 	void sampleInTemp();											//샘플 타일의 값을 템프에 담아주는 함수
 	void homeBt();
+	void dragPaint();												//스윽 그려서 칠하기
+	void tempDrag();												//누른 포인트 담기
+	void dragOnOff();												//드으래그모드 온오프
 
 	void save();
 	void load();

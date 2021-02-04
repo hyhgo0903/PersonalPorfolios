@@ -28,6 +28,7 @@ void mapTool::imageInit()
 	_rightBt = RectMake(WINSIZEX - 35 + CAMX, 385 + CAMY, 64, 32);
 
 	_objDel = RectMake(WINSIZEX - 140 + CAMX, 500 + CAMY, 64, 32);
+	_dragBt = RectMake(WINSIZEX - 210 + CAMX, 500 + CAMY, 64, 32);
 	_menuRc = RectMake(CAMX + WINSIZEX - 522, CAMY, 522, 394);
 
 	_delAll = RectMake(WINSIZEX - 70 + CAMX, 500 + CAMY, 64, 32);
@@ -228,6 +229,10 @@ void mapTool::imageRender()
 	IMAGEMANAGER->findImage("fill")->render(getMemDC(), _fill.left, _fill.top);
 	IMAGEMANAGER->findImage("delAll")->render(getMemDC(), _delAll.left, _delAll.top);
 	IMAGEMANAGER->findImage("ui_home")->render(getMemDC(), _homeBt.left, _homeBt.top);
+	if (_dragMode) IMAGEMANAGER->findImage("drag")->render(getMemDC(), _dragBt.left, _dragBt.top);
+	else IMAGEMANAGER->findImage("drag")->alphaRender(getMemDC(), _dragBt.left, _dragBt.top, 100);
+
+
 	if (_currentStage == 1)
 	{
 		FINDIMG("현재스테이지")->alphaRender(getMemDC(), _loadBt.left + 2, _loadBt.top + 2, 100);

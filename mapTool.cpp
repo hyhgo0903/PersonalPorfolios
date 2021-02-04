@@ -27,7 +27,8 @@ HRESULT mapTool::init()
 	_objName = NONE;
 	_objDelOn = false;
 	_menuInPt = false;
-	
+	_push = false;
+	_dragMode = false;
 	_playerTile = _enemyTile = -1;
 
 
@@ -58,6 +59,9 @@ void mapTool::createIsoMap(int tileX, int tileY)
 
 			_isoTile[i * tileX + j].centerX = TILESIZEX * (TILEX + (j - i))/2;
 			_isoTile[i * tileX + j].centerY = TILESIZEY * (i + j + 1) / 2;
+
+			_isoTile[i * tileX + j].pt.x = TILESIZEX * (TILEX + (j - i)) / 2;
+			_isoTile[i * tileX + j].pt.y = TILESIZEY * (i + j + 1) / 2;
 
 			_isoTile[i * tileX + j].drawX = _isoTile[i * tileX + j].centerX - TILESIZEX / 2;
 			_isoTile[i * tileX + j].drawY = _isoTile[i * tileX + j].centerY - TILESIZEY / 2;
@@ -101,6 +105,9 @@ void mapTool::update()
 			if (PtInRect(&_objDel, _cameraPtMouse)) objDel();
 			if (PtInRect(&_delAll, _cameraPtMouse)) objDelAll();
 			if (PtInRect(&_homeBt, _cameraPtMouse)) homeBt();
+			if (PtInRect(&_dragBt, _cameraPtMouse)) dragOnOff();
+
+			tempDrag();
 
 			if (_ptMouse.x > 132 && _ptMouse.x < 147 && _ptMouse.y>555 && _ptMouse.y < 574)
 			{ // 천의자릿수 클릭
@@ -132,7 +139,14 @@ void mapTool::update()
 			if (_pickingPt.x >= 0 && _pickingPt.y >= 0) createTile();
 			ptInObj();
 			if (_pickingPt.x >= 0 && _pickingPt.y >= 0) createObj();
+			_push = true;
+			if(_dragMode && _push) dragPaint();
 		}
+	}
+
+	if (KEYMANAGER->isOnceKeyUp(VK_LBUTTON))
+	{
+		_push = false;
 	}
 
 	ptInIso();
@@ -174,6 +188,9 @@ void mapTool::render()
 
 	sprintf_s(str, "ptMouse X : %d , Y : %d", CAMX + _cameraPtMouse.x, CAMY + _cameraPtMouse.y);
 	TextOut(getMemDC(), CAMX+ 150, CAMY+ 70, str, strlen(str));
+
+	//일단 구현은 됬는데 드래그 표시를 어떻게해야하나... 고민중
+	if(_push) Rectangle(getMemDC(), _dragRc);
 }
 
 

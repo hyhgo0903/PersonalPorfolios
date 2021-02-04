@@ -50,6 +50,8 @@ void loadingScene::younghanInit()
 	imgLoaded();
 	IMAGEMANAGER->addImage("un", "image/maptool/un.bmp", 16, 16, false, RGB(255, 0, 255));
 	imgLoaded();
+	IMAGEMANAGER->addImage("drag", "image/maptool/drag.bmp", 64, 32, false, RGB(255, 0, 255));
+	imgLoaded();
 	//////////////////오브젝트
 	IMAGEMANAGER->addImage("tree", "image/maptool/tree.bmp", 107, 113, true, RGB(255, 0, 255));
 	imgLoaded();
