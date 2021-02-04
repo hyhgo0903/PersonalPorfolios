@@ -66,6 +66,10 @@ void stageManager::render()
 		if (_isoTile[i].inRect)	IMAGEMANAGER->findImage("mapTiles")->alphaFrameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY, 100);
 		else IMAGEMANAGER->findImage("mapTiles")->frameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY);
 	}
+	if (!_battlePhase)
+	{
+		FINDIMG("배치가능")->alphaRender(getMemDC(), _isoTile[_playerTile].centerX - 400, _isoTile[_playerTile].centerY - 400, 30);
+	}
 	//마우스에 선택유닛 보여주는 기능
 	if (_pickUnit == P_ZERGLING && _onOff)	IMAGEMANAGER->findImage("저글링이동블루")->alphaFrameRender(getMemDC(), _cameraPtMouse.x - 18, _cameraPtMouse.y - 18, 4, 0, 100);
 	if (_pickUnit == P_MARINE && _onOff)	IMAGEMANAGER->findImage("마린기본파랑")->alphaFrameRender(getMemDC(), _cameraPtMouse.x - 16, _cameraPtMouse.y - 18, 0, 4, 100);
@@ -140,10 +144,6 @@ void stageManager::uiRender()
 		{
 			FINDIMG("가이드타일")->alphaRender(getMemDC(), _isoTile[_path[i]].drawX, _isoTile[_path[i]].drawY, _alpha);
 		}
-	}
-	if (!_battlePhase)
-	{		
-		FINDIMG("배치가능")->alphaRender(getMemDC(), _isoTile[_playerTile].centerX - 400, _isoTile[_playerTile].centerY - 400, 30);
 	}
 }
 
@@ -257,7 +257,7 @@ void stageManager::createUnit()
 		&& !_menuInPt && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
 	{
 		if (getDistance(_isoTile[_playerTile].centerX, _isoTile[_playerTile].centerY,
-			_cameraPtMouse.x, _cameraPtMouse.y) > 400)
+			_cameraPtMouse.x, _cameraPtMouse.y) > 400 || _pickingPt.x < 0)
 		{
 			PLAYSND("배치실패");
 			return;
@@ -369,6 +369,7 @@ void stageManager::setStage(STAGE stage)
 		break;
 	}
 	_um->getVUnit().clear();
+	_se->getVSne().clear();
 	_gold = _tempGold = _isoTile[0].gold;
 	_battlePhase = false;
 	_onOff = true;
@@ -386,6 +387,14 @@ void stageManager::setStage(STAGE stage)
 			_um->createFlag(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
 		}
 	}
+	// 화면이동
+	CAMERAMANAGER->setCameraX(_isoTile[_playerTile].centerX - 600);
+	if (CAMX < 0) CAMERAMANAGER->setCameraX(0);
+	if (CAMY > 720) CAMERAMANAGER->setCameraY(720);
+	CAMERAMANAGER->setCameraY(_isoTile[_playerTile].centerY - 350);
+	if (CAMY < 0) CAMERAMANAGER->setCameraY(0);
+	if (CAMY > 260) CAMERAMANAGER->setCameraY(260);
+
 
 	for (int i = 0; i < TILEX * TILEY; ++i)
 	{

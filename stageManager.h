@@ -2,6 +2,7 @@
 #include "gameNode.h"
 #include "tile.h"
 #include "unitManager.h"
+#include "skillNEffectManager.h"
 
 struct tagAStarTile
 {
@@ -54,6 +55,7 @@ private:
 	RECT	_bishopBt;
 	RECT	_ghostBt;
 
+	skillNEffectManager* _se;
 	unitManager* _um;
 	bool	_battlePhase; // 이게 false면 배치페이즈 true면 교전페이즈
 	bool	_menuInPt;			//마우스가 메뉴안에 들어갔을때 불필요한 행동들을 제어하기 위해 만듬
@@ -117,7 +119,9 @@ public:
 	void pathFinder(int currentTile);
 
 	void umLink(unitManager * um) { _um = um; }
+	void seLink(skillNEffectManager * se) { _se = se; }
 
 	void stageChange();
+	int getPlayerTile() { return _playerTile; }
 };
 

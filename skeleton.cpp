@@ -24,8 +24,8 @@ HRESULT skeleton::init(BELONG belong, float x, float y)
 	_damage = 6;
 	_maxHP = 10;
 	_attackIndex = 2; // 2번 인덱스가 될때 공격판정
-	_width = 21;
-	_height = 22; // 일단은 대충 설정해놓은거임(이미지크기)
+	_width = 28;
+	_height = 28; // 일단은 대충 설정해놓은거임(이미지크기)
 	_count = 0;
 	_used = false;
 
@@ -50,19 +50,19 @@ void skeleton::render()
 	{ // 위치 적당히 보정해서 쓸것
 	case WALK:
 		//Rectangle(getMemDC(), _rangeRc);
-		_image->frameRender(getMemDC(), _rc.left - 9, _rc.top - 11, _frameDirection, _frame);
+		_image->frameRender(getMemDC(), _rc.left - 11, _rc.top - 15, _frameDirection, _frame);
 		break;
 	case ATTACKWAIT: // 첫번쨰 프레임으로 고정
 		//Rectangle(getMemDC(), _rangeRc);
-		_image->frameRender(getMemDC(), _rc.left - 9, _rc.top - 11, _frameDirection, 0);
+		_image->frameRender(getMemDC(), _rc.left - 8, _rc.top - 10, _frameDirection, 0);
 		break;
 	case ATTACK:
 		//Rectangle(getMemDC(), _rangeRc);
-		_image->frameRender(getMemDC(), _rc.left - 9, _rc.top - 11, _frameDirection, _frame);
+		_image->frameRender(getMemDC(), _rc.left - 8, _rc.top - 10, _frameDirection, _frame);
 		break;
 	case DEAD: // 프레임인덱스 다르게 도니까 주의
 		//Rectangle(getMemDC(), _rangeRc);
-		_image->frameRender(getMemDC(), _rc.left - 18, _rc.top - 8, _frame, 0);
+		_image->frameRender(getMemDC(), _rc.left - 27, _rc.top - 25, _frameDirection, _frame);
 		break;
 	}
 
@@ -74,13 +74,13 @@ void skeleton::reRender()
 	switch (_state)
 	{ // 위치 적당히 보정해서 쓸것
 	case WALK:
-		_image->alphaFrameRender(getMemDC(), _rc.left - 9, _rc.top - 11, _frameDirection, _frame, 150);
+		_image->alphaFrameRender(getMemDC(), _rc.left - 11, _rc.top - 15, _frameDirection, _frame, 150);
 		break;
 	case ATTACKWAIT: // 첫번쨰 프레임으로 고정
-		_image->alphaFrameRender(getMemDC(), _rc.left - 9, _rc.top - 11, _frameDirection, 0, 150);
+		_image->alphaFrameRender(getMemDC(), _rc.left - 8, _rc.top - 10, _frameDirection, 0, 150);
 		break;
 	case ATTACK:
-		_image->alphaFrameRender(getMemDC(), _rc.left - 9, _rc.top - 11, _frameDirection, _frame, 150);
+		_image->alphaFrameRender(getMemDC(), _rc.left - 8, _rc.top - 10, _frameDirection, _frame, 150);
 		break;
 	}
 }
@@ -111,7 +111,7 @@ void skeleton::setState(STATE state)
 		case DEAD:
 			PLAYSND("스켈레톤사망");
 			_image = FINDIMG("해골병사 죽음");
-			_maxFrame = _image->getMaxFrameX();
+			_maxFrame = _image->getMaxFrameY();
 			break;
 		}
 	}

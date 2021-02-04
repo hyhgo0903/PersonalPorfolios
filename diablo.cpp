@@ -43,8 +43,9 @@ void diablo::update()
 {
 	commonUpdate();
 	_summonRc = RectMakeCenter(_x + 40, _y + 90, 180, 180);
-	_rangeRc = RectMakeCenter(_x, _y, _width + 500, _height + 500);
-	_focusRc = RectMakeCenter(_x, _y, _width + 500, _height + 500);
+	_rangeRc = RectMakeCenter(_x, _y, _width + 600, _height + 600);
+	_focusRc = RectMakeCenter(_x, _y, _width + 600, _height + 600);
+	// 이게 감지렉트인데 사거리렉트보다 작으면 안되겠지?
 }
 
 void diablo::render()
@@ -54,22 +55,22 @@ void diablo::render()
 	case WALK:
 		//Rectangle(getMemDC(), _summonRc);
 		//Rectangle(getMemDC(), _rangeRc);
-		_image->frameRender(getMemDC(), _rc.left - 65, _rc.top - 41, _frameDirection, _frame);
+		_image->frameRender(getMemDC(), _rc.left - 54, _rc.top - 41, _frameDirection, _frame);
 		break;
 	case ATTACKWAIT: // 첫번쨰 프레임으로 고정
 		//Rectangle(getMemDC(), _summonRc);
 		//Rectangle(getMemDC(), _rangeRc);
-		_image->frameRender(getMemDC(), _rc.left - 90, _rc.top - 72, _frameDirection, 0);
+		_image->frameRender(getMemDC(), _rc.left - 54, _rc.top - 41, _frameDirection, 5);
 		break;
 	case ATTACK:
 		//Rectangle(getMemDC(), _summonRc);
 		//Rectangle(getMemDC(), _rangeRc);
-		_image->frameRender(getMemDC(), _rc.left - 90, _rc.top - 72, _frameDirection, _frame);
+		_image->frameRender(getMemDC(), _rc.left - 73, _rc.top - 77, _frameDirection, _frame);
 		break;
 	case DEAD: // 프레임인덱스 다르게 도니까 주의
 		//Rectangle(getMemDC(), _summonRc);
 		//Rectangle(getMemDC(), _rangeRc);
-		_image->frameRender(getMemDC(), _rc.left - 18, _rc.top - 8,  _frame , 0);
+		_image->frameRender(getMemDC(), _rc.left - 54, _rc.top - 84,  _frame , 0);
 		break;
 	}
 }
@@ -110,4 +111,22 @@ void diablo::setState(STATE state)
 
 void diablo::reRender()
 {
+	switch (_state)
+	{ // 위치 적당히 보정해서 쓸것
+	case WALK:
+		//Rectangle(getMemDC(), _summonRc);
+		//Rectangle(getMemDC(), _rangeRc);
+		_image->alphaFrameRender(getMemDC(), _rc.left - 54, _rc.top - 41, _frameDirection, _frame,150);
+		break;
+	case ATTACKWAIT: // 첫번쨰 프레임으로 고정
+		//Rectangle(getMemDC(), _summonRc);
+		//Rectangle(getMemDC(), _rangeRc);
+		_image->alphaFrameRender(getMemDC(), _rc.left - 54, _rc.top - 41, _frameDirection, 5,150);
+		break;
+	case ATTACK:
+		//Rectangle(getMemDC(), _summonRc);
+		//Rectangle(getMemDC(), _rangeRc);
+		_image->alphaFrameRender(getMemDC(), _rc.left - 73, _rc.top - 77, _frameDirection, _frame,150);
+		break;
+	}
 }

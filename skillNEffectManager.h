@@ -21,11 +21,10 @@ public:
 	virtual void render();	//그리기 전용
 
 	void createPsionic(S_BELONG belong, float x, float y);
-	void createPlague(S_BELONG belong, float x, float y);
 	void createHeal(S_BELONG belong, float x, float y);
 	void createThunder(S_BELONG belong, float x, float y);
 
-	vector<skillNEffect*> getVSne() { return _vSne; }
+	vector<skillNEffect*>& getVSne() { return _vSne; }
 	vector<skillNEffect*>::iterator getViSne() { return _viSne; }
 };
 
