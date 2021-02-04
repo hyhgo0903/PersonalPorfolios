@@ -97,8 +97,9 @@ void unitManager::progressBarRender()
 {
 	Rectangle(getMemDC(), CAMX, CAMY+580, CAMX+240, CAMY+700);
 	for (int i = 0; i < _vUnit.size(); ++i)
-	{
-		if (_vUnit[i]->getState() != DEAD)_vUnit[i]->progressBarRender();
+	{		
+		if (_vUnit[i]->getState() != DEAD
+			&& _vUnit[i]->getID() != 20) _vUnit[i]->progressBarRender();
 	}
 }
 
@@ -180,4 +181,11 @@ void unitManager::createSkeleton(BELONG belong, float x, float y)
 	skeleton* sk = new skeleton;
 	sk->init(belong, x, y);
 	_vUnit.push_back(sk);
+}
+
+void unitManager::createFlag(BELONG belong, float x, float y)
+{
+	flagUnit* fl = new flagUnit;
+	fl->init(belong, x, y);
+	_vUnit.push_back(fl);
 }

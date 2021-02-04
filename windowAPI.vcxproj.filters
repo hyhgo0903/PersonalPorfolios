@@ -201,9 +201,6 @@
     <ClInclude Include="psionic.h">
       <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
     </ClInclude>
-    <ClInclude Include="flague.h">
-      <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
-    </ClInclude>
     <ClInclude Include="stageManager.h">
       <Filter>playGround\mainScene\stage</Filter>
     </ClInclude>
@@ -236,6 +233,9 @@
     </ClInclude>
     <ClInclude Include="thunder.h">
       <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="flagUnit.h">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -368,9 +368,6 @@
     <ClCompile Include="psionic.cpp">
       <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
     </ClCompile>
-    <ClCompile Include="flague.cpp">
-      <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
-    </ClCompile>
     <ClCompile Include="stageManager.cpp">
       <Filter>playGround\mainScene\stage</Filter>
     </ClCompile>
@@ -451,6 +448,9 @@
     </ClCompile>
     <ClCompile Include="thunder.cpp">
       <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="flagUnit.cpp">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

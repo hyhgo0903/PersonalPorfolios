@@ -79,7 +79,8 @@ private:
 
 	bool _stop; // 못찾은거
 
-
+	bool _isVictory;
+	bool _isDefeat;
 
 public:
 	stageManager();
@@ -116,5 +117,7 @@ public:
 	void pathFinder(int currentTile);
 
 	void umLink(unitManager * um) { _um = um; }
+
+	void stageChange();
 };
 

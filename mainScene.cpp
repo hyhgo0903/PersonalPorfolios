@@ -36,7 +36,7 @@ HRESULT mainScene::init()
 	_um->createCivilian(ENEMY, 960, 944);
 	_um->getVUnit()[1]->setVPath(_ia->aStarPath(899, 0));
 	_um->getVUnit()[1]->getTileNum() = 899;*/
-	/*_um->createZergling(PLAYER, 310, 530);
+	_um->createZergling(PLAYER, 310, 530);
 	_um->createMarine(ENEMY, 1350, 400);
 	_um->createMarine(PLAYER, 110, 370);
 	_um->createMarine(ENEMY, 1350, 500);
@@ -47,9 +47,9 @@ HRESULT mainScene::init()
 	_um->createBishop(ENEMY, 1200, 600);
 	_um->createBishop(PLAYER, 200, 350);
 	_um->createGhost(PLAYER, 250, 400);
-	_um->createGhost(ENEMY, 1250, 650);*/
+	_um->createGhost(ENEMY, 1250, 650);
 
-	_um->createDiablo(ENEMY, 650, 650);
+	_um->createDiablo(ENEMY, 550, 550);
 
 	return S_OK;
 }

@@ -44,6 +44,10 @@ void mapTool::imageInit()
 	_wall2 = RectMake(CAMX + WINSIZEX - 480, CAMY + 113, 32, 45);
 	_wall3 = RectMake(CAMX + WINSIZEX - 448, CAMY + 113, 32, 45);
 	_wall4 = RectMake(CAMX + WINSIZEX - 416, CAMY + 113, 32, 45);
+	_lava_obj1 = RectMake(CAMX + WINSIZEX - 122, CAMY + 83, 54, 97);
+	_lava_obj3 = RectMake(CAMX + WINSIZEX - 122, CAMY + 180, 70, 52);
+	_lava_obj2_l = RectMake(CAMX + WINSIZEX - 512, CAMY + 158, 54, 86);
+	_lava_obj2_r = RectMake(CAMX + WINSIZEX - 458, CAMY + 158, 54, 86);
 
 	_playerFlagRc = RectMake(CAMX + WINSIZEX - 512, CAMY+266, 64, 118);
 	_enemyFlagRc = RectMake(CAMX + WINSIZEX - 448, CAMY+266, 64, 118);
@@ -93,6 +97,10 @@ void mapTool::imageRender()
 		else if (_isoTile[i].name == WALL2)	IMAGEMANAGER->findImage("wall2")->render(getMemDC(), _isoTile[i].drawX + 24, _isoTile[i].drawY - 18);
 		else if (_isoTile[i].name == WALL3)	IMAGEMANAGER->findImage("wall1")->render(getMemDC(), _isoTile[i].drawX + 32, _isoTile[i].drawY - 28);
 		else if (_isoTile[i].name == WALL4)	IMAGEMANAGER->findImage("wall2")->render(getMemDC(), _isoTile[i].drawX + 4, _isoTile[i].drawY - 28);
+		else if (_isoTile[i].name == LAVA_OBJ1)	IMAGEMANAGER->findImage("lava_obj1")->render(getMemDC(), _isoTile[i].drawX + 4, _isoTile[i].drawY - 72);
+		else if (_isoTile[i].name == LAVA_OBJ3)	IMAGEMANAGER->findImage("lava_obj3")->render(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY - 25);
+		else if (_isoTile[i].name == LAVA_OBJ2_L)	IMAGEMANAGER->findImage("lava_obj2_l")->render(getMemDC(), _isoTile[i].drawX + 4, _isoTile[i].drawY - 60);
+		else if (_isoTile[i].name == LAVA_OBJ2_R)	IMAGEMANAGER->findImage("lava_obj2_r")->render(getMemDC(), _isoTile[i].drawX , _isoTile[i].drawY - 60);
 		else if (_isoTile[i].name == PLAYERFLAG)	IMAGEMANAGER->findImage("플레이어깃발")->render(getMemDC(), _isoTile[i].centerX - 32, _isoTile[i].centerY - 118);
 		else if (_isoTile[i].name == ENEMYFLAG)	IMAGEMANAGER->findImage("에너미깃발")->render(getMemDC(), _isoTile[i].centerX - 32, _isoTile[i].centerY - 118);
 		else if (_isoTile[i].name == ZERGLING)	IMAGEMANAGER->findImage("저글링이동퍼플")->frameRender(getMemDC(), _isoTile[i].drawX + 11, _isoTile[i].drawY - 5, 4, 0);
@@ -100,8 +108,8 @@ void mapTool::imageRender()
 		else if (_isoTile[i].name == CIVILIAN)	IMAGEMANAGER->findImage("시민퍼플")->frameRender(getMemDC(), _isoTile[i].drawX + 23, _isoTile[i].drawY - 5, 4, 7);
 		else if (_isoTile[i].name == TEMPLAR)	IMAGEMANAGER->findImage("템플러대기퍼플")->frameRender(getMemDC(), _isoTile[i].drawX + 18, _isoTile[i].drawY - 10, 4, 7);
 		else if (_isoTile[i].name == BISHOP)	IMAGEMANAGER->findImage("레드비숍대기")->frameRender(getMemDC(), _isoTile[i].drawX + 25, _isoTile[i].drawY - 2, 4, 0);
-		else if (_isoTile[i].name == DIABLO) {}	//아직 이미지가 없음
-		else if (_isoTile[i].name == SKELETON) {}	//아직 이미지가 없음
+		else if (_isoTile[i].name == DIABLO) IMAGEMANAGER->findImage("디아블로 서기")->frameRender(getMemDC(), _isoTile[i].drawX - 70, _isoTile[i].drawY - 145, 4, 2);
+		else if (_isoTile[i].name == SKELETON) IMAGEMANAGER->findImage("해골병사 서기")->frameRender(getMemDC(), _isoTile[i].drawX - 2, _isoTile[i].drawY - 14, 4, 2);
 		else if (_isoTile[i].name == GHOST)	IMAGEMANAGER->findImage("ghost_move_red")->frameRender(getMemDC(), _isoTile[i].drawX + 7, _isoTile[i].drawY - 10, 4, 0);
 
 		//언무브 타일 표시
@@ -168,6 +176,18 @@ void mapTool::imageRender()
 
 			if (PtInRect(&_wall4, _cameraPtMouse)) FillRect(getMemDC(), &_wall4, _brush);
 			IMAGEMANAGER->findImage("wall2")->render(getMemDC(), _wall4.left, _wall4.top);
+
+			if (PtInRect(&_lava_obj1, _cameraPtMouse)) FillRect(getMemDC(), &_lava_obj1, _brush);
+			IMAGEMANAGER->findImage("lava_obj1")->render(getMemDC(), _lava_obj1.left, _lava_obj1.top);
+
+			if (PtInRect(&_lava_obj3, _cameraPtMouse)) FillRect(getMemDC(), &_lava_obj3, _brush);
+			IMAGEMANAGER->findImage("lava_obj3")->render(getMemDC(), _lava_obj3.left, _lava_obj3.top);
+
+			if (PtInRect(&_lava_obj2_l, _cameraPtMouse)) FillRect(getMemDC(), &_lava_obj2_l, _brush);
+			IMAGEMANAGER->findImage("lava_obj2_l")->render(getMemDC(), _lava_obj2_l.left, _lava_obj2_l.top);
+
+			if (PtInRect(&_lava_obj2_r, _cameraPtMouse)) FillRect(getMemDC(), &_lava_obj2_r, _brush);
+			IMAGEMANAGER->findImage("lava_obj2_r")->render(getMemDC(), _lava_obj2_r.left, _lava_obj2_r.top);
 		}
 		else if (_menuNum == THREE)
 		{

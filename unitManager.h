@@ -8,6 +8,7 @@
 #include "ghost.h"
 #include "diablo.h"
 #include "skeleton.h"
+#include "flagUnit.h"
 #include <vector>
 
 class unitManager : public gameNode
@@ -51,5 +52,6 @@ public:
 	void createDiablo(BELONG belong, float x, float y);
 	void createskeleton(BELONG belong, float x, float y);
 	void createSkeleton(BELONG belong, float x, float y);
+	void createFlag(BELONG belong, float x, float y);
 };
 

@@ -15,10 +15,10 @@ HRESULT thunder::init(S_BELONG belong, float x, float y)
 	_ID = 3;
 	_belong = S_ENEMY;
 	_x = x; _y = y;
-	_rc = RectMakeCenter(_x + 5, _y - 250, 30, 30);
+	_rc = RectMakeCenter(_x, _y, 30, 300);
 	_image = FINDIMG("¹ø°³ ÀÌÆåÆ®");
 	_maxFrame = _image->getMaxFrameX();
-	_duration = 130;
+	_duration = 100;
 
 	commonInit();
 
@@ -38,5 +38,5 @@ void thunder::update()
 void thunder::render()
 {
 	// Rectangle(getMemDC(), _rc);
-	_image->frameRender(getMemDC(), _rc.left - 9, _rc.top - 10, _frame, 0);
+	_image->frameRender(getMemDC(), _rc.left - 40, _rc.top, _frame, 0);
 }

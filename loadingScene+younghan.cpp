@@ -65,6 +65,14 @@ void loadingScene::younghanInit()
 	imgLoaded();
 	IMAGEMANAGER->addImage("wall2", "image/maptool/wall2.bmp", 32, 45, true, RGB(255, 0, 255));
 	imgLoaded();
+	IMAGEMANAGER->addImage("lava_obj1", "image/maptool/lava_obj1.bmp", 54, 97, true, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("lava_obj2_l", "image/maptool/lava_obj2_l.bmp", 54, 86, true, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("lava_obj2_r", "image/maptool/lava_obj2_r.bmp", 54, 86, true, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("lava_obj3", "image/maptool/lava_obj3.bmp", 70, 52, true, RGB(255, 0, 255));
+	imgLoaded();
 	/////////////////РЏДж
 	IMAGEMANAGER->addFrameImage("ghost_move_red", "image/unit/ghost/ghost_move_red.bmp", 320, 324, 8, 9, true, RGB(255, 255, 0));
 	imgLoaded();

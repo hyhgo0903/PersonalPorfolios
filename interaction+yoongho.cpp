@@ -80,15 +80,28 @@ void interaction::yoonghoUpdate()
 			{ // 디아블로면 해골생성 
 				if (_um->getVUnit()[i]->getBelong() == ENEMY)
 				{
-					for (int j = 0; j < 4; j++)
-					{
-						_um->createSkeleton(ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(20, 100), _um->getVUnit()[i]->getY() + RND->getFromIntTo(20, 100));
-						_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
-					}
-					for (int j = 0; j < 2; j++)
-					{
-						_se->createThunder(S_ENEMY, _um->getVUnit()[tg]->getX(), _um->getVUnit()[tg]->getY());
-					}
+					/*for (int j = 0; j < 6; j++)
+				{*/
+					_um->createSkeleton(ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(10, 40), _um->getVUnit()[i]->getY() + RND->getFromIntTo(140, 200));
+					_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
+					_um->createSkeleton(ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(50, 60), _um->getVUnit()[i]->getY() - RND->getFromIntTo(230, 300));
+					_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
+					_um->createSkeleton(ENEMY, _um->getVUnit()[i]->getX() + RND->getFromIntTo(10, 100), _um->getVUnit()[i]->getY() + RND->getFromIntTo(140, 260));
+					_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
+					_um->createSkeleton(ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(50, 100), _um->getVUnit()[i]->getY() - RND->getFromIntTo(160, 362));
+					_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
+					_um->createSkeleton(ENEMY, _um->getVUnit()[i]->getX() + RND->getFromIntTo(30, 150), _um->getVUnit()[i]->getY() + RND->getFromIntTo(140, 260));
+					_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
+					_um->createSkeleton(ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(50, 100), _um->getVUnit()[i]->getY() - RND->getFromIntTo(160, 262));
+					_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
+					//}
+					// 디아블로의 원거리 공격
+					_se->createThunder(S_ENEMY, _um->getVUnit()[i]->getX() + RND->getFromIntTo(100, 400), RND->getFromIntTo(130, 300));
+					_se->createThunder(S_ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(50, 600), RND->getFromIntTo(250, 400));
+					_se->createThunder(S_ENEMY, _um->getVUnit()[i]->getX() + RND->getFromIntTo(100, 500), RND->getFromIntTo(340, 660));
+					_se->createThunder(S_ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(50, 100), RND->getFromIntTo(380, 550));
+					_se->createThunder(S_ENEMY, _um->getVUnit()[i]->getX() + RND->getFromIntTo(100, 500), RND->getFromIntTo(160, 460));
+					_se->createThunder(S_ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(30, 700), RND->getFromIntTo(300, 400));
 				}
 			}
 

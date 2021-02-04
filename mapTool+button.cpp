@@ -126,6 +126,7 @@ void mapTool::objDelAll()
 	for (int i = 0; i < TILEX* TILEY; ++i)
 	{
 		_isoTile[i].name = NONE;
+		_isoTile[i].MUM = MOVE;
 	}
 	_playerTile = -1;
 	_enemyTile = -1;

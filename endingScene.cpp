@@ -22,6 +22,7 @@ void endingScene::release()
 
 void endingScene::update()
 {
+	TextOut(getMemDC(), 500, 300, "∫Ú≈‰∏Æ!", strlen("∫Ú≈‰∏Æ!"));
 }
 
 void endingScene::render()

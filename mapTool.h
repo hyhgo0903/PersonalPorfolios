@@ -84,6 +84,11 @@ private:
 	RECT			_tree3;
 	RECT			_tree4;
 	RECT			_tree5;
+	RECT			_lava_obj1;
+	RECT			_lava_obj2_l;
+	RECT			_lava_obj2_r;
+	RECT			_lava_obj3;
+
 
 	RECT			_wall1;
 	RECT			_wall2;

@@ -49,12 +49,6 @@ void skillNEffectManager::createPsionic(S_BELONG belong, float x, float y)
 	_vSne.push_back(psi);
 }
 
-void skillNEffectManager::createPlague(S_BELONG belong, float x, float y)
-{
-	flague* flagu = new flague;
-	flagu->init(belong, x, y);
-	_vSne.push_back(flagu);
-}
 
 void skillNEffectManager::createHeal(S_BELONG belong, float x, float y)
 {

@@ -1,7 +1,6 @@
 #pragma once
 #include "gameNode.h"
 #include <vector>
-#include "flague.h"
 #include "psionic.h"
 #include "heal.h"
 #include "thunder.h"
