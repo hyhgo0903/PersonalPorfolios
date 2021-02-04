@@ -98,7 +98,7 @@ void unitManager::progressBarRender()
 	Rectangle(getMemDC(), CAMX, CAMY+580, CAMX+240, CAMY+700);
 	for (int i = 0; i < _vUnit.size(); ++i)
 	{		
-		if (_vUnit[i]->getState() != DEAD
+		if (_vUnit[i]->getState() != DEAD && _vUnit[i]->getHP() >= 0
 			&& _vUnit[i]->getID() != 20) _vUnit[i]->progressBarRender();
 	}
 }

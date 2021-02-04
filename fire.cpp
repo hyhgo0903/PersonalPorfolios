@@ -1,31 +1,31 @@
 #include "stdafx.h"
-#include "heal.h"
+#include "fire.h"
 
-HRESULT heal::init(S_BELONG belong, float x, float y)
+HRESULT fire::init(S_BELONG belong, float x, float y)
 {
-	_ID = 2;
+	_ID = 4;
 	_belong = belong;
 	_x = x; _y = y;
-	_rc = RectMakeCenter(_x, _y, 96, 96);
-	_image = FINDIMG("ศ๚");
+	_rc = RectMakeCenter(_x, _y, 32, 32);
+	_image = FINDIMG("บา");
 	_maxFrame = _image->getMaxFrameX();
-	_duration = 252;
+	_duration = 54;
 
 	commonInit();
 	return S_OK;
 }
 
-void heal::release()
+void fire::release()
 {
 	SAFE_DELETE(_image);
 }
 
-void heal::update()
+void fire::update()
 {
 	commonUpdate();
 }
 
-void heal::render()
+void fire::render()
 {
 	_image->frameRender(getMemDC(), _rc.left, _rc.top, _frame, 0);
 }

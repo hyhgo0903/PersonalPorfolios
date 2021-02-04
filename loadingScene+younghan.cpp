@@ -118,5 +118,11 @@ void loadingScene::younghanInit()
 	imgLoaded();
 	IMAGEMANAGER->addImage("ui_off", "image/ui/ui_off.bmp", 64, 32, false, RGB(255, 0, 255));
 	imgLoaded();
+	IMAGEMANAGER->addImage("ui_stage1", "image/ui/ui_stage1.bmp", 80, 30, false, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("ui_stage2", "image/ui/ui_stage2.bmp", 80, 30, false, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("ui_BossStage", "image/ui/ui_bossstage.bmp", 80, 30, false, RGB(255, 0, 255));
+	imgLoaded();
 }
 

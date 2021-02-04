@@ -22,9 +22,9 @@ void endingScene::release()
 
 void endingScene::update()
 {
-	TextOut(getMemDC(), 500, 300, "ºòÅä¸®!", strlen("ºòÅä¸®!"));
 }
 
 void endingScene::render()
 {
+	FINDIMG("ÇÃ·¹ÀÌ¾î±ê¹ß")->render(getMemDC(), 500, 300);
 }

@@ -40,7 +40,7 @@ void unitManager::yoonghoUpdate()
 					if (_vUnit[i]->getY() < _vUnit[j]->getY())
 					{
 						_vUnit[i]->getY() -= height;
-					} // 서로 반씩 미는걸로 해봄
+					}
 					else if(_vUnit[i]->getY() > _vUnit[j]->getY())
 					{
 						_vUnit[i]->getY() += height;
@@ -58,6 +58,12 @@ void unitManager::yoonghoUpdate()
 					}
 				}
 				_vUnit[i]->RMC();
+				if (_vUnit[i]->getBelong() == _vUnit[j]->getBelong())
+				{ // 같은팀이 밀면 원래 진행방향으로 좀 밀리게 해봤음
+					_vUnit[j]->getX() += _vUnit[j]->getSpeed() * cosf(_vUnit[j]->getAngle1());
+					_vUnit[j]->getY() -= _vUnit[j]->getSpeed() * sinf(_vUnit[j]->getAngle1());
+					_vUnit[j]->RMC();
+				}
 			}
 		}
 	}

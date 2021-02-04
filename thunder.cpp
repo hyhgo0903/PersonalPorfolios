@@ -18,7 +18,7 @@ HRESULT thunder::init(S_BELONG belong, float x, float y)
 	_rc = RectMakeCenter(_x, _y, 30, 300);
 	_image = FINDIMG("¹ø°³ ÀÌÆåÆ®");
 	_maxFrame = _image->getMaxFrameX();
-	_duration = 100;
+	_duration = 50;
 
 	commonInit();
 

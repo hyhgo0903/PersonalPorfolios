@@ -149,6 +149,8 @@
   <ItemGroup>
     <ClInclude Include="animation.h" />
     <ClInclude Include="bishop.h" />
+    <ClInclude Include="dragon.h" />
+    <ClInclude Include="fire.h" />
     <ClInclude Include="flagUnit.h" />
     <ClInclude Include="skeleton.h" />
     <ClInclude Include="button.h" />
@@ -200,6 +202,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
+    <ClCompile Include="dragon.cpp" />
+    <ClCompile Include="fire.cpp" />
     <ClCompile Include="flagUnit.cpp" />
     <ClCompile Include="mapTool+numberinput.cpp" />
     <ClCompile Include="skeleton.cpp" />

@@ -8,6 +8,9 @@ void loadingScene::yoonghoInit()
 	soundLoaded();
 	SOUNDMANAGER->addSound("골드부족", "sound/goldlack.wav", false, false);
 	soundLoaded();
+	SOUNDMANAGER->addSound("배치실패", "sound/tadErr03.wav", false, false);
+	soundLoaded();
+	
 
 	IMAGEMANAGER->addFrameImage("저글링이동블루", "image/unit/zergling/zerglingwalkblue.bmp", 320, 273, 8, 7, true, RGB(255, 0, 255));
 	imgLoaded();
@@ -74,5 +77,8 @@ void loadingScene::yoonghoInit()
 	IMAGEMANAGER->addImage("현재스테이지", "image/ui/currentstage.bmp", 60, 28, false, RGB(255, 0, 255));
 	imgLoaded();
 	IMAGEMANAGER->addImage("지급골드", "image/ui/stagegold.bmp", 200, 32, false, RGB(255, 0, 255));
+	imgLoaded();
+
+	IMAGEMANAGER->addImage("배치가능", "image/ui/createable.bmp", 800, 800, true, RGB(255, 0, 255));
 	imgLoaded();
 }

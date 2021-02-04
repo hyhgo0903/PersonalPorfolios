@@ -237,6 +237,12 @@
     <ClInclude Include="flagUnit.h">
       <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClInclude>
+    <ClInclude Include="fire.h">
+      <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="dragon.h">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -450,6 +456,12 @@
       <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
     </ClCompile>
     <ClCompile Include="flagUnit.cpp">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="fire.cpp">
+      <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="dragon.cpp">
       <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClCompile>
   </ItemGroup>

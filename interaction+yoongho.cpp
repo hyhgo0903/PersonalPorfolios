@@ -22,7 +22,7 @@ void interaction::yoonghoUpdate()
 				}
 			}
 		}		
-		if (_se->getVSne()[i]->getID() == 2)
+		else if (_se->getVSne()[i]->getID() == 2)
 		{
 
 			for (int j = 0; j < _um->getVUnit().size(); ++j)
@@ -33,6 +33,19 @@ void interaction::yoonghoUpdate()
 				if (IntersectRect(&temp, &_um->getVUnit()[j]->getRect(), &_se->getVSne()[i]->getRect()))
 				{
 					_um->getVUnit()[j]->getHP() += 0.1f;
+				}
+			}
+		}
+		else if (_se->getVSne()[i]->getID() == 3)
+		{ // 번개 닿으면 데미지
+			for (int j = 0; j < _um->getVUnit().size(); ++j)
+			{
+				if (_um->getVUnit()[j]->getState() == DEAD) continue;
+				if (_um->getVUnit()[j]->getBelong() == _se->getVSne()[i]->getBelong()) continue;
+				RECT temp; // 피아식별을 하는 사이오닉스톰으로.. 이넘문은 다르지만 0,1로 비교하므로 비교가능하다
+				if (IntersectRect(&temp, &_um->getVUnit()[j]->getRect(), &_se->getVSne()[i]->getRect()))
+				{
+					_um->getVUnit()[j]->getHP() -= 1.f;
 				}
 			}
 		}
@@ -80,28 +93,34 @@ void interaction::yoonghoUpdate()
 			{ // 디아블로면 해골생성 
 				if (_um->getVUnit()[i]->getBelong() == ENEMY)
 				{
-					/*for (int j = 0; j < 6; j++)
-				{*/
-					_um->createSkeleton(ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(10, 40), _um->getVUnit()[i]->getY() + RND->getFromIntTo(140, 200));
+					_um->createSkeleton(ENEMY,
+						_um->getVUnit()[i]->getX() + 200 * cosf(_um->getVUnit()[i]->getAngle1()),
+						_um->getVUnit()[i]->getY() - 200 * sinf(_um->getVUnit()[i]->getAngle1()));
 					_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
-					_um->createSkeleton(ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(50, 60), _um->getVUnit()[i]->getY() - RND->getFromIntTo(230, 300));
+					_um->getVUnit()[_um->getVUnit().size() - 1]->setAngle(_um->getVUnit()[i]->getAngle1());
+					_um->createSkeleton(ENEMY,
+						_um->getVUnit()[i]->getX() + 250 * cosf(_um->getVUnit()[i]->getAngle1()),
+						_um->getVUnit()[i]->getY() - 150 * sinf(_um->getVUnit()[i]->getAngle1()));
 					_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
-					_um->createSkeleton(ENEMY, _um->getVUnit()[i]->getX() + RND->getFromIntTo(10, 100), _um->getVUnit()[i]->getY() + RND->getFromIntTo(140, 260));
+					_um->getVUnit()[_um->getVUnit().size() - 1]->setAngle(_um->getVUnit()[i]->getAngle1());
+					_um->createSkeleton(ENEMY,
+						_um->getVUnit()[i]->getX() + 150 * cosf(_um->getVUnit()[i]->getAngle1()),
+						_um->getVUnit()[i]->getY() - 250 * sinf(_um->getVUnit()[i]->getAngle1()));
 					_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
-					_um->createSkeleton(ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(50, 100), _um->getVUnit()[i]->getY() - RND->getFromIntTo(160, 362));
-					_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
-					_um->createSkeleton(ENEMY, _um->getVUnit()[i]->getX() + RND->getFromIntTo(30, 150), _um->getVUnit()[i]->getY() + RND->getFromIntTo(140, 260));
-					_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
-					_um->createSkeleton(ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(50, 100), _um->getVUnit()[i]->getY() - RND->getFromIntTo(160, 262));
-					_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
-					//}
-					// 디아블로의 원거리 공격
-					_se->createThunder(S_ENEMY, _um->getVUnit()[i]->getX() + RND->getFromIntTo(100, 400), RND->getFromIntTo(130, 300));
-					_se->createThunder(S_ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(50, 600), RND->getFromIntTo(250, 400));
-					_se->createThunder(S_ENEMY, _um->getVUnit()[i]->getX() + RND->getFromIntTo(100, 500), RND->getFromIntTo(340, 660));
-					_se->createThunder(S_ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(50, 100), RND->getFromIntTo(380, 550));
-					_se->createThunder(S_ENEMY, _um->getVUnit()[i]->getX() + RND->getFromIntTo(100, 500), RND->getFromIntTo(160, 460));
-					_se->createThunder(S_ENEMY, _um->getVUnit()[i]->getX() - RND->getFromIntTo(30, 700), RND->getFromIntTo(300, 400));
+					_um->getVUnit()[_um->getVUnit().size() - 1]->setAngle(_um->getVUnit()[i]->getAngle1());
+					_um->getVUnit()[i]->getID() = 21; // 디아블로 페이즈2
+				}
+			}
+			else if (_um->getVUnit()[i]->getID() == 21)
+			{ // 디아블로페이즈2면 번개생성
+				if (_um->getVUnit()[i]->getBelong() == ENEMY)
+				{
+					_um->getVUnit()[i]->getID() = 6; // 해골소환페이즈로
+					_se->createThunder(S_ENEMY, _um->getVUnit()[tg]->getX(), _um->getVUnit()[tg]->getY() - 100);
+					_se->createThunder(S_ENEMY, _um->getVUnit()[tg]->getX() + rand() % 200 , _um->getVUnit()[tg]->getY() + rand() % 200 - 100);
+					_se->createThunder(S_ENEMY, _um->getVUnit()[tg]->getX() + rand() % 200, _um->getVUnit()[tg]->getY() - rand() % 200 - 100);
+					_se->createThunder(S_ENEMY, _um->getVUnit()[tg]->getX() - rand() % 200, _um->getVUnit()[tg]->getY() - rand() % 200 - 100);
+					_se->createThunder(S_ENEMY, _um->getVUnit()[tg]->getX() - rand() % 200, _um->getVUnit()[tg]->getY() + rand() % 200 - 100);
 				}
 			}
 
@@ -132,6 +151,7 @@ void interaction::yoonghoUpdate()
 		}
 	}
 
+	/*
 	for (int i = 0; i < _um->getVUnit().size(); ++i)
 	{
 		if (_um->getVUnit()[i]->getState() != WALK) continue;
@@ -163,7 +183,7 @@ void interaction::yoonghoUpdate()
 			_um->getVUnit()[i]->getX() -= _um->getVUnit()[i]->getSpeed();
 			continue;
 		}
-	}
+	}*/
 
 	for (int i = 0; i < _um->getVUnit().size(); ++i)
 	{

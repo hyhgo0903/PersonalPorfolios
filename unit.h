@@ -137,7 +137,7 @@ public:
 
 
 	// 게터들도 무지막지하게 많음
-	int getID() { return _ID; }
+	int& getID() { return _ID; }
 	BELONG& getBelong() { return _belong; }
 	// 이걸 변경할 일이 있을지 싶지만 마컨같은거면..
 	STATE getState() { return _state; }

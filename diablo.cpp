@@ -20,11 +20,11 @@ HRESULT diablo::init(BELONG belong, float x, float y)
 	_x = x; _y = y;
 	_speed = 0.9f;
 	_maxDelay = 120; // 대충 1초에 한대 치게끔
-	_damage = 20;
+	_damage = 0;
 	_maxHP = 1000;
-	_attackIndex = 2; // 2번 인덱스가 될때 공격판정
-	_width = 22;
-	_height = 22; // 일단은 대충 설정해놓은거임(이미지크기) 
+	_attackIndex = 5; // 2번 인덱스가 될때 공격판정
+	_width = 80;
+	_height = 80; // 일단은 대충 설정해놓은거임(이미지크기) 
 	_count = 0;
 	_used = false;
 
@@ -43,7 +43,8 @@ void diablo::update()
 {
 	commonUpdate();
 	_summonRc = RectMakeCenter(_x + 40, _y + 90, 180, 180);
-	_rangeRc = RectMakeCenter(_x + 40, _y + 90, _width + 400, _height + 400);
+	_rangeRc = RectMakeCenter(_x, _y, _width + 500, _height + 500);
+	_focusRc = RectMakeCenter(_x, _y, _width + 500, _height + 500);
 }
 
 void diablo::render()
@@ -53,17 +54,17 @@ void diablo::render()
 	case WALK:
 		//Rectangle(getMemDC(), _summonRc);
 		//Rectangle(getMemDC(), _rangeRc);
-		_image->frameRender(getMemDC(), _rc.left - 5, _rc.top - 5, _frameDirection, _frame);
+		_image->frameRender(getMemDC(), _rc.left - 65, _rc.top - 41, _frameDirection, _frame);
 		break;
 	case ATTACKWAIT: // 첫번쨰 프레임으로 고정
 		//Rectangle(getMemDC(), _summonRc);
 		//Rectangle(getMemDC(), _rangeRc);
-		_image->frameRender(getMemDC(), _rc.left - 7, _rc.top - 10, _frameDirection, _frame);
+		_image->frameRender(getMemDC(), _rc.left - 90, _rc.top - 72, _frameDirection, 0);
 		break;
 	case ATTACK:
 		//Rectangle(getMemDC(), _summonRc);
 		//Rectangle(getMemDC(), _rangeRc);
-		_image->frameRender(getMemDC(), _rc.left - 7, _rc.top - 10, _frameDirection, _frame);
+		_image->frameRender(getMemDC(), _rc.left - 90, _rc.top - 72, _frameDirection, _frame);
 		break;
 	case DEAD: // 프레임인덱스 다르게 도니까 주의
 		//Rectangle(getMemDC(), _summonRc);
@@ -84,7 +85,7 @@ void diablo::setState(STATE state)
 		switch (_state)
 		{
 		case WALK:
-			_image = FINDIMG("디아블로 서기");
+			_image = FINDIMG("디아블로 걷기");
 			_maxFrame = _image->getMaxFrameY();
 			break;
 		case ATTACKWAIT:

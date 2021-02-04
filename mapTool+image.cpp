@@ -108,8 +108,8 @@ void mapTool::imageRender()
 		else if (_isoTile[i].name == CIVILIAN)	IMAGEMANAGER->findImage("시민퍼플")->frameRender(getMemDC(), _isoTile[i].drawX + 23, _isoTile[i].drawY - 5, 4, 7);
 		else if (_isoTile[i].name == TEMPLAR)	IMAGEMANAGER->findImage("템플러대기퍼플")->frameRender(getMemDC(), _isoTile[i].drawX + 18, _isoTile[i].drawY - 10, 4, 7);
 		else if (_isoTile[i].name == BISHOP)	IMAGEMANAGER->findImage("레드비숍대기")->frameRender(getMemDC(), _isoTile[i].drawX + 25, _isoTile[i].drawY - 2, 4, 0);
-		else if (_isoTile[i].name == DIABLO) IMAGEMANAGER->findImage("디아블로 서기")->frameRender(getMemDC(), _isoTile[i].drawX - 70, _isoTile[i].drawY - 145, 4, 2);
-		else if (_isoTile[i].name == SKELETON) IMAGEMANAGER->findImage("해골병사 서기")->frameRender(getMemDC(), _isoTile[i].drawX - 2, _isoTile[i].drawY - 14, 4, 2);
+		else if (_isoTile[i].name == DIABLO) IMAGEMANAGER->findImage("디아블로 걷기")->frameRender(getMemDC(), _isoTile[i].drawX - 70, _isoTile[i].drawY - 145, 4, 2);
+		else if (_isoTile[i].name == SKELETON) IMAGEMANAGER->findImage("해골병사 걷기")->frameRender(getMemDC(), _isoTile[i].drawX - 2, _isoTile[i].drawY - 14, 4, 2);
 		else if (_isoTile[i].name == GHOST)	IMAGEMANAGER->findImage("ghost_move_red")->frameRender(getMemDC(), _isoTile[i].drawX + 7, _isoTile[i].drawY - 10, 4, 0);
 
 		//언무브 타일 표시

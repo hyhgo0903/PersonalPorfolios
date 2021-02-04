@@ -108,6 +108,10 @@ void stageManager::uiRender()
 	IMAGEMANAGER->findImage("ui_start")->render(getMemDC(), _startBt.left, _startBt.top);
 	IMAGEMANAGER->findImage("ui_home")->render(getMemDC(), _homeBt.left, _homeBt.top);
 	IMAGEMANAGER->findImage("ui_retry")->render(getMemDC(), _retryBt.left, _retryBt.top);
+	//스테이지 표시
+	if(_stage == STAGE1)	IMAGEMANAGER->findImage("ui_stage1")->render(getMemDC(), CAMX, CAMY);
+	else if (_stage == STAGE2)	IMAGEMANAGER->findImage("ui_stage2")->render(getMemDC(), CAMX, CAMY);
+	else if (_stage == STAGE3)	IMAGEMANAGER->findImage("ui_BossStage")->render(getMemDC(), CAMX, CAMY);
 
 	if(_onOff) IMAGEMANAGER->findImage("ui_on")->render(getMemDC(), _onBt.left, _onBt.top);
 	else IMAGEMANAGER->findImage("ui_off")->render(getMemDC(), _offBt.left, _offBt.top);
@@ -136,6 +140,10 @@ void stageManager::uiRender()
 		{
 			FINDIMG("가이드타일")->alphaRender(getMemDC(), _isoTile[_path[i]].drawX, _isoTile[_path[i]].drawY, _alpha);
 		}
+	}
+	if (!_battlePhase)
+	{		
+		FINDIMG("배치가능")->alphaRender(getMemDC(), _isoTile[_playerTile].centerX - 400, _isoTile[_playerTile].centerY - 400, 30);
 	}
 }
 
@@ -196,15 +204,7 @@ void stageManager::clearBt()
 {
 	if (PtInRect(&_clearBt, _cameraPtMouse) && !_battlePhase)
 	{
-		for (int i = 0; i < _um->getVUnit().size(); ++i)
-		{
-			if(_um->getVUnit()[i]->getBelong() == PLAYER)	_um->getVUnit()[i]->getErase() = true;
-		}
-		_gold = _isoTile[0].gold;
-	}
-	for (int i = 0; i < 900; ++i)
-	{
-		if (_isoTile[i].name == PLAYEROCCUPIED) _isoTile[i].name = NONE;
+		setStage(_stage);
 	}
 }
 
@@ -252,6 +252,12 @@ void stageManager::createUnit()
 {
 	if (_battlePhase) return;
 	//언무브 타일에는 안깔립니당
+	if (getDistance(_isoTile[_playerTile].centerX, _isoTile[_playerTile].centerY,
+		_cameraPtMouse.x, _cameraPtMouse.y) > 400)
+	{
+		PLAYSND("배치실패");
+		return;
+	}
 	if (_isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE 
 		&& !_menuInPt && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
 	{

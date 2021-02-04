@@ -45,7 +45,9 @@ void flagUnit::update()
 	}
 }
 
-void flagUnit::render(){
+void flagUnit::render() {}
+
+void flagUnit::reRender(){
 	FINDIMG("체력바뒤")->resizedRender(getMemDC(), _rc.left - 15, _rc.top - 130, _width + 30, 6);
 	if (_HP / _maxHP > 0.5f)
 	{
@@ -60,7 +62,5 @@ void flagUnit::render(){
 		FINDIMG("빨간피")->resizedRender(getMemDC(), _rc.left - 15, _rc.top - 130, (_width + 30) *_HP / _maxHP, 6);
 	}
 }
-
-void flagUnit::reRender(){}
 
 void flagUnit::setState(STATE state){}

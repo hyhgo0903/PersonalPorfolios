@@ -41,7 +41,6 @@ void skeleton::release()
 void skeleton::update()
 {
 	commonUpdate();
-	_focusRc = RectMakeCenter(_x, _y, _width + 30, _height + 30);
 	_rangeRc = RectMakeCenter(_x, _y, _width + 20, _height + 20);
 }
 
@@ -97,7 +96,7 @@ void skeleton::setState(STATE state)
 		switch (_state)
 		{
 		case WALK:
-			_image = FINDIMG("ÇØ°ñº´»ç ¼­±â");
+			_image = FINDIMG("ÇØ°ñº´»ç °È±â");
 			_maxFrame = _image->getMaxFrameY();
 			break;
 		case ATTACKWAIT:
