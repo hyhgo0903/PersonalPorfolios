@@ -47,6 +47,7 @@ void mapTool::save()
 			return;
 		}
 		_seePath = true;
+		_currentStage = 1;
 		HANDLE file;
 		DWORD write;
 
@@ -70,6 +71,7 @@ void mapTool::save()
 			return;
 		}
 		_seePath = true;
+		_currentStage = 2;
 		HANDLE file;
 		DWORD write;
 
@@ -93,6 +95,7 @@ void mapTool::save()
 			return;
 		}
 		_seePath = true;
+		_currentStage = 3;
 		HANDLE file;
 		DWORD write;
 

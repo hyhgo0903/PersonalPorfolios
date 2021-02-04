@@ -15,7 +15,7 @@ HRESULT mapTool::init()
 	CAMERAMANAGER->setCameraX(0);
 	CAMERAMANAGER->setCameraY(0);
 	createSampleTiles();
-	_currentStage = 1;
+	_currentStage = 0;
 	createIsoMap(TILEX, TILEY);
 	_tempTile.fX = _tempTile.fY = 0;
 	_savePopUp = _popUpCount = _modifyingCount = _modifyingNum = 0;
@@ -30,20 +30,6 @@ HRESULT mapTool::init()
 	
 	_playerTile = _enemyTile = -1;
 
-	HANDLE file;
-	DWORD read;
-
-	file = CreateFile("stage1.map", GENERIC_READ, NULL, NULL,
-		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-
-	ReadFile(file, _isoTile, sizeof(isoTile) * TILEX * TILEY, &read, NULL);
-	CloseHandle(file);
-
-	for (int i = 0; i < 900; ++i)
-	{
-		if (_isoTile[i].name == PLAYERFLAG) _playerTile = i;
-		else if (_isoTile[i].name == ENEMYFLAG) _enemyTile = i;
-	}
 
 	return S_OK;
 }
@@ -160,6 +146,13 @@ void mapTool::update()
 		InvalidateRect(_hWnd, NULL, false);
 	}
 
+	// _isoTile[1].gold에 배경을 지정해서 저장(골드처럼 저장 잘됨. sm에서 읽으면 됨)
+	// 임시적으로 변경할수 있게 해놨음. 나중에 누르면 _isoTile[1].gold만 바꾸게 하면 잘 됨
+	if (KEYMANAGER->isOnceKeyDown('Q'))
+	{
+		_isoTile[1].gold += 1;
+		if (_isoTile[1].gold > 6) _isoTile[1].gold = 0;
+	}
 
 	numberInput();
 }

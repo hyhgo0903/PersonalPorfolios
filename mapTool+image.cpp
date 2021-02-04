@@ -64,6 +64,22 @@ void mapTool::imageInit()
 
 void mapTool::imageRender()
 {
+	switch (_isoTile[1].gold)
+	{
+	case 0: break;
+	case 1:	FINDIMG("정글")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); // 이렇게 윈사이즈만큼만 그려주는게 부하가 덜함
+		break;
+	case 2:	FINDIMG("싸펑")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); // 이렇게 윈사이즈만큼만 그려주는게 부하가 덜함
+		break;
+	case 3:	FINDIMG("눈산")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); // 이렇게 윈사이즈만큼만 그려주는게 부하가 덜함
+		break;
+	case 4:	FINDIMG("우주")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); // 이렇게 윈사이즈만큼만 그려주는게 부하가 덜함
+		break;
+	case 5:	FINDIMG("화산")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); // 이렇게 윈사이즈만큼만 그려주는게 부하가 덜함
+		break;
+	case 6:	FINDIMG("사막")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); // 이렇게 윈사이즈만큼만 그려주는게 부하가 덜함
+		break;
+	}
 	//아이소타일
 	for (int i = 0; i < TILEX * TILEY; ++i)
 	{ // 화면 밖의 맵은 그리지 않도록 함. 렉 방지용. 메인씬에도 이거 쓰고 시연떄도 이거 줄여서 보여줘도 될듯
