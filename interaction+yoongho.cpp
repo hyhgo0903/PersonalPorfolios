@@ -97,17 +97,17 @@ void interaction::yoonghoUpdate()
 						_um->getVUnit()[i]->getX() + 200 * cosf(_um->getVUnit()[i]->getAngle1()),
 						_um->getVUnit()[i]->getY() - 200 * sinf(_um->getVUnit()[i]->getAngle1()));
 					_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
-					_um->getVUnit()[_um->getVUnit().size() - 1]->setAngle(_um->getVUnit()[i]->getAngle1());
+					_um->getVUnit()[_um->getVUnit().size() - 1]->setAngle(3.f/2.f*PI);
 					_um->createSkeleton(ENEMY,
-						_um->getVUnit()[i]->getX() + 250 * cosf(_um->getVUnit()[i]->getAngle1()),
-						_um->getVUnit()[i]->getY() - 150 * sinf(_um->getVUnit()[i]->getAngle1()));
+						_um->getVUnit()[i]->getX() - 100 + 200 * cosf(_um->getVUnit()[i]->getAngle1()),
+						_um->getVUnit()[i]->getY() - 200 * sinf(_um->getVUnit()[i]->getAngle1()));
 					_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
-					_um->getVUnit()[_um->getVUnit().size() - 1]->setAngle(_um->getVUnit()[i]->getAngle1());
+					_um->getVUnit()[_um->getVUnit().size() - 1]->setAngle(3.f / 2.f*PI);
 					_um->createSkeleton(ENEMY,
-						_um->getVUnit()[i]->getX() + 150 * cosf(_um->getVUnit()[i]->getAngle1()),
-						_um->getVUnit()[i]->getY() - 250 * sinf(_um->getVUnit()[i]->getAngle1()));
+						_um->getVUnit()[i]->getX() + 100 + 200 * cosf(_um->getVUnit()[i]->getAngle1()),
+						_um->getVUnit()[i]->getY() - 200 * sinf(_um->getVUnit()[i]->getAngle1()));
 					_um->getVUnit()[_um->getVUnit().size() - 1]->getActive() = true;
-					_um->getVUnit()[_um->getVUnit().size() - 1]->setAngle(_um->getVUnit()[i]->getAngle1());
+					_um->getVUnit()[_um->getVUnit().size() - 1]->setAngle(3.f / 2.f*PI);
 					_um->getVUnit()[i]->getID() = 21; // 디아블로 페이즈2
 				}
 			}

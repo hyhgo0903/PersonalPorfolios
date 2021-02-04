@@ -422,8 +422,8 @@ void stageManager::setStage(STAGE stage)
 		else if (_isoTile[i].name == DIABLO)
 		{
 			_um->createDiablo(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
-			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i;
-			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(aStarPath(i, _playerTile));
+			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i+62; // 크기때매 두칸 아래를 목적지로 잡는거
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(aStarPath(i+62, _playerTile));
 		}
 		else if (_isoTile[i].name == SKELETON)
 		{
