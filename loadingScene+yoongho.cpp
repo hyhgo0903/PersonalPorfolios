@@ -81,4 +81,26 @@ void loadingScene::yoonghoInit()
 
 	IMAGEMANAGER->addImage("¹èÄ¡°¡´É", "image/ui/createable.bmp", 800, 800, true, RGB(255, 0, 255));
 	imgLoaded();
+
+
+	IMAGEMANAGER->addImage("Á¤±Û½æ", "image/stage/junglesum.bmp", 85, 43, false, RGB(0, 0, 0));
+	imgLoaded();
+	IMAGEMANAGER->addImage("½ÎÆã½æ", "image/stage/cyberSpacesum.bmp", 85, 43, false, RGB(0, 0, 0));
+	imgLoaded();
+	IMAGEMANAGER->addImage("´«»ê½æ", "image/stage/snowMountainsum.bmp", 85, 43, false, RGB(0, 0, 0));
+	imgLoaded();
+	IMAGEMANAGER->addImage("¿ìÁÖ½æ", "image/stage/spacesum.bmp", 85, 43, false, RGB(0, 0, 0));
+	imgLoaded();
+	IMAGEMANAGER->addImage("È­»ê½æ", "image/stage/volcanosum.bmp", 85, 43, false, RGB(0, 0, 0));
+	imgLoaded();
+	IMAGEMANAGER->addImage("»ç¸·½æ", "image/stage/wildernesssum.bmp", 85, 43, false, RGB(0, 0, 0));
+	imgLoaded();
+	IMAGEMANAGER->addImage("¹è°æ", "image/backGround.bmp", MAPSIZEX, MAPSIZEY, false, RGB(0, 0, 0));
+	imgLoaded();
+	IMAGEMANAGER->addImage("·Ñ½Â¸®", "image/ui/lastVictory.bmp", 1200, 700, false, RGB(0, 0, 0));
+	imgLoaded();
+	IMAGEMANAGER->addImage("½ºÄÚ¾î", "image/ui/score.bmp", 150, 32, false, RGB(0, 0, 0));
+	imgLoaded();
+	IMAGEMANAGER->addFrameImage("°í½ºÆ®Æã", "image/sne/ghosteffect.bmp", 350, 33, 10, 1, true, RGB(255, 0, 255));
+	imgLoaded();
 }

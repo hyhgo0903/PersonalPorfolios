@@ -17,9 +17,9 @@ HRESULT ghost::init(BELONG belong, float x, float y)
 	_ID = 8;
 	_x = x; _y = y;
 	_speed = 2.0f;
-	_maxDelay = 120; // 대충 1초에 한대 치게끔
-	_damage = 18;
-	_maxHP = 45;
+	_maxDelay = 150; // 대충 1초에 한대 치게끔
+	_damage = 14;
+	_maxHP = 18;
 	_attackIndex = 2; // 2번 인덱스가 될때 공격판정
 	_width = 21;
 	_height = 22; // 일단은 대충 설정해놓은거임(이미지크기)
@@ -39,16 +39,16 @@ void ghost::release()
 void ghost::update()
 {
 	commonUpdate();
-	_focusRc = RectMakeCenter(_x, _y, _width + 500, _height + 500);
-	_rangeRc = RectMakeCenter(_x, _y, _width + 500, _height + 500);
+	_focusRc = RectMakeCenter(_x, _y, _width + 420, _height + 420);
+	_rangeRc = RectMakeCenter(_x, _y, _width + 420, _height + 420);
 	// 사거리 맞춰서 여기서 설정
 
 	//현재 체력이 33%이하가 되면 체력의 절반을 회복한다
-	if (_HP < _maxHP / 3 && !_used)
+	/*if (_HP < _maxHP / 3 && !_used)
 	{
 		_HP += _maxHP / 2;
 		_used = true;
-	}
+	}*/
 }
 
 void ghost::render()
@@ -68,8 +68,6 @@ void ghost::render()
 		_image->frameRender(getMemDC(), _rc.left - 18, _rc.top - 8, _frame, 0);
 		break;
 	}
-
-	if (KEYMANAGER->isToggleKey(VK_F1)) Rectangle(getMemDC(), _rc);
 }
 
 void ghost::reRender()

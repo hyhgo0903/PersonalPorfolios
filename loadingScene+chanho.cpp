@@ -39,17 +39,21 @@ void loadingScene::chanhoInit()
 	IMAGEMANAGER->addFrameImage("블루드래곤죽음", "image/unit/dragon/blueDragonDead.bmp", 344, 40, 8, 1, true, RGB(255, 0, 255));
 	imgLoaded();
 
+    IMAGEMANAGER->addFrameImage("나루토대기", "image/unit/naruto/narutoIdle.bmp", 128, 128, 8, 4, true, RGB(255, 0, 255));
+    imgLoaded();
+    IMAGEMANAGER->addFrameImage("나루토이동", "image/unit/naruto/narutoWalk.bmp", 192, 256, 8, 8, true, RGB(255, 0, 255));
+    imgLoaded();
+    IMAGEMANAGER->addFrameImage("나루토공격", "image/unit/naruto/narutoAttack.bmp", 256, 288, 8, 9, true, RGB(255, 0, 255));
+    imgLoaded();
+    IMAGEMANAGER->addFrameImage("나루토죽음", "image/unit/naruto/narutoDead.bmp", 128, 80, 4, 4, true, RGB(255, 0, 255));
+    imgLoaded();
+
 	IMAGEMANAGER->addFrameImage("힐", "image/sne/healEffect.bmp", 2016, 96, 21, 1, true, RGB(255, 0, 255));
 	imgLoaded();
 	IMAGEMANAGER->addFrameImage("불", "image/sne/fireEffect.bmp", 288, 32, 9, 1, true, RGB(255, 0, 255));
 	imgLoaded();
-
-	IMAGEMANAGER->addFrameImage("불", "image/sne/fireEffect.bmp", 288, 32, 9, 1, true, RGB(255, 0, 255));
-	imgLoaded();
-	IMAGEMANAGER->addFrameImage("불", "image/sne/fireEffect.bmp", 288, 32, 9, 1, true, RGB(255, 0, 255));
-	imgLoaded();
-	IMAGEMANAGER->addFrameImage("불", "image/sne/fireEffect.bmp", 288, 32, 9, 1, true, RGB(255, 0, 255));
-	imgLoaded();
+    IMAGEMANAGER->addFrameImage("나선환", "image/sne/narutoEffect.bmp", 1216, 64, 19, 1, true, RGB(255, 0, 255));
+    imgLoaded();
 
 	IMAGEMANAGER->addImage("정글", "image/stage/jungle.bmp", 1920, 960, false, RGB(0, 0, 0));
 	imgLoaded();

@@ -47,6 +47,7 @@ HRESULT mainScene::init()
 	_um->createBishop(PLAYER, 200, 350);
 	_um->createGhost(PLAYER, 250, 400);
 	_um->createGhost(ENEMY, 1250, 650);*/
+	// _um->createTower1(ENEMY, 450, 450);
 
 	// _um->createDiablo(ENEMY, 650, 450);
 

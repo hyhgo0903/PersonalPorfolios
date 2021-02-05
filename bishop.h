@@ -1,14 +1,13 @@
 #pragma once
 #include "unit.h"
-class bishop :
-	public unit
+class bishop : public unit
 {
 
 private:
 
 public:
-	bishop();
-	~bishop();
+    bishop() {};
+    ~bishop() {};
 
 	virtual HRESULT init(BELONG belong, float x, float y);	//초기화 전용 함수
 	virtual void release();	//메모리 해제 함수

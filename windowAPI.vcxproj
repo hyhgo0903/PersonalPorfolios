@@ -48,7 +48,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
@@ -152,6 +152,9 @@
     <ClInclude Include="dragon.h" />
     <ClInclude Include="fire.h" />
     <ClInclude Include="flagUnit.h" />
+    <ClInclude Include="ghostEffect.h" />
+    <ClInclude Include="naruto.h" />
+    <ClInclude Include="narutoEffect.h" />
     <ClInclude Include="skeleton.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="cameraManager.h" />
@@ -193,6 +196,7 @@
     <ClInclude Include="timeManager.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="titleScene.h" />
+    <ClInclude Include="tower1.h" />
     <ClInclude Include="txtData.h" />
     <ClInclude Include="unit.h" />
     <ClInclude Include="unitManager.h" />
@@ -205,7 +209,10 @@
     <ClCompile Include="dragon.cpp" />
     <ClCompile Include="fire.cpp" />
     <ClCompile Include="flagUnit.cpp" />
+    <ClCompile Include="ghostEffect.cpp" />
     <ClCompile Include="mapTool+numberinput.cpp" />
+    <ClCompile Include="naruto.cpp" />
+    <ClCompile Include="narutoEffect.cpp" />
     <ClCompile Include="skeleton.cpp" />
     <ClCompile Include="diablo.cpp" />
     <ClCompile Include="heal.cpp" />
@@ -266,6 +273,7 @@
     <ClCompile Include="timeManager.cpp" />
     <ClCompile Include="timer.cpp" />
     <ClCompile Include="titleScene.cpp" />
+    <ClCompile Include="tower1.cpp" />
     <ClCompile Include="txtData.cpp" />
     <ClCompile Include="um+chanho.cpp" />
     <ClCompile Include="um+deokho.cpp" />

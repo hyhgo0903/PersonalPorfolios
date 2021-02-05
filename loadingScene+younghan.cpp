@@ -88,6 +88,16 @@ void loadingScene::younghanInit()
 	imgLoaded();
 	IMAGEMANAGER->addFrameImage("ghost_dead_blue", "image/unit/ghost/ghost_dead_blue.bmp", 280, 41, 5, 1, true, RGB(255, 255, 0));
 	imgLoaded();
+	IMAGEMANAGER->addFrameImage("tower1_idle_red", "image/unit/tower1/tower1_idle_red.bmp", 384, 40, 8, 1, true, RGB(255, 255, 0));
+	imgLoaded();
+	IMAGEMANAGER->addFrameImage("tower1_idle_blue", "image/unit/tower1/tower1_idle_blue.bmp", 384, 40, 8, 1, true, RGB(255, 255, 0));
+	imgLoaded();
+	IMAGEMANAGER->addFrameImage("tower1_atk_red", "image/unit/tower1/tower1_atk_red.bmp", 384, 400, 8, 10, true, RGB(255, 255, 0));
+	imgLoaded();
+	IMAGEMANAGER->addFrameImage("tower1_atk_blue", "image/unit/tower1/tower1_atk_blue.bmp", 384, 400, 8, 10, true, RGB(255, 255, 0));
+	imgLoaded();
+	IMAGEMANAGER->addFrameImage("tower1_dead", "image/unit/tower1/tower1_dead.bmp", 1248, 96, 13, 1, true, RGB(255, 0, 255));
+	imgLoaded();
 	/////////////////¾ÆÀÌÄÜ
 	IMAGEMANAGER->addImage("icon_zergling", "image/icon/icon_zergling.bmp", 80, 90, false, RGB(255, 0, 255));
 	imgLoaded();

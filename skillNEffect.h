@@ -14,6 +14,8 @@ class skillNEffect :	public gameNode
 		1 - 사이오닉 스톰
 		2 - 힐
 		3 - 번개
+
+		6 - 고스트펑
 	*/
 
 protected:

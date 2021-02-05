@@ -16,7 +16,7 @@ HRESULT zergling::init(BELONG belong, float x, float y)
 	_x = x; _y = y;
 	_speed = 2.0f;
 	_maxDelay = 60; // 대충 1초에 한대 치게끔
-	_damage = 5;
+	_damage = 7;
 	_maxHP = 35;
 	_attackIndex = 2; // 2번 인덱스가 될때 공격판정
 	_width = 20;

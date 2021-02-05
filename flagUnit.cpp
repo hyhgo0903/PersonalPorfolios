@@ -9,7 +9,7 @@ HRESULT flagUnit::init(BELONG belong, float x, float y)
 	_speed = 0.f;
 	_maxDelay = 1000;
 	_damage = 0;
-	_maxHP = 500;
+	_maxHP = 100;
 	_attackIndex = 5; // 2번 인덱스가 될때 공격판정
 	_width = 32;
 	_height = 16; // 일단은 대충 설정해놓은거임(이미지크기)

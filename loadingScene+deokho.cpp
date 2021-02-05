@@ -59,7 +59,20 @@ void loadingScene::deokhoInit()
 	ADDS("해골병사사망", "sound/SkeletonDie.wav", false, false);
 	soundLoaded();
 
-	ADDS("보스브금", "sound/SkeletonDie.wav", false, false);
+	ADDS("승리", "sound/Victory.wav", false, false);
+	soundLoaded();
+	ADDS("패배", "sound/Defeated.wav", false, false);
+	soundLoaded();
+	ADDS("클리어", "sound/Clear.wav", false, false);
+	soundLoaded();
+	ADDS("시작", "sound/Start.wav", false, false);
+	soundLoaded();
+
+	ADDS("보스브금", "sound/BossBGM.wav", true, true);
+	soundLoaded();
+	ADDS("타이틀씬브금", "sound/TitleScene.wav", true, true);
+	soundLoaded();
+	ADDS("메인씬브금", "sound/treamedterran1.wav", true, true);
 	soundLoaded();
 
 

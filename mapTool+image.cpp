@@ -66,20 +66,14 @@ void mapTool::imageInit()
 void mapTool::imageRender()
 {
 	switch (_isoTile[1].gold)
-	{
-	case 0: break;
-	case 1:	FINDIMG("정글")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); // 이렇게 윈사이즈만큼만 그려주는게 부하가 덜함
-		break;
-	case 2:	FINDIMG("싸펑")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); // 이렇게 윈사이즈만큼만 그려주는게 부하가 덜함
-		break;
-	case 3:	FINDIMG("눈산")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); // 이렇게 윈사이즈만큼만 그려주는게 부하가 덜함
-		break;
-	case 4:	FINDIMG("우주")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); // 이렇게 윈사이즈만큼만 그려주는게 부하가 덜함
-		break;
-	case 5:	FINDIMG("화산")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); // 이렇게 윈사이즈만큼만 그려주는게 부하가 덜함
-		break;
-	case 6:	FINDIMG("사막")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); // 이렇게 윈사이즈만큼만 그려주는게 부하가 덜함
-		break;
+	{// 이렇게 윈사이즈만큼만 그려주는게 부하가 덜함
+	case 0: FINDIMG("배경")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY);		break;
+	case 1:	FINDIMG("정글")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); 	break;
+	case 2:	FINDIMG("싸펑")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); 	break;
+	case 3:	FINDIMG("눈산")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); 	break;
+	case 4:	FINDIMG("우주")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); 	break;
+	case 5:	FINDIMG("화산")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); 	break;
+	case 6:	FINDIMG("사막")->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY); 	break;
 	}
 	//아이소타일
 	for (int i = 0; i < TILEX * TILEY; ++i)
@@ -216,6 +210,13 @@ void mapTool::imageRender()
 			IMAGEMANAGER->findImage("icon_diablo")->render(getMemDC(), _icDiablo.left, _icDiablo.top);
 			IMAGEMANAGER->findImage("icon_skeleton")->render(getMemDC(), _icSkeleton.left, _icSkeleton.top);
 			IMAGEMANAGER->findImage("icon_ghost")->render(getMemDC(), _icGhost.left, _icGhost.top);
+
+			FINDIMG("정글썸")->render(getMemDC(), CAMX + 689, CAMY + 340);
+			FINDIMG("싸펑썸")->render(getMemDC(), CAMX + 689+85, CAMY + 340);
+			FINDIMG("눈산썸")->render(getMemDC(), CAMX + 689+170, CAMY + 340);
+			FINDIMG("우주썸")->render(getMemDC(), CAMX + 689+255, CAMY + 340);
+			FINDIMG("화산썸")->render(getMemDC(), CAMX + 689+340, CAMY + 340);
+			FINDIMG("사막썸")->render(getMemDC(), CAMX + 689+425, CAMY + 340);
 		}
 	}
 	//세이브와 로드

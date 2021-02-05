@@ -31,4 +31,12 @@ void loadingScene::hyunjeonghoInit()
 	//################## 디아블로 스킬 이펙트 ###################################################################
 	IMAGEMANAGER->addFrameImage("번개 이펙트", "image/sne/thunderEffect.bmp", 1339, 300, 11, 1, true, RGB(255, 0, 255));
 	imgLoaded();
+
+	//################## 엔딩 승리 , 패배 이미지 ###################################################################
+	IMAGEMANAGER->addImage("승리", "image/ui/victory_select.bmp", 400, 300, true, RGB(255, 0, 255));
+	imgLoaded();
+
+	IMAGEMANAGER->addImage("패배", "image/ui/defeated_select.bmp", 400, 300, true, RGB(255, 0, 255));
+	imgLoaded();
+
 }

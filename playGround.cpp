@@ -15,7 +15,6 @@ HRESULT playGround::init()
 	gameNode::init(true);
 
 	_x = _y = _seeMinimap = 0;
-	_backGround = IMAGEMANAGER->addImage("배경", "image/backGround.bmp", MAPSIZEX, MAPSIZEY, false, RGB(0, 0, 0));
 
 	_ms = new mainScene;
 
@@ -76,7 +75,6 @@ void playGround::render()
 {
 	PatBlt(getMemDC(), 0, 0, CAMX + WINSIZEX, CAMY + WINSIZEY, WHITENESS);
 	//================ 위에 건들지 마라 ==============================
-	_backGround->render(getMemDC(), CAMX, CAMY, CAMX, CAMY, WINSIZEX, WINSIZEY);
 	SCENEMANAGER->render(); // 얘넨 다 확대축소..
 	//================= 아래도 건들지 마라 ==============================
 	if (_x == 0) // 확대안하는거면 이렇게 그림

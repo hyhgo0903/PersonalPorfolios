@@ -66,6 +66,7 @@ private:
 	int _enemyTile;
 	int _alpha;
 	
+	int _score;
 
 	vector<tagAStarTile*>			_vTotalList;
 	vector<tagAStarTile*>::iterator _viTotalList;

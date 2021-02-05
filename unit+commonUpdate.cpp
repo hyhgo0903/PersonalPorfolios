@@ -10,7 +10,7 @@ void unit::commonUpdate()
 	}
 	if (_stuck > 60 && _state == WALK)
 	{ // 1초이상 맵에 끼이면 우회하는거(이땐 타겟팅을 안하고 원래 경로로 다시 감)
-		_stuck = -240;
+		_stuck = -120;
 		_target = -1;
 		int x = _tileNum % 30;
 		int y = _tileNum / 30;

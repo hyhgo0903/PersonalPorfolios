@@ -29,6 +29,13 @@ void mapTool::ptInObj()
 		else if (PtInRect(&_icDiablo, _cameraPtMouse) && _menuNum == THREE)		_objName = DIABLO;
 		else if (PtInRect(&_icSkeleton, _cameraPtMouse) && _menuNum == THREE)	_objName = SKELETON;
 		else if (PtInRect(&_icGhost, _cameraPtMouse) && _menuNum == THREE)		_objName = GHOST;
+		else if (_ptMouse.x > 689 && _ptMouse.x < 689 + 85 && _ptMouse.y > 340 && _ptMouse.y < 383 && _menuNum == THREE) _isoTile[1].gold = 1;
+		else if (_ptMouse.x > 689 + 85 && _ptMouse.x < 689 + 170 && _ptMouse.y > 340 && _ptMouse.y < 383 && _menuNum == THREE) _isoTile[1].gold = 2;
+		else if (_ptMouse.x > 689 + 170 && _ptMouse.x < 689 + 255 && _ptMouse.y > 340 && _ptMouse.y < 383 && _menuNum == THREE) _isoTile[1].gold = 3;
+		else if (_ptMouse.x > 689 + 255 && _ptMouse.x < 689 + 340 && _ptMouse.y > 340 && _ptMouse.y < 383 && _menuNum == THREE) _isoTile[1].gold = 4;
+		else if (_ptMouse.x > 689 + 340 && _ptMouse.x < 689 + 425 && _ptMouse.y > 340 && _ptMouse.y < 383 && _menuNum == THREE) _isoTile[1].gold = 5;
+		else if (_ptMouse.x > 689 + 425 && _ptMouse.x < 689 + 510 && _ptMouse.y > 340 && _ptMouse.y < 383 && _menuNum == THREE) _isoTile[1].gold = 6;
+
 	}
 }
 

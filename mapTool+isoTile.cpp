@@ -85,7 +85,8 @@ void mapTool::dragPaint()
 
 	for (int i = 0; i < TILEX * TILEY; ++i)
 	{
-		if (PtInRect(&_dragRc, _isoTile[i].pt))
+		POINT tempPoint = { _isoTile[i].centerX, _isoTile[i].centerY };
+		if (PtInRect(&_dragRc, tempPoint))
 		{
 			if (!_moveUnMove && _tempTile.fX >= 0 && _tempTile.fY >= 0 && _menuNum == ONE)
 			{//언무브 타일 off면 무브타일로 깔아줌

@@ -1,14 +1,6 @@
 #include "stdafx.h"
 #include "bishop.h"
 
-bishop::bishop()
-{
-}
-
-bishop::~bishop()
-{
-}
-
 HRESULT bishop::init(BELONG belong, float x, float y)
 {
 	_belong = belong;
@@ -33,8 +25,7 @@ void bishop::release()
 void bishop::update()
 {
 	commonUpdate();
-	_rangeRc = RectMakeCenter(_x, _y, _width + 50, _height + 50);
-	_focusRc = RectMakeCenter(_x, _y, _width + 30, _height + 30);
+	_rangeRc = RectMakeCenter(_x, _y, _width + 250, _height + 250);
 
 
 }

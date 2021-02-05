@@ -33,7 +33,9 @@ HRESULT titleScene::init()
 	_effectBar = RectMake(_volumRect.left + 88, _volumRect.top + 175, 120, 29);
 	_effectMinus = RectMake(_volumRect.left + 71, _volumRect.top + 181, 15, 18);
 
-
+	SOUNDMANAGER->stop("보스브금");
+	SOUNDMANAGER->stop("메인씬브금");
+	if(!SOUNDMANAGER->isPlaySound("타이틀씬브금"))PLAYSND("타이틀씬브금");
 	return S_OK;
 }
 
@@ -57,6 +59,8 @@ void titleScene::update()
 	{
 		if (PtInRect(&_gameStart, _ptMouse) == true && !_isVolumeSetOn)
 		{
+			SOUNDMANAGER->stop("타이틀씬브금");
+			PLAYSND("시작");
 			_isStart = true;
 		}
 
@@ -67,11 +71,12 @@ void titleScene::update()
 
 		else if (PtInRect(&_option, _ptMouse) == true && _isVolumeSetOn == false)
 		{
-			SCENEMANAGER->changeScene("볼륨조절");
+			SOUNDMANAGER->pause("타이틀씬브금");
 			_isVolumeSetOn = true;
 		}
 		if (PtInRect(&_volumeExit, _ptMouse) == true && _isVolumeSetOn == true)
 		{
+			SOUNDMANAGER->resume("타이틀씬브금");
 			_isVolumeSetOn = false;
 			SOUNDMANAGER->stop("테란브금");
 			SOUNDMANAGER->stop("템플러공격");

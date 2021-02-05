@@ -243,6 +243,18 @@
     <ClInclude Include="dragon.h">
       <Filter>playGround\mainScene\unit\subclass</Filter>
     </ClInclude>
+    <ClInclude Include="naruto.h">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="narutoEffect.h">
+      <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="tower1.h">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
+    </ClInclude>
+    <ClInclude Include="ghostEffect.h">
+      <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -463,6 +475,18 @@
     </ClCompile>
     <ClCompile Include="dragon.cpp">
       <Filter>playGround\mainScene\unit\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="naruto.cpp">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="narutoEffect.cpp">
+      <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="tower1.cpp">
+      <Filter>playGround\mainScene\unit\subclass</Filter>
+    </ClCompile>
+    <ClCompile Include="ghostEffect.cpp">
+      <Filter>playGround\mainScene\skillNEffect\subclass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -60,9 +60,6 @@ void mapTool::createIsoMap(int tileX, int tileY)
 			_isoTile[i * tileX + j].centerX = TILESIZEX * (TILEX + (j - i))/2;
 			_isoTile[i * tileX + j].centerY = TILESIZEY * (i + j + 1) / 2;
 
-			_isoTile[i * tileX + j].pt.x = TILESIZEX * (TILEX + (j - i)) / 2;
-			_isoTile[i * tileX + j].pt.y = TILESIZEY * (i + j + 1) / 2;
-
 			_isoTile[i * tileX + j].drawX = _isoTile[i * tileX + j].centerX - TILESIZEX / 2;
 			_isoTile[i * tileX + j].drawY = _isoTile[i * tileX + j].centerY - TILESIZEY / 2;
 		}
@@ -160,13 +157,6 @@ void mapTool::update()
 		InvalidateRect(_hWnd, NULL, false);
 	}
 
-	// _isoTile[1].gold에 배경을 지정해서 저장(골드처럼 저장 잘됨. sm에서 읽으면 됨)
-	// 임시적으로 변경할수 있게 해놨음. 나중에 누르면 _isoTile[1].gold만 바꾸게 하면 잘 됨
-	if (KEYMANAGER->isOnceKeyDown('Q'))
-	{
-		_isoTile[1].gold += 1;
-		if (_isoTile[1].gold > 6) _isoTile[1].gold = 0;
-	}
 
 	numberInput();
 }
@@ -186,11 +176,11 @@ void mapTool::render()
 		if (KEYMANAGER->isToggleKey(VK_F1)) TextOut(getMemDC(), CAMX+ _isoTile[i].drawX + TILEX, CAMY+_isoTile[i].drawY + (TILEY / 2), str, strlen(str));
 	}
 
-	sprintf_s(str, "ptMouse X : %d , Y : %d", CAMX + _cameraPtMouse.x, CAMY + _cameraPtMouse.y);
+	sprintf_s(str, "ptMouse X : %d , Y : %d", _cameraPtMouse.x, _cameraPtMouse.y);
 	TextOut(getMemDC(), CAMX+ 150, CAMY+ 70, str, strlen(str));
 
 	//일단 구현은 됬는데 드래그 표시를 어떻게해야하나... 고민중
-	if(_push) Rectangle(getMemDC(), _dragRc);
+	if(_push && _dragMode) Rectangle(getMemDC(), _dragRc);
 }
 
 

@@ -4,6 +4,9 @@
 #include "psionic.h"
 #include "heal.h"
 #include "thunder.h"
+#include "fire.h"
+#include "narutoEffect.h"
+#include "ghostEffect.h"
 
 class skillNEffectManager :	public gameNode
 {
@@ -23,6 +26,9 @@ public:
 	void createPsionic(S_BELONG belong, float x, float y);
 	void createHeal(S_BELONG belong, float x, float y);
 	void createThunder(S_BELONG belong, float x, float y);
+    void createfire(S_BELONG belong, float x, float y);
+    void createNEffect(S_BELONG belong, float x, float y);
+	void createGhostffect(S_BELONG belong, float x, float y);
 
 	vector<skillNEffect*>& getVSne() { return _vSne; }
 	vector<skillNEffect*>::iterator getViSne() { return _viSne; }
