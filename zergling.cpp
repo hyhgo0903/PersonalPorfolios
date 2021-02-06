@@ -21,7 +21,7 @@ HRESULT zergling::init(BELONG belong, float x, float y)
 	_attackIndex = 2; // 2번 인덱스가 될때 공격판정
 	_width = 20;
 	_height = 20; // 일단은 대충 설정해놓은거임(이미지크기)
-
+	_healCount = 60;
 	commonInit(); // 앞에변수 참조해서 만드는 변수도 있으므로 뒤에다 만들어야함
 	if (_belong == PLAYER)PLAYSND("저글링생성");
 	return S_OK;
@@ -39,14 +39,22 @@ void zergling::update()
 
 
 	// 이하는 저글링특성이니까 참고안해도 괜찮음
-	if (_HP / _maxHP <= 0.5f && _maxDelay == 60)
-	{ // 피가 50%이하면 공속2배
-		_maxDelay /= 2.f;
+	if (_HP / _maxHP <= 0.5f)
+	{ // 피가 50%이하면 공속2배 + 힐(최대 18만큼)
+		--_healCount;
+	}
+	if (_healCount < 60 && _healCount > 0)
+	{ // 피가 50%이하면 공속2배 + 1회한정힐(최대 12만큼)
+		_maxDelay = 30;
+		_HP += 0.2f;
+		--_healCount;
+		if (_maxHP < _HP) _HP = _maxHP;
 	}
 }
 
 void zergling::render()
 {
+	if (_healCount < 60 && _healCount > 0 && _state != DEAD) FINDIMG("저글링힐")->frameRender(getMemDC(), _rc.left - 28, _rc.top - 15, _healCount / 6, 0);
 	switch (_state)
 	{ // 위치 적당히 보정해서 쓸것
 	case WALK:

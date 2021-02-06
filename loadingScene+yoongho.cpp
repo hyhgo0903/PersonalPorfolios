@@ -103,4 +103,6 @@ void loadingScene::yoonghoInit()
 	imgLoaded();
 	IMAGEMANAGER->addFrameImage("°í½ºÆ®Æã", "image/sne/ghosteffect.bmp", 350, 33, 10, 1, true, RGB(255, 0, 255));
 	imgLoaded();
+	IMAGEMANAGER->addFrameImage("Àú±Û¸µÈú", "image/sne/effectheal.bmp", 675, 50, 9, 1, true, RGB(255, 0, 255));
+	imgLoaded();
 }

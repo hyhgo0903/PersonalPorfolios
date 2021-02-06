@@ -203,12 +203,14 @@ void interaction::yoonghoUpdate()
 	// ¿Ø¥÷¿Ã ∏ √Êµπ
 	for (int i = 0; i < _um->getVUnit().size(); ++i)
 	{
-		if (_um->getVUnit()[i]->getState() != WALK || _um->getVUnit()[i]->getID() == 6 || _um->getVUnit()[i]->getID() == 21) continue;
+		if (_um->getVUnit()[i]->getState() != WALK || _um->getVUnit()[i]->getID() == 6 || _um->getVUnit()[i]->getID() == 21
+			|| _um->getVUnit()[i]->getStuck() < 0) continue;
 		POINT tempPtL = picking(_um->getVUnit()[i]->getRect().left, _um->getVUnit()[i]->getY());
 		if (_sm->getIsoTile()[tempPtL.x + tempPtL.y * 30].MUM == UNMOVE)
 		{
 			_um->getVUnit()[i]->moveCancel();
 			_um->getVUnit()[i]->getX() += _um->getVUnit()[i]->getSpeed();
+			_um->getVUnit()[i]->RMC();
 			_um->getVUnit()[i]->getStuck() += 1;
 			continue;
 		}
@@ -217,6 +219,7 @@ void interaction::yoonghoUpdate()
 		{
 			_um->getVUnit()[i]->moveCancel();
 			_um->getVUnit()[i]->getX() -= _um->getVUnit()[i]->getSpeed();
+			_um->getVUnit()[i]->RMC();
 			_um->getVUnit()[i]->getStuck() += 1;
 			continue;
 		}
@@ -225,6 +228,7 @@ void interaction::yoonghoUpdate()
 		{
 			_um->getVUnit()[i]->moveCancel();
 			_um->getVUnit()[i]->getY() -= _um->getVUnit()[i]->getSpeed();
+			_um->getVUnit()[i]->RMC();
 			_um->getVUnit()[i]->getStuck() += 1;
 			continue;
 		}
@@ -233,6 +237,7 @@ void interaction::yoonghoUpdate()
 		{
 			_um->getVUnit()[i]->moveCancel();
 			_um->getVUnit()[i]->getY() += _um->getVUnit()[i]->getSpeed();
+			_um->getVUnit()[i]->RMC();
 			_um->getVUnit()[i]->getStuck() += 1;
 			continue;
 		}

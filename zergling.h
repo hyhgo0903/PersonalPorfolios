@@ -4,6 +4,7 @@ class zergling :
 	public unit
 {
 private:
+	int _healCount;
 
 public:
 	zergling();
