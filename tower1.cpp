@@ -17,9 +17,9 @@ HRESULT tower1::init(BELONG belong, float x, float y)
 	_ID = 1;
 	_x = x; _y = y;
 	_speed = 0.0f;
-	_maxDelay = 30; // 대충 1초에 한대 치게끔
-	_damage = 3;
-	_maxHP = 9999;
+	_maxDelay = 90; // 대충 1초에 한대 치게끔
+	_damage = 13;
+	_maxHP = 120;
 	_attackIndex = 2; // 2번 인덱스가 될때 공격판정
 	_width = 20;
 	_height = 20; // 일단은 대충 설정해놓은거임(이미지크기)
@@ -37,8 +37,8 @@ void tower1::release()
 void tower1::update()
 {
 	commonUpdate();
-	_focusRc = RectMakeCenter(_x, _y, _width + 300, _height + 300);
-	_rangeRc = RectMakeCenter(_x, _y, _width + 300, _height + 300);
+	_focusRc = RectMakeCenter(_x, _y, _width + 200, _height + 200);
+	_rangeRc = RectMakeCenter(_x, _y, _width + 200, _height + 200);
 
 }
 
@@ -47,20 +47,18 @@ void tower1::render()
 	switch (_state)
 	{ // 위치 적당히 보정해서 쓸것
 	case WALK:
-		_image->frameRender(getMemDC(), _rc.left - 10, _rc.top - 18, _frameDirection, _frame);
+		_image->frameRender(getMemDC(), _rc.left - 20, _rc.top - 16, _frameDirection, _frame);
 		break;
 	case ATTACKWAIT: // 첫번쨰 프레임으로 고정
-		_image->frameRender(getMemDC(), _rc.left - 10, _rc.top - 18, _frameDirection, 0);
+		_image->frameRender(getMemDC(), _rc.left - 20, _rc.top - 16, _frameDirection, 0);
 		break;
 	case ATTACK:
-		_image->frameRender(getMemDC(), _rc.left - 10, _rc.top - 18, _frameDirection, _frame);
+		_image->frameRender(getMemDC(), _rc.left - 20, _rc.top - 16, _frameDirection, _frame);
 		break;
 	case DEAD: // 프레임인덱스 다르게 도니까 주의
-		_image->frameRender(getMemDC(), _rc.left - 22, _rc.top - 24, _frame, 0);
+		_image->frameRender(getMemDC(), _rc.left - 40, _rc.top - 35, _frame, 0);
 		break;
 	}
-
-	Rectangle(getMemDC(), _rc);
 }
 
 void tower1::reRender()
@@ -68,13 +66,13 @@ void tower1::reRender()
 	switch (_state)
 	{ // 위치 적당히 보정해서 쓸것
 	case WALK:
-		_image->alphaFrameRender(getMemDC(), _rc.left - 10, _rc.top - 18, _frameDirection, _frame, 150);
+		_image->alphaFrameRender(getMemDC(), _rc.left - 20, _rc.top - 16, _frameDirection, _frame, 150);
 		break;
 	case ATTACKWAIT: // 첫번쨰 프레임으로 고정
-		_image->alphaFrameRender(getMemDC(), _rc.left - 10, _rc.top - 18, _frameDirection, 0, 150);
+		_image->alphaFrameRender(getMemDC(), _rc.left - 20, _rc.top - 16, _frameDirection, 0, 150);
 		break;
 	case ATTACK:
-		_image->alphaFrameRender(getMemDC(), _rc.left - 10, _rc.top - 18, _frameDirection, _frame, 150);
+		_image->alphaFrameRender(getMemDC(), _rc.left - 20, _rc.top - 16, _frameDirection, _frame, 150);
 		break;
 	}
 }
@@ -99,6 +97,7 @@ void tower1::setState(STATE state)
 			break;
 			// 저글링의경우 대기는 이동에서 y프레임 0으로만 쓸거임
 		case ATTACK:
+			PLAYSND("tower1_atk");
 			_image = FINDIMG("tower1_atk_blue");
 			_maxFrame = _image->getMaxFrameY();
 			break;
@@ -122,6 +121,7 @@ void tower1::setState(STATE state)
 			break;
 			// 저글링의경우 대기는 이동에서 y프레임 0으로만 쓸거임
 		case ATTACK:
+			PLAYSND("tower1_atk");
 			_image = FINDIMG("tower1_atk_red");
 			_maxFrame = _image->getMaxFrameY();
 			break;

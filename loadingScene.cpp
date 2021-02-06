@@ -14,6 +14,7 @@ loadingScene::~loadingScene()
 
 HRESULT loadingScene::init()
 {
+	_loadingSkip = 0;
 	CAMERAMANAGER->setCameraX(0);
 	CAMERAMANAGER->setCameraY(0);
 	_loadingBar = new progressBar;
@@ -45,6 +46,10 @@ void loadingScene::update()
 	_loadingBar->update();
 	_loadingBar->setGauge(_currentCount, LOADINGMAX);
 
+	if (KEYMANAGER->isStayKeyDown(VK_F1) && !_loadingSkip)
+	{
+		_loadingSkip = true;
+	}
 	//로딩이 다 되면
 	if (_loadingEnd)
 	{
@@ -66,7 +71,11 @@ void loadingScene::render()
 	{
 		strcpy_s(cstr, SOUNDMANAGER->getLatestAdded().c_str());
 	}
-	TextOut(getMemDC(), 0, WINSIZEY -50, cstr, strlen(cstr));
+	TextOut(getMemDC(), 0, WINSIZEY -70, cstr, strlen(cstr));
+	sprintf_s(cstr, "진행상황 : %d/%d", _currentCount, LOADINGMAX);
+	TextOut(getMemDC(), 0, WINSIZEY - 55, cstr, strlen(cstr));
+	sprintf_s(cstr, "로딩스킵 : F1버튼");
+	TextOut(getMemDC(), 0, WINSIZEY - 40, cstr, strlen(cstr));
 }
 
 
@@ -84,9 +93,10 @@ DWORD CALLBACK threadFunction(LPVOID lpParameter)
 	loadingHelper->younghanInit();
 
 
+	//Sleep(1000);
+
 	// 로딩 완료시
 	loadingHelper->_loadingEnd = true;
-
 	return 0;
 }
 
@@ -94,12 +104,12 @@ void loadingScene::imgLoaded()
 {
 	_soundLoaded = false;
 	++_currentCount;
-	//Sleep(20);
+	if (!_loadingSkip) Sleep(30);
 }
 
 void loadingScene::soundLoaded()
 {
 	_soundLoaded = true;
 	++_currentCount;
-	//Sleep(20);
+	if (!_loadingSkip) Sleep(30);
 }

@@ -173,7 +173,6 @@ void mapTool::render()
 	for (int i = 0; i < TILEX * TILEY; ++i)
 	{
 		sprintf_s(str, "%d, %d", _isoTile[i].nX, _isoTile[i].nY);
-		if (KEYMANAGER->isToggleKey(VK_F1)) TextOut(getMemDC(), CAMX+ _isoTile[i].drawX + TILEX, CAMY+_isoTile[i].drawY + (TILEY / 2), str, strlen(str));
 	}
 
 	sprintf_s(str, "ptMouse X : %d , Y : %d", _cameraPtMouse.x, _cameraPtMouse.y);

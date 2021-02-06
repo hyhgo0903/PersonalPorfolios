@@ -61,6 +61,8 @@ void mapTool::imageInit()
 	_icDiablo = RectMake(CAMX + WINSIZEX - 112, CAMY, 80, 90);
 	_icSkeleton = RectMake(CAMX + WINSIZEX - 512, CAMY + 90, 80, 90);
 	_icGhost = RectMake(CAMX + WINSIZEX - 432, CAMY + 90, 80, 90);
+	_icDragon = RectMake(CAMX + WINSIZEX - 352, CAMY + 90, 80, 90);
+	_icTower1= RectMake(CAMX + WINSIZEX - 272, CAMY + 90, 80, 90);
 }
 
 void mapTool::imageRender()
@@ -91,8 +93,14 @@ void mapTool::imageRender()
 		else
 
 		if (_isoTile[i].centerX < CAMX - 32 || _isoTile[i].centerX > CAMX + WINSIZEX + 32 ||
-			_isoTile[i].centerY < CAMY - 16 || _isoTile[i].centerY > CAMY + WINSIZEY + 16) continue;
+			_isoTile[i].centerY < CAMY - 16 || _isoTile[i].centerY > CAMY + WINSIZEY + 120) continue;
 		
+		if (KEYMANAGER->isToggleKey(VK_F2))
+		{ // 시연용키임. 이게 켜져 있으면 좀 더 안에도 안그려서 맵밖 안그려주는거 보여주는 기능임(부하줄이려고 이렇게 했습니다~)이렇게
+			if (_isoTile[i].centerX < CAMX + 150 || _isoTile[i].centerX > CAMX + WINSIZEX + 32 ||
+				_isoTile[i].centerY < CAMY + 150 || _isoTile[i].centerY > CAMY + WINSIZEY + 120) continue;
+		}
+
 		//아이소 타일 그려줌
 		if (_isoTile[i].inRect)	IMAGEMANAGER->findImage("mapTiles")->alphaFrameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY, 100);
 		else IMAGEMANAGER->findImage("mapTiles")->frameRender(getMemDC(), _isoTile[i].drawX, _isoTile[i].drawY, _isoTile[i].fX, _isoTile[i].fY);
@@ -121,7 +129,9 @@ void mapTool::imageRender()
 		else if (_isoTile[i].name == BISHOP)	IMAGEMANAGER->findImage("레드비숍대기")->frameRender(getMemDC(), _isoTile[i].drawX + 25, _isoTile[i].drawY - 2, 4, 0);
 		else if (_isoTile[i].name == DIABLO) IMAGEMANAGER->findImage("디아블로 걷기")->frameRender(getMemDC(), _isoTile[i].drawX - 70, _isoTile[i].drawY - 145, 4, 2);
 		else if (_isoTile[i].name == SKELETON) IMAGEMANAGER->findImage("해골병사 걷기")->frameRender(getMemDC(), _isoTile[i].drawX - 2, _isoTile[i].drawY - 14, 4, 2);
-		else if (_isoTile[i].name == GHOST)	IMAGEMANAGER->findImage("ghost_move_red")->frameRender(getMemDC(), _isoTile[i].drawX + 7, _isoTile[i].drawY - 10, 4, 0);
+		else if (_isoTile[i].name == GHOST)		IMAGEMANAGER->findImage("ghost_move_red")->frameRender(getMemDC(), _isoTile[i].drawX + 7, _isoTile[i].drawY - 10, 4, 0);
+		else if (_isoTile[i].name == DRAGON)	IMAGEMANAGER->findImage("레드드래곤대기")->frameRender(getMemDC(), _isoTile[i].drawX + 10, _isoTile[i].drawY - 10, 4, 0);
+		else if (_isoTile[i].name == TOWER1)	IMAGEMANAGER->findImage("tower1_idle_red")->frameRender(getMemDC(), _isoTile[i].drawX + 4, _isoTile[i].drawY - 10, 0, 0);
 
 		//언무브 타일 표시
 		if (_isoTile[i].MUM == UNMOVE) IMAGEMANAGER->findImage("un")->render(getMemDC(), _isoTile[i].drawX + 23, _isoTile[i].drawY + 7);
@@ -210,6 +220,8 @@ void mapTool::imageRender()
 			IMAGEMANAGER->findImage("icon_diablo")->render(getMemDC(), _icDiablo.left, _icDiablo.top);
 			IMAGEMANAGER->findImage("icon_skeleton")->render(getMemDC(), _icSkeleton.left, _icSkeleton.top);
 			IMAGEMANAGER->findImage("icon_ghost")->render(getMemDC(), _icGhost.left, _icGhost.top);
+			IMAGEMANAGER->findImage("icon_dragon")->render(getMemDC(), _icDragon.left, _icDragon.top);
+			IMAGEMANAGER->findImage("icon_tower1")->render(getMemDC(), _icTower1.left, _icTower1.top);
 
 			FINDIMG("정글썸")->render(getMemDC(), CAMX + 689, CAMY + 340);
 			FINDIMG("싸펑썸")->render(getMemDC(), CAMX + 689+85, CAMY + 340);

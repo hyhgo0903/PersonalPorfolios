@@ -28,7 +28,7 @@ enum STAGEMOVE
 
 enum pickUnit
 {
-	P_NONE, P_ZERGLING, P_MARINE, P_CIVILIAN, P_TEMPLAR, P_BISHOP, P_GHOST
+	P_NONE, P_ZERGLING, P_MARINE, P_CIVILIAN, P_TEMPLAR, P_BISHOP, P_GHOST, P_DRAGON, P_NARUTO
 };
 
 class stageManager : public gameNode
@@ -54,6 +54,8 @@ private:
 	RECT	_templarBt;
 	RECT	_bishopBt;
 	RECT	_ghostBt;
+	RECT	_dragonBt;
+	RECT	_narutoBt;
 
 	skillNEffectManager* _se;
 	unitManager* _um;

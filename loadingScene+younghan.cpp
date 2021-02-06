@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "loadingScene.h"
+#define ADDS SOUNDMANAGER->addSound
 
 void loadingScene::younghanInit()
 {
@@ -115,6 +116,12 @@ void loadingScene::younghanInit()
 	imgLoaded();
 	IMAGEMANAGER->addImage("icon_skeleton", "image/icon/icon_skeleton.bmp", 80, 90, false, RGB(255, 0, 255));
 	imgLoaded();
+	IMAGEMANAGER->addImage("icon_dragon", "image/icon/icon_Dragon.bmp", 80, 90, false, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("icon_naruto", "image/icon/icon_Naruto.bmp", 80, 90, false, RGB(255, 0, 255));
+	imgLoaded();
+	IMAGEMANAGER->addImage("icon_tower1", "image/icon/icon_tower1.bmp", 80, 90, false, RGB(255, 0, 255));
+	imgLoaded();
 	//////////////////////UI///////////////////////
 	IMAGEMANAGER->addImage("ui_menu", "image/ui/ui_menu.bmp", 900, 132, true, RGB(255, 0, 255));
 	imgLoaded();
@@ -136,5 +143,8 @@ void loadingScene::younghanInit()
 	imgLoaded();
 	IMAGEMANAGER->addImage("ui_BossStage", "image/ui/ui_bossstage.bmp", 80, 30, false, RGB(255, 0, 255));
 	imgLoaded();
+	//»ç¿îµå///////////
+	ADDS("tower1_atk", "sound/tower1_atk.wav", false, false);
+	soundLoaded();
 }
 

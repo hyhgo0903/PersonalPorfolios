@@ -29,6 +29,8 @@ void mapTool::ptInObj()
 		else if (PtInRect(&_icDiablo, _cameraPtMouse) && _menuNum == THREE)		_objName = DIABLO;
 		else if (PtInRect(&_icSkeleton, _cameraPtMouse) && _menuNum == THREE)	_objName = SKELETON;
 		else if (PtInRect(&_icGhost, _cameraPtMouse) && _menuNum == THREE)		_objName = GHOST;
+		else if (PtInRect(&_icDragon, _cameraPtMouse) && _menuNum == THREE)		_objName = DRAGON;
+		else if (PtInRect(&_icTower1, _cameraPtMouse) && _menuNum == THREE)		_objName = TOWER1;
 		else if (_ptMouse.x > 689 && _ptMouse.x < 689 + 85 && _ptMouse.y > 340 && _ptMouse.y < 383 && _menuNum == THREE) _isoTile[1].gold = 1;
 		else if (_ptMouse.x > 689 + 85 && _ptMouse.x < 689 + 170 && _ptMouse.y > 340 && _ptMouse.y < 383 && _menuNum == THREE) _isoTile[1].gold = 2;
 		else if (_ptMouse.x > 689 + 170 && _ptMouse.x < 689 + 255 && _ptMouse.y > 340 && _ptMouse.y < 383 && _menuNum == THREE) _isoTile[1].gold = 3;
@@ -190,19 +192,31 @@ void mapTool::createObj()
 		else if (_objName == DIABLO && !_objDelOn && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE
 		&& _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name != PLAYERFLAG && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name != ENEMYFLAG)
 		{
-		_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = DIABLO;
-		InvalidateRect(_hWnd, NULL, false);
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = DIABLO;
+			InvalidateRect(_hWnd, NULL, false);
 		}
 		else if (_objName == SKELETON && !_objDelOn && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE
 		&& _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name != PLAYERFLAG && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name != ENEMYFLAG)
 		{
-		_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = SKELETON;
-		InvalidateRect(_hWnd, NULL, false);
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = SKELETON;
+			InvalidateRect(_hWnd, NULL, false);
 		}
 		else if (_objName == GHOST && !_objDelOn && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE
 			&& _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name != PLAYERFLAG && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name != ENEMYFLAG)
 		{
 			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = GHOST;
+			InvalidateRect(_hWnd, NULL, false);
+		}
+		else if (_objName == DRAGON && !_objDelOn && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE
+		&& _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name != PLAYERFLAG && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name != ENEMYFLAG)
+		{
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = DRAGON;
+			InvalidateRect(_hWnd, NULL, false);
+		}
+		else if (_objName == TOWER1 && !_objDelOn && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE
+		&& _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name != PLAYERFLAG && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name != ENEMYFLAG)
+		{
+			_isoTile[_pickingPt.y * TILEX + _pickingPt.x].name = TOWER1;
 			InvalidateRect(_hWnd, NULL, false);
 		}
 	}

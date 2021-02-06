@@ -136,6 +136,8 @@ void stageManager::render()
 	if (_pickUnit == P_TEMPLAR && _onOff)	IMAGEMANAGER->findImage("템플러대기블루")->alphaFrameRender(getMemDC(), _cameraPtMouse.x - 18, _cameraPtMouse.y - 18, 4, 7, 100);
 	if (_pickUnit == P_BISHOP && _onOff)	IMAGEMANAGER->findImage("블루비숍대기")->alphaFrameRender(getMemDC(), _cameraPtMouse.x - 18, _cameraPtMouse.y - 18, 4, 0, 100);
 	if (_pickUnit == P_GHOST && _onOff)	IMAGEMANAGER->findImage("ghost_move_blue")->alphaFrameRender(getMemDC(), _cameraPtMouse.x - 18, _cameraPtMouse.y - 18, 4, 0, 100);
+	if (_pickUnit == P_DRAGON && _onOff)	IMAGEMANAGER->findImage("블루드래곤대기")->alphaFrameRender(getMemDC(), _cameraPtMouse.x - 20, _cameraPtMouse.y - 24, 4, 0, 100);
+	if (_pickUnit == P_NARUTO && _onOff)	IMAGEMANAGER->findImage("나루토대기")->alphaFrameRender(getMemDC(), _cameraPtMouse.x - 10, _cameraPtMouse.y - 20, 4, 0, 100);
 }
 
 void stageManager::objectRender()
@@ -144,7 +146,7 @@ void stageManager::objectRender()
 	for (int i = 0; i < TILEX * TILEY; ++i)
 	{
 		if (_isoTile[i].centerX < CAMX - 32 || _isoTile[i].centerX > CAMX + WINSIZEX + 32 ||
-			_isoTile[i].centerY < CAMY - 16 || _isoTile[i].centerY > CAMY + WINSIZEY + 16) continue;
+			_isoTile[i].centerY < CAMY - 16 || _isoTile[i].centerY > CAMY + WINSIZEY + 120) continue;
 
 		else if (_isoTile[i].name == TREE1)	IMAGEMANAGER->findImage("tree")->render(getMemDC(), _isoTile[i].drawX - 32, _isoTile[i].drawY - 90);
 		else if (_isoTile[i].name == TREE2)	IMAGEMANAGER->findImage("tree2")->render(getMemDC(), _isoTile[i].drawX - 10, _isoTile[i].drawY - 90);
@@ -205,6 +207,8 @@ void stageManager::uiRender()
 		IMAGEMANAGER->findImage("icon_templar")->render(getMemDC(), _templarBt.left, _templarBt.top);
 		IMAGEMANAGER->findImage("icon_bishop")->render(getMemDC(), _bishopBt.left, _bishopBt.top);
 		IMAGEMANAGER->findImage("icon_ghost")->render(getMemDC(), _ghostBt.left, _ghostBt.top);
+		IMAGEMANAGER->findImage("icon_dragon")->render(getMemDC(), _dragonBt.left, _dragonBt.top);
+		IMAGEMANAGER->findImage("icon_naruto")->render(getMemDC(), _narutoBt.left, _narutoBt.top);
 		//소지금
 		FINDIMG("달러")->render(getMemDC(), CAMX + WINSIZEX - 825, CAMY + WINSIZEY - 128);
 		if (_gold > 999) FINDIMG("숫자")->frameRender(getMemDC(), CAMX + WINSIZEX - 800, CAMY + WINSIZEY - 126, _gold / 1000%10, 0);
@@ -240,6 +244,8 @@ void stageManager::uiRect()
 	_templarBt = RectMake(CAMX + 520, CAMY + WINSIZEY - 95, 80, 90);
 	_bishopBt = RectMake(CAMX + 600, CAMY + WINSIZEY - 95, 80, 90);
 	_ghostBt = RectMake(CAMX + 680, CAMY + WINSIZEY - 95, 80, 90);
+	_dragonBt = RectMake(CAMX + 760, CAMY + WINSIZEY - 95, 80, 90);
+	_narutoBt = RectMake(CAMX + 840, CAMY + WINSIZEY - 95, 80, 90);
 }
 
 void stageManager::homeBt()
@@ -265,6 +271,7 @@ void stageManager::startBt()
 		_battlePhase = true;
 		_um->setActive();
 		_onOff = false;
+		_alpha = 0;
 	}
 }
 
@@ -308,6 +315,8 @@ void stageManager::ptInCreateMenu()
 	if (PtInRect(&_templarBt, _cameraPtMouse))		_pickUnit = P_TEMPLAR;
 	if (PtInRect(&_bishopBt, _cameraPtMouse))		_pickUnit = P_BISHOP;
 	if (PtInRect(&_ghostBt, _cameraPtMouse))		_pickUnit = P_GHOST;
+	if (PtInRect(&_dragonBt, _cameraPtMouse))		_pickUnit = P_DRAGON;
+	if (PtInRect(&_narutoBt, _cameraPtMouse))		_pickUnit = P_NARUTO;
 }
 
 void stageManager::ptInMenu()
@@ -324,6 +333,8 @@ void stageManager::ptInMenu()
 	else if (PtInRect(&_bishopBt, _cameraPtMouse)) _menuInPt = true;
 	else if (PtInRect(&_ghostBt, _cameraPtMouse)) _menuInPt = true;
 	else if (PtInRect(&_clearBt, _cameraPtMouse)) _menuInPt = true;
+	else if (PtInRect(&_dragonBt, _cameraPtMouse)) _menuInPt = true;
+	else if (PtInRect(&_narutoBt, _cameraPtMouse)) _menuInPt = true;
 	else _menuInPt = false;
 }
 
@@ -332,11 +343,12 @@ void stageManager::createUnit()
 	if (_battlePhase || _isVictory || _isDefeat) return;
 	//언무브 타일에는 안깔립니당
 	
-	if (_isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM != UNMOVE 
-		&& !_menuInPt && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
+	if (!_menuInPt)
 	{
 		if (getDistance(_isoTile[_playerTile].centerX, _isoTile[_playerTile].centerY,
-			_cameraPtMouse.x, _cameraPtMouse.y) > 400 || _pickingPt.x < 0)
+			_cameraPtMouse.x, _cameraPtMouse.y) > 400 || _pickingPt.x < 0
+			|| _isoTile[_pickingPt.y * TILEX + _pickingPt.x].MUM == UNMOVE
+			|| _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name != NONE)
 		{
 			PLAYSND("배치실패");
 			return;
@@ -345,51 +357,68 @@ void stageManager::createUnit()
 		if (_pickUnit == P_ZERGLING )
 		{
 			_gold -= 100; //유닛 가격
-			if (_gold > 0)
+			if (_gold >= 0)
 			{
 				_um->createZergling(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
 			}
 		}
-		else if (_pickUnit == P_MARINE && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
+		else if (_pickUnit == P_MARINE)
 		{
 			_gold -= 150; //유닛 가격
-			if (_gold > 0)
+			if (_gold >= 0)
 			{
 				_um->createMarine(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
 			}
 		}
-		else if (_pickUnit == P_CIVILIAN && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
+		else if (_pickUnit == P_CIVILIAN)
 		{
 			_gold -= 70; //유닛 가격
-			if (_gold > 0)
+			if (_gold >= 0)
 			{
 				_um->createCivilian(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
 			}
 		}
-		else if (_pickUnit == P_TEMPLAR && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
+		else if (_pickUnit == P_TEMPLAR)
 		{
 			_gold -= 200; //유닛 가격
-			if (_gold > 0)
+			if (_gold >= 0)
 			{
 				_um->createTemplar(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 9);
 			}
 		}
-		else if (_pickUnit == P_BISHOP && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
+		else if (_pickUnit == P_BISHOP)
 		{
 			_gold -= 200; //유닛 가격
-			if (_gold > 0)
+			if (_gold >= 0)
 			{
 				_um->createBishop(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX + 5, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 5);
 			}
 		}
-		else if (_pickUnit == P_GHOST && _isoTile[_pickingPt.y * TILEX + _pickingPt.x].name == NONE)
+		else if (_pickUnit == P_GHOST)
 		{
 			_gold -= 150; //유닛 가격
-			if (_gold > 0)
+			if (_gold >= 0)
 			{
 				_um->createGhost(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 2);
 			}
 		}
+		else if (_pickUnit == P_DRAGON)
+		{
+			_gold -= 250; //유닛 가격
+			if (_gold >= 0)
+			{
+				_um->createDragon(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 2);
+			}
+		}
+		else if (_pickUnit == P_NARUTO)
+		{
+			_gold -= 800; //유닛 가격
+			if (_gold >= 0)
+			{
+				_um->createNaruto(PLAYER, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerX - 2, _isoTile[_pickingPt.y * TILEX + _pickingPt.x].centerY - 2);
+			}
+		}
+
 		if (_gold < 0) // 가격이 0이하로 떨어지면 만든거 취소
 		{
 			_gold = _tempGold;
@@ -522,6 +551,18 @@ void stageManager::setStage(STAGE stage)
 		else if (_isoTile[i].name == GHOST)
 		{
 			_um->createGhost(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
+			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i;
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(aStarPath(i, _playerTile));
+		}
+		else if (_isoTile[i].name == DRAGON)
+		{
+			_um->createDragon(ENEMY, _isoTile[i].centerX - 8, _isoTile[i].centerY - 10);
+			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i;
+			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(aStarPath(i, _playerTile));
+		}
+		else if (_isoTile[i].name == TOWER1)
+		{
+			_um->createTower1(ENEMY, _isoTile[i].centerX, _isoTile[i].centerY);
 			_um->getVUnit()[_um->getVUnit().size() - 1]->getTileNum() = i;
 			_um->getVUnit()[_um->getVUnit().size() - 1]->setVPath(aStarPath(i, _playerTile));
 		}

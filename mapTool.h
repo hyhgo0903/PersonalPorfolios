@@ -111,6 +111,8 @@ private:
 	RECT			_icDiablo;
 	RECT			_icSkeleton;
 	RECT			_icGhost;
+	RECT			_icDragon;
+	RECT			_icTower1;
 	/////////////////////////////////////
 	POINT			_pickingPt;
 
