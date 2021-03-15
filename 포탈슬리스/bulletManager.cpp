@@ -87,12 +87,12 @@ void bulletManager::render()
 }
 
 void bulletManager::playerFire(int ID, float x, float y, float angle, float power, float damageCoefficient)
-{
-	if (_vPBullet.size() >= BULLETMAX) return;
-	playerBullet* pbullet;
+{ // 탄알의 종류, 중점의 x좌표, 중점의 y좌표, 각도, 파워, 데미지계수(탄알의 종류에 지정된 데미지에 곱해짐)
+	if (_vPBullet.size() >= BULLETMAX) return;					// 탄알 수 제한보다 벡터사이즈가 크면 리턴
+	playerBullet* pbullet;										// 객체를 생성합니다
 	pbullet = new playerBullet;
-	pbullet->init(ID, x, y, angle, power, damageCoefficient);
-	_vPBullet.push_back(pbullet);
+	pbullet->init(ID, x, y, angle, power, damageCoefficient);	// 설정값대로 초기화합니다
+	_vPBullet.push_back(pbullet);								// 벡터에 넣어줍니다
 }
 
 void bulletManager::enemyFire(int ID, float x, float y, int left, float angle)

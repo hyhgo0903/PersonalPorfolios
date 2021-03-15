@@ -22,7 +22,7 @@ void playGround::imageInit()
 
 	// ¸Ê °ü·Ã ÀÌ¹ÌÁö
 	IMAGEMANAGER->addImage("¸Ê", "image/map.bmp", 5295, 448, false, RGB(0, 0, 0));
-	IMAGEMANAGER->addImage("¸ÊÇÈ¼¿", "image/mappixel.bmp", 5295, 448, true, RGB(255, 0, 255));
+	IMAGEMANAGER->addImage("¸ÊÇÈ¼¿", "image/mappixel.bmp", 5295, 448, false, RGB(255, 0, 255));
 
 	// ÅÊÅ© °ü·Ã ÀÌ¹ÌÁö
 	IMAGEMANAGER->addFrameImage("Ä³³í¾ÆÀÌµé", "image/tank/cannonidle.bmp", 3120, 236, 39, 2, true, RGB(255, 0, 255));

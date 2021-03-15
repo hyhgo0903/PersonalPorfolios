@@ -35,24 +35,7 @@ HRESULT playScene::init(int data)
 
 HRESULT playScene::init()
 {
-	CAMERAMANAGER->setCameraX(0);
-	srand(time(NULL));
-	_goCount = _goFrameX = _idleTime = 0;
-	_wind = 0.f;
-	_pm = new playerManager;	_pm->init(0);
-	_um = new UIManager;		_um->init();
-	_im = new itemManager;		_im->init();
-	_bm = new bulletManager;	_bm->init();
-	_em = new enemyManager;		_em->init(); // 매니저 혹사
-	_pm->setImMemoryAddressLink(_im); // im의 함수로 아이템슬롯 상태 받아오기. 사용시 아이템 비우기. - 상호참조
-	_pm->setBmMemoryAddressLink(_bm); // bm의 함수로 발사시키기 위해(pm의 각종 인자를 매개변수로 입력) - 상호참조
-	_em->setBmMemoryAddressLink(_bm); // bm의 함수로 발사시키기 위해(em의 각종 인자를 매개변수로 입력) - 상호참조
-	_em->setImMemoryAddressLink(_im); // im의 함수로 에너미의 위치에 아이템 드랍 함수를 쓰기 위해 - 단방향 참조
-	_em->setPmMemoryAddressLink(_pm); // pm의 함수로 player위치를 감지하고 그에따라 공격방향 설정 - 단방향 참조
-	_im->setPmMemoryAddressLink(_pm); // pm의 함수로 플레이어 rect값 받아오고 아이템 획득(충돌) 처리 - 상호참조
-	_bm->setPmMemoryAddressLink(_pm); // pm의 함수로 rect값을 받아오고 충돌처리 - 상호참조
-	_bm->setEmMemoryAddressLink(_em); // em의 함수로 rect값을 받아오고 충돌처리 - 상호참조
-
+	// 어차피 위의걸로 이닛함	
 	return S_OK;
 }
 
@@ -105,10 +88,10 @@ void playScene::render()
 {
 	if (_pm == nullptr || _um == nullptr || _im == nullptr || _bm == nullptr || _em == nullptr) return;
 	FINDIMG("맵")->render(getMemDC(), GETCAM, 0, GETCAM,0,WINSIZEX,WINSIZEY);
-	if (KEYMANAGER->isToggleKey(VK_TAB))
+		if (KEYMANAGER->isToggleKey(VK_TAB))
 	{
-		FINDIMG("맵픽셀")->render(getMemDC(), GETCAM, 0, GETCAM, 0, WINSIZEX, WINSIZEY);
 		TIMEMANAGER->render(getMemDC());
+		FINDIMG("맵픽셀")->render(getMemDC(), GETCAM, 0, GETCAM, 0, WINSIZEX, WINSIZEY);
 	}
 	_um->render();
 	_im->render();
@@ -116,29 +99,31 @@ void playScene::render()
 	_pm->render();
 	_bm->render();
 	interfaceRender();
-
+	
 }
 
 
 
-void playScene::saveRecord() // 씬 넘어가기전 기록을 파일로 저장하는 함수
-{	
+void playScene::saveRecord() 
+{	// 씬 넘어가기전 기록을 파일로 저장하는 함수
 	char temp[128];	ZeroMemory(temp, sizeof(temp));
 	vector<string> vStr;
-	
-	if (_waccess_s(L"./기록.txt", 0) != 0) // 파일이 없으면 0,0으로 초기화해서 만듦
-	{ // 없으면 만들어준다. 0, 0으로 자동저장됨.
+	// 파일이 없으면 0,0으로 초기화해서 만듦
+	if (_waccess_s(L"./기록.txt", 0) != 0)
+	{ // 기록파일이 없으면 기록.txt를 만들어준다
 		vStr.push_back(itoa(0, temp, 10));
 		vStr.push_back(itoa(0, temp, 10));
 		TXTDATA->txtSave("기록.txt", vStr);
 	}
 	vStr.clear();
-	vStr = TXTDATA->txtLoad("기록.txt");
+	// 파일의 값들을 벡터에 저장
+	vStr = TXTDATA->txtLoad("기록.txt"); 
 	_highScore = atoi(vStr[1].c_str());
-
 	vStr.clear();
-	vStr.push_back(itoa(_scoreSum, temp, 10));
+	vStr.push_back(itoa(_scoreSum, temp, 10)); // 스코어를 첫 요소로 넣음
+	// 스코어가 최고기록보다 높으면 두번쨰요소를(최고기록)을 스코어로 넣음
 	if (_scoreSum > _highScore)	vStr.push_back(itoa(_scoreSum, temp, 10));
+	// 아니면 그냥 원래있던 최고기록을 다시 넣음
 	else vStr.push_back(itoa(_highScore, temp, 10));
-	TXTDATA->txtSave("기록.txt", vStr);
+	TXTDATA->txtSave("기록.txt", vStr); // 최종적으로 저장
 }

@@ -6,12 +6,13 @@
 
 HRESULT playerManager::init(int data)
 {
+	_difficulty = data / 10;
+	_selectedTank = data % 10;
+	
 	_changeEffect = new effect;
 	_changeEffect->init(IMAGEMANAGER->findImage("교체"), 40, 40, 1, 0.5f);
 	EFFECTMANAGER->addEffect("change", "image/effectchange.bmp", 800, 40, 40, 40, 1.0f, 0.2f, 20);	
 
-	_difficulty = data / 10;
-	_selectedTank = data % 10;
 	
 
 	switch (_selectedTank)
@@ -141,27 +142,24 @@ void playerManager::render()
 // 탱크 이동(픽셀충돌, 중력영향)
 void playerManager::tankMove()
 {
+	// RECT바텀 기준으로 탐지
 	_tank.probeY = _tank.rc.bottom;
 	for (int i = _tank.probeY - 4; i < _tank.probeY + 8; ++i)
-	{
+	{ // 바텀-4~바텀+8까지 검사
 		COLORREF color = GetPixel(FINDIMG("맵픽셀")->getMemDC(), _tank.x, i);
 		int r = GetRValue(color); int g = GetGValue(color); int b = GetBValue(color);
-
-		if (!(r == 255 && g == 0 && b == 255) && _tank.y > 0) // 착지한 상태면
-		{
-			//공의 Y축은 해당 픽셀값에서 공의 반지름만큼 뺀다
+		if (!(r == 255 && g == 0 && b == 255) && _tank.y > 0)
+		{ // 특정 색상값이 아님 -> 착지한 상태
 			if (_tank.jumpPower <= 0)
 			{
-				_tank.isJump = false;
-				_tank.jumpPower = 0;
-				_tank.y = i - TANKHEIGHT / 2;
-				break;
+				_tank.isJump = false; _tank.jumpPower = 0; // 점프끄기				
+				_tank.y = i - TANKHEIGHT / 2; break;	// 탱크밑변 맞춰줌
 			}
 		}
-		if (_tank.probeY + 7 == i) // 끝까지 갔는데 안착지한거
+		if (_tank.probeY + 7 == i) // 끝까지 갔는데 안착지
 		{
-			_tank.jumpPower -= GRAVITY;
-			if (_tank.jumpPower < -2) _tank.isJump = true; // 일정 속도 이상(거의 곧바로임) 내려가고있으면 점프 못함
+			_tank.jumpPower -= GRAVITY; // 중력및 낙하 적용
+			if (_tank.jumpPower < -2) _tank.isJump = true;
 		}
 	}
 	_tank.y -= _tank.jumpPower;

@@ -47,19 +47,21 @@ void selectScene::update()
 		// 매뉴얼키기
 		else if (_manualPop) _manualPop = false; // 매뉴얼 끄기
 		else if (!_manualPop && !_selectPhase && _cursor[0] == 2) PostQuitMessage(0); // 종료
-		else if (_selectPhase && _cursor[0]==0 && !_selected) // 난이도 선택
+
+		// 난이도 선택은 10의 자리로 저장(쉬움0,보통10,하드20)
+		else if (_selectPhase && _cursor[0]==0 && !_selected)
 		{_selected = true;	_data = 0; _cursor[1] = 0;}
 		else if (_selectPhase && _cursor[0] == 1 && !_selected)
 		{_selected = true;	_data = 10; _cursor[1] = 0;}
 		else if (_selectPhase && _cursor[0] == 2 && !_selected)
 		{_selected = true;	_data = 20; _cursor[1] = 0;}
-		else if (_selectPhase && _cursor[1] == 0 && _selected) // 초기 탱크선택하고
-		{
+		else if (_selectPhase && _cursor[1] == 0 && _selected)
+		{ // 초기탱크는 1의 자리로 저장(+0,+1,+2) 씬체인지
 			SCENEMANAGER->changeScene("플레이씬", _data);
-		} // 저장하고 씬체인지까지
+		} // 예를들어 하드난이도, 캐논탱을 고르면 _data는 20+0으로 저장
 		else if (_selectPhase && _cursor[1] == 1 && _selected)
 		{
-			SCENEMANAGER->changeScene("플레이씬", _data + 1);
+			SCENEMANAGER->changeScene("플레이씬", _data+1);
 		}
 		else if (_selectPhase && _cursor[1] == 2 && _selected)
 		{

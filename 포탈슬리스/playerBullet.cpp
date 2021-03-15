@@ -43,10 +43,13 @@ void playerBullet::update()
 	_rc = RectMakeCenter(_x, _y, _width, _height);
 	if (_ID > 1) // 다른건 8방향으로 쏜다
 	{
-		_angle = getAngle(0,0,_xSpd,_ySpd) + PI8; // 현재 각도를 도출하고 더함
+		_angle = getAngle(0,0,_xSpd,_ySpd) + PI8;
+		// 현재 각도를 도출하고 (1/8*π)만큼 더함
 		if (_angle > 2 * PI) _angle -= 2 * PI;
 		else if (_angle < 0) _angle += 2 * PI;
+		// (-2π)~(2π)의 범위에 오도록 보정
 		_frameX = int(4.0f*_angle / PI);
+		// 이 값에 (1/4*π)만큼 나누어 프레임도출
 	}
 	else // 캐논탱은 뺑글뺑글
 	{
