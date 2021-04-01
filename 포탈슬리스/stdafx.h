@@ -31,7 +31,7 @@ using namespace TFIVE_UTIL;
 // ## 디파인 문 ## 20.11.12 ##
 //==================================
 
-#define WINNAME (LPTSTR)(TEXT("25기 API"))
+#define WINNAME (LPTSTR)(TEXT("포탈슬리스"))
 #define WINSTARTX 50		//윈도우 시작좌표 X지점
 #define WINSTARTY 50		//윈도우 시작좌표 Y지점
 #define WINSIZEX 800		//윈도우 가로크기
