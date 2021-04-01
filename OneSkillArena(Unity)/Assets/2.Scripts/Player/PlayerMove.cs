@@ -74,10 +74,12 @@ public class PlayerMove : MonoBehaviour
     {
         if (hp <= 0) return;
         hp -= damage;
-        StartCoroutine(effectCoroutine());
-        if (hp <= 0) {
+        if (hp <= 0)
+        {
             anim.SetTrigger("GetDead");
+            GameSceneButtonManager.gm.OpenRetry();
         }
+        StartCoroutine(effectCoroutine());
     }
 
     IEnumerator effectCoroutine()
@@ -152,8 +154,6 @@ public class PlayerMove : MonoBehaviour
             bool isMove = moveInput.magnitude != 0;
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.NormalAtk")) anim.SetBool("isMove", isMove);
 
-
-            //!anim.GetCurrentAnimatorStateInfo(0).IsName("Move")
             if (isMove && !anim.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.NormalAtk"))
             {
                 Vector3 lookForward = new Vector3(camPos.forward.x, 0f, camPos.forward.z).normalized;

@@ -9,8 +9,9 @@ public class GameSceneButtonManager : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject selectPanel;
     public GameObject[] GenSpots;
-    public bool gameClear;
+    public bool gameClear = false;
     public bool gamePause = false;
+    public bool gameOver = false;
     public GameObject block;
     public int enemyNumbers;
     public GameObject enemyNumbersLabel;
@@ -36,6 +37,8 @@ public class GameSceneButtonManager : MonoBehaviour
     private int correctAnswer;
 
     public AudioClip bossBgm;
+
+    public GameObject retryPanel;
 
     public static GameSceneButtonManager gm = null;
     public static GameSceneButtonManager Instance
@@ -277,6 +280,18 @@ public class GameSceneButtonManager : MonoBehaviour
         if (OptionManager.om.keyBoardMode) OptionManager.om.keyBoardMode = false;
         else OptionManager.om.keyBoardMode = true;
         keyModeLabel.modeShow();
+    }
+    
+    public void OpenRetry()
+    {
+        uguiCanvas.SetActive(false);
+        gameOver = true;
+        retryPanel.SetActive(true);
+    }
+
+    public void retryButton()
+    {
+        SceneManager.LoadScene(2);
     }
 
     public void OpenOption()

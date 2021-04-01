@@ -15,6 +15,7 @@ public class EnemyMove : MonoBehaviour
     
 
     Animator anim;
+    private bool isVictory = false;
     public int hp;
     public int maxHp;
     private int attackDamage;
@@ -33,7 +34,7 @@ public class EnemyMove : MonoBehaviour
 
     CharacterController cc;
     public Slider hpSlider;
-    public GameObject damagePrefab;
+    public GameObject shield;
 
     private void Awake()
     {
@@ -70,6 +71,7 @@ public class EnemyMove : MonoBehaviour
                 GetComponent<NavMeshAgent>().speed = 8f;
                 break;
             case 2:
+                shield.SetActive(true);
                 break;
             case 3:
                 findDistance = 18f;
@@ -81,8 +83,14 @@ public class EnemyMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameSceneButtonManager.gm.gamePause || GameSceneButtonManager.gm.gameClear) return;
-        
+        if (GameSceneButtonManager.gm.gameOver && !isVictory)
+        {
+            isVictory = true;
+            anim.SetTrigger("Victory");
+            return;
+        }
+        if (GameSceneButtonManager.gm.gamePause || GameSceneButtonManager.gm.gameClear || isVictory) return;
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (transform.position.y < 3) dealDamage(maxHp);
@@ -125,19 +133,15 @@ public class EnemyMove : MonoBehaviour
         {
             case EnemyState.Idle:
                 if (nav.enabled) nav.enabled = false;
-                Idle();
                 break;
             case EnemyState.Move:
                 if (!nav.enabled) nav.enabled = true;
-                Move();
                 break;
             case EnemyState.Attack:
                 if (nav.enabled) nav.enabled = false;
-                Attack();
                 break;
             case EnemyState.Damaged:
                 if (nav.enabled) nav.enabled = false;
-                Damaged();
                 break;
             case EnemyState.Die:
                 if (nav.enabled) nav.enabled = false;
@@ -244,8 +248,9 @@ public class EnemyMove : MonoBehaviour
         if (enemyState == EnemyState.Die ||
             enemyState == EnemyState.Damaged) return;
         //천보일땐 데미지 무시하고 그냥 이동        
-        if (gdm.enemyAttribute == 2 && enemyState == EnemyState.Idle)
+        if (gdm.enemyAttribute == 2 && shield != null)
         {
+            Destroy(shield);
             ChangeState(EnemyState.Move);
             return;
         }
@@ -253,7 +258,6 @@ public class EnemyMove : MonoBehaviour
         int temp = (int)SkillManager.skm.currentElement;
         if (temp == 4){             // 전능이면 3배
             GameSceneButtonManager.gm.calculatedDamage = 3 * damage;
-            Instantiate(damagePrefab, transform.position, Camera.main.transform.rotation);
             hp -= 3*damage;
             if (SkillManager.skm.currentUtil == SkillManager.SkillUtil.Bloody)
             { // 흡혈이면 피해량 반만큼 회복
@@ -263,7 +267,6 @@ public class EnemyMove : MonoBehaviour
         else if (temp == weakness)
         { // 약점과 맞으면 2배
             GameSceneButtonManager.gm.calculatedDamage = 2 * damage;
-            Instantiate(damagePrefab, transform.position, Camera.main.transform.rotation);
             hp -= 2 * damage;
             if (SkillManager.skm.currentUtil == SkillManager.SkillUtil.Bloody)
             {
@@ -273,7 +276,6 @@ public class EnemyMove : MonoBehaviour
         else
         {
             GameSceneButtonManager.gm.calculatedDamage = damage;
-            Instantiate(damagePrefab, transform.position, Camera.main.transform.rotation);
             hp -= damage;
             if (SkillManager.skm.currentUtil == SkillManager.SkillUtil.Bloody)
             {
